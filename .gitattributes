@@ -1,0 +1,5 @@
+# Amber language files
+*.ab linguist-language=Amber
+
+# Generated files (exclude from statistics)
+xylitol.sh linguist-generated=true

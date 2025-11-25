@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Written in [Amber](https://amber-lang.com/)
 # version: 0.4.0-alpha
-# date: 2025-11-26 02:35:09
+# date: 2025-11-26 03:06:35
 replace__0_v0() {
     local source=$1
     local search=$2
@@ -479,7 +479,7 @@ fi
         go_down__300_v0 $(echo 3 '-' ${input_lines} | bc -l | sed '/\./ s/\.\{0,1\}0\{1,\}$//');
         __AF_go_down300_v0__61_9="$__AF_go_down300_v0";
         echo "$__AF_go_down300_v0__61_9" > /dev/null 2>&1
-        remove_line__296_v0 $(echo ${header_line} '+' 3 | bc -l | sed '/\./ s/\.\{0,1\}0\{1,\}$//');
+        remove_line__296_v0 $(echo ${header_line} '+' 4 | bc -l | sed '/\./ s/\.\{0,1\}0\{1,\}$//');
         __AF_remove_line296_v0__62_9="$__AF_remove_line296_v0";
         echo "$__AF_remove_line296_v0__62_9" > /dev/null 2>&1
 fi

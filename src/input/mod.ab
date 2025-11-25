@@ -59,7 +59,7 @@ pub fun xyl_input(
 
     if input_lines < 3 {
         go_down(3 - input_lines)
-        remove_line(header_line + 3)
+        remove_line(header_line + 4)
     }
     if input_lines >= 3 {
         remove_line(input_lines + header_line + 1)

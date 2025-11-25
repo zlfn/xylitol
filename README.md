@@ -24,7 +24,8 @@ amber build src/main.ab xylitol.sh
 ## Choose
 Choose an option from a list of choices
 
-![화면 기록 2025-11-25 오후 1 10 13](https://github.com/user-attachments/assets/38a404bf-f141-4537-9ffd-79a0ff2cb0b1)
+<img width="2000" height="532" alt="image" src="https://github.com/user-attachments/assets/d66cf28d-d796-4cb8-a6c3-a7f1231f4375" />
+
 
 ```bash
 cat songs.txt | ./xylitol.sh choose
@@ -35,7 +36,7 @@ cat foods.txt | ./xylitol.sh choose --header "Grocery Shopping"
 ## Input
 Prompt for input with a simple command.
 
-![화면 기록 2025-11-25 오전 5 01 35](https://github.com/user-attachments/assets/7a5f9e8a-ea30-4b93-b9f9-459cb3ae6736)
+<img width="2000" height="228" alt="image" src="https://github.com/user-attachments/assets/f90586dd-c63f-47a5-a602-a0ef47bf39e7" />
 
 
 ```bash
@@ -46,6 +47,8 @@ Prompt for input with a simple command.
 
 ## Confirm
 Prompt the user for confirmation (yes/no).
+
+<img width="2000" height="272" alt="image" src="https://github.com/user-attachments/assets/7cdcd94a-5a2d-47a5-ae75-08f46442b358" />
 
 ```bash
 ./xylitol.sh confirm && rm file.txt || echo "File not removed"

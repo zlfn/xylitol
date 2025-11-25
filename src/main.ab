@@ -8,7 +8,20 @@ import { execute_choose } from "./choose/exec.ab"
 const VERSION = "0.1.0"
 const AMBER_VERSION = "0.4.0"
 
+fun check_prerequirements(): Bool {
+    $ echo "0" | bc -l > /dev/null $ failed {
+        eprintf_colored("Error: ", 91)
+        eprintf("bc is not installed. Please install bc to use xylitol.\n")
+        eprintf("  For Debian/Ubuntu: sudo apt install bc\n")
+        eprintf("  For Fedora: sudo dnf install bc\n")
+        eprintf("  For Arch Linux: sudo pacman -S bc\n")
+        return false
+    }
+    return true
+}
+
 main(arguments) {
+    if not check_prerequirements(): exit(1)
     if {
         arguments[1] == "input": {
             echo execute_input(arguments)

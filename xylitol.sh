@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Written in [Amber](https://amber-lang.com/)
 # version: 0.4.0-alpha
-# date: 2025-11-25 12:36:56
+# date: 2025-11-25 12:52:25
 replace__0_v0() {
     local source=$1
     local search=$2
@@ -251,9 +251,12 @@ fi
     __AF_remove209_v0__32_5="$__AF_remove209_v0";
     echo "$__AF_remove209_v0__32_5" > /dev/null 2>&1
     __AMBER_LEN="${placeholder}";
-    remove__209_v0 $(echo "${#__AMBER_LEN}" '+' 1 | bc -l | sed '/\./ s/\.\{0,1\}0\{1,\}$//');
+    remove__209_v0 "${#__AMBER_LEN}";
     __AF_remove209_v0__33_5="$__AF_remove209_v0";
     echo "$__AF_remove209_v0__33_5" > /dev/null 2>&1
+    remove__209_v0 1;
+    __AF_remove209_v0__34_5="$__AF_remove209_v0";
+    echo "$__AF_remove209_v0__34_5" > /dev/null 2>&1
     local text=""
     if [ $(echo  '!' ${password} | bc -l | sed '/\./ s/\.\{0,1\}0\{1,\}$//') != 0 ]; then
          stty echo ;
@@ -270,18 +273,18 @@ else
 fi
     if [ $([ "_${header}" == "_" ]; echo $?) != 0 ]; then
         go_down__212_v0 2;
-        __AF_go_down212_v0__45_9="$__AF_go_down212_v0";
-        echo "$__AF_go_down212_v0__45_9" > /dev/null 2>&1
+        __AF_go_down212_v0__46_9="$__AF_go_down212_v0";
+        echo "$__AF_go_down212_v0__46_9" > /dev/null 2>&1
         remove_line__210_v0 4;
-        __AF_remove_line210_v0__46_9="$__AF_remove_line210_v0";
-        echo "$__AF_remove_line210_v0__46_9" > /dev/null 2>&1
+        __AF_remove_line210_v0__47_9="$__AF_remove_line210_v0";
+        echo "$__AF_remove_line210_v0__47_9" > /dev/null 2>&1
 else
         go_down__212_v0 2;
-        __AF_go_down212_v0__48_9="$__AF_go_down212_v0";
-        echo "$__AF_go_down212_v0__48_9" > /dev/null 2>&1
+        __AF_go_down212_v0__49_9="$__AF_go_down212_v0";
+        echo "$__AF_go_down212_v0__49_9" > /dev/null 2>&1
         remove_line__210_v0 3;
-        __AF_remove_line210_v0__49_9="$__AF_remove_line210_v0";
-        echo "$__AF_remove_line210_v0__49_9" > /dev/null 2>&1
+        __AF_remove_line210_v0__50_9="$__AF_remove_line210_v0";
+        echo "$__AF_remove_line210_v0__50_9" > /dev/null 2>&1
 fi
     __AF_xyl_input227_v0="${text}";
     return 0

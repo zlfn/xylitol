@@ -18,4 +18,4 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-printf "\e[96;1m$card,\e[96m release and dispe!!!\e[0m" >&2
+printf "\e[96;1m$card,\e[96m release and dispe!!!\n\e[0m" >&2

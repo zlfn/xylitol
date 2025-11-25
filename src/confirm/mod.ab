@@ -34,8 +34,10 @@ pub fun xyl_confirm(
     trust $ stty -echo < /dev/tty $
     hide_cursor()
 
+    let term_width = get_term_width()
+
     if header != "" {
-        eprintf(header + "\n\n")
+        eprintf(truncate_text(header, term_width) + "\n\n")
     }
 
     let selected = default_yes
@@ -44,14 +46,8 @@ pub fun xyl_confirm(
     render_confirm_options(selected)
 
     eprintf("\n\n")
-    eprintf("←→")
-    eprintf_colored(" select • ", 90)
-    eprintf("enter")
-    eprintf_colored(" confirm • ", 90)
-    eprintf("y")
-    eprintf_colored(" yes • ", 90)
-    eprintf("n")
-    eprintf_colored(" no", 90)
+    // "←→ select • enter confirm • y yes • n no" = 9 + 3 + 13 + 3 + 5 + 3 + 4 = 40
+    render_tooltip(["←→", "select", "enter", "confirm", "y", "yes", "n", "no"], 40, term_width)
     go_up(2)
 
     loop {
@@ -88,7 +84,7 @@ pub fun xyl_confirm(
     }
 
     // Clean up: remove options line and hint line
-    let total_lines = 3
+    let total_lines = 4
     if header != "" {
         total_lines += 1
     }

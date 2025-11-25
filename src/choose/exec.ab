@@ -18,7 +18,7 @@ pub fun execute_choose(parameters: [Text]): Text {
     let options = read_stdin_options()
     let multi = false
     let limit = -1
-    let page_size = 10
+    let page_size = 10 
 
     for param in parameters[2..9999] {
         if {

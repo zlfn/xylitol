@@ -1,4 +1,5 @@
 import * from "std/env"
+import * from "std/math"
 import * from "../utils.ab"
 
 /// Prompts the user single-line input with a placeholder.
@@ -14,13 +15,15 @@ pub fun xyl_input(
     header: Text = "",
     password: Bool = false,
 ): Text {
+    let term_width = get_term_width()
+
     if header != "" {
-        eprintf(header + "\n")
+        eprintf(truncate_text(header, term_width) + "\n")
     }
 
-    go_down(2)
-    eprintf_colored("enter", 0)
-    eprintf_colored(" submit", 2)
+    new_line(2)
+    // "enter submit" = 12
+    render_tooltip(["enter", "submit"], 12, term_width)
     go_up(2)
     eprintf("\e[99999D")
 
@@ -41,12 +44,25 @@ pub fun xyl_input(
         text = trust $ read -es -i {char} -p "{prompt}" text < /dev/tty; printf "%s" "\$text" $
     }
 
+    // Calculate how many lines the input takes up (prompt + text may wrap)
+    let term_width = get_term_width()
+    let input_display_len = len(prompt + text)
+    let input_lines = math_ceil(input_display_len / term_width)
+    if input_lines < 1 {
+        input_lines = 1
+    }
+
+    let header_line = 0
     if header != "" {
-        go_down(2)
-        remove_line(4)
-    } else {
-        go_down(2)
-        remove_line(3)
+        header_line = 1
+    }
+
+    if input_lines < 3 {
+        go_down(3 - input_lines)
+        remove_line(header_line + 3)
+    }
+    if input_lines >= 3 {
+        remove_line(input_lines + header_line + 1)
     }
 
     return text

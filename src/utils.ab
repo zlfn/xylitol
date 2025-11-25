@@ -1,5 +1,5 @@
 import { printf } from "std/env"
-import { join } from "std/text"
+import * from "std/text"
 
 pub fun get_char(): Text {
     let char = trust $ read -n 1 key < /dev/tty; printf "%s" "\$key"$
@@ -48,11 +48,13 @@ pub fun remove(cnt: Num): Null {
     eprintf(join(remove_text, ""))
 }
 
-/// remove `cnt` lines from the terminal.
+/// remove `cnt` lines from the terminal (starting from current line, going up).
 pub fun remove_line(cnt: Num): Null {
-    for i in 0..cnt {
-        eprintf("\e[A\e[K")
+    eprintf("\e[2K")
+    for i in 0..(cnt - 1) {
+        eprintf("\e[A\e[2K")
     }
+    eprintf("\e[9999D")
 }
 
 pub fun print_blank(cnt: Num): Null {
@@ -62,9 +64,7 @@ pub fun print_blank(cnt: Num): Null {
     }
 }
 
-
-/// move the cursor down `cnt` lines.
-pub fun go_down(cnt: Num): Null {
+pub fun new_line(cnt: Num): Null {
     for i in 0..cnt {
         eprintf("\n")
     }
@@ -72,9 +72,12 @@ pub fun go_down(cnt: Num): Null {
 
 /// move the cursor up `cnt` lines.
 pub fun go_up(cnt: Num): Null {
-    for i in 0..cnt {
-        eprintf("\e[1A")
-    }
+    eprintf("\e[{cnt as Text}A")
+}
+
+/// move the cursor down `cnt` lines.
+pub fun go_down(cnt: Num): Null {
+    eprintf("\e[{cnt as Text}B")
 }
 
 // move the cursor up or down `cnt` lines.
@@ -92,5 +95,104 @@ pub fun hide_cursor(): Null {
 
 pub fun show_cursor(): Null {
     eprintf("\e[?25h")
+}
+
+/// Get the terminal size (columns, rows) using ANSI escape sequence.
+fun get_term_size(): [Num] {
+    // Query terminal size with \e[18t, response format: \e[8;rows;colst
+    let result = trust $ printf '\e[18t' > /dev/tty; IFS=';' read -rsd t _ignore height width < /dev/tty; echo "\$height; \$width" $
+    let parts = split(result, ";")
+    if len(parts) != 2 {
+        return [80, 24]
+    }
+    let rows = parse_number(parts[0]) failed {
+        return [80, 24]
+    }
+    let cols = parse_number(parts[1]) failed {
+        return [80, 24]
+    }
+    return [cols, rows]
+}
+
+/// Get the terminal width (columns).
+pub fun get_term_width(): Num {
+    let size = get_term_size()
+    return size[0]
+}
+
+/// Get the terminal height (rows).
+pub fun get_term_height(): Num {
+    let size = get_term_size()
+    return size[1]
+}
+
+/// Truncate text to fit within max_width, adding "..." if truncated.
+/// The max_width includes the "..." suffix.
+pub fun truncate_text(text: Text, max_width: Num): Text {
+    if max_width < 4 {
+        return text
+    }
+    if len(text) <= max_width {
+        return text
+    }
+    let truncated = trust $ printf "%s" "{text}" | cut -c1-{max_width - 3} $
+    return truncated + "..." + "\e[0m"
+}
+
+
+/// Render a tooltip line with key-action pairs.
+/// Format: "key action • key action • ..."
+/// Truncates if exceeds term_width.
+///
+/// ### Parameters
+/// - `items`: Flat array of key, action pairs. e.g. ["↑↓", "select", "enter", "confirm"]
+/// - `total_len`: Pre-calculated total visible length of the tooltip.
+/// - `term_width`: Terminal width to truncate output.
+pub fun render_tooltip(items: [Text], total_len: Num, term_width: Num): Null {
+    let separator = " • "
+    let separator_len = 3
+
+    // Fast path: no truncation needed
+    if total_len <= term_width {
+        let iter = 0
+        loop {
+            if {
+                iter >= len(items): break
+                iter > 0: eprintf_colored(separator, 90)
+            }
+            eprintf(items[iter] + " " + colored(items[iter + 1], 2))
+            iter += 2
+        }
+    } else {
+        // Slow path: truncate
+        let current_len = 0
+        let first = true
+        let iter = 0
+        loop {
+            if iter >= len(items) {
+                break
+            }
+            let key = items[iter]
+            let action = items[iter + 1]
+            let part_len = len(key) + 1 + len(action)
+
+            let needed = part_len
+            if not first {
+                needed += separator_len
+            }
+
+            if current_len + needed > term_width {
+                break
+            }
+
+            if not first {
+                eprintf_colored(separator, 90)
+            }
+            eprintf(key + " " + colored(action, 2))
+            current_len += needed
+            first = false
+            iter += 2
+        }
+    }
 }
 

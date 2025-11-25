@@ -200,7 +200,7 @@ pub fun xyl_choose(
         if {
             prev_page != current_page {
                 go_up(1)
-                remove_line(display_count)
+                remove_line(display_count - 1)
                 eprintf("\e[9999D")
                 render_choose_page(options, current_page, selected, cursor, page_size, display_count, term_width)
                 render_page_indicator(current_page, total_pages)
@@ -224,17 +224,15 @@ pub fun xyl_choose(
         }
     }
 
-    let info_lines = 1
-    let total_lines = display_count + 2
-    if total_pages > 1 {
-        info_lines += 1
-    }
+    let info_lines = 2
+    let total_lines = display_count + 1
     if header != "" {
         total_lines += 1
     }
 
     go_down(info_lines)
     remove_line(total_lines)
+    remove_current_line()
 
     trust $ stty echo < /dev/tty $
     show_cursor()
@@ -416,7 +414,7 @@ pub fun xyl_multi_choose(
         if {
             prev_page != current_page {
                 go_up(1)
-                remove_line(display_count)
+                remove_line(display_count - 1)
                 eprintf("\e[9999D")
                 render_multi_choose_page(options, checked, current_page, selected, cursor, page_size, display_count, term_width)
                 render_page_indicator(current_page, total_pages)
@@ -449,17 +447,15 @@ pub fun xyl_multi_choose(
         }
     }
 
-    let info_lines = 1
-    let total_lines = display_count + 2
-    if total_pages > 1 {
-        info_lines += 1
-    }
+    let info_lines = 2
+    let total_lines = display_count + 1
     if header != "" {
         total_lines += 1
     }
 
     go_down(info_lines)
     remove_line(total_lines)
+    remove_current_line()
 
     let result = [Text]
     for i in 0..len(options) {

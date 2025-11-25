@@ -90,7 +90,8 @@ pub fun xyl_confirm(
     }
 
     go_down(2)
-    remove_line(total_lines)
+    remove_line(total_lines - 1)
+    remove_current_line()
 
     trust $ stty echo < /dev/tty $
     show_cursor()

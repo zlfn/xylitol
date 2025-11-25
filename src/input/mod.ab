@@ -44,27 +44,26 @@ pub fun xyl_input(
         text = trust $ read -es -i {char} -p "{prompt}" text < /dev/tty; printf "%s" "\$text" $
     }
 
+    trust $ stty -echo < /dev/tty $
+
     // Calculate how many lines the input takes up (prompt + text may wrap)
     let term_width = get_term_width()
     let input_display_len = len(prompt + text)
     let input_lines = math_ceil(input_display_len / term_width)
-    if input_lines < 1 {
-        input_lines = 1
-    }
 
     if input_lines < 3 {
-        go_down(3 - input_lines)
-        if header != "" {
-            remove_line(1)
-        }
-        remove_line(3)
+        go_down(1)
+        remove_line(2)
+        remove_current_line()
     }
     if input_lines >= 3 {
-        if header != "" {
-            remove_line(1)
-        }
-        remove_line(input_lines + 1)
+        remove_line(input_lines)
+    }
+    if header != "" {
+        remove_line(1)
+        remove_current_line()
     }
 
+    trust $ stty echo < /dev/tty $
     return text
 }

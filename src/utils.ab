@@ -50,11 +50,17 @@ pub fun remove(cnt: Num): Null {
 
 /// remove `cnt` lines from the terminal (starting from current line, going up).
 pub fun remove_line(cnt: Num): Null {
-    eprintf("\e[2K")
-    for i in 0..(cnt - 1) {
-        eprintf("\e[A\e[2K")
+    if cnt >= 1 {
+        for _ in 0..cnt {
+            eprintf("\e[2K\e[1A")
+        }
     }
     eprintf("\e[9999D")
+}
+
+/// remove the current line from the terminal.
+pub fun remove_current_line(): Null {
+    eprintf("\e[2K\e[9999D")
 }
 
 pub fun print_blank(cnt: Num): Null {

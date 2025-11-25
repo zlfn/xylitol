@@ -27,17 +27,17 @@ pub fun xyl_input(
     eprintf(prompt)
     eprintf_colored(placeholder, 90)
 
-    trust $ stty -echo $
+    trust $ stty -echo < /dev/tty $
     let char = get_char()
     remove(len(prompt))
     remove(len(placeholder) + 1)
 
     let text = ""
     if not password {
-        trust $ stty echo $
+        trust $ stty echo < /dev/tty $
         text = trust $ read -e -i {char} -p "{prompt}" text < /dev/tty; printf "%s" "\$text" $
     } else {
-        trust $ stty echo $
+        trust $ stty echo < /dev/tty $
         text = trust $ read -es -i {char} -p "{prompt}" text < /dev/tty; printf "%s" "\$text" $
     }
 

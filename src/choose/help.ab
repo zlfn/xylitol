@@ -17,5 +17,6 @@ pub fun print_choose_help(): Null {
     echo "  --no-limit             Enable multi-selection mode with no limit"
     echo "  --cursor=\"<text>\"      Set the cursor text (default: '> ')"
     echo "  --header=\"<text>\"      Set a header text to display above the options (ANSI escape supported)"
+    echo "  --page-size=<number>   Set the number of options per page (default: 10)"
     echo ""
 }

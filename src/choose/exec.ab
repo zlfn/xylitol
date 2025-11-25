@@ -14,10 +14,11 @@ fun read_stdin_options(): [Text] {
 
 pub fun execute_choose(parameters: [Text]): Text {
     let cursor = "> "
-    let header = colored("Choose:", 34)
+    let header = "\e[96;1mChoose:\e[0m"
     let options = read_stdin_options()
     let multi = false
     let limit = -1
+    let page_size = 10
 
     for param in parameters[2..9999] {
         if {
@@ -44,6 +45,13 @@ pub fun execute_choose(parameters: [Text]): Text {
             match_regex(param, "^--no-limit$") {
                 multi = true
             }
+            match_regex(param, "^--page-size=.*$") {
+                let result = split(param, "=")
+                page_size = parse_number(result[1]) failed {
+                    eprintf_colored("Invalid page-size value: " + result[1] + "\n", 31)
+                    exit(1)
+                }
+            }
             else {
                 options += [param]
             }
@@ -51,9 +59,9 @@ pub fun execute_choose(parameters: [Text]): Text {
     }
 
     if multi {
-        let results = xyl_multi_choose(options, cursor, header, limit)
+        let results = xyl_multi_choose(options, cursor, header, limit, page_size)
         return join(results, "\n")
     }
 
-    return xyl_choose(options, cursor, header)
+    return xyl_choose(options, cursor, header, page_size)
 }

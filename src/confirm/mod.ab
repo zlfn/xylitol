@@ -1,0 +1,103 @@
+import * from "std/env"
+import * from "../utils.ab"
+
+/// Renders the Yes/No selection with background colors
+fun render_confirm_options(selected: Bool): Null {
+    eprintf(" ")
+    if selected {
+        // Yes selected (green background)
+        eprintf("\e[42;37m    Yes    \e[0m")
+        eprintf("  ")
+        // No not selected (dim)
+        eprintf("\e[49;37m    No    \e[0m")
+    } else {
+        // Yes not selected (dim)
+        eprintf("\e[49;37m    Yes    \e[0m")
+        eprintf("  ")
+        // No selected (red background)
+        eprintf("\e[41;37m    No    \e[0m")
+    }
+}
+
+/// Prompts the user with a Yes/No confirmation dialog.
+///
+/// ### Parameters
+/// - `header`: The header message to display above the options. (ANSI supported)
+/// - `default_yes`: Whether Yes is selected by default. Default is true.
+///
+/// ### Returns
+/// - `true` if the user selected Yes, `false` if No.
+pub fun xyl_confirm(
+    header: Text = "\e[96;1mAre you sure?\e[0m",
+    default_yes: Bool = true,
+): Bool {
+    trust $ stty -echo < /dev/tty $
+    hide_cursor()
+
+    if header != "" {
+        eprintf(header + "\n\n")
+    }
+
+    let selected = default_yes
+
+    // Render initial options
+    render_confirm_options(selected)
+
+    eprintf("\n\n")
+    eprintf("←→")
+    eprintf_colored(" select • ", 90)
+    eprintf("enter")
+    eprintf_colored(" confirm • ", 90)
+    eprintf("y")
+    eprintf_colored(" yes • ", 90)
+    eprintf("n")
+    eprintf_colored(" no", 90)
+    go_up(2)
+
+    loop {
+        let key = get_key()
+
+        if {
+            key == "LEFT" or key == "h" or key == "RIGHT" or key == "l" {
+                if {
+                    selected {
+                        selected = false
+                        eprintf("\e[9999D\e[K")
+                        render_confirm_options(selected)
+                    }
+                    not selected {
+                        selected = true
+                        eprintf("\e[9999D\e[K")
+                        render_confirm_options(selected)
+                    }
+                }
+            }
+            key == "y" or key == "Y" {
+                selected = true
+                break
+            }
+            key == "n" or key == "N" {
+                selected = false
+                break
+            }
+            key == "INPUT" {
+                break
+            }
+            else: continue
+        }
+    }
+
+    // Clean up: remove options line and hint line
+    let total_lines = 3
+    if header != "" {
+        total_lines += 1
+    }
+
+    go_down(2)
+    remove_line(total_lines)
+
+    trust $ stty echo < /dev/tty $
+    show_cursor()
+
+    return selected
+}

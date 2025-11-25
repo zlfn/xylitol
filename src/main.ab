@@ -4,6 +4,7 @@ import { printf } from "std/env"
 import { print_help } from "./help.ab"
 import { execute_input } from "./input/exec.ab"
 import { execute_choose } from "./choose/exec.ab"
+import { execute_confirm } from "./confirm/exec.ab"
 
 const VERSION = "0.1.0"
 const AMBER_VERSION = "0.4.0"
@@ -20,7 +21,12 @@ fun check_prerequirements(): Bool {
     return true
 }
 
+fun trap_cleanup(): Null {
+    trust $ trap 'printf "\e[?25h\e[0m" >&2; stty echo < /dev/tty' EXIT $
+}
+
 main(arguments) {
+    trap_cleanup()
     if not check_prerequirements(): exit(1)
     if {
         arguments[1] == "input": {
@@ -28,6 +34,13 @@ main(arguments) {
         }
         arguments[1] == "choose": {
             echo execute_choose(arguments)
+        }
+        arguments[1] == "confirm": {
+            let result = execute_confirm(arguments)
+            if {
+                result == "yes": exit(0)
+                else: exit(1)
+            }
         }
         arguments[1] == "help" or arguments[1] == "--help" or arguments[1] == "-h": {
             print_help()

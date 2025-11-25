@@ -1,68 +1,183 @@
 import * from "std/env"
+import * from "std/math"
 import * from "../utils.ab"
 
+fun get_page_options(options: [Text], page: Num, page_size: Num): [Text] {
+    let start = page * page_size
+    let end = start + page_size
+    if end > len(options) {
+        end = len(options)
+    }
+    let result = [Text]
+    for i in start..end {
+        result += [options[i]]
+    }
+    return result
+}
+
+fun get_page_start(page: Num, page_size: Num): Num {
+    return page * page_size
+}
+
+fun render_choose_page(options: [Text], page: Num, sel: Num, cursor: Text, page_size: Num, display_count: Num): Null {
+    let page_options = get_page_options(options, page, page_size)
+    for i in 0..len(page_options) {
+        if i == sel {
+            eprintf_colored(cursor + page_options[i] + "\n", 32)
+        } else {
+            print_blank(len(cursor))
+            eprintf(page_options[i] + "\n")
+        }
+    }
+    let remaining_slots = display_count - len(page_options)
+    if remaining_slots > 0 { // Amber bug gaurd
+        for _ in 0..remaining_slots {
+            eprintf("\e[K\n")
+        }
+    }
+}
+
+fun render_multi_choose_page(options: [Text], checked: [Bool], page: Num, sel: Num, cursor: Text, page_size: Num, display_count: Num): Null {
+    let page_options = get_page_options(options, page, page_size)
+    let start = get_page_start(page, page_size)
+    for i in 0..len(page_options) {
+        let global_idx = start + i
+        let check_mark = checked[global_idx] then "✓ " else "• "
+        if {
+            i == sel: eprintf_colored(cursor + check_mark + page_options[i] + "\n", 32)
+            checked[global_idx]: {
+                print_blank(len(cursor))
+                eprintf_colored(check_mark + page_options[i] + "\n", 32)
+            }
+            else: {
+                print_blank(len(cursor))
+                eprintf(check_mark + page_options[i] + "\n")
+            }
+        }
+    }
+    let remaining_slots = display_count - len(page_options)
+    if remaining_slots > 0 { // Amber bug guard
+        for _ in 0..remaining_slots {
+            eprintf("\e[K\n")
+        }
+    }
+}
+
+fun render_page_indicator(page: Num, total_pages: Num): Null {
+    if total_pages > 1 {
+        eprintf("\e[9999D\e[K")
+        eprintf_colored("Page {page + 1}/{total_pages}", 90)
+        eprintf("\e[9999D")
+    }
+}
+
+/// Prompts the user to choose a single option from a list.
+///
+/// ### Parameters
+/// - `options`: The list of options to choose from.
+/// - `cursor`: The cursor text to indicate the selected option.
+/// - `header`: An optional header message to display above the options. (ANSI supported)
+/// - `page_size`: The number of options to display per page.
 pub fun xyl_choose(
     options: [Text],
     cursor: Text = "> ",
     header: Text = "\e[96mChoose:\e[0m",
+    page_size: Num = 10,
 ): Text {
-    trust $ stty -echo < /dev/tty $
-
     if len(options) == 0 {
         eprintf_colored("No options provided.\n", 31)
-        trust $ stty echo < /dev/tty $
         exit(1)
     }
+
+    trust $ stty -echo < /dev/tty $
+    hide_cursor()
 
     if header != "" {
         eprintf(header + "\n")
     }
 
-    go_down(len(options) + 1)
+    let total_pages = math_floor((len(options) + page_size - 1) / page_size)
+    let current_page = 0
+    let selected = 0
+
+    let display_count = page_size
+    if len(options) < page_size {
+        display_count = len(options)
+    }
+
+    go_down(display_count)
+    eprintf("\e[9999D")
+    if total_pages > 1 {
+        eprintf_colored("Page {current_page + 1}/{total_pages}", 90)
+    }
+    go_down(1)
+
     eprintf_colored("↑↓", 0)
     eprintf_colored(" select", 2)
+    if total_pages > 1 {
+        eprintf_colored(" • ", 90)
+        eprintf_colored("←→", 0)
+        eprintf_colored(" page", 2)
+    }
     eprintf_colored(" • ", 90)
     eprintf_colored("enter", 0)
     eprintf_colored(" confirm", 2)
-    go_up(len(options) + 1)
+    go_up(display_count + 1)
     eprintf("\e[9999D")
 
-    let selected = 0
-
-    for i in 0..len(options) {
-        if i == selected {
-            eprintf_colored(cursor + options[i] + "\n", 32)
-        } else {
-            print_blank(len(cursor))
-            eprintf(options[i] + "\n")
-        }
-    }
+    render_choose_page(options, current_page, selected, cursor, page_size, display_count)
 
     loop {
         let key = get_key()
 
         let prev_selected = selected
+        let prev_page = current_page
+        let page_options = get_page_options(options, current_page, page_size)
 
         if {
             key == "UP" or key == "k" {
                 if selected == 0 {
-                    selected = len(options) - 1
+                    if current_page > 0 {
+                        current_page -= 1
+                        let new_page_options = get_page_options(options, current_page, page_size)
+                        selected = len(new_page_options) - 1
+                    } else {
+                        current_page = total_pages - 1
+                        let new_page_options = get_page_options(options, current_page, page_size)
+                        selected = len(new_page_options) - 1
+                    }
                 } else {
                     selected = selected - 1
                 }
             }
             key == "DOWN" or key == "j" {
-                if selected == len(options) - 1 {
-                    selected = 0
+                if selected == len(page_options) - 1 {
+                    if current_page < total_pages - 1 {
+                        current_page += 1
+                        selected = 0
+                    } else {
+                        current_page = 0
+                        selected = 0
+                    }
                 } else {
                     selected = selected + 1
                 }
             }
-            key == "h" {
-                selected = 0
+            key == "LEFT" or key == "h" {
+                if current_page > 0 {
+                    current_page -= 1
+                    selected = 0
+                } else {
+                    selected = 0
+                }
             }
-            key == "l" {
-                selected = len(options) - 1
+            key == "RIGHT" or key == "l" {
+                if current_page < total_pages - 1 {
+                    current_page += 1
+                    selected = 0
+                } else {
+                    selected = len(page_options) - 1
+                }
             }
             key == "INPUT" {
                 break
@@ -70,33 +185,49 @@ pub fun xyl_choose(
             else: continue
         }
 
-        if prev_selected != selected {
-            go_up(len(options) - prev_selected)
-            eprintf("\e[K")
-            print_blank(len(cursor))
-            eprintf(options[prev_selected])
+        if {
+            prev_page != current_page {
+                remove_line(display_count)
+                eprintf("\e[9999D")
+                render_choose_page(options, current_page, selected, cursor, page_size, display_count)
+                render_page_indicator(current_page, total_pages)
+            }
+            prev_selected != selected {
+                go_up(display_count - prev_selected)
+                eprintf("\e[K")
+                print_blank(len(cursor))
+                eprintf(page_options[prev_selected])
 
-            let diff = selected - prev_selected
-            go_up_or_down(diff)
-            eprintf("\e[9999D")
-            eprintf("\e[K")
-            eprintf_colored(cursor + options[selected], 32)
+                let diff = selected - prev_selected
+                go_up_or_down(diff)
+                eprintf("\e[9999D")
+                eprintf("\e[K")
+                let current_page_options = get_page_options(options, current_page, page_size)
+                eprintf_colored(cursor + current_page_options[selected], 32)
 
-            go_down(len(options) - selected)
-            eprintf("\e[9999D")
+                go_down(display_count - selected)
+                eprintf("\e[9999D")
+            }
         }
     }
 
+    let info_lines = 1
+    let total_lines = display_count + 2
+    if total_pages > 1 {
+        info_lines += 1
+        total_lines += 1
+    }
     if header != "" {
-        go_down(6)
-        remove_line(len(options) + 7)
-    } else {
-        go_down(6)
-        remove_line(len(options) + 6)
+        total_lines += 1
     }
 
+    go_down(info_lines + 1)
+    remove_line(total_lines)
+
     trust $ stty echo < /dev/tty $
-    return options[selected]
+    show_cursor()
+    let global_selected = current_page * page_size + selected
+    return options[global_selected]
 }
 
 fun count_checked(checked: [Bool]): Num {
@@ -109,93 +240,142 @@ fun count_checked(checked: [Bool]): Num {
     return count
 }
 
+/// Prompts the user to choose multiple options from a list.
+///
+//// ### Parameters
+/// - `options`: The list of options to choose from.
+/// - `cursor`: The cursor text to indicate the selected option.
+/// - `header`: An optional header message to display above the options. (ANSI supported)
+/// - `limit`: The maximum number of options the user can select. Use -1 for no limit.
+/// - `page_size`: The number of options to display per page.
 pub fun xyl_multi_choose(
     options: [Text],
     cursor: Text = "> ",
     header: Text = "\e[96mChoose:\e[0m",
     limit: Num = -1,
+    page_size: Num = 10,
 ): [Text] {
-    trust $ stty -echo < /dev/tty $
-
     if len(options) == 0 {
         eprintf_colored("No options provided.\n", 31)
-        trust $ stty echo < /dev/tty $
         return [Text]
     }
+
+    trust $ stty -echo < /dev/tty $
+    hide_cursor()
 
     if header != "" {
         eprintf(header + "\n")
     }
 
-    go_down(len(options) + 1)
+    let total_pages = math_floor((len(options) + page_size - 1) / page_size)
+    let current_page = 0
+    let selected = 0
+
+    let display_count = page_size
+    if len(options) < page_size {
+        display_count = len(options)
+    }
+
+    go_down(display_count)
+    eprintf("\e[9999D")
+    if total_pages > 1 {
+        eprintf_colored("Page {current_page + 1}/{total_pages}", 90)
+    }
+    go_down(1)
+
     eprintf_colored("↑↓", 0)
     eprintf_colored(" select", 2)
     eprintf_colored(" • ", 90)
     eprintf_colored("x", 0)
     eprintf_colored(" toggle", 2)
+    if total_pages > 1 {
+        eprintf_colored(" • ", 90)
+        eprintf_colored("←→", 0)
+        eprintf_colored(" page", 2)
+    }
     eprintf_colored(" • ", 90)
     eprintf_colored("enter", 0)
     eprintf_colored(" confirm", 2)
-    go_up(len(options) + 1)
+    go_up(display_count + 1)
     eprintf("\e[9999D")
 
-    let selected = 0
     let checked = [Bool]
     for _ in 0..len(options) {
         checked += [false]
     }
 
-    for i in 0..len(options) {
-        if i == selected {
-            eprintf_colored(cursor + "• " + options[i] + "\n", 32)
-        } else {
-            print_blank(len(cursor))
-            eprintf("• " + options[i] + "\n")
-        }
-    }
+    render_multi_choose_page(options, checked, current_page, selected, cursor, page_size, display_count)
 
     loop {
         let key = get_key()
 
         let prev_selected = selected
+        let prev_page = current_page
+        let page_options = get_page_options(options, current_page, page_size)
+        let global_selected = get_page_start(current_page, page_size) + selected
 
         if {
             key == "UP" or key == "k" {
                 if selected == 0 {
-                    selected = len(options) - 1
+                    if current_page > 0 {
+                        current_page -= 1
+                        let new_page_options = get_page_options(options, current_page, page_size)
+                        selected = len(new_page_options) - 1
+                    } else {
+                        current_page = total_pages - 1
+                        let new_page_options = get_page_options(options, current_page, page_size)
+                        selected = len(new_page_options) - 1
+                    }
                 } else {
                     selected = selected - 1
                 }
             }
             key == "DOWN" or key == "j" {
-                if selected == len(options) - 1 {
-                    selected = 0
+                if selected == len(page_options) - 1 {
+                    if current_page < total_pages - 1 {
+                        current_page += 1
+                        selected = 0
+                    } else {
+                        current_page = 0
+                        selected = 0
+                    }
                 } else {
                     selected = selected + 1
                 }
             }
-            key == "h" {
-                selected = 0
+            key == "LEFT" or key == "h" {
+                if current_page > 0 {
+                    current_page -= 1
+                    selected = 0
+                } else {
+                    selected = 0
+                }
             }
-            key == "l" {
-                selected = len(options) - 1
+            key == "RIGHT" or key == "l" {
+                if current_page < total_pages - 1 {
+                    current_page += 1
+                    selected = 0
+                } else {
+                    selected = len(page_options) - 1
+                }
             }
             key == "x" or key == "X" {
                 if {
-                    checked[selected] {
-                        checked[selected] = false
+                    checked[global_selected] {
+                        checked[global_selected] = false
                     }
                     limit < 0 or count_checked(checked) < limit {
-                        checked[selected] = true
+                        checked[global_selected] = true
                     }
                     else: continue
                 }
-                go_up(len(options) - selected)
+                go_up(display_count - selected)
                 eprintf("\e[9999D")
                 eprintf("\e[K")
-                let check_mark = checked[selected] then "✓ " else "• "
-                eprintf_colored(cursor + check_mark + options[selected], 32)
-                go_down(len(options) - selected)
+                let check_mark = checked[global_selected] then "✓ " else "• "
+                let current_page_options = get_page_options(options, current_page, page_size)
+                eprintf_colored(cursor + check_mark + current_page_options[selected], 32)
+                go_down(display_count - selected)
                 eprintf("\e[9999D")
                 continue
             }
@@ -205,34 +385,53 @@ pub fun xyl_multi_choose(
             else: continue
         }
 
-        if prev_selected != selected {
-            go_up(len(options) - prev_selected)
-            eprintf("\e[K")
-            print_blank(len(cursor))
-            let prev_check_mark = checked[prev_selected] then "✓ " else "• "
-            eprintf(prev_check_mark + options[prev_selected])
+        if {
+            prev_page != current_page {
+                remove_line(display_count)
+                eprintf("\e[9999D")
+                render_multi_choose_page(options, checked, current_page, selected, cursor, page_size, display_count)
+                render_page_indicator(current_page, total_pages)
+            }
+            prev_selected != selected {
+                let start = get_page_start(current_page, page_size)
+                let prev_global = start + prev_selected
+                go_up(display_count - prev_selected)
+                eprintf("\e[K")
+                print_blank(len(cursor))
+                let prev_check_mark = checked[prev_global] then "✓ " else "• "
+                if checked[prev_global] {
+                    eprintf_colored("✓ " + page_options[prev_selected], 32)
+                } else {
+                    eprintf("• " + page_options[prev_selected])
+                }
 
-            let diff = selected - prev_selected
-            go_up_or_down(diff)
-            eprintf("\e[9999D")
-            eprintf("\e[K")
-            let check_mark = checked[selected] then "✓ " else "• "
-            eprintf_colored(cursor + check_mark + options[selected], 32)
+                let diff = selected - prev_selected
+                go_up_or_down(diff)
+                eprintf("\e[9999D")
+                eprintf("\e[K")
+                let new_global = start + selected
+                let check_mark = checked[new_global] then "✓ " else "• "
+                let current_page_options = get_page_options(options, current_page, page_size)
+                eprintf_colored(cursor + check_mark + current_page_options[selected], 32)
 
-            go_down(len(options) - selected)
-            eprintf("\e[9999D")
+                go_down(display_count - selected)
+                eprintf("\e[9999D")
+            }
         }
     }
 
+    let info_lines = 1
+    let total_lines = display_count + 2
+    if total_pages > 1 {
+        info_lines += 1
+        total_lines += 1
+    }
     if header != "" {
-        go_down(6)
-        remove_line(len(options) + 7)
-    } else {
-        go_down(6)
-        remove_line(len(options) + 6)
+        total_lines += 1
     }
 
-    trust $ stty echo < /dev/tty $
+    go_down(info_lines + 1)
+    remove_line(total_lines)
 
     let result = [Text]
     for i in 0..len(options) {
@@ -240,5 +439,9 @@ pub fun xyl_multi_choose(
             result += [options[i]]
         }
     }
+
+    trust $ stty echo < /dev/tty $
+    show_cursor()
+
     return result
 }

@@ -46,6 +46,11 @@ move the cursor up `cnt` lines.
 ```ab
 pub fun go_up_or_down(cnt: Num): Null 
 ```
+## `hide_cursor`
+
+```ab
+pub fun hide_cursor(): Null 
+```
 ## `print_blank`
 
 ```ab
@@ -74,3 +79,8 @@ pub fun remove_line(cnt: Num): Null
 remove `cnt` lines from the terminal.
 
 
+## `show_cursor`
+
+```ab
+pub fun show_cursor(): Null 
+```

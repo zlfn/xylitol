@@ -1,0 +1,37 @@
+import * from "./mod.ab"
+import * from "./help.ab"
+import * from "std/text"
+import * from "std/env"
+import * from "../utils.ab"
+
+pub fun execute_confirm(parameters: [Text]): Text {
+    let header = "\e[96;1mAre you sure?\e[0m"
+    let default_yes = true
+
+    for param in parameters {
+        if {
+            match_regex(param, "^-h$") or match_regex(param, "^--help$") {
+                print_confirm_help()
+                exit(0)
+            }
+            match_regex(param, "^--header=.*$") {
+                let result = split(param, "=")
+                header = result[1]
+            }
+            match_regex(param, "^--default=.*$") {
+                let result = split(param, "=")
+                if {
+                    result[1] == "yes" or result[1] == "y": default_yes = true
+                    result[1] == "no" or result[1] == "n": default_yes = false
+                    else: {
+                        eprintf_colored("Invalid default value: " + result[1] + ". Use 'yes' or 'no'.\n", 31)
+                        exit(1)
+                    }
+                }
+            }
+        }
+    }
+
+    let result = xyl_confirm(header, default_yes)
+    return result then "yes" else "no"
+}

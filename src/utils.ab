@@ -86,3 +86,11 @@ pub fun go_up_or_down(cnt: Num): Null {
     }
 }
 
+pub fun hide_cursor(): Null {
+    eprintf("\e[?25l")
+}
+
+pub fun show_cursor(): Null {
+    eprintf("\e[?25h")
+}
+

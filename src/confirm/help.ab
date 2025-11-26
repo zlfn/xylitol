@@ -1,14 +1,14 @@
 import * from "std/env"
-import * from "../utils.ab"
+import * from "../utils/truecolor.ab"
 
 pub fun print_confirm_help(): Null {
     echo "Usage: ./xylitol.sh confirm [flags]"
     echo ""
-    printf_colored("confirm", 92)
+    printf(colored_primary("confirm"))
     printf(" - Display a Yes/No confirmation dialog.")
     echo ""
     echo ""
-    echo_colored("Flags: ", 96)
+    printf(colored_secondary("Flags: ") + "\n")
     echo "  -h, --help             Show this help message"
     echo "  --header=\"<text>\"      Set a header text to display above the options (ANSI escape supported)"
     echo "  --default=<yes|no>     Set the default selection (default: yes)"

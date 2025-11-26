@@ -1,26 +1,30 @@
 import * from "std/env"
+import * from "./utils/truecolor.ab"
 import * from "./utils.ab"
 
 pub fun print_help() {
     echo "Usage: ./xylitol.sh <command> [flags]"
     echo ""
-    printf_colored("Xylitol", 92)
+    printf("\e[1m" + colored_primary("Xylitol"))
     printf(" - A tool for ")
-    printf_colored("fresh", 92)
+    printf(colored_primary("fresh"))
     printf(" shell scripts.")
     echo ""
     echo ""
-    echo_colored("Flags: ", 96)
+    printf(colored_secondary("Flags: ") + "\n")
     echo "  -h, --help        Show this help message"
     echo "  -v, --version     Show version information"
     echo ""
-    echo_colored("Commands: ", 96)
+    printf(colored_secondary("Commands: ") + "\n")
     echo "  input             Prompt for some input"
     echo "  choose            Choose from a list of options"
     echo "  confirm           Prompt for a yes/no confirmation"
     echo ""
-    printf("Run ")
-    printf_colored("./xylitol.sh <command> --help", 93)
-    printf(" for more information on a command.")
+    printf(colored_secondary("Envs: ") + "\n")
+    printf("  $XYLITOL_TRUECOLOR         Enable 24-bit truecolor support " + colored("(\"Yes\" or \"No\", default: Yes)", 90) + "\n")
+    printf("  $XYLITOL_PRIMARY_COLOR     Set the primary color " + colored("(default: 3;207;159;92)", 90) + "\n")
+    printf("  $XYLITOL_SECONDARY_COLOR   Set the secondary color " + colored("(default: 3;118;206;95)", 90) + "\n")
+    printf("  $XYLITOL_ACCENT_COLOR      Set the accent color " + colored("(default: 234;72;121;94)", 90) + "\n")
     echo ""
+    printf("Run " + colored_accent("./xylitol.sh <command> --help") + " for more information on a command.\n") 
 }

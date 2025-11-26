@@ -1,5 +1,7 @@
 import * from "std/env"
 import * from "../utils.ab"
+import * from "../utils/truecolor.ab"
+import * from "../utils/term.ab"
 
 /// Renders the Yes/No selection with background colors
 /// Uses smaller buttons when terminal width is below 30 characters
@@ -11,17 +13,16 @@ fun render_confirm_options(selected: Bool, term_width: Num): Null {
 
     eprintf(" ")
     if selected {
-        // Yes selected (green background)
-        eprintf("\e[42;37m" + yes_label + "\e[0m")
+        // Yes selected
+        eprintf("\e[97m" + background_secondary(yes_label))
         eprintf(gap)
         // No not selected (dim)
         eprintf("\e[49;37m" + no_label + "\e[0m")
     } else {
-        // Yes not selected (dim)
+        // No selected
         eprintf("\e[49;37m" + yes_label + "\e[0m")
         eprintf(gap)
-        // No selected (red background)
-        eprintf("\e[41;37m" + no_label + "\e[0m")
+        eprintf("\e[97m" + background_secondary(no_label))
     }
 }
 
@@ -34,13 +35,13 @@ fun render_confirm_options(selected: Bool, term_width: Num): Null {
 /// ### Returns
 /// - `true` if the user selected Yes, `false` if No.
 pub fun xyl_confirm(
-    header: Text = "\e[96;1mAre you sure?\e[0m",
+    header: Text = "Are you sure?",
     default_yes: Bool = true,
 ): Bool {
     trust $ stty -echo < /dev/tty $
     hide_cursor()
 
-    let term_width = get_term_width()
+    let term_width = term_width()
 
     if header != "" {
         eprintf(truncate_text(header, term_width) + "\n\n")

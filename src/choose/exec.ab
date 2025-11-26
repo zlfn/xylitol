@@ -1,7 +1,8 @@
 import * from "./mod.ab"
-import * from "./help.ab"
 import * from "std/text"
+import * from "./help.ab"
 import * from "../utils.ab"
+import * from "../utils/truecolor.ab"
 
 fun read_stdin_options(): [Text] {
     let options = [Text]
@@ -14,7 +15,7 @@ fun read_stdin_options(): [Text] {
 
 pub fun execute_choose(parameters: [Text]): Text {
     let cursor = "> "
-    let header = "\e[96;1mChoose:\e[0m"
+    let header = "\e[1m" + colored_primary("Choose: ")
     let options = read_stdin_options()
     let multi = false
     let limit = -1
@@ -37,7 +38,7 @@ pub fun execute_choose(parameters: [Text]): Text {
             match_regex(param, "^--limit=.*$") {
                 let result = split(param, "=")
                 limit = parse_number(result[1]) failed {
-                    eprintf_colored("Invalid limit value: " + result[1] + "\n", 31)
+                    eprintf_colored("ERROR: Invalid limit value: " + result[1] + "\n", 31)
                     exit(1)
                 }
                 multi = true
@@ -48,7 +49,7 @@ pub fun execute_choose(parameters: [Text]): Text {
             match_regex(param, "^--page-size=.*$") {
                 let result = split(param, "=")
                 page_size = parse_number(result[1]) failed {
-                    eprintf_colored("Invalid page-size value: " + result[1] + "\n", 31)
+                    eprintf_colored("ERROR: Invalid page-size value: " + result[1] + "\n", 31)
                     exit(1)
                 }
             }
@@ -58,10 +59,12 @@ pub fun execute_choose(parameters: [Text]): Text {
         }
     }
 
+    let display_header = has_ansi_escape(header) then header else "\e[1m" + colored_primary(header)
+
     if multi {
-        let results = xyl_multi_choose(options, cursor, header, limit, page_size)
+        let results = xyl_multi_choose(options, cursor, display_header, limit, page_size)
         return join(results, "\n")
     }
 
-    return xyl_choose(options, cursor, header, page_size)
+    return xyl_choose(options, cursor, display_header, page_size)
 }

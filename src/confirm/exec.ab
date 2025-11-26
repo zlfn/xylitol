@@ -1,11 +1,13 @@
-import * from "./mod.ab"
-import * from "./help.ab"
 import * from "std/text"
 import * from "std/env"
+
+import * from "./mod.ab"
+import * from "./help.ab"
 import * from "../utils.ab"
+import * from "../utils/truecolor.ab"
 
 pub fun execute_confirm(parameters: [Text]): Text {
-    let header = "\e[96;1mAre you sure?\e[0m"
+    let header = "\e[1m" + colored_primary("Are you sure?")
     let default_yes = true
 
     for param in parameters {
@@ -24,7 +26,7 @@ pub fun execute_confirm(parameters: [Text]): Text {
                     result[1] == "yes" or result[1] == "y": default_yes = true
                     result[1] == "no" or result[1] == "n": default_yes = false
                     else: {
-                        eprintf_colored("Invalid default value: " + result[1] + ". Use 'yes' or 'no'.\n", 31)
+                        eprintf_colored("ERROR: Invalid default value: " + result[1] + ". Use 'yes' or 'no'.\n", 31)
                         exit(1)
                     }
                 }
@@ -32,6 +34,7 @@ pub fun execute_confirm(parameters: [Text]): Text {
         }
     }
 
-    let result = xyl_confirm(header, default_yes)
+    let display_header = has_ansi_escape(header) then header else "\e[1m" + colored_primary(header)
+    let result = xyl_confirm(display_header, default_yes)
     return result then "yes" else "no"
 }

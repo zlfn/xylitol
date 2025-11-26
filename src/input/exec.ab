@@ -1,6 +1,8 @@
 import * from "./mod.ab"
 import * from "./help.ab"
 import * from "std/text"
+import * from "../utils.ab"
+import * from "../utils/truecolor.ab"
 
 pub fun execute_input(parameters: [Text]): Text {
     let prompt = "> "
@@ -30,5 +32,6 @@ pub fun execute_input(parameters: [Text]): Text {
         }
     }
 
-    return xyl_input(prompt, placeholder, header, password)
+    let display_header = has_ansi_escape(header) then header else "\e[1m" + colored_primary(header)
+    return xyl_input(prompt, placeholder, display_header, password)
 }

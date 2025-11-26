@@ -16,12 +16,12 @@ fun get_page_start(page: Num, page_size: Num): Num
 ## `render_choose_page`
 
 ```ab
-fun render_choose_page(options: [Text], page: Num, sel: Num, cursor: Text, page_size: Num, display_count: Num): Null 
+fun render_choose_page(page_options: [Text], sel: Num, cursor: Text, display_count: Num, term_width: Num): Null 
 ```
 ## `render_multi_choose_page`
 
 ```ab
-fun render_multi_choose_page(options: [Text], checked: [Bool], page: Num, sel: Num, cursor: Text, page_size: Num, display_count: Num): Null 
+fun render_multi_choose_page(page_options: [Text], checked: [Bool], page_start: Num, sel: Num, cursor: Text, display_count: Num, term_width: Num): Null 
 ```
 ## `render_page_indicator`
 
@@ -31,7 +31,7 @@ fun render_page_indicator(page: Num, total_pages: Num): Null
 ## `xyl_choose`
 
 ```ab
-pub fun xyl_choose(options: [Text], cursor: Text = "> ", header: Text = "\e[96mChoose:\e[0m", page_size: Num = 10,): Text 
+pub fun xyl_choose(options: [Text], cursor: Text = "> ", header: Text = "\e[1mChoose:\e[0m", page_size: Num = 10,): Text 
 ```
 
 Prompts the user to choose a single option from a list.
@@ -46,7 +46,7 @@ Prompts the user to choose a single option from a list.
 ## `xyl_multi_choose`
 
 ```ab
-pub fun xyl_multi_choose(options: [Text], cursor: Text = "> ", header: Text = "\e[96mChoose:\e[0m", limit: Num = - 1, page_size: Num = 10,): [Text] 
+pub fun xyl_multi_choose(options: [Text], cursor: Text = "> ", header: Text = "Choose:", limit: Num = - 1, page_size: Num = 10,): [Text] 
 ```
 
 Prompts the user to choose multiple options from a list.

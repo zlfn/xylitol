@@ -1,6 +1,7 @@
 import * from "std/env"
 import * from "std/math"
 import * from "../utils.ab"
+import * from "../utils/term.ab"
 
 /// Prompts the user single-line input with a placeholder.
 ///
@@ -17,7 +18,7 @@ pub fun xyl_input(
 ): Text {
     trust $ stty -echo < /dev/tty $
 
-    let term_width = get_term_width()
+    let term_width = term_width()
 
     if header != "" {
         eprintf(truncate_text(header, term_width) + "\n")
@@ -48,7 +49,6 @@ pub fun xyl_input(
     trust $ stty -echo < /dev/tty $
 
     // Calculate how many lines the input takes up (prompt + text may wrap)
-    let term_width = get_term_width()
     let input_display_len = len(prompt + text)
     let input_lines = math_ceil(input_display_len / term_width)
 

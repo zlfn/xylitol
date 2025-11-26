@@ -27,7 +27,6 @@ Maze
 Mirror
 Mist
 Move
-Nothing
 Power
 Rain
 Return

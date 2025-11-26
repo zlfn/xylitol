@@ -1,21 +1,85 @@
 #!/usr/bin/env bash
 
-printf "\e[96mOh, Key of Clow … power of magic, power of light, surrender the wand, let the force ignite! \e[0m" >&2
-printf "\e[96;1mRelease!!! ✨\e[0m\n" >&2
+export XYLITOL_PRIMARY_COLOR="246;177;206;95" # Pink
+export XYLITOL_SECONDARY_COLOR="239;224;127;93" # White
 
-card=$(cat inputs/clow_cards.txt | ../xylitol.sh choose --header="\e[96;1m🌸 Choose Your Clow Cards\e[0m" --no-limit)
+# ccsakura.txt is from https://aahub.org
+function print_sakura() {
+    printf "\e[38;2;246;177;206m" >&2
+    (cat inputs/ccsakura.txt)
+    printf "\e[0m" >&2
+}
 
-if [ -z "$card" ]; then
-    printf "\e[91;1mNo cards selected, release canceled!\e[0m\n" >&2
-    exit 1
+lang=$(../xylitol.sh choose --header="🌸 Select Language" "English" "日本語" "한국어")
+
+if [ "$lang" = "English" ]; then
+    printf "Key of Clow … power of magic, power of light, surrender the wand, let the force ignite!\n" >&2
+    printf "Key which hides the power of the dark,\n" >&2
+    printf "Reveal your true from before me.\n" >&2
+    printf "I, Sakura Kinomoto, command you under our contact.\n" >&2
+    printf "\e[38;2;246;177;206;1m✨ Release!!! ✨\e[0m\n" >&2
+
+    while true; do
+        card=$(cat inputs/clow_cards_en.txt | ../xylitol.sh choose --header="🌸 Choose Clow Card")
+
+        prompt="Are you sure with this card?: "
+        card=${card//$'\n'/、}
+        (../xylitol.sh confirm --header="$prompt$card")
+        if [ $? -eq 0 ]; then
+            break
+        fi
+    done
+
+    print_sakura
+    printf "\e[38;2;246;177;206;1m" >&2
+    printf "      $card,"
+    printf "\e[38;2;239;224;127m" >&2
+    printf " return to the form that you were meant to be in!!!\n"
+    printf "\e[0m" >&2
+elif [ "$lang" = "日本語" ]; then
+    printf "闇の力を秘めし鍵よ、\n真の姿を我の前に示せ。\n契約のもとさくらが命じる。\n" >&2
+    printf "\e[38;2;246;177;206;1m✨ レリーズ!!! ✨\e[0m\n" >&2
+
+    while true; do
+        card=$(cat inputs/clow_cards_jp.txt | ../xylitol.sh choose --header="🌸 クロウカードを選んでね")
+
+        prompt="このカードでいい?: "
+        card=${card//$'\n'/、}
+        (../xylitol.sh confirm --header="$prompt$card")
+        if [ $? -eq 0 ]; then
+            break
+        fi
+    done
+
+    print_sakura
+    printf "\e[38;2;239;224;127;1m" >&2
+    printf "                  汝のあるべき姿に戻れ!"
+    printf "\e[38;2;246;177;206;1m" >&2
+    printf " $card!\n"
+    printf "\e[0m" >&2
+else
+    printf "어둠의 힘을 지니고 있는 열쇠여,\n진정한 모습 내 앞에 나타나라.\n너와의 계약에 따라 체리가 명한다.\n" >&2
+    printf "\e[38;2;246;177;206;1m✨ 봉인해제!!! ✨\e[0m\n" >&2
+
+    while true; do
+        card=$(cat inputs/clow_cards_ko.txt | ../xylitol.sh choose --header="🌸 크로우 카드를 선택하세요")
+
+        prompt="이 카드로 할까요?: "
+        card=${card//$'\n'/、}
+        (../xylitol.sh confirm --header="$prompt$card")
+        if [ $? -eq 0 ]; then
+            break
+        fi
+    done
+
+    print_sakura
+    printf "\e[38;2;239;224;127;1m" >&2
+    printf "           너의 본모습으로 돌아갈 것을 명한다!"
+    printf "\e[38;2;246;177;206;1m" >&2
+    printf " $card!\n"
+    printf "\e[0m" >&2
 fi
 
-prompt="\e[92;1mAre you sure with this cards?:\e[0m "
-card=${card//$'\n'/, }
-(../xylitol.sh confirm --header="$prompt$card")
-if [ $? -ne 0 ]; then
-    printf "\e[91;1mRelease canceled!\e[0m\n" >&2
-    exit 1
-fi
-
-printf "\e[96;1m$card,\e[96m release and dispe!!!\n\e[0m" >&2
+printf "\e[38;2;246;177;206m" >&2
+echo "------------------------------------------------------------------------"
+printf "\e[0m" >&2

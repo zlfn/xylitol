@@ -6,7 +6,6 @@ Bash is a highly limited language, and controlling all possible terminal cases i
 Therefore, XYLITOL only supports a reasonable terminal environments, and all execution environments 
 are assumed to meet at least the following conditions:
 - ANSI Escape Sequences are supported, including color output and cursor movement.
-- XTerm Control Sequences are supported.
 - POSIX standard utilities (such as `sed`, `bc`, etc.) are available.
 - The terminal width is at least 20 columns.
 - The terminal height is at least 10 lines.
@@ -17,6 +16,19 @@ terminals that do not meet the above requirements will not be accepted as vaild.
 
 However, pull requests that address problems on such terminals are welcome, as long as they 
 do not cause significant performance regressions.
+
+**Support for Xterm extensions in the terminal is strongly recommended.**  
+Xterm extensions include features such as 256 colors, queriying the terminal's current size, etc.  
+Although fallbacks are applied in most cases to allow operation without extensions, full
+functionality cannot be guaranteed when they are unavaiable.  
+
+Terminals that provide support for Xterm extensions inlcude (but are not limited to) the following:
+- Cross-platform: Alacritty, Kitty, WezTerm, Tabby (Terminus), Warp, Hyper, Cool Retro Term, Rio
+- Linux: GNOME Terminal, KDE Konsole, xfce4-terminal, mate-terminal
+- Windows: Windows Terminal, ConEmu, Fluent Terminal
+- macOS: iTerm2
+
+XYLITOL is designed to work correctly on all the terminals listed above, but is has not been tested on every one of them.
 
 ## Quality of Operation Guarantee
 XYLITOL is expected to work well across all environments and inputs, 
@@ -33,6 +45,7 @@ correctly in most situations, but may behave incorrectly in some extreme cases.
 Any contribution that causes issues in these environments will still be accepted.
 However, contributions that fix issues in these environments are encouraged.
 - Windows / FreeBSD
+- Terminals without Xterm extensions
 - ANSI string input (only in cases explicitly documented as supported)
 - CJK text input
 

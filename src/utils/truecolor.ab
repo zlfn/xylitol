@@ -1,0 +1,200 @@
+import { env_const_get, echo_colored } from "std/env"
+import { split, parse_number } from "std/text"
+
+/// A global variable indicating if the terminal supports truecolor.
+/// "None" or "Yes" or "No"
+///
+/// This value is only updated by the `get_supports_truecolor` function
+/// executed by `colored_rgb` on its first call.
+let _supports_truecolor = "None"
+/// A global variable indicating if the Xylitol colors have been loaded from environment variables.
+let _got_xylitol_colors = false
+let _primary_color = [3, 207, 159, 92]
+let _secondary_color = [3, 118, 206, 95]
+let _accent_color = [234, 72, 121, 94]
+
+
+/// Checks if the terminal supports 24-bit true color.
+/// Returns true if COLORTERM is "truecolor" or "24bit".
+fun get_supports_truecolor(): Bool {
+    let config = env_const_get("XYLITOL_TRUECOLOR") failed { "" }
+    if config == "No" {
+        _supports_truecolor = "No"
+        return false
+    }
+    let colorterm = env_const_get("COLORTERM") failed {
+        _supports_truecolor = "No"
+        return false
+    }
+    _supports_truecolor = colorterm == "truecolor" or colorterm == "24bit" then "Yes" else "No"
+    return _supports_truecolor == "Yes"
+}
+
+/// Returns a text wrapped in 24-bit true color codes.
+/// If truecolor is not supported, falls back to the specified fallback color code.
+///
+/// ### Parameters
+/// - `message`: The text to colorize.
+/// - `r`: Red component (0-255).
+/// - `g`: Green component (0-255).
+/// - `b`: Blue component (0-255).
+/// - `truecolor`: Whether the terminal supports truecolor.
+/// - `fallback`: Fallback ANSI color code (default: 0 = default color).
+pub fun colored_rgb(message: Text, r: Num, g: Num, b: Num, fallback: Num = 0): Text {
+    if {
+        _supports_truecolor == "Yes": {
+            return "\e[38;2;{r as Text};{g as Text};{b as Text}m" + message + "\e[0m"
+        }
+        _supports_truecolor == "None": {
+            if {
+                get_supports_truecolor(): {
+                    return "\e[38;2;{r as Text};{g as Text};{b as Text}m" + message + "\e[0m"
+                }
+                fallback == 0: return message
+                else: return "\e[{fallback as Text}m" + message + "\e[0m"
+            }
+        }
+        else {
+            if fallback == 0 {
+                return message
+            }
+            return "\e[{fallback as Text}m" + message + "\e[0m"
+        }
+    }
+}
+
+/// Returns a text wrapped in 24-bit true color background codes.
+/// If truecolor is not supported, falls back to the specified fallback color code.
+///
+/// ### Parameters
+/// - `message`: The text to colorize.
+/// - `r`: Red component (0-255).
+/// - `g`: Green component (0-255).
+/// - `b`: Blue component (0-255).
+/// - `fallback`: Fallback ANSI foreground color code (40-47, 100-107). Converted to background automatically.
+pub fun background_rgb(message: Text, r: Num, g: Num, b: Num, fallback: Num = 0): Text {
+    // Convert foreground color code to background color code
+    // 30-37 -> 40-47, 90-97 -> 100-107
+    let bg_fallback = fallback
+    if fallback >= 30 and fallback <= 37 {
+        bg_fallback = fallback + 10
+    }
+    if fallback >= 90 and fallback <= 97 {
+        bg_fallback = fallback + 10
+    }
+
+    if {
+        _supports_truecolor == "Yes": {
+            return "\e[48;2;{r as Text};{g as Text};{b as Text}m" + message + "\e[0m"
+        }
+        _supports_truecolor == "None": {
+            if {
+                get_supports_truecolor(): {
+                    return "\e[48;2;{r as Text};{g as Text};{b as Text}m" + message + "\e[0m"
+                }
+                bg_fallback == 0: return message
+                else: return "\e[{bg_fallback as Text}m" + message + "\e[0m"
+            }
+        }
+        else {
+            if bg_fallback == 0 {
+                return message
+            }
+            return "\e[{bg_fallback as Text}m" + message + "\e[0m"
+        }
+    }
+}
+
+fun inner_get_xylitol_colors(): Null? {
+    if not _got_xylitol_colors {
+        let primary_env = env_const_get("XYLITOL_PRIMARY_COLOR") failed { "" }
+        if primary_env != "" {
+            let parts = split(primary_env, ";")
+            if len(parts) == 4 {
+                _primary_color = [
+                    parse_number(parts[0])?,
+                    parse_number(parts[1])?,
+                    parse_number(parts[2])?,
+                    parse_number(parts[3])?,
+                ]
+            }
+        }
+
+        let secondary_env = env_const_get("XYLITOL_SECONDARY_COLOR") failed { "" }
+        if secondary_env != "" {
+            let parts = split(secondary_env, ";")
+            if len(parts) == 4 {
+                _secondary_color = [
+                    parse_number(parts[0])?,
+                    parse_number(parts[1])?,
+                    parse_number(parts[2])?,
+                    parse_number(parts[3])?,
+                ]
+            }
+        }
+
+        let accent_env = env_const_get("XYLITOL_ACCENT_COLOR") failed { "" }
+        if accent_env != "" {
+            let parts = split(accent_env, ";")
+            if len(parts) == 4 {
+                _accent_color = [
+                    parse_number(parts[0])?,
+                    parse_number(parts[1])?,
+                    parse_number(parts[2])?,
+                    parse_number(parts[3])?,
+                ]
+            }
+        }
+
+        _got_xylitol_colors = true
+    }
+}
+
+pub fun get_xylitol_colors(): Null {
+    inner_get_xylitol_colors() failed {
+        echo_colored("WARN: Failed to parse Xylitol colors from envs.", 33)
+    }
+    _got_xylitol_colors = true
+}
+
+pub fun colored_primary(message: Text): Text {
+    if not _got_xylitol_colors {
+        get_xylitol_colors()
+    }
+    return colored_rgb(message, _primary_color[0], _primary_color[1], _primary_color[2], _primary_color[3])
+}
+
+pub fun colored_secondary(message: Text): Text {
+    if not _got_xylitol_colors {
+        get_xylitol_colors()
+    }
+    return colored_rgb(message, _secondary_color[0], _secondary_color[1], _secondary_color[2], _secondary_color[3])
+}
+
+pub fun colored_accent(message: Text): Text {
+    if not _got_xylitol_colors {
+        get_xylitol_colors()
+    }
+    return colored_rgb(message, _accent_color[0], _accent_color[1], _accent_color[2], _accent_color[3])
+}
+
+pub fun background_primary(message: Text): Text {
+    if not _got_xylitol_colors {
+        get_xylitol_colors()
+    }
+    return background_rgb(message, _primary_color[0], _primary_color[1], _primary_color[2], _primary_color[3])
+}
+
+pub fun background_secondary(message: Text): Text {
+    if not _got_xylitol_colors {
+        get_xylitol_colors()
+    }
+    return background_rgb(message, _secondary_color[0], _secondary_color[1], _secondary_color[2], _secondary_color[3])
+}
+
+pub fun background_accent(message: Text): Text {
+    if not _got_xylitol_colors {
+        get_xylitol_colors()
+    }
+    return background_rgb(message, _accent_color[0], _accent_color[1], _accent_color[2], _accent_color[3])
+}

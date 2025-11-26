@@ -1,17 +1,17 @@
 import * from "std/env"
-import * from "../utils.ab"
+import * from "../utils/truecolor.ab"
 
 pub fun print_choose_help(): Null {
     echo "Usage: ./xylitol.sh choose [<options> ...] [flags]"
     echo ""
-    printf_colored("choose", 92)
+    printf(colored_primary("choose"))
     printf(" - Choose from a list of options.")
     echo ""
     echo ""
-    echo_colored("Arguments: ", 96)
+    printf(colored_secondary("Arguments: ") + "\n")
     echo "  [<options> ...]        List of options to choose from"
     echo ""
-    echo_colored("Flags: ", 96)
+    printf(colored_secondary("Flags: ") + "\n")
     echo "  -h, --help             Show this help message"
     echo "  --limit=<number>       Enable multi-selection mode with a limit of selections"
     echo "  --no-limit             Enable multi-selection mode with no limit"

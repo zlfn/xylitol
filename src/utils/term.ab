@@ -1,0 +1,44 @@
+import { split, parse_number } from "std/text"
+
+/// global variables to store terminal size
+/// (prevent multiple queries in one session)
+let _got_term_size = false
+let _term_size = [80, 24] 
+
+/// Get the terminal size (columns, rows) using ANSI escape sequence.
+fun get_term_size(): Null? {
+    // Query terminal size with \e[18t, response format: \e[8;rows;colst
+    let result = trust $ printf '\e[18t' > /dev/tty; IFS=';' read -rsd t _ignore height width < /dev/tty; echo "\$height; \$width" $
+    let parts = split(result, ";")
+    if len(parts) != 2 {
+        fail
+    }
+    let rows = parse_number(parts[0])?
+    let cols = parse_number(parts[1])?
+
+    _term_size = [cols, rows]
+    _got_term_size = true
+}
+
+pub fun term_size(): [Num] {
+    if not _got_term_size {
+        trust get_term_size()
+    }
+    return _term_size
+}
+
+/// Get the terminal width (columns).
+pub fun term_width(): Num {
+    if not _got_term_size {
+        trust get_term_size()
+    }
+    return _term_size[0]
+}
+
+/// Get the terminal height (rows).
+pub fun term_height(): Num {
+    if not _got_term_size {
+        trust get_term_size()
+    }
+    return _term_size[1]
+}

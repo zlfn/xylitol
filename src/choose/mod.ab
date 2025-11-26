@@ -201,6 +201,7 @@ pub fun xyl_choose(
             prev_page != current_page {
                 go_up(1)
                 remove_line(display_count - 1)
+                remove_current_line()
                 eprintf("\e[9999D")
                 render_choose_page(options, current_page, selected, cursor, page_size, display_count, term_width)
                 render_page_indicator(current_page, total_pages)
@@ -414,6 +415,7 @@ pub fun xyl_multi_choose(
             prev_page != current_page {
                 go_up(1)
                 remove_line(display_count - 1)
+                remove_current_line()
                 eprintf("\e[9999D")
                 render_multi_choose_page(options, checked, current_page, selected, cursor, page_size, display_count, term_width)
                 render_page_indicator(current_page, total_pages)

@@ -1,11 +1,13 @@
 import { printf } from "std/env"
 import * from "std/text"
 
+/// Reads a single character from terminal.
 pub fun get_char(): Text {
     let char = trust $ read -n 1 key < /dev/tty; printf "%s" "\$key" $
     return char
 }
 
+/// Reads a key from terminal, including special keys (arrows, backspace, etc.)
 pub fun get_key(): Text {
     let var = trust $ read -rsn1 k < /dev/tty; if [[ "\$k" == \$'\e' ]]; then read -rsn2 r < /dev/tty; k+=\$r; fi; printf '%q' "\$k" $
     if {
@@ -41,20 +43,12 @@ pub fun colored(message: Text, color: Num): Text {
 
 /// remove `cnt` characters from the terminal.
 pub fun remove(cnt: Num): Null {
-    let remove_text = [Text]
-    for i in 0..cnt {
-        remove_text += ["\b \b"]
-    }
-    eprintf(join(remove_text, ""))
+   trust $ printf '%0.s\b \b' \$(seq 1 {cnt}) >&2 $
 }
 
 /// remove `cnt` lines from the terminal (starting from current line, going up).
 pub fun remove_line(cnt: Num): Null {
-    if cnt >= 1 {
-        for _ in 0..cnt {
-            eprintf("\e[2K\e[1A")
-        }
-    }
+    trust $ printf '\e[2K\e[1A%.0s' \$(seq {cnt as Text}) >&2 $
     eprintf("\e[9999D")
 }
 
@@ -63,11 +57,11 @@ pub fun remove_current_line(): Null {
     eprintf("\e[2K\e[9999D")
 }
 
+/// Prints blank spaces.
+/// ### Parameters
+/// - `cnt`: Number of spaces to print.
 pub fun print_blank(cnt: Num): Null {
-    /// Prints blank spaces.
-    for _ in 0..cnt {
-        eprintf(" ")
-    }
+    trust $ printf '%*s' "{cnt as Text}" ' ' >&2 $
 }
 
 pub fun new_line(cnt: Num): Null {

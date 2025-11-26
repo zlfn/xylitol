@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Written in [Amber](https://amber-lang.com/)
 # version: 0.4.0-alpha
-# date: 2025-11-27 03:05:52
+# date: 2025-11-27 03:19:41
 replace__0_v0() {
     local source=$1
     local search=$2
@@ -1126,10 +1126,10 @@ fi
 fi
 done
     has_ansi_escape__321_v0 "${header}";
-    __AF_has_ansi_escape321_v0__35_26="$__AF_has_ansi_escape321_v0";
+    __AF_has_ansi_escape321_v0__35_42="$__AF_has_ansi_escape321_v0";
     colored_primary__404_v0 "${header}";
-    __AF_colored_primary404_v0__35_77="${__AF_colored_primary404_v0}";
-    local display_header=$(if [ "$__AF_has_ansi_escape321_v0__35_26" != 0 ]; then echo "${header}"; else echo "\e[1m""${__AF_colored_primary404_v0__35_77}"; fi)
+    __AF_colored_primary404_v0__35_93="${__AF_colored_primary404_v0}";
+    local display_header=$(if [ $(echo $([ "_${header}" != "_" ]; echo $?) '||' "$__AF_has_ansi_escape321_v0__35_42" | bc -l | sed '/\./ s/\.\{0,1\}0\{1,\}$//') != 0 ]; then echo "${header}"; else echo "\e[1m""${__AF_colored_primary404_v0__35_93}"; fi)
     xyl_input__368_v0 "${prompt}" "${placeholder}" "${display_header}" ${password};
     __AF_xyl_input368_v0__36_12="${__AF_xyl_input368_v0}";
     __AF_execute_input477_v0="${__AF_xyl_input368_v0__36_12}";
@@ -2513,10 +2513,10 @@ else
 fi
 done
     has_ansi_escape__538_v0 "${header}";
-    __AF_has_ansi_escape538_v0__62_26="$__AF_has_ansi_escape538_v0";
+    __AF_has_ansi_escape538_v0__62_42="$__AF_has_ansi_escape538_v0";
     colored_primary__585_v0 "${header}";
-    __AF_colored_primary585_v0__62_77="${__AF_colored_primary585_v0}";
-    local display_header=$(if [ "$__AF_has_ansi_escape538_v0__62_26" != 0 ]; then echo "${header}"; else echo "\e[1m""${__AF_colored_primary585_v0__62_77}"; fi)
+    __AF_colored_primary585_v0__62_93="${__AF_colored_primary585_v0}";
+    local display_header=$(if [ $(echo $([ "_${header}" != "_" ]; echo $?) '||' "$__AF_has_ansi_escape538_v0__62_42" | bc -l | sed '/\./ s/\.\{0,1\}0\{1,\}$//') != 0 ]; then echo "${header}"; else echo "\e[1m""${__AF_colored_primary585_v0__62_93}"; fi)
     if [ ${multi} != 0 ]; then
         xyl_multi_choose__616_v0 options[@] "${cursor}" "${display_header}" ${limit} ${page_size};
         __AF_xyl_multi_choose616_v0__65_23=("${__AF_xyl_multi_choose616_v0[@]}");
@@ -3285,10 +3285,10 @@ fi
 fi
 done
     has_ansi_escape__821_v0 "${header}";
-    __AF_has_ansi_escape821_v0__37_26="$__AF_has_ansi_escape821_v0";
+    __AF_has_ansi_escape821_v0__37_42="$__AF_has_ansi_escape821_v0";
     colored_primary__868_v0 "${header}";
-    __AF_colored_primary868_v0__37_77="${__AF_colored_primary868_v0}";
-    local display_header=$(if [ "$__AF_has_ansi_escape821_v0__37_26" != 0 ]; then echo "${header}"; else echo "\e[1m""${__AF_colored_primary868_v0__37_77}"; fi)
+    __AF_colored_primary868_v0__37_93="${__AF_colored_primary868_v0}";
+    local display_header=$(if [ $(echo $([ "_${header}" != "_" ]; echo $?) '||' "$__AF_has_ansi_escape821_v0__37_42" | bc -l | sed '/\./ s/\.\{0,1\}0\{1,\}$//') != 0 ]; then echo "${header}"; else echo "\e[1m""${__AF_colored_primary868_v0__37_93}"; fi)
     xyl_confirm__893_v0 "${display_header}" ${default_yes};
     __AF_xyl_confirm893_v0__38_18="$__AF_xyl_confirm893_v0";
     local result="$__AF_xyl_confirm893_v0__38_18"

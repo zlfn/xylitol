@@ -1,3 +1,35 @@
+## `background_accent`
+
+```ab
+pub fun background_accent(message: Text): Text 
+```
+## `background_primary`
+
+```ab
+pub fun background_primary(message: Text): Text 
+```
+## `background_rgb`
+
+```ab
+pub fun background_rgb(message: Text, r: Num, g: Num, b: Num, fallback: Num = 0): Text 
+```
+
+Returns a text wrapped in 24-bit true color background codes.
+If truecolor is not supported, falls back to the specified fallback color code.
+
+### Parameters
+- `message`: The text to colorize.
+- `r`: Red component (0-255).
+- `g`: Green component (0-255).
+- `b`: Blue component (0-255).
+- `fallback`: Fallback ANSI foreground color code (40-47, 100-107). Converted to background automatically.
+
+
+## `background_secondary`
+
+```ab
+pub fun background_secondary(message: Text): Text 
+```
 ## `colored_accent`
 
 ```ab

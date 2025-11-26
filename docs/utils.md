@@ -54,6 +54,16 @@ move the cursor up `cnt` lines.
 ```ab
 pub fun go_up_or_down(cnt: Num): Null 
 ```
+## `has_ansi_escape`
+
+```ab
+pub fun has_ansi_escape(text: Text): Bool 
+```
+
+Checks if the text contains ANSI escape sequences.
+Returns true if the text contains "\e[" or "\x1b[".
+
+
 ## `hide_cursor`
 
 ```ab

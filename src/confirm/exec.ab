@@ -34,7 +34,7 @@ pub fun execute_confirm(parameters: [Text]): Text {
         }
     }
 
-    let display_header = has_ansi_escape(header) then header else "\e[1m" + colored_primary(header)
+    let display_header = header == "" or has_ansi_escape(header) then header else "\e[1m" + colored_primary(header)
     let result = xyl_confirm(display_header, default_yes)
     return result then "yes" else "no"
 }

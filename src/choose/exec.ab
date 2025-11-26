@@ -59,7 +59,7 @@ pub fun execute_choose(parameters: [Text]): Text {
         }
     }
 
-    let display_header = has_ansi_escape(header) then header else "\e[1m" + colored_primary(header)
+    let display_header = header == "" or has_ansi_escape(header) then header else "\e[1m" + colored_primary(header)
 
     if multi {
         let results = xyl_multi_choose(options, cursor, display_header, limit, page_size)

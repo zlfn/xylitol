@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 export XYLITOL_PRIMARY_COLOR="246;177;206;95" # Pink
-export XYLITOL_SECONDARY_COLOR="239;224;127;93" # White
+export XYLITOL_SECONDARY_COLOR="239;224;127;93" # Yellow
 
 # ccsakura.txt is from https://aahub.org
 function print_sakura() {

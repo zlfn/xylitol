@@ -10,7 +10,7 @@ pub fun perl_get_cjk_width(text: Text): Num? {
     if not _perl_available {
         fail
     }
-    let width_str = $ perl -CSDA -E '\$w=0;\$w+=/\p\{EastAsianWidth=Wide}|\p\{EastAsianWidth=Fullwidth}|\p\{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say \$w' "{text}" $?
+    let width_str = $ perl -CSDA -E '\$w=0;\$w+=/\p\{EastAsianWidth=Wide}|\p\{EastAsianWidth=Fullwidth}|\p\{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say \$w' "{text}" 2>/dev/null $?
     let width = parse_number(width_str)?
     return width
 }
@@ -21,7 +21,7 @@ pub fun perl_truncate_cjk(text: Text, max_width: Num): Text? {
     if not _perl_available {
         fail
     }
-    let result = $ perl -CSDA -E '\$t=shift;\$m=shift;\$w=0;\$r="";\$c=/\p\{EastAsianWidth=Wide}|\p\{EastAsianWidth=Fullwidth}|\p\{EastAsianWidth=Ambiguous}/?2:1,(\$w+\$c<=\$m?(\$w+=\$c,\$r.=\$_):last) for split//,\$t; print \$r' "{text}" {max_width} $?
+    let result = $ perl -CSDA -E '\$t=shift;\$m=shift;\$w=0;\$r="";\$c=/\p\{EastAsianWidth=Wide}|\p\{EastAsianWidth=Fullwidth}|\p\{EastAsianWidth=Ambiguous}/?2:1,(\$w+\$c<=\$m?(\$w+=\$c,\$r.=\$_):last) for split//,\$t; print \$r' "{text}" {max_width} 2>/dev/null $?
     return result
 }
 
@@ -31,7 +31,7 @@ pub fun perl_substr_cjk(text: Text, start: Num, end: Num): Text? {
     if not _perl_available {
         fail
     }
-    let result = $ perl -CSDA -E '\$t=shift;\$s=shift;\$e=shift;\$w=0;\$r="";\$c=/\p\{EastAsianWidth=Wide}|\p\{EastAsianWidth=Fullwidth}|\p\{EastAsianWidth=Ambiguous}/?2:1,(\$w>=\$e?last:\$w+\$c>\$s?(\$r.=\$_):0),\$w+=\$c for split//,\$t; print \$r' "{text}" {start} {end} $?
+    let result = $ perl -CSDA -E '\$t=shift;\$s=shift;\$e=shift;\$w=0;\$r="";\$c=/\p\{EastAsianWidth=Wide}|\p\{EastAsianWidth=Fullwidth}|\p\{EastAsianWidth=Ambiguous}/?2:1,(\$w>=\$e?last:\$w+\$c>\$s?(\$r.=\$_):0),\$w+=\$c for split//,\$t; print \$r' "{text}" {start} {end} 2>/dev/null $?
     return result
 }
 

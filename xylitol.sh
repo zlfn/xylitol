@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Written in [Amber](https://amber-lang.com/)
 # version: 0.4.0-alpha
-# date: 2025-11-28 05:24:46
+# date: 2025-11-28 05:52:30
 replace__0_v0() {
     local source=$1
     local search=$2
@@ -533,7 +533,7 @@ perl_get_cjk_width__347_v0() {
         __AF_perl_get_cjk_width347_v0='';
         return 1
 fi
-    __AMBER_VAL_33=$( perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text}" );
+    __AMBER_VAL_33=$( perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text}" 2>/dev/null );
     __AS=$?;
 if [ $__AS != 0 ]; then
 __AF_perl_get_cjk_width347_v0=''
@@ -558,7 +558,7 @@ perl_truncate_cjk__348_v0() {
         __AF_perl_truncate_cjk348_v0='';
         return 1
 fi
-    __AMBER_VAL_34=$( perl -CSDA -E '$t=shift;$m=shift;$w=0;$r="";$c=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1,($w+$c<=$m?($w+=$c,$r.=$_):last) for split//,$t; print $r' "${text}" ${max_width} );
+    __AMBER_VAL_34=$( perl -CSDA -E '$t=shift;$m=shift;$w=0;$r="";$c=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1,($w+$c<=$m?($w+=$c,$r.=$_):last) for split//,$t; print $r' "${text}" ${max_width} 2>/dev/null );
     __AS=$?;
 if [ $__AS != 0 ]; then
 __AF_perl_truncate_cjk348_v0=''
@@ -1395,7 +1395,7 @@ perl_get_cjk_width__589_v0() {
         __AF_perl_get_cjk_width589_v0='';
         return 1
 fi
-    __AMBER_VAL_74=$( perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text}" );
+    __AMBER_VAL_74=$( perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text}" 2>/dev/null );
     __AS=$?;
 if [ $__AS != 0 ]; then
 __AF_perl_get_cjk_width589_v0=''
@@ -1420,7 +1420,7 @@ perl_truncate_cjk__590_v0() {
         __AF_perl_truncate_cjk590_v0='';
         return 1
 fi
-    __AMBER_VAL_75=$( perl -CSDA -E '$t=shift;$m=shift;$w=0;$r="";$c=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1,($w+$c<=$m?($w+=$c,$r.=$_):last) for split//,$t; print $r' "${text}" ${max_width} );
+    __AMBER_VAL_75=$( perl -CSDA -E '$t=shift;$m=shift;$w=0;$r="";$c=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1,($w+$c<=$m?($w+=$c,$r.=$_):last) for split//,$t; print $r' "${text}" ${max_width} 2>/dev/null );
     __AS=$?;
 if [ $__AS != 0 ]; then
 __AF_perl_truncate_cjk590_v0=''
@@ -3009,7 +3009,7 @@ perl_get_cjk_width__897_v0() {
         __AF_perl_get_cjk_width897_v0='';
         return 1
 fi
-    __AMBER_VAL_163=$( perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text}" );
+    __AMBER_VAL_163=$( perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text}" 2>/dev/null );
     __AS=$?;
 if [ $__AS != 0 ]; then
 __AF_perl_get_cjk_width897_v0=''
@@ -3034,7 +3034,7 @@ perl_truncate_cjk__898_v0() {
         __AF_perl_truncate_cjk898_v0='';
         return 1
 fi
-    __AMBER_VAL_164=$( perl -CSDA -E '$t=shift;$m=shift;$w=0;$r="";$c=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1,($w+$c<=$m?($w+=$c,$r.=$_):last) for split//,$t; print $r' "${text}" ${max_width} );
+    __AMBER_VAL_164=$( perl -CSDA -E '$t=shift;$m=shift;$w=0;$r="";$c=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1,($w+$c<=$m?($w+=$c,$r.=$_):last) for split//,$t; print $r' "${text}" ${max_width} 2>/dev/null );
     __AS=$?;
 if [ $__AS != 0 ]; then
 __AF_perl_truncate_cjk898_v0=''
@@ -4402,7 +4402,7 @@ perl_get_cjk_width__1310_v0() {
         __AF_perl_get_cjk_width1310_v0='';
         return 1
 fi
-    __AMBER_VAL_234=$( perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text}" );
+    __AMBER_VAL_234=$( perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text}" 2>/dev/null );
     __AS=$?;
 if [ $__AS != 0 ]; then
 __AF_perl_get_cjk_width1310_v0=''
@@ -4427,7 +4427,7 @@ perl_truncate_cjk__1311_v0() {
         __AF_perl_truncate_cjk1311_v0='';
         return 1
 fi
-    __AMBER_VAL_235=$( perl -CSDA -E '$t=shift;$m=shift;$w=0;$r="";$c=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1,($w+$c<=$m?($w+=$c,$r.=$_):last) for split//,$t; print $r' "${text}" ${max_width} );
+    __AMBER_VAL_235=$( perl -CSDA -E '$t=shift;$m=shift;$w=0;$r="";$c=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1,($w+$c<=$m?($w+=$c,$r.=$_):last) for split//,$t; print $r' "${text}" ${max_width} 2>/dev/null );
     __AS=$?;
 if [ $__AS != 0 ]; then
 __AF_perl_truncate_cjk1311_v0=''

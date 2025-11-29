@@ -28,7 +28,7 @@ pub fun execute_file(parameters: [Text]): Text {
             }
             match_regex(param, "^--page-size=.*$") {
                 let result = split(param, "=")
-                page_size = parse_number(result[1]) failed {
+                page_size = parse_int(result[1]) failed {
                     eprintf_colored("ERROR: Invalid page-size value: " + result[1] + "\n", 31)
                     exit(1)
                 }

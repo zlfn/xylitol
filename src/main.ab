@@ -27,32 +27,31 @@ fun trap_cleanup(): Null {
             stty echo < /dev/tty' EXIT $
 }
 
-main(arguments) {
+main(args) {
     trap_cleanup()
     if not check_prerequirements(): exit(1)
-    get_xylitol_colors()
 
     if {
-        len(arguments) < 2 or arguments[1] == "help" or arguments[1] == "--help" or arguments[1] == "-h": {
+        len(args) < 2 or args[1] == "help" or args[1] == "--help" or args[1] == "-h": {
             print_help()
         }
-        arguments[1] == "input": {
-            echo execute_input(arguments)
+        args[1] == "input": {
+            echo execute_input(args)
         }
-        arguments[1] == "choose": {
-            echo execute_choose(arguments)
+        args[1] == "choose": {
+            echo execute_choose(args)
         }
-        arguments[1] == "confirm": {
-            let result = execute_confirm(arguments)
+        args[1] == "confirm": {
+            let result = execute_confirm(args)
             if {
                 result == "yes": exit(0)
                 else: exit(1)
             }
         }
-        arguments[1] == "file": {
-            echo execute_file(arguments)
+        args[1] == "file": {
+            echo execute_file(args)
         }
-        arguments[1] == "version" or arguments[1] == "--version" or arguments[1] == "-v": {
+        args[1] == "version" or args[1] == "--version" or args[1] == "-v": {
             printf(colored_primary("xylitol.sh"))
             printf(" version: ")
             printf(colored_accent(VERSION))
@@ -62,7 +61,7 @@ main(arguments) {
         }
         else: {
             print_help()
-            printf_colored("ERROR: Unknown command '" + arguments[1] + "'", 91)
+            printf_colored("ERROR: Unknown command '" + args[1] + "'", 91)
         }
     }
 }

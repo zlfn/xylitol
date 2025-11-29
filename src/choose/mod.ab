@@ -2,7 +2,7 @@ import * from "std/env"
 import * from "std/math"
 import * from "../utils.ab"
 
-fun get_page_options(options: [Text], page: Num, page_size: Num): [Text] {
+fun get_page_options(options: [Text], page: Int, page_size: Int): [Text] {
     let start = page * page_size
     let end = start + page_size
     if end > len(options) {
@@ -15,11 +15,11 @@ fun get_page_options(options: [Text], page: Num, page_size: Num): [Text] {
     return result
 }
 
-fun get_page_start(page: Num, page_size: Num): Num {
+fun get_page_start(page: Int, page_size: Int): Int {
     return page * page_size
 }
 
-fun render_choose_page(page_options: [Text], sel: Num, cursor: Text, display_count: Num, term_width: Num): Null {
+fun render_choose_page(page_options: [Text], sel: Int, cursor: Text, display_count: Int, term_width: Int): Null {
     let cursor_len = len(cursor)
     let max_option_width = term_width - cursor_len - 1
     for i in 0..len(page_options) {
@@ -39,7 +39,7 @@ fun render_choose_page(page_options: [Text], sel: Num, cursor: Text, display_cou
     }
 }
 
-fun render_multi_choose_page(page_options: [Text], checked: [Bool], page_start: Num, sel: Num, cursor: Text, display_count: Num, term_width: Num): Null {
+fun render_multi_choose_page(page_options: [Text], checked: [Bool], page_start: Int, sel: Int, cursor: Text, display_count: Int, term_width: Int): Null {
     let cursor_len = len(cursor)
     let check_mark_len = 2 // "✓ " or "• "
     let max_option_width = term_width - cursor_len - check_mark_len - 1
@@ -67,7 +67,7 @@ fun render_multi_choose_page(page_options: [Text], checked: [Bool], page_start: 
     }
 }
 
-fun render_page_indicator(page: Num, total_pages: Num): Null {
+fun render_page_indicator(page: Int, total_pages: Int): Null {
     if total_pages > 1 {
         eprintf("\x1b[9999D\x1b[K")
         eprintf_colored("Page {page + 1}/{total_pages}", 90)
@@ -86,7 +86,7 @@ pub fun xyl_choose(
     options: [Text],
     cursor: Text = "> ",
     header: Text = "\x1b[1mChoose:\x1b[0m",
-    page_size: Num = 10,
+    page_size: Int = 10,
 ): Text {
     if len(options) == 0 {
         eprintf_colored("ERROR: No options provided.\n", 31)
@@ -244,7 +244,7 @@ pub fun xyl_choose(
     return options[global_selected]
 }
 
-fun count_checked(checked: [Bool]): Num {
+fun count_checked(checked: [Bool]): Int {
     let count = 0
     for c in checked {
         if c {
@@ -266,8 +266,8 @@ pub fun xyl_multi_choose(
     options: [Text],
     cursor: Text = "> ",
     header: Text = "Choose:",
-    limit: Num = -1,
-    page_size: Num = 10,
+    limit: Int = -1,
+    page_size: Int = 10,
 ): [Text] {
     if len(options) == 0 {
         eprintf_colored("ERROR: No options provided.\n", 31)

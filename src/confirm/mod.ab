@@ -3,7 +3,7 @@ import * from "../utils.ab"
 
 /// Renders the Yes/No selection with background colors
 /// Uses smaller buttons when terminal width is below 30 characters
-fun render_confirm_options(selected: Bool, term_width: Num): Null {
+fun render_confirm_options(selected: Bool, term_width: Int): Null {
     let small = term_width < 30
     let yes_label = small then " Yes " else "    Yes    "
     let no_label = small then " No " else "    No    "

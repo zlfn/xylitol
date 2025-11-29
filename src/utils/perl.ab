@@ -1,23 +1,23 @@
 // Perl Extensions Utilities
 
-import { parse_number } from "std/text"
+import { parse_int } from "std/text"
 
 let _perl_disabled = trust $ echo "\$XYLITOL_USE_PERL" $ == "No"
 let _perl_available = not _perl_disabled and (trust $ command -v perl > /dev/null && echo 0 || echo 1 $ == "0")
 
 /// Get the CJK width of the given text using Perl's Unicode properties.
-pub fun perl_get_cjk_width(text: Text): Num? {
+pub fun perl_get_cjk_width(text: Text): Int? {
     if not _perl_available {
         fail
     }
     let width_str = $ perl -CSDA -E '\$w=0;\$w+=/\p\{EastAsianWidth=Wide}|\p\{EastAsianWidth=Fullwidth}|\p\{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say \$w' "{text}" 2>/dev/null $?
-    let width = parse_number(width_str)?
+    let width = parse_int(width_str)?
     return width
 }
 
 /// Truncate text to fit within a given display width, considering CJK character widths.
 /// Returns the truncated string that fits within max_width display columns.
-pub fun perl_truncate_cjk(text: Text, max_width: Num): Text? {
+pub fun perl_truncate_cjk(text: Text, max_width: Int): Text? {
     if not _perl_available {
         fail
     }
@@ -27,7 +27,7 @@ pub fun perl_truncate_cjk(text: Text, max_width: Num): Text? {
 
 /// Substring text by display width range [start, end), considering CJK character widths.
 /// Returns characters whose display positions fall within [start, end).
-pub fun perl_substr_cjk(text: Text, start: Num, end: Num): Text? {
+pub fun perl_substr_cjk(text: Text, start: Int, end: Int): Text? {
     if not _perl_available {
         fail
     }

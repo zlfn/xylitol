@@ -13,7 +13,6 @@ function print_sakura() {
 lang=$(../xylitol.sh choose --header="🌸 Select Language" "English" "日本語" "한국어")
 
 if [ "$lang" = "English" ]; then
-    printf "Key of Clow … power of magic, power of light, surrender the wand, let the force ignite!\n" >&2
     printf "Key which hides the power of the dark,\n" >&2
     printf "Reveal your true from before me.\n" >&2
     printf "I, Sakura Kinomoto, command you under our contact.\n" >&2

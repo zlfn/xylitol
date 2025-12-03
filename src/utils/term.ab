@@ -48,7 +48,7 @@ fun get_term_size(): Null? {
 }
 
 pub fun term_size(): [Int] {
-    if not _got_term_size == false {
+    if not _got_term_size {
         trust get_term_size()
     }
     return _term_size
@@ -56,7 +56,7 @@ pub fun term_size(): [Int] {
 
 /// Get the terminal width (columns).
 pub fun term_width(): Int {
-    if not _got_term_size == false {
+    if not _got_term_size {
         trust get_term_size()
     }
     return _term_size[0]
@@ -64,7 +64,7 @@ pub fun term_width(): Int {
 
 /// Get the terminal height (rows).
 pub fun term_height(): Int {
-    if not _got_term_size == false{
+    if not _got_term_size {
         trust get_term_size()
     }
     return _term_size[1]

@@ -8,7 +8,7 @@ import { execute_confirm } from "./confirm/exec.ab"
 import { execute_file } from "./file/exec.ab"
 
 const VERSION = "0.1.0"
-const AMBER_VERSION = "0.4.0"
+const AMBER_VERSION = "0.5.1-alpha"
 
 fun check_prerequirements(): Bool {
     $ echo "0" | bc -l > /dev/null $ failed {

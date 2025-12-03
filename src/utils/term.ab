@@ -1,4 +1,4 @@
-import { split, parse_number } from "std/text"
+import { split, parse_int } from "std/text"
 
 /// global variables to store terminal size
 /// (prevent multiple queries in one session)
@@ -11,7 +11,7 @@ trust $ export XYLITOL_RUNTIME_STTY_COUNT=0 $
 /// Lock the terminal (disable echo). Uses reference counting via environment variable.
 pub fun stty_lock(): Null {
     let count = trust $ echo "\$\{XYLITOL_RUNTIME_STTY_COUNT:-0}" $
-    let count_num = parse_number(count) failed { 0 }
+    let count_num = parse_int(count) failed { 0 }
     if count_num == 0 {
         trust $ stty -echo < /dev/tty $
     }
@@ -22,7 +22,7 @@ pub fun stty_lock(): Null {
 /// Unlock the terminal (enable echo). Uses reference counting via environment variable.
 pub fun stty_unlock(): Null {
     let count = trust $ echo "\$\{XYLITOL_RUNTIME_STTY_COUNT:-0}" $
-    let count_num = parse_number(count) failed { 0 }
+    let count_num = parse_int(count) failed { 0 }
     if count_num > 0 {
         count_num -= 1
         trust $ export XYLITOL_RUNTIME_STTY_COUNT={count_num} $
@@ -40,14 +40,14 @@ fun get_term_size(): Null? {
     if len(parts) != 2 {
         fail
     }
-    let rows = parse_number(parts[0])?
-    let cols = parse_number(parts[1])?
+    let rows = parse_int(parts[0])?
+    let cols = parse_int(parts[1])?
 
     _term_size = [cols, rows]
     _got_term_size = true
 }
 
-pub fun term_size(): [Num] {
+pub fun term_size(): [Int] {
     if not _got_term_size {
         trust get_term_size()
     }
@@ -55,7 +55,7 @@ pub fun term_size(): [Num] {
 }
 
 /// Get the terminal width (columns).
-pub fun term_width(): Num {
+pub fun term_width(): Int {
     if not _got_term_size {
         trust get_term_size()
     }
@@ -63,7 +63,7 @@ pub fun term_width(): Num {
 }
 
 /// Get the terminal height (rows).
-pub fun term_height(): Num {
+pub fun term_height(): Int {
     if not _got_term_size {
         trust get_term_size()
     }

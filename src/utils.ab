@@ -27,7 +27,7 @@ pub fun get_key(): Text {
     }
 }
 
-pub fun printf_colored(message: Text, color: Num): Null {
+pub fun printf_colored(message: Text, color: Int): Null {
     /// Prints a text with a specified color.
     printf("\x1b[{color as Text}m%s\x1b[0m", [message])
 }
@@ -37,23 +37,23 @@ pub fun eprintf(format: Text, args: [Text] = [""]): Null {
     trust $ printf "\$\{{nameof args}[@]}" >&2 $
 }
 
-pub fun eprintf_colored(message: Text, color: Num): Null {
+pub fun eprintf_colored(message: Text, color: Int): Null {
     /// Prints an error message with a specified color.
     eprintf("\x1b[{color as Text}m%s\x1b[0m", [message])
 }
 
-pub fun colored(message: Text, color: Num): Text {
+pub fun colored(message: Text, color: Int): Text {
     /// Returns a text wrapped in color codes.
     return "\x1b[{color as Text}m" + message + "\x1b[0m"
 }
 
 /// remove `cnt` characters from the terminal.
-pub fun remove(cnt: Num): Null {
+pub fun remove(cnt: Int): Null {
    trust $ printf '%0.s\b \b' \$(seq 1 {cnt}) >&2 $
 }
 
 /// remove `cnt` lines from the terminal (starting from current line, going up).
-pub fun remove_line(cnt: Num): Null {
+pub fun remove_line(cnt: Int): Null {
     trust $ printf '\x1b[2K\x1b[1A%.0s' \$(seq {cnt as Text}) >&2 $
     eprintf("\x1b[9999D")
 }
@@ -66,28 +66,28 @@ pub fun remove_current_line(): Null {
 /// Prints blank spaces.
 /// ### Parameters
 /// - `cnt`: Number of spaces to print.
-pub fun print_blank(cnt: Num): Null {
+pub fun print_blank(cnt: Int): Null {
     trust $ printf '%*s' "{cnt as Text}" ' ' >&2 $
 }
 
-pub fun new_line(cnt: Num): Null {
+pub fun new_line(cnt: Int): Null {
     for i in 0..cnt {
         eprintf("\n")
     }
 }
 
 /// move the cursor up `cnt` lines.
-pub fun go_up(cnt: Num): Null {
+pub fun go_up(cnt: Int): Null {
     eprintf("\x1b[{cnt as Text}A")
 }
 
 /// move the cursor down `cnt` lines.
-pub fun go_down(cnt: Num): Null {
+pub fun go_down(cnt: Int): Null {
     eprintf("\x1b[{cnt as Text}B")
 }
 
 // move the cursor up or down `cnt` lines.
-pub fun go_up_or_down(cnt: Num): Null {
+pub fun go_up_or_down(cnt: Int): Null {
     if cnt > 0 {
         go_down(cnt)
     } else {
@@ -134,7 +134,7 @@ pub fun is_all_ascii(text: Text): Bool {
 ///
 /// ### Parameters
 /// - `text`: Text that may contain ANSI escape sequences.
-pub fun get_visible_len(text: Text): Num {
+pub fun get_visible_len(text: Text): Int {
     let stripped = strip_ansi(text)
     // Check if text is all ASCII
     if not is_all_ascii(stripped) {
@@ -149,7 +149,7 @@ pub fun get_visible_len(text: Text): Num {
 
 /// Truncate text to fit within max_width without adding any suffix.
 /// Simply cuts the text to fit within the specified width.
-pub fun truncate_text(text: Text, max_width: Num): Text {
+pub fun truncate_text(text: Text, max_width: Int): Text {
     let visible_len = get_visible_len(text)
     if visible_len <= max_width {
         return text
@@ -165,7 +165,7 @@ pub fun truncate_text(text: Text, max_width: Num): Text {
 /// Truncate ANSI-colored text to fit within max_width.
 /// Preserves ANSI escape sequences while truncating visible content.
 /// ANSI sequences are expected in literal \x1b format.
-pub fun truncate_ansi(text: Text, max_width: Num): Text {
+pub fun truncate_ansi(text: Text, max_width: Int): Text {
     if not has_ansi_escape(text) {
         return truncate_text(text, max_width)
     }
@@ -201,7 +201,7 @@ pub fun truncate_ansi(text: Text, max_width: Num): Text {
                 result += "\\x1b[" + ansi_params + "m"
 
                 // Rest is text content
-                let m_idx_num = trust parse_number(m_idx)
+                let m_idx_num = trust parse_int(m_idx)
                 let text_start = m_idx_num + 1
                 let text_part = trust $ __p="{part}"; printf "%s" "\$\{__p:{text_start}}" $
                 if text_part != "" and remaining_width > 0 {
@@ -225,7 +225,7 @@ pub fun truncate_ansi(text: Text, max_width: Num): Text {
 
 /// Truncate text to fit within max_width, adding "..." if truncated.
 /// The max_width includes the "..." suffix.
-pub fun cutoff_text(text: Text, max_width: Num): Text {
+pub fun cutoff_text(text: Text, max_width: Int): Text {
     let visible_len = get_visible_len(text)
     if visible_len <= max_width {
         return text
@@ -243,7 +243,7 @@ pub fun cutoff_text(text: Text, max_width: Num): Text {
 /// - `items`: Flat array of key, action pairs. e.g. ["↑↓", "select", "enter", "confirm"]
 /// - `total_len`: Pre-calculated total visible length of the tooltip.
 /// - `term_width`: Terminal width to truncate output.
-pub fun render_tooltip(items: [Text], total_len: Num, term_width: Num): Null {
+pub fun render_tooltip(items: [Text], total_len: Int, term_width: Int): Null {
     let separator = " • "
     let separator_len = 3
 

@@ -1,5 +1,5 @@
-import { env_const_get, echo_colored } from "std/env"
-import { split, parse_number } from "std/text"
+import { env_var_get, echo_colored } from "std/env"
+import { split, parse_int } from "std/text"
 
 /// A global variable indicating if the terminal supports truecolor.
 /// "None" or "Yes" or "No"
@@ -17,12 +17,12 @@ let _accent_color = [234, 72, 121, 95]
 /// Checks if the terminal supports 24-bit true color.
 /// Returns true if COLORTERM is "truecolor" or "24bit".
 fun get_supports_truecolor(): Bool {
-    let config = env_const_get("XYLITOL_TRUECOLOR") failed { "" }
+    let config = env_var_get("XYLITOL_TRUECOLOR") failed { "" }
     if config == "No" {
         _supports_truecolor = "No"
         return false
     }
-    let colorterm = env_const_get("COLORTERM") failed {
+    let colorterm = env_var_get("COLORTERM") failed {
         _supports_truecolor = "No"
         return false
     }
@@ -40,7 +40,7 @@ fun get_supports_truecolor(): Bool {
 /// - `b`: Blue component (0-255).
 /// - `truecolor`: Whether the terminal supports truecolor.
 /// - `fallback`: Fallback ANSI color code (default: 0 = default color).
-pub fun colored_rgb(message: Text, r: Num, g: Num, b: Num, fallback: Num = 0): Text {
+pub fun colored_rgb(message: Text, r: Int, g: Int, b: Int, fallback: Int = 0): Text {
     if {
         _supports_truecolor == "Yes": {
             return "\x1b[38;2;{r as Text};{g as Text};{b as Text}m" + message + "\x1b[0m"
@@ -72,7 +72,7 @@ pub fun colored_rgb(message: Text, r: Num, g: Num, b: Num, fallback: Num = 0): T
 /// - `g`: Green component (0-255).
 /// - `b`: Blue component (0-255).
 /// - `fallback`: Fallback ANSI foreground color code (40-47, 100-107). Converted to background automatically.
-pub fun background_rgb(message: Text, r: Num, g: Num, b: Num, fallback: Num = 0): Text {
+pub fun background_rgb(message: Text, r: Int, g: Int, b: Int, fallback: Int = 0): Text {
     // Convert foreground color code to background color code
     // 30-37 -> 40-47, 90-97 -> 100-107
     let bg_fallback = fallback
@@ -107,41 +107,41 @@ pub fun background_rgb(message: Text, r: Num, g: Num, b: Num, fallback: Num = 0)
 
 fun inner_get_xylitol_colors(): Null? {
     if not _got_xylitol_colors {
-        let primary_env = env_const_get("XYLITOL_PRIMARY_COLOR") failed { "" }
+        let primary_env = env_var_get("XYLITOL_PRIMARY_COLOR") failed { "" }
         if primary_env != "" {
             let parts = split(primary_env, ";")
             if len(parts) == 4 {
                 _primary_color = [
-                    parse_number(parts[0])?,
-                    parse_number(parts[1])?,
-                    parse_number(parts[2])?,
-                    parse_number(parts[3])?,
+                    parse_int(parts[0])?,
+                    parse_int(parts[1])?,
+                    parse_int(parts[2])?,
+                    parse_int(parts[3])?,
                 ]
             }
         }
 
-        let secondary_env = env_const_get("XYLITOL_SECONDARY_COLOR") failed { "" }
+        let secondary_env = env_var_get("XYLITOL_SECONDARY_COLOR") failed { "" }
         if secondary_env != "" {
             let parts = split(secondary_env, ";")
             if len(parts) == 4 {
                 _secondary_color = [
-                    parse_number(parts[0])?,
-                    parse_number(parts[1])?,
-                    parse_number(parts[2])?,
-                    parse_number(parts[3])?,
+                    parse_int(parts[0])?,
+                    parse_int(parts[1])?,
+                    parse_int(parts[2])?,
+                    parse_int(parts[3])?,
                 ]
             }
         }
 
-        let accent_env = env_const_get("XYLITOL_ACCENT_COLOR") failed { "" }
+        let accent_env = env_var_get("XYLITOL_ACCENT_COLOR") failed { "" }
         if accent_env != "" {
             let parts = split(accent_env, ";")
             if len(parts) == 4 {
                 _accent_color = [
-                    parse_number(parts[0])?,
-                    parse_number(parts[1])?,
-                    parse_number(parts[2])?,
-                    parse_number(parts[3])?,
+                    parse_int(parts[0])?,
+                    parse_int(parts[1])?,
+                    parse_int(parts[2])?,
+                    parse_int(parts[3])?,
                 ]
             }
         }

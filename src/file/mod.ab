@@ -29,7 +29,7 @@ pub fun xyl_file(
     start_path: Text = "",
     cursor: Text = "> ",
     show_hidden: Bool = false,
-    page_size: Num = 10,
+    page_size: Int = 10,
 ): Text {
     stty_lock()
 

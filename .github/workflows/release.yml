@@ -1,0 +1,31 @@
+name: Xylitol Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+        with:
+          persist-credentials: false
+
+      - uses: ArjixWasTaken/setup-amethyst-action@main
+        with:
+          amethyst-version: "v0.0.1"
+          enable-cache: true
+
+      - name: Build Amethyst
+        run: amethyst build
+
+      - uses: svenstaro/upload-release-action@6b7fa9f267e90b50a19fef07b3596790bb941741 # 2.11.3
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: target/xylitol.sh
+          tag: ${{ github.ref_name }}
+          overwrite: true

@@ -20,23 +20,25 @@ amber build src/main.ab xylitol.sh
 * [`choose`](#choose): Choose an option from a list of choices
 * [`input`](#input): Prompt the user for input.
 * [`confirm`](#confirm): Prompt the user for confirmation (yes/no).
+* [`file`](#file): Pick a file from system.
 
 ## Choose
 Choose an option from a list of choices
 
-<img width="2000" height="532" alt="image" src="https://github.com/user-attachments/assets/d66cf28d-d796-4cb8-a6c3-a7f1231f4375" />
+<img width="1200" height="381" alt="image" src="https://github.com/user-attachments/assets/dca320f6-6bdd-4fa1-abe2-b97a6f7a4cde" />
 
 
 ```bash
 cat songs.txt | ./xylitol.sh choose
-cat foods.txt | ./xylitol.sh choose --header "Grocery Shopping"
+cat foods.txt | ./xylitol.sh choose --header="Grocery Shopping"
 ```
 
 
 ## Input
 Prompt for input with a simple command.
 
-<img width="2000" height="228" alt="image" src="https://github.com/user-attachments/assets/f90586dd-c63f-47a5-a602-a0ef47bf39e7" />
+<img width="1200" height="151" alt="image" src="https://github.com/user-attachments/assets/8ffcd022-a55c-4614-aa6a-5b2783c7ea71" />
+
 
 
 ```bash
@@ -48,12 +50,21 @@ Prompt for input with a simple command.
 ## Confirm
 Prompt the user for confirmation (yes/no).
 
-<img width="2000" height="272" alt="image" src="https://github.com/user-attachments/assets/7cdcd94a-5a2d-47a5-ae75-08f46442b358" />
+<img width="1200" height="184" alt="image" src="https://github.com/user-attachments/assets/2eb07a60-eae6-44e6-aa36-a28c4e33c720" />
+
 
 ```bash
 ./xylitol.sh confirm && rm file.txt || echo "File not removed"
 ```
 
+## File
+Prompt the user to select a file from the file tree.
+
+<img width="1200" height="449" alt="image" src="https://github.com/user-attachments/assets/94d44b95-7be6-48e6-9ddf-6588bb787b91" />
+
+```bash
+./xylitol.sh file ~/.config
+```
 
 ### Tested on
 ```

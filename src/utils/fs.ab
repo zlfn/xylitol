@@ -19,6 +19,9 @@ pub fun get_directory_entries(path: Text): [Text] {
             types[i]== "-" {
                 file_type = "f"
             }
+            types[i] == "d" {
+                file_type = "d"
+            }
             types[i] == "l" {
                 target = trust $ echo {raw[i]} | sed 's/.*-> //' $
                 file_type = "l"

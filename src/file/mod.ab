@@ -109,13 +109,19 @@ pub fun xyl_file(
                 current_path = normalize_path(current_path)
             }
             file_type == "l" {
-                // For symlinks, check if they point to a directory
-                if starts_with(entry[2], "/") {
-                    current_path = entry[2]
+                // Resolve symlink target path
+                let target = entry[2]
+                let target_path = target
+                if not starts_with(target, "/") {
+                    target_path = path_join(current_path, target)
+                }
+                // Follow symlink if it points to a directory, otherwise return path
+                if is_directory(target_path) {
+                    current_path = target_path
                     current_path = normalize_path(current_path)
                 } else {
                     stty_unlock()
-                    return path_join(current_path, entry[2])
+                    return path_join(current_path, name)
                 }
             }
             else: {

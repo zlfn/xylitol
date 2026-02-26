@@ -157,8 +157,8 @@ starts_with__23_v0() {
     echo 1
   fi)"
     __status=$?
-    result_470="${command_10}"
-    ret_starts_with23_v0="$([ "_${result_470}" != "_1" ]; echo $?)"
+    result_472="${command_10}"
+    ret_starts_with23_v0="$([ "_${result_472}" != "_1" ]; echo $?)"
     return 0
 }
 
@@ -3798,6 +3798,8 @@ get_directory_entries__1570_v0() {
         target_373=""
         if [ "$([ "_${types_367[${i_371}]}" != "_-" ]; echo $?)" != 0 ]; then
             file_type_372="f"
+        elif [ "$([ "_${types_367[${i_371}]}" != "_d" ]; echo $?)" != 0 ]; then
+            file_type_372="d"
         elif [ "$([ "_${types_367[${i_371}]}" != "_l" ]; echo $?)" != 0 ]; then
             command_298="$(echo ${raw_368[${i_371}]} | sed 's/.*-> //')"
             __status=$?
@@ -3841,6 +3843,15 @@ normalize_path__1573_v0() {
     return 0
 }
 
+is_directory__1574_v0() {
+    local path=$1
+    command_303="$([ -d "${path}" ] && echo "1" || echo "0")"
+    __status=$?
+    result_473="${command_303}"
+    ret_is_directory1574_v0="$([ "_${result_473}" != "_1" ]; echo $?)"
+    return 0
+}
+
 path_join__1575_v0() {
     local base=$1
     local child=$2
@@ -3854,20 +3865,20 @@ path_join__1575_v0() {
 
 get_parent_dir__1576_v0() {
     local path=$1
-    command_303="$(dirname "${path}")"
+    command_304="$(dirname "${path}")"
     __status=$?
-    parent_469="${command_303}"
+    parent_469="${command_304}"
     ret_get_parent_dir1576_v0="${parent_469}"
     return 0
 }
 
 # Perl Extensions Utilities
-command_304="$(echo "$XYLITOL_USE_PERL")"
+command_305="$(echo "$XYLITOL_USE_PERL")"
 __status=$?
-_perl_disabled_39="$([ "_${command_304}" != "_No" ]; echo $?)"
-command_305="$(command -v perl > /dev/null && echo 0 || echo 1)"
+_perl_disabled_39="$([ "_${command_305}" != "_No" ]; echo $?)"
+command_306="$(command -v perl > /dev/null && echo 0 || echo 1)"
 __status=$?
-_perl_available_40="$(( $(( ! ${_perl_disabled_39} )) && $([ "_${command_305}" != "_0" ]; echo $?) ))"
+_perl_available_40="$(( $(( ! ${_perl_disabled_39} )) && $([ "_${command_306}" != "_0" ]; echo $?) ))"
 # global variables to store terminal size
 # (prevent multiple queries in one session)
 _got_term_size_41=0
@@ -3876,9 +3887,9 @@ _term_size_42=(80 24)
 export XYLITOL_RUNTIME_STTY_COUNT=0
 __status=$?
 stty_lock__1593_v0() {
-    command_307="$(echo "${XYLITOL_RUNTIME_STTY_COUNT:-0}")"
+    command_308="$(echo "${XYLITOL_RUNTIME_STTY_COUNT:-0}")"
     __status=$?
-    count_354="${command_307}"
+    count_354="${command_308}"
     parse_int__14_v0 "${count_354}"
     __status=$?
     if [ "${__status}" != 0 ]; then
@@ -3895,9 +3906,9 @@ stty_lock__1593_v0() {
 }
 
 stty_unlock__1594_v0() {
-    command_308="$(echo "${XYLITOL_RUNTIME_STTY_COUNT:-0}")"
+    command_309="$(echo "${XYLITOL_RUNTIME_STTY_COUNT:-0}")"
     __status=$?
-    count_383="${command_308}"
+    count_383="${command_309}"
     parse_int__14_v0 "${count_383}"
     __status=$?
     if [ "${__status}" != 0 ]; then
@@ -3917,13 +3928,13 @@ stty_unlock__1594_v0() {
 
 get_term_size__1595_v0() {
     # Query terminal size with \x1b[18t, response format: \x1b[8;rows;colst
-    command_309="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -rsd t _ignore height width < /dev/tty; echo "$height; $width")"
+    command_310="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -rsd t _ignore height width < /dev/tty; echo "$height; $width")"
     __status=$?
-    result_356="${command_309}"
+    result_356="${command_310}"
     split__5_v0 "${result_356}" ";"
     parts_357=("${ret_split5_v0[@]}")
-    __length_310=("${parts_357[@]}")
-    if [ "$(( ${#__length_310[@]} != 2 ))" != 0 ]; then
+    __length_311=("${parts_357[@]}")
+    if [ "$(( ${#__length_311[@]} != 2 ))" != 0 ]; then
         ret_get_term_size1595_v0=''
         return 1
     fi
@@ -4033,8 +4044,8 @@ inner_get_xylitol_colors__1611_v0() {
         if [ "$([ "_${primary_env_343}" == "_" ]; echo $?)" != 0 ]; then
             split__5_v0 "${primary_env_343}" ";"
             parts_344=("${ret_split5_v0[@]}")
-            __length_315=("${parts_344[@]}")
-            if [ "$(( ${#__length_315[@]} == 4 ))" != 0 ]; then
+            __length_316=("${parts_344[@]}")
+            if [ "$(( ${#__length_316[@]} == 4 ))" != 0 ]; then
                 parse_int__14_v0 "${parts_344[0]}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
@@ -4075,8 +4086,8 @@ inner_get_xylitol_colors__1611_v0() {
         if [ "$([ "_${secondary_env_345}" == "_" ]; echo $?)" != 0 ]; then
             split__5_v0 "${secondary_env_345}" ";"
             parts_346=("${ret_split5_v0[@]}")
-            __length_317=("${parts_346[@]}")
-            if [ "$(( ${#__length_317[@]} == 4 ))" != 0 ]; then
+            __length_318=("${parts_346[@]}")
+            if [ "$(( ${#__length_318[@]} == 4 ))" != 0 ]; then
                 parse_int__14_v0 "${parts_346[0]}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
@@ -4117,8 +4128,8 @@ inner_get_xylitol_colors__1611_v0() {
         if [ "$([ "_${accent_env_347}" == "_" ]; echo $?)" != 0 ]; then
             split__5_v0 "${accent_env_347}" ";"
             parts_348=("${ret_split5_v0[@]}")
-            __length_319=("${parts_348[@]}")
-            if [ "$(( ${#__length_319[@]} == 4 ))" != 0 ]; then
+            __length_320=("${parts_348[@]}")
+            if [ "$(( ${#__length_320[@]} == 4 ))" != 0 ]; then
                 parse_int__14_v0 "${parts_348[0]}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
@@ -4207,38 +4218,38 @@ eprintf_colored__1632_v0() {
     local message=$1
     local color=$2
     # Prints an error message with a specified color.
-    array_321=("${message}")
-    eprintf__1631_v0 "\\x1b[${color}m%s\\x1b[0m" array_321[@]
+    array_322=("${message}")
+    eprintf__1631_v0 "\\x1b[${color}m%s\\x1b[0m" array_322[@]
 }
 
 remove_current_line__1636_v0() {
-    array_322=("")
-    eprintf__1631_v0 "\\x1b[2K\\x1b[9999D" array_322[@]
+    array_323=("")
+    eprintf__1631_v0 "\\x1b[2K\\x1b[9999D" array_323[@]
 }
 
 # move the cursor up or down `cnt` lines.
 # / Text Utilities /////
 # // Application Utilities /////
 # Perl Extensions Utilities
-command_323="$(echo "$XYLITOL_USE_PERL")"
+command_324="$(echo "$XYLITOL_USE_PERL")"
 __status=$?
-_perl_disabled_48="$([ "_${command_323}" != "_No" ]; echo $?)"
-command_324="$(command -v perl > /dev/null && echo 0 || echo 1)"
+_perl_disabled_48="$([ "_${command_324}" != "_No" ]; echo $?)"
+command_325="$(command -v perl > /dev/null && echo 0 || echo 1)"
 __status=$?
-_perl_available_49="$(( $(( ! ${_perl_disabled_48} )) && $([ "_${command_324}" != "_0" ]; echo $?) ))"
+_perl_available_49="$(( $(( ! ${_perl_disabled_48} )) && $([ "_${command_325}" != "_0" ]; echo $?) ))"
 perl_get_cjk_width__1780_v0() {
     local text=$1
     if [ "$(( ! ${_perl_available_49} ))" != 0 ]; then
         ret_perl_get_cjk_width1780_v0=''
         return 1
     fi
-    command_325="$(perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text}" 2>/dev/null)"
+    command_326="$(perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text}" 2>/dev/null)"
     __status=$?
     if [ "${__status}" != 0 ]; then
         ret_perl_get_cjk_width1780_v0=''
         return "${__status}"
     fi
-    width_str_397="${command_325}"
+    width_str_397="${command_326}"
     parse_int__14_v0 "${width_str_397}"
     __status=$?
     if [ "${__status}" != 0 ]; then
@@ -4257,13 +4268,13 @@ perl_truncate_cjk__1781_v0() {
         ret_perl_truncate_cjk1781_v0=''
         return 1
     fi
-    command_326="$(perl -CSDA -E '$t=shift;$m=shift;$w=0;$r="";$c=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1,($w+$c<=$m?($w+=$c,$r.=$_):last) for split//,$t; print $r' "${text}" ${max_width} 2>/dev/null)"
+    command_327="$(perl -CSDA -E '$t=shift;$m=shift;$w=0;$r="";$c=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1,($w+$c<=$m?($w+=$c,$r.=$_):last) for split//,$t; print $r' "${text}" ${max_width} 2>/dev/null)"
     __status=$?
     if [ "${__status}" != 0 ]; then
         ret_perl_truncate_cjk1781_v0=''
         return "${__status}"
     fi
-    result_402="${command_326}"
+    result_402="${command_327}"
     ret_perl_truncate_cjk1781_v0="${result_402}"
     return 0
 }
@@ -4276,9 +4287,9 @@ _term_size_51=(80 24)
 export XYLITOL_RUNTIME_STTY_COUNT=0
 __status=$?
 stty_lock__1788_v0() {
-    command_328="$(echo "${XYLITOL_RUNTIME_STTY_COUNT:-0}")"
+    command_329="$(echo "${XYLITOL_RUNTIME_STTY_COUNT:-0}")"
     __status=$?
-    count_386="${command_328}"
+    count_386="${command_329}"
     parse_int__14_v0 "${count_386}"
     __status=$?
     if [ "${__status}" != 0 ]; then
@@ -4295,9 +4306,9 @@ stty_lock__1788_v0() {
 }
 
 stty_unlock__1789_v0() {
-    command_329="$(echo "${XYLITOL_RUNTIME_STTY_COUNT:-0}")"
+    command_330="$(echo "${XYLITOL_RUNTIME_STTY_COUNT:-0}")"
     __status=$?
-    count_460="${command_329}"
+    count_460="${command_330}"
     parse_int__14_v0 "${count_460}"
     __status=$?
     if [ "${__status}" != 0 ]; then
@@ -4317,13 +4328,13 @@ stty_unlock__1789_v0() {
 
 get_term_size__1790_v0() {
     # Query terminal size with \x1b[18t, response format: \x1b[8;rows;colst
-    command_330="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -rsd t _ignore height width < /dev/tty; echo "$height; $width")"
+    command_331="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -rsd t _ignore height width < /dev/tty; echo "$height; $width")"
     __status=$?
-    result_388="${command_330}"
+    result_388="${command_331}"
     split__5_v0 "${result_388}" ";"
     parts_389=("${ret_split5_v0[@]}")
-    __length_331=("${parts_389[@]}")
-    if [ "$(( ${#__length_331[@]} != 2 ))" != 0 ]; then
+    __length_332=("${parts_389[@]}")
+    if [ "$(( ${#__length_332[@]} != 2 ))" != 0 ]; then
         ret_get_term_size1790_v0=''
         return 1
     fi
@@ -4440,8 +4451,8 @@ inner_get_xylitol_colors__1806_v0() {
         if [ "$([ "_${primary_env_442}" == "_" ]; echo $?)" != 0 ]; then
             split__5_v0 "${primary_env_442}" ";"
             parts_443=("${ret_split5_v0[@]}")
-            __length_336=("${parts_443[@]}")
-            if [ "$(( ${#__length_336[@]} == 4 ))" != 0 ]; then
+            __length_337=("${parts_443[@]}")
+            if [ "$(( ${#__length_337[@]} == 4 ))" != 0 ]; then
                 parse_int__14_v0 "${parts_443[0]}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
@@ -4481,8 +4492,8 @@ inner_get_xylitol_colors__1806_v0() {
         if [ "$([ "_${secondary_env_444}" == "_" ]; echo $?)" != 0 ]; then
             split__5_v0 "${secondary_env_444}" ";"
             parts_445=("${ret_split5_v0[@]}")
-            __length_338=("${parts_445[@]}")
-            if [ "$(( ${#__length_338[@]} == 4 ))" != 0 ]; then
+            __length_339=("${parts_445[@]}")
+            if [ "$(( ${#__length_339[@]} == 4 ))" != 0 ]; then
                 parse_int__14_v0 "${parts_445[0]}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
@@ -4523,8 +4534,8 @@ inner_get_xylitol_colors__1806_v0() {
         if [ "$([ "_${accent_env_446}" == "_" ]; echo $?)" != 0 ]; then
             split__5_v0 "${accent_env_446}" ";"
             parts_447=("${ret_split5_v0[@]}")
-            __length_340=("${parts_447[@]}")
-            if [ "$(( ${#__length_340[@]} == 4 ))" != 0 ]; then
+            __length_341=("${parts_447[@]}")
+            if [ "$(( ${#__length_341[@]} == 4 ))" != 0 ]; then
                 parse_int__14_v0 "${parts_447[0]}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
@@ -4580,9 +4591,9 @@ colored_secondary__1809_v0() {
 
 # // IO Functions /////
 get_key__1824_v0() {
-    command_342="$(read -rsn1 k < /dev/tty; if [[ "$k" == $'\e' ]]; then read -rsn2 r < /dev/tty; k+=$r; fi; printf '%q' "$k")"
+    command_343="$(read -rsn1 k < /dev/tty; if [[ "$k" == $'\e' ]]; then read -rsn2 r < /dev/tty; k+=$r; fi; printf '%q' "$k")"
     __status=$?
-    var_452="${command_342}"
+    var_452="${command_343}"
     if [ "$([ "_${var_452}" != "_\$'\\E[A'" ]; echo $?)" != 0 ]; then
         ret_get_key1824_v0="UP"
         return 0
@@ -4620,8 +4631,8 @@ eprintf_colored__1827_v0() {
     local message=$1
     local color=$2
     # Prints an error message with a specified color.
-    array_343=("${message}")
-    eprintf__1826_v0 "\\x1b[${color}m%s\\x1b[0m" array_343[@]
+    array_344=("${message}")
+    eprintf__1826_v0 "\\x1b[${color}m%s\\x1b[0m" array_344[@]
 }
 
 colored__1828_v0() {
@@ -4636,13 +4647,13 @@ remove_line__1830_v0() {
     local cnt=$1
     printf '\x1b[2K\x1b[1A%.0s' $(seq ${cnt}) >&2
     __status=$?
-    array_344=("")
-    eprintf__1826_v0 "\\x1b[9999D" array_344[@]
+    array_345=("")
+    eprintf__1826_v0 "\\x1b[9999D" array_345[@]
 }
 
 remove_current_line__1831_v0() {
-    array_345=("")
-    eprintf__1826_v0 "\\x1b[2K\\x1b[9999D" array_345[@]
+    array_346=("")
+    eprintf__1826_v0 "\\x1b[2K\\x1b[9999D" array_346[@]
 }
 
 print_blank__1832_v0() {
@@ -4656,22 +4667,22 @@ new_line__1833_v0() {
     from=0
     to="${cnt}"
     for i_422 in $(if [ "${from}" -gt "${to}" ]; then seq -- "${from}" -1 "$(( ${to} + 1 ))"; elif [ "${from}" -lt "${to}" ]; then seq -- "${from}" "$(( ${to} - 1 ))"; fi); do
-        array_346=("")
+        array_347=("")
         eprintf__1826_v0 "
-" array_346[@]
+" array_347[@]
     done
 }
 
 go_up__1834_v0() {
     local cnt=$1
-    array_347=("")
-    eprintf__1826_v0 "\\x1b[${cnt}A" array_347[@]
+    array_348=("")
+    eprintf__1826_v0 "\\x1b[${cnt}A" array_348[@]
 }
 
 go_down__1835_v0() {
     local cnt=$1
-    array_348=("")
-    eprintf__1826_v0 "\\x1b[${cnt}B" array_348[@]
+    array_349=("")
+    eprintf__1826_v0 "\\x1b[${cnt}B" array_349[@]
 }
 
 # move the cursor up or down `cnt` lines.
@@ -4685,39 +4696,39 @@ go_up_or_down__1836_v0() {
 }
 
 hide_cursor__1837_v0() {
-    array_349=("")
-    eprintf__1826_v0 "\\x1b[?25l" array_349[@]
+    array_350=("")
+    eprintf__1826_v0 "\\x1b[?25l" array_350[@]
 }
 
 show_cursor__1838_v0() {
-    array_350=("")
-    eprintf__1826_v0 "\\x1b[?25h" array_350[@]
+    array_351=("")
+    eprintf__1826_v0 "\\x1b[?25h" array_351[@]
 }
 
 # / Text Utilities /////
 has_ansi_escape__1839_v0() {
     local text=$1
     # Check for ESC character (0x1B = 27) or literal \x1b[
-    command_351="$([[ "${text}" == *$'\x1b'* || "${text}" == *'\x1b['* ]] && echo "1" || echo "0")"
+    command_352="$([[ "${text}" == *$'\x1b'* || "${text}" == *'\x1b['* ]] && echo "1" || echo "0")"
     __status=$?
-    has_escape_400="${command_351}"
+    has_escape_400="${command_352}"
     ret_has_ansi_escape1839_v0="$([ "_${has_escape_400}" != "_1" ]; echo $?)"
     return 0
 }
 
 strip_ansi__1841_v0() {
     local text=$1
-    command_352="$(printf "%s" "${text}" | sed $'s/\x1b\[[0-9;]*m//g' | sed 's/\\x1b\[[0-9;]*m//g')"
+    command_353="$(printf "%s" "${text}" | sed $'s/\x1b\[[0-9;]*m//g' | sed 's/\\x1b\[[0-9;]*m//g')"
     __status=$?
-    ret_strip_ansi1841_v0="${command_352}"
+    ret_strip_ansi1841_v0="${command_353}"
     return 0
 }
 
 is_all_ascii__1842_v0() {
     local text=$1
-    command_353="$(printf "%s" "${text}" | LC_ALL=C grep -q '^[ -~]*$' && echo 0 || echo 1)"
+    command_354="$(printf "%s" "${text}" | LC_ALL=C grep -q '^[ -~]*$' && echo 0 || echo 1)"
     __status=$?
-    result_396="${command_353}"
+    result_396="${command_354}"
     ret_is_all_ascii1842_v0="$([ "_${result_396}" != "_0" ]; echo $?)"
     return 0
 }
@@ -4734,15 +4745,15 @@ get_visible_len__1843_v0() {
         perl_get_cjk_width__1780_v0 "${stripped_395}"
         __status=$?
         if [ "${__status}" != 0 ]; then
-            __length_354="${stripped_395}"
-            ret_get_visible_len1843_v0="${#__length_354}"
+            __length_355="${stripped_395}"
+            ret_get_visible_len1843_v0="${#__length_355}"
             return 0
         fi
         ret_get_visible_len1843_v0="${ret_perl_get_cjk_width1780_v0}"
         return 0
     else
-        __length_355="${stripped_395}"
-        ret_get_visible_len1843_v0="${#__length_355}"
+        __length_356="${stripped_395}"
+        ret_get_visible_len1843_v0="${#__length_356}"
         return 0
     fi
 }
@@ -4768,9 +4779,9 @@ truncate_text__1844_v0() {
         ret_truncate_text1844_v0="${ret_perl_truncate_cjk1781_v0}"
         return 0
     fi
-    command_356="$(printf "%s" "${text}" | cut -c1-${max_width})"
+    command_357="$(printf "%s" "${text}" | cut -c1-${max_width})"
     __status=$?
-    ret_truncate_text1844_v0="${command_356}"
+    ret_truncate_text1844_v0="${command_357}"
     return 0
 }
 
@@ -4785,22 +4796,22 @@ truncate_ansi__1845_v0() {
         return 0
     fi
     # Check if text starts with \x1b[
-    command_357="$([[ "${text}" == '\x1b['* ]] && echo "1" || echo "0")"
+    command_358="$([[ "${text}" == '\x1b['* ]] && echo "1" || echo "0")"
     __status=$?
-    starts_with_ansi_403="${command_357}"
+    starts_with_ansi_403="${command_358}"
     # Replace \x1b[ with newline, then split
-    command_358="$(t="${text}"; printf '%s' "${t//\\x1b[/
+    command_359="$(t="${text}"; printf '%s' "${t//\\x1b[/
 }")"
     __status=$?
-    replaced_404="${command_358}"
+    replaced_404="${command_359}"
     split__5_v0 "${replaced_404}" "
 "
     parts_405=("${ret_split5_v0[@]}")
     result_406=""
     remaining_width_407="${max_width}"
     from=0
-    __length_359=("${parts_405[@]}")
-    to="${#__length_359[@]}"
+    __length_360=("${parts_405[@]}")
+    to="${#__length_360[@]}"
     for idx_408 in $(if [ "${from}" -gt "${to}" ]; then seq -- "${from}" -1 "$(( ${to} + 1 ))"; elif [ "${from}" -lt "${to}" ]; then seq -- "${from}" "$(( ${to} - 1 ))"; fi); do
         part_409="${parts_405[${idx_408}]}"
         # If text starts with ANSI, all parts are "ANSIparams m text" format
@@ -4817,23 +4828,23 @@ truncate_ansi__1845_v0() {
             fi
         else
             # Part is "ANSIparams m text" format - find first 'm'
-            command_360="$(__p="${part_409}"; for ((i=0; i<${#__p}; i++)); do [[ "${__p:$i:1}" == "m" ]] && echo $i && break; done)"
+            command_361="$(__p="${part_409}"; for ((i=0; i<${#__p}; i++)); do [[ "${__p:$i:1}" == "m" ]] && echo $i && break; done)"
             __status=$?
-            m_idx_411="${command_360}"
+            m_idx_411="${command_361}"
             if [ "$([ "_${m_idx_411}" == "_" ]; echo $?)" != 0 ]; then
                 # Reconstruct ANSI sequence
-                command_361="$(__p="${part_409}"; printf "%s" "${__p:0:${m_idx_411}}")"
+                command_362="$(__p="${part_409}"; printf "%s" "${__p:0:${m_idx_411}}")"
                 __status=$?
-                ansi_params_412="${command_361}"
+                ansi_params_412="${command_362}"
                 result_406+="\\x1b[""${ansi_params_412}""m"
                 # Rest is text content
                 parse_int__14_v0 "${m_idx_411}"
                 __status=$?
                 m_idx_num_413="${ret_parse_int14_v0}"
                 text_start_414="$(( ${m_idx_num_413} + 1 ))"
-                command_362="$(__p="${part_409}"; printf "%s" "${__p:${text_start_414}}")"
+                command_363="$(__p="${part_409}"; printf "%s" "${__p:${text_start_414}}")"
                 __status=$?
-                text_part_415="${command_362}"
+                text_part_415="${command_363}"
                 if [ "$(( $([ "_${text_part_415}" == "_" ]; echo $?) && $(( ${remaining_width_407} > 0 )) ))" != 0 ]; then
                     truncate_text__1844_v0 "${text_part_415}" "${remaining_width_407}"
                     truncated_416="${ret_truncate_text1844_v0}"
@@ -4885,16 +4896,16 @@ render_tooltip__1847_v0() {
         iter_425=0
         while :
         do
-            __length_363=("${items[@]}")
-            if [ "$(( ${iter_425} >= ${#__length_363[@]} ))" != 0 ]; then
+            __length_364=("${items[@]}")
+            if [ "$(( ${iter_425} >= ${#__length_364[@]} ))" != 0 ]; then
                 break
             elif [ "$(( ${iter_425} > 0 ))" != 0 ]; then
                 eprintf_colored__1827_v0 "${separator_423}" 90
             fi
             colored__1828_v0 "${items[$(( ${iter_425} + 1 ))]}" 2
             ret_colored1828_v0__258_41="${ret_colored1828_v0}"
-            array_364=("")
-            eprintf__1826_v0 "${items[${iter_425}]}"" ""${ret_colored1828_v0__258_41}" array_364[@]
+            array_365=("")
+            eprintf__1826_v0 "${items[${iter_425}]}"" ""${ret_colored1828_v0__258_41}" array_365[@]
             iter_425="$(( ${iter_425} + 2 ))"
         done
     else
@@ -4904,15 +4915,15 @@ render_tooltip__1847_v0() {
         iter_428=0
         while :
         do
-            __length_365=("${items[@]}")
-            if [ "$(( ${iter_428} >= ${#__length_365[@]} ))" != 0 ]; then
+            __length_366=("${items[@]}")
+            if [ "$(( ${iter_428} >= ${#__length_366[@]} ))" != 0 ]; then
                 break
             fi
             key_429="${items[${iter_428}]}"
             action_430="${items[$(( ${iter_428} + 1 ))]}"
-            __length_366="${key_429}"
-            __length_367="${action_430}"
-            part_len_431="$(( $(( ${#__length_366} + 1 )) + ${#__length_367} ))"
+            __length_367="${key_429}"
+            __length_368="${action_430}"
+            part_len_431="$(( $(( ${#__length_367} + 1 )) + ${#__length_368} ))"
             needed_432="${part_len_431}"
             if [ "$(( ! ${first_427} ))" != 0 ]; then
                 needed_432="$(( ${needed_432} + ${separator_len_424} ))"
@@ -4925,8 +4936,8 @@ render_tooltip__1847_v0() {
             fi
             colored__1828_v0 "${action_430}" 2
             ret_colored1828_v0__286_33="${ret_colored1828_v0}"
-            array_368=("")
-            eprintf__1826_v0 "${key_429}"" ""${ret_colored1828_v0__286_33}" array_368[@]
+            array_369=("")
+            eprintf__1826_v0 "${key_429}"" ""${ret_colored1828_v0__286_33}" array_369[@]
             current_len_426="$(( ${current_len_426} + ${needed_432} ))"
             first_427=0
             iter_428="$(( ${iter_428} + 2 ))"
@@ -4940,10 +4951,10 @@ get_page_options__1897_v0() {
     local page_size=$3
     start_433="$(( ${page} * ${page_size} ))"
     end_434="$(( ${start_433} + ${page_size} ))"
-    __length_369=("${options[@]}")
-    if [ "$(( ${end_434} > ${#__length_369[@]} ))" != 0 ]; then
-        __length_370=("${options[@]}")
-        end_434="${#__length_370[@]}"
+    __length_370=("${options[@]}")
+    if [ "$(( ${end_434} > ${#__length_370[@]} ))" != 0 ]; then
+        __length_371=("${options[@]}")
+        end_434="${#__length_371[@]}"
     fi
     result_435=()
     from="${start_433}"
@@ -4961,12 +4972,12 @@ render_choose_page__1899_v0() {
     local cursor=$3
     local display_count=$4
     local term_width=$5
-    __length_373="${cursor}"
-    cursor_len_438="${#__length_373}"
+    __length_374="${cursor}"
+    cursor_len_438="${#__length_374}"
     max_option_width_439="$(( $(( ${term_width} - ${cursor_len_438} )) - 1 ))"
     from=0
-    __length_374=("${page_options[@]}")
-    to="${#__length_374[@]}"
+    __length_375=("${page_options[@]}")
+    to="${#__length_375[@]}"
     for i_440 in $(if [ "${from}" -gt "${to}" ]; then seq -- "${from}" -1 "$(( ${to} + 1 ))"; elif [ "${from}" -lt "${to}" ]; then seq -- "${from}" "$(( ${to} - 1 ))"; fi); do
         cutoff_text__1846_v0 "${page_options[${i_440}]}" "${max_option_width_439}"
         truncated_option_441="${ret_cutoff_text1846_v0}"
@@ -4974,25 +4985,25 @@ render_choose_page__1899_v0() {
             colored_secondary__1809_v0 "${cursor}""${truncated_option_441}""
 "
             ret_colored_secondary1809_v0__28_21="${ret_colored_secondary1809_v0}"
-            array_375=("")
-            eprintf__1826_v0 "${ret_colored_secondary1809_v0__28_21}" array_375[@]
+            array_376=("")
+            eprintf__1826_v0 "${ret_colored_secondary1809_v0__28_21}" array_376[@]
         else
             print_blank__1832_v0 "${cursor_len_438}"
-            array_376=("")
+            array_377=("")
             eprintf__1826_v0 "${truncated_option_441}""
-" array_376[@]
+" array_377[@]
         fi
     done
-    __length_377=("${page_options[@]}")
-    remaining_slots_450="$(( ${display_count} - ${#__length_377[@]} ))"
+    __length_378=("${page_options[@]}")
+    remaining_slots_450="$(( ${display_count} - ${#__length_378[@]} ))"
     if [ "$(( ${remaining_slots_450} > 0 ))" != 0 ]; then
         # Amber bug gaurd
         from=0
         to="${remaining_slots_450}"
         for ____451 in $(if [ "${from}" -gt "${to}" ]; then seq -- "${from}" -1 "$(( ${to} + 1 ))"; elif [ "${from}" -lt "${to}" ]; then seq -- "${from}" "$(( ${to} - 1 ))"; fi); do
-            array_378=("")
+            array_379=("")
             eprintf__1826_v0 "\\x1b[K
-" array_378[@]
+" array_379[@]
         done
     fi
 }
@@ -5001,11 +5012,11 @@ render_page_indicator__1901_v0() {
     local page=$1
     local total_pages=$2
     if [ "$(( ${total_pages} > 1 ))" != 0 ]; then
-        array_379=("")
-        eprintf__1826_v0 "\\x1b[9999D\\x1b[K" array_379[@]
-        eprintf_colored__1827_v0 "Page $(( ${page} + 1 ))/${total_pages}" 90
         array_380=("")
-        eprintf__1826_v0 "\\x1b[9999D" array_380[@]
+        eprintf__1826_v0 "\\x1b[9999D\\x1b[K" array_380[@]
+        eprintf_colored__1827_v0 "Page $(( ${page} + 1 ))/${total_pages}" 90
+        array_381=("")
+        eprintf__1826_v0 "\\x1b[9999D" array_381[@]
     fi
 }
 
@@ -5014,8 +5025,8 @@ xyl_choose__1902_v0() {
     local cursor=$2
     local header=$3
     local page_size=$4
-    __length_381=("${options[@]}")
-    if [ "$(( ${#__length_381[@]} == 0 ))" != 0 ]; then
+    __length_382=("${options[@]}")
+    if [ "$(( ${#__length_382[@]} == 0 ))" != 0 ]; then
         eprintf_colored__1827_v0 "ERROR: No options provided.
 " 31
         exit 1
@@ -5033,24 +5044,24 @@ xyl_choose__1902_v0() {
     if [ "$([ "_${header}" == "_" ]; echo $?)" != 0 ]; then
         cutoff_text__1846_v0 "${header}" "${term_width_392}"
         ret_cutoff_text1846_v0__107_17="${ret_cutoff_text1846_v0}"
-        array_382=("")
+        array_383=("")
         eprintf__1826_v0 "${ret_cutoff_text1846_v0__107_17}""
-" array_382[@]
+" array_383[@]
     fi
-    __length_383=("${options[@]}")
-    math_floor__416_v0 "$(( $(( $(( ${#__length_383[@]} + ${page_size} )) - 1 )) / ${page_size} ))"
+    __length_384=("${options[@]}")
+    math_floor__416_v0 "$(( $(( $(( ${#__length_384[@]} + ${page_size} )) - 1 )) / ${page_size} ))"
     total_pages_418="${ret_math_floor416_v0}"
     current_page_419=0
     selected_420=0
     display_count_421="${page_size}"
-    __length_384=("${options[@]}")
-    if [ "$(( ${#__length_384[@]} < ${page_size} ))" != 0 ]; then
-        __length_385=("${options[@]}")
-        display_count_421="${#__length_385[@]}"
+    __length_385=("${options[@]}")
+    if [ "$(( ${#__length_385[@]} < ${page_size} ))" != 0 ]; then
+        __length_386=("${options[@]}")
+        display_count_421="${#__length_386[@]}"
     fi
     new_line__1833_v0 "${display_count_421}"
-    array_386=("")
-    eprintf__1826_v0 "\\x1b[9999D" array_386[@]
+    array_387=("")
+    eprintf__1826_v0 "\\x1b[9999D" array_387[@]
     if [ "$(( ${total_pages_418} > 1 ))" != 0 ]; then
         eprintf_colored__1827_v0 "Page $(( ${current_page_419} + 1 ))/${total_pages_418}" 90
     fi
@@ -5058,15 +5069,15 @@ xyl_choose__1902_v0() {
     # "↑↓ select • enter confirm" = 9 + 3 + 13 = 25
     # "↑↓ select • ←→ page • enter confirm" = 9 + 3 + 8 + 3 + 13 = 36
     if [ "$(( ${total_pages_418} > 1 ))" != 0 ]; then
-        array_387=("↑↓" "select" "←→" "page" "enter" "confirm")
-        render_tooltip__1847_v0 array_387[@] 36 "${term_width_392}"
+        array_388=("↑↓" "select" "←→" "page" "enter" "confirm")
+        render_tooltip__1847_v0 array_388[@] 36 "${term_width_392}"
     else
-        array_388=("↑↓" "select" "enter" "confirm")
-        render_tooltip__1847_v0 array_388[@] 25 "${term_width_392}"
+        array_389=("↑↓" "select" "enter" "confirm")
+        render_tooltip__1847_v0 array_389[@] 25 "${term_width_392}"
     fi
     go_up__1834_v0 "$(( ${display_count_421} + 1 ))"
-    array_389=("")
-    eprintf__1826_v0 "\\x1b[9999D" array_389[@]
+    array_390=("")
+    eprintf__1826_v0 "\\x1b[9999D" array_390[@]
     get_page_options__1897_v0 options[@] "${current_page_419}" "${page_size}"
     page_options_437=("${ret_get_page_options1897_v0[@]}")
     render_choose_page__1899_v0 page_options_437[@] "${selected_420}" "${cursor}" "${display_count_421}" "${term_width_392}"
@@ -5086,14 +5097,14 @@ xyl_choose__1902_v0() {
                 fi
                 up_paged_456=1
             elif [ "$(( ${selected_420} == 0 ))" != 0 ]; then
-                __length_390=("${page_options_437[@]}")
-                selected_420="$(( ${#__length_390[@]} - 1 ))"
+                __length_391=("${page_options_437[@]}")
+                selected_420="$(( ${#__length_391[@]} - 1 ))"
             else
                 selected_420="$(( ${selected_420} - 1 ))"
             fi
         elif [ "$(( $([ "_${key_453}" != "_DOWN" ]; echo $?) || $([ "_${key_453}" != "_j" ]; echo $?) ))" != 0 ]; then
-            __length_391=("${page_options_437[@]}")
-            if [ "$(( ${selected_420} == $(( ${#__length_391[@]} - 1 )) ))" != 0 ]; then
+            __length_392=("${page_options_437[@]}")
+            if [ "$(( ${selected_420} == $(( ${#__length_392[@]} - 1 )) ))" != 0 ]; then
                 if [ "$(( ${current_page_419} < $(( ${total_pages_418} - 1 )) ))" != 0 ]; then
                     current_page_419="$(( ${current_page_419} + 1 ))"
                     selected_420=0
@@ -5116,55 +5127,55 @@ xyl_choose__1902_v0() {
                 current_page_419="$(( ${current_page_419} + 1 ))"
                 selected_420=0
             else
-                __length_392=("${page_options_437[@]}")
-                selected_420="$(( ${#__length_392[@]} - 1 ))"
+                __length_393=("${page_options_437[@]}")
+                selected_420="$(( ${#__length_393[@]} - 1 ))"
             fi
         elif [ "$([ "_${key_453}" != "_INPUT" ]; echo $?)" != 0 ]; then
             break
         else
             continue
         fi
-        __length_393="${cursor}"
-        max_option_width_457="$(( $(( ${term_width_392} - ${#__length_393} )) - 1 ))"
+        __length_394="${cursor}"
+        max_option_width_457="$(( $(( ${term_width_392} - ${#__length_394} )) - 1 ))"
         if [ "$(( ${prev_page_455} != ${current_page_419} ))" != 0 ]; then
             get_page_options__1897_v0 options[@] "${current_page_419}" "${page_size}"
             page_options_437=("${ret_get_page_options1897_v0[@]}")
             if [ "${up_paged_456}" != 0 ]; then
-                __length_394=("${page_options_437[@]}")
-                selected_420="$(( ${#__length_394[@]} - 1 ))"
+                __length_395=("${page_options_437[@]}")
+                selected_420="$(( ${#__length_395[@]} - 1 ))"
             fi
             go_up__1834_v0 1
             remove_line__1830_v0 "$(( ${display_count_421} - 1 ))"
             remove_current_line__1831_v0 
-            array_395=("")
-            eprintf__1826_v0 "\\x1b[9999D" array_395[@]
+            array_396=("")
+            eprintf__1826_v0 "\\x1b[9999D" array_396[@]
             render_choose_page__1899_v0 page_options_437[@] "${selected_420}" "${cursor}" "${display_count_421}" "${term_width_392}"
             render_page_indicator__1901_v0 "${current_page_419}" "${total_pages_418}"
         elif [ "$(( ${prev_selected_454} != ${selected_420} ))" != 0 ]; then
             go_up__1834_v0 "$(( ${display_count_421} - ${prev_selected_454} ))"
-            array_396=("")
-            eprintf__1826_v0 "\\x1b[K" array_396[@]
-            __length_397="${cursor}"
-            print_blank__1832_v0 "${#__length_397}"
+            array_397=("")
+            eprintf__1826_v0 "\\x1b[K" array_397[@]
+            __length_398="${cursor}"
+            print_blank__1832_v0 "${#__length_398}"
             cutoff_text__1846_v0 "${page_options_437[${prev_selected_454}]}" "${max_option_width_457}"
             ret_cutoff_text1846_v0__218_25="${ret_cutoff_text1846_v0}"
-            array_398=("")
-            eprintf__1826_v0 "${ret_cutoff_text1846_v0__218_25}" array_398[@]
+            array_399=("")
+            eprintf__1826_v0 "${ret_cutoff_text1846_v0__218_25}" array_399[@]
             diff_458="$(( ${selected_420} - ${prev_selected_454} ))"
             go_up_or_down__1836_v0 "${diff_458}"
-            array_399=("")
-            eprintf__1826_v0 "\\x1b[9999D" array_399[@]
             array_400=("")
-            eprintf__1826_v0 "\\x1b[K" array_400[@]
+            eprintf__1826_v0 "\\x1b[9999D" array_400[@]
+            array_401=("")
+            eprintf__1826_v0 "\\x1b[K" array_401[@]
             cutoff_text__1846_v0 "${page_options_437[${selected_420}]}" "${max_option_width_457}"
             ret_cutoff_text1846_v0__224_52="${ret_cutoff_text1846_v0}"
             colored_secondary__1809_v0 "${cursor}""${ret_cutoff_text1846_v0__224_52}"
             ret_colored_secondary1809_v0__224_25="${ret_colored_secondary1809_v0}"
-            array_401=("")
-            eprintf__1826_v0 "${ret_colored_secondary1809_v0__224_25}" array_401[@]
-            go_down__1835_v0 "$(( ${display_count_421} - ${selected_420} ))"
             array_402=("")
-            eprintf__1826_v0 "\\x1b[9999D" array_402[@]
+            eprintf__1826_v0 "${ret_colored_secondary1809_v0__224_25}" array_402[@]
+            go_down__1835_v0 "$(( ${display_count_421} - ${selected_420} ))"
+            array_403=("")
+            eprintf__1826_v0 "\\x1b[9999D" array_403[@]
         fi
     done
     total_lines_459="$(( ${display_count_421} + 2 ))"
@@ -5222,8 +5233,8 @@ xyl_file__1907_v0() {
     do
         colored_primary__1613_v0 "Loading files..."
         ret_colored_primary1613_v0__47_17="${ret_colored_primary1613_v0}"
-        array_404=("")
-        eprintf__1631_v0 "${ret_colored_primary1613_v0__47_17}" array_404[@]
+        array_405=("")
+        eprintf__1631_v0 "${ret_colored_primary1613_v0__47_17}" array_405[@]
         # Get directory entries
         get_directory_entries__1570_v0 "${current_path_362}"
         raw_entries_374=("${ret_get_directory_entries1570_v0[@]}")
@@ -5240,9 +5251,9 @@ xyl_file__1907_v0() {
             entry_378=("${ret_parse_entry1571_v0[@]}")
             name_379="${entry_378[0]}"
             # Skip hidden files if not showing them
-            command_409="$(echo "${name_379}" | cut -c1)"
+            command_410="$(echo "${name_379}" | cut -c1)"
             __status=$?
-            first_char_380="${command_409}"
+            first_char_380="${command_410}"
             if [ "$(( $(( ! ${show_hidden} )) && $([ "_${first_char_380}" != "_." ]; echo $?) ))" != 0 ]; then
                 continue
             fi
@@ -5251,8 +5262,8 @@ xyl_file__1907_v0() {
             options_375+=("${ret_format_entry_display1906_v0__70_25}")
             entries_376+=("${raw_entry_377}")
         done
-        __length_412=("${entries_376[@]}")
-        if [ "$(( ${#__length_412[@]} == 0 ))" != 0 ]; then
+        __length_413=("${entries_376[@]}")
+        if [ "$(( ${#__length_413[@]} == 0 ))" != 0 ]; then
             eprintf_colored__1632_v0 "ERROR: Directory is empty or inaccessible.
 " 31
             stty_unlock__1594_v0 
@@ -5268,8 +5279,8 @@ xyl_file__1907_v0() {
         # Find selected entry index
         selected_idx_464=-1
         from=0
-        __length_413=("${options_375[@]}")
-        to="${#__length_413[@]}"
+        __length_414=("${options_375[@]}")
+        to="${#__length_414[@]}"
         for i_465 in $(if [ "${from}" -gt "${to}" ]; then seq -- "${from}" -1 "$(( ${to} + 1 ))"; elif [ "${from}" -lt "${to}" ]; then seq -- "${from}" "$(( ${to} - 1 ))"; fi); do
             if [ "$([ "_${options_375[${i_465}]}" != "_${selected_option_463}" ]; echo $?)" != 0 ]; then
                 selected_idx_464="${i_465}"
@@ -5293,16 +5304,25 @@ xyl_file__1907_v0() {
             normalize_path__1573_v0 "${current_path_362}"
             current_path_362="${ret_normalize_path1573_v0}"
         elif [ "$([ "_${file_type_468}" != "_l" ]; echo $?)" != 0 ]; then
-            # For symlinks, check if they point to a directory
-            starts_with__23_v0 "${entry_466[2]}" "/"
-            ret_starts_with23_v0__113_20="${ret_starts_with23_v0}"
-            if [ "${ret_starts_with23_v0__113_20}" != 0 ]; then
-                current_path_362="${entry_466[2]}"
+            # Resolve symlink target path
+            target_470="${entry_466[2]}"
+            target_path_471="${target_470}"
+            starts_with__23_v0 "${target_470}" "/"
+            ret_starts_with23_v0__115_24="${ret_starts_with23_v0}"
+            if [ "$(( ! ${ret_starts_with23_v0__115_24} ))" != 0 ]; then
+                path_join__1575_v0 "${current_path_362}" "${target_470}"
+                target_path_471="${ret_path_join1575_v0}"
+            fi
+            # Follow symlink if it points to a directory, otherwise return path
+            is_directory__1574_v0 "${target_path_471}"
+            ret_is_directory1574_v0__119_20="${ret_is_directory1574_v0}"
+            if [ "${ret_is_directory1574_v0__119_20}" != 0 ]; then
+                current_path_362="${target_path_471}"
                 normalize_path__1573_v0 "${current_path_362}"
                 current_path_362="${ret_normalize_path1573_v0}"
             else
                 stty_unlock__1594_v0 
-                path_join__1575_v0 "${current_path_362}" "${entry_466[2]}"
+                path_join__1575_v0 "${current_path_362}" "${name_467}"
                 ret_xyl_file1907_v0="${ret_path_join1575_v0}"
                 return 0
             fi
@@ -5323,24 +5343,24 @@ print_file_help__1983_v0() {
     echo ""
     colored_primary__1613_v0 "file"
     ret_colored_primary1613_v0__7_12="${ret_colored_primary1613_v0}"
-    array_414=("")
-    printf__106_v0 "${ret_colored_primary1613_v0__7_12}" array_414[@]
     array_415=("")
-    printf__106_v0 " - Browse filesystem and select a file." array_415[@]
+    printf__106_v0 "${ret_colored_primary1613_v0__7_12}" array_415[@]
+    array_416=("")
+    printf__106_v0 " - Browse filesystem and select a file." array_416[@]
     echo ""
     echo ""
     colored_secondary__1614_v0 "Arguments: "
     ret_colored_secondary1614_v0__11_12="${ret_colored_secondary1614_v0}"
-    array_416=("")
+    array_417=("")
     printf__106_v0 "${ret_colored_secondary1614_v0__11_12}""
-" array_416[@]
+" array_417[@]
     echo "  [<path>]               Starting directory path (default: current directory)"
     echo ""
     colored_secondary__1614_v0 "Flags: "
     ret_colored_secondary1614_v0__14_12="${ret_colored_secondary1614_v0}"
-    array_417=("")
+    array_418=("")
     printf__106_v0 "${ret_colored_secondary1614_v0__14_12}""
-" array_417[@]
+" array_418[@]
     echo "  -h, --help             Show this help message"
     echo "  -a, --all              Show hidden files"
     echo "  --cursor=\"<text>\"      Set the cursor text (default: '> ')"
@@ -5412,18 +5432,18 @@ check_prerequirements__2036_v0() {
     __status=$?
     if [ "${__status}" != 0 ]; then
         eprintf_colored__213_v0 "Error: " 91
-        array_418=("")
-        eprintf__212_v0 "bc is not installed. Please install bc to use xylitol.
-" array_418[@]
         array_419=("")
-        eprintf__212_v0 "  For Debian/Ubuntu: sudo apt install bc
+        eprintf__212_v0 "bc is not installed. Please install bc to use xylitol.
 " array_419[@]
         array_420=("")
-        eprintf__212_v0 "  For Fedora: sudo dnf install bc
+        eprintf__212_v0 "  For Debian/Ubuntu: sudo apt install bc
 " array_420[@]
         array_421=("")
-        eprintf__212_v0 "  For Arch Linux: sudo pacman -S bc
+        eprintf__212_v0 "  For Fedora: sudo dnf install bc
 " array_421[@]
+        array_422=("")
+        eprintf__212_v0 "  For Arch Linux: sudo pacman -S bc
+" array_422[@]
         ret_check_prerequirements2036_v0=0
         return 0
     fi
@@ -5444,8 +5464,8 @@ ret_check_prerequirements2036_v0__32_12="${ret_check_prerequirements2036_v0}"
 if [ "$(( ! ${ret_check_prerequirements2036_v0__32_12} ))" != 0 ]; then
     exit 1
 fi
-__length_423=("${args_59[@]}")
-if [ "$(( $(( $(( $(( ${#__length_423[@]} < 2 )) || $([ "_${args_59[1]}" != "_help" ]; echo $?) )) || $([ "_${args_59[1]}" != "_--help" ]; echo $?) )) || $([ "_${args_59[1]}" != "_-h" ]; echo $?) ))" != 0 ]; then
+__length_424=("${args_59[@]}")
+if [ "$(( $(( $(( $(( ${#__length_424[@]} < 2 )) || $([ "_${args_59[1]}" != "_help" ]; echo $?) )) || $([ "_${args_59[1]}" != "_--help" ]; echo $?) )) || $([ "_${args_59[1]}" != "_-h" ]; echo $?) ))" != 0 ]; then
     print_help__358_v0 
 elif [ "$([ "_${args_59[1]}" != "_input" ]; echo $?)" != 0 ]; then
     execute_input__716_v0 args_59[@]
@@ -5470,14 +5490,14 @@ elif [ "$([ "_${args_59[1]}" != "_file" ]; echo $?)" != 0 ]; then
 elif [ "$(( $(( $([ "_${args_59[1]}" != "_version" ]; echo $?) || $([ "_${args_59[1]}" != "_--version" ]; echo $?) )) || $([ "_${args_59[1]}" != "_-v" ]; echo $?) ))" != 0 ]; then
     colored_primary__194_v0 "xylitol.sh"
     ret_colored_primary194_v0__55_20="${ret_colored_primary194_v0}"
-    array_424=("")
-    printf__106_v0 "${ret_colored_primary194_v0__55_20}" array_424[@]
     array_425=("")
-    printf__106_v0 " version: " array_425[@]
+    printf__106_v0 "${ret_colored_primary194_v0__55_20}" array_425[@]
+    array_426=("")
+    printf__106_v0 " version: " array_426[@]
     colored_accent__196_v0 "${__VERSION_57}"
     ret_colored_accent196_v0__57_20="${ret_colored_accent196_v0}"
-    array_426=("")
-    printf__106_v0 "${ret_colored_accent196_v0__57_20}" array_426[@]
+    array_427=("")
+    printf__106_v0 "${ret_colored_accent196_v0__57_20}" array_427[@]
     echo ""
     printf_colored__211_v0 "written in Amber: " 90
     printf_colored__211_v0 "  ""${__AMBER_VERSION_58}" 90

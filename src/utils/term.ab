@@ -1,4 +1,4 @@
-import { split, parse_int } from "std/text"
+import { split, parse_int, match_regex } from "std/text"
 
 /// global variables to store terminal size
 /// (prevent multiple queries in one session)
@@ -32,24 +32,63 @@ pub fun stty_unlock(): Null {
     }
 }
 
-/// Get the terminal size (columns, rows) using ANSI escape sequence.
-fun get_term_size(): Null? {
-    // Query terminal size with \x1b[18t, response format: \x1b[8;rows;colst
-    let result = trust $ printf '\x1b[18t' > /dev/tty; IFS=';' read -rsd t _ignore height width < /dev/tty; echo "\$height; \$width" $
+/// Parse a size component, returning 0 when the text is not a number.
+fun parse_size(text: Text): Int {
+    // `match_regex` uses BRE by default, where `+` is a literal character
+    if not match_regex(text, "^[0-9][0-9]*$") {
+        return 0
+    }
+    return trust parse_int(text)
+}
+
+/// Ask the terminal for its size with the xterm `\x1b[18t` extension.
+/// Response format: `\x1b[8;rows;colst`.
+/// The read times out, so terminals without the extension do not block execution.
+fun query_term_size(): Bool {
+    let result = trust $ printf '\x1b[18t' > /dev/tty; IFS=';' read -t 0.5 -rsd t _ignore height width < /dev/tty 2>/dev/null; echo "\$height; \$width" $
     let parts = split(result, ";")
     if len(parts) != 2 {
-        fail
+        return false
     }
-    let rows = parse_int(parts[0])?
-    let cols = parse_int(parts[1])?
-
+    let rows = parse_size(parts[0])
+    let cols = parse_size(parts[1])
+    if rows <= 0 or cols <= 0 {
+        return false
+    }
     _term_size = [cols, rows]
+    return true
+}
+
+/// Read the terminal size from the tty itself.
+/// Used when the terminal does not support the `\x1b[18t` extension.
+fun stty_term_size(): Bool {
+    let result = trust $ stty size < /dev/tty 2>/dev/null $
+    let parts = split(result, " ")
+    if len(parts) != 2 {
+        return false
+    }
+    let rows = parse_size(parts[0])
+    let cols = parse_size(parts[1])
+    if rows <= 0 or cols <= 0 {
+        return false
+    }
+    _term_size = [cols, rows]
+    return true
+}
+
+/// Get the terminal size (columns, rows).
+/// Keeps the default size when it cannot be detected by any means.
+fun get_term_size(): Null {
+    let detected = query_term_size()
+    if not detected {
+        detected = stty_term_size()
+    }
     _got_term_size = true
 }
 
 pub fun term_size(): [Int] {
     if not _got_term_size {
-        trust get_term_size()
+        get_term_size()
     }
     return _term_size
 }
@@ -57,7 +96,7 @@ pub fun term_size(): [Int] {
 /// Get the terminal width (columns).
 pub fun term_width(): Int {
     if not _got_term_size {
-        trust get_term_size()
+        get_term_size()
     }
     return _term_size[0]
 }
@@ -65,7 +104,7 @@ pub fun term_width(): Int {
 /// Get the terminal height (rows).
 pub fun term_height(): Int {
     if not _got_term_size {
-        trust get_term_size()
+        get_term_size()
     }
     return _term_size[1]
 }

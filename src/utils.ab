@@ -65,12 +65,12 @@ pub fun remove_line(cnt: Int): Null {
         }
         eprintf(sequence)
     }
-    eprintf("\x1b[9999D")
+    eprintf("\x1b[G")
 }
 
 /// remove the current line from the terminal.
 pub fun remove_current_line(): Null {
-    eprintf("\x1b[2K\x1b[9999D")
+    eprintf("\x1b[2K\x1b[G")
 }
 
 /// Prints blank spaces.

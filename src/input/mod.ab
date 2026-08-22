@@ -27,7 +27,7 @@ pub fun xyl_input(
     // "enter submit" = 12
     render_tooltip(["enter", "submit"], 12, term_width)
     go_up(2)
-    eprintf("\x1b[99999D")
+    eprintf("\x1b[G")
 
     eprintf(prompt)
     eprintf_colored(placeholder, 90)

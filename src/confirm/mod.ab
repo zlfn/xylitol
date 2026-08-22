@@ -63,12 +63,12 @@ pub fun xyl_confirm(
                 if {
                     selected {
                         selected = false
-                        eprintf("\x1b[9999D\x1b[K")
+                        eprintf("\x1b[G\x1b[K")
                         render_confirm_options(selected, term_width)
                     }
                     not selected {
                         selected = true
-                        eprintf("\x1b[9999D\x1b[K")
+                        eprintf("\x1b[G\x1b[K")
                         render_confirm_options(selected, term_width)
                     }
                 }

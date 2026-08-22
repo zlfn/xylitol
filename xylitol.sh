@@ -1027,12 +1027,12 @@ remove_line__530_v0() {
         eprintf__526_v0 "${sequence_145}" array_66[@]
     fi
     array_67=("")
-    eprintf__526_v0 "\\x1b[9999D" array_67[@]
+    eprintf__526_v0 "\\x1b[G" array_67[@]
 }
 
 remove_current_line__531_v0() {
     array_68=("")
-    eprintf__526_v0 "\\x1b[2K\\x1b[9999D" array_68[@]
+    eprintf__526_v0 "\\x1b[2K\\x1b[G" array_68[@]
 }
 
 new_line__533_v0() {
@@ -1328,7 +1328,7 @@ xyl_input__597_v0() {
     render_tooltip__547_v0 array_92[@] 12 "${term_width_104}"
     go_up__534_v0 2
     array_93=("")
-    eprintf__526_v0 "\\x1b[99999D" array_93[@]
+    eprintf__526_v0 "\\x1b[G" array_93[@]
     array_94=("")
     eprintf__526_v0 "${prompt}" array_94[@]
     eprintf_colored__527_v0 "${placeholder}" 90
@@ -1930,12 +1930,12 @@ remove_line__887_v0() {
         eprintf__883_v0 "${sequence_251}" array_126[@]
     fi
     array_127=("")
-    eprintf__883_v0 "\\x1b[9999D" array_127[@]
+    eprintf__883_v0 "\\x1b[G" array_127[@]
 }
 
 remove_current_line__888_v0() {
     array_128=("")
-    eprintf__883_v0 "\\x1b[2K\\x1b[9999D" array_128[@]
+    eprintf__883_v0 "\\x1b[2K\\x1b[G" array_128[@]
 }
 
 print_blank__889_v0() {
@@ -2365,10 +2365,10 @@ render_page_indicator__958_v0() {
     local total_pages=$2
     if [ "$(( ${total_pages} > 1 ))" != 0 ]; then
         array_170=("")
-        eprintf__883_v0 "\\x1b[9999D\\x1b[K" array_170[@]
+        eprintf__883_v0 "\\x1b[G\\x1b[K" array_170[@]
         eprintf_colored__884_v0 "Page $(( ${page} + 1 ))/${total_pages}" 90
         array_171=("")
-        eprintf__883_v0 "\\x1b[9999D" array_171[@]
+        eprintf__883_v0 "\\x1b[G" array_171[@]
     fi
 }
 
@@ -2413,7 +2413,7 @@ xyl_choose__959_v0() {
     fi
     new_line__890_v0 "${display_count_269}"
     array_177=("")
-    eprintf__883_v0 "\\x1b[9999D" array_177[@]
+    eprintf__883_v0 "\\x1b[G" array_177[@]
     if [ "$(( ${total_pages_266} > 1 ))" != 0 ]; then
         eprintf_colored__884_v0 "Page $(( ${current_page_267} + 1 ))/${total_pages_266}" 90
     fi
@@ -2429,7 +2429,7 @@ xyl_choose__959_v0() {
     fi
     go_up__891_v0 "$(( ${display_count_269} + 1 ))"
     array_180=("")
-    eprintf__883_v0 "\\x1b[9999D" array_180[@]
+    eprintf__883_v0 "\\x1b[G" array_180[@]
     get_page_options__954_v0 options[@] "${current_page_267}" "${page_size}"
     page_options_270=("${ret_get_page_options954_v0[@]}")
     render_choose_page__956_v0 page_options_270[@] "${selected_268}" "${cursor}" "${display_count_269}" "${term_width_263}"
@@ -2500,7 +2500,7 @@ xyl_choose__959_v0() {
             remove_line__887_v0 "$(( ${display_count_269} - 1 ))"
             remove_current_line__888_v0 
             array_186=("")
-            eprintf__883_v0 "\\x1b[9999D" array_186[@]
+            eprintf__883_v0 "\\x1b[G" array_186[@]
             render_choose_page__956_v0 page_options_270[@] "${selected_268}" "${cursor}" "${display_count_269}" "${term_width_263}"
             render_page_indicator__958_v0 "${current_page_267}" "${total_pages_266}"
         elif [ "$(( ${prev_selected_278} != ${selected_268} ))" != 0 ]; then
@@ -2516,7 +2516,7 @@ xyl_choose__959_v0() {
             diff_282="$(( ${selected_268} - ${prev_selected_278} ))"
             go_up_or_down__893_v0 "${diff_282}"
             array_190=("")
-            eprintf__883_v0 "\\x1b[9999D" array_190[@]
+            eprintf__883_v0 "\\x1b[G" array_190[@]
             array_191=("")
             eprintf__883_v0 "\\x1b[K" array_191[@]
             cutoff_text__903_v0 "${page_options_270[${selected_268}]}" "${max_option_width_281}"
@@ -2527,7 +2527,7 @@ xyl_choose__959_v0() {
             eprintf__883_v0 "${ret_colored_secondary866_v0__224_25}" array_192[@]
             go_down__892_v0 "$(( ${display_count_269} - ${selected_268} ))"
             array_193=("")
-            eprintf__883_v0 "\\x1b[9999D" array_193[@]
+            eprintf__883_v0 "\\x1b[G" array_193[@]
         fi
     done
     total_lines_283="$(( ${display_count_269} + 2 ))"
@@ -2599,7 +2599,7 @@ xyl_multi_choose__961_v0() {
     fi
     new_line__890_v0 "${display_count_209}"
     array_200=("")
-    eprintf__883_v0 "\\x1b[9999D" array_200[@]
+    eprintf__883_v0 "\\x1b[G" array_200[@]
     if [ "$(( ${total_pages_206} > 1 ))" != 0 ]; then
         eprintf_colored__884_v0 "Page $(( ${current_page_207} + 1 ))/${total_pages_206}" 90
     fi
@@ -2623,7 +2623,7 @@ xyl_multi_choose__961_v0() {
     fi
     go_up__891_v0 "$(( ${display_count_209} + 1 ))"
     array_205=("")
-    eprintf__883_v0 "\\x1b[9999D" array_205[@]
+    eprintf__883_v0 "\\x1b[G" array_205[@]
     checked_221=()
     from=0
     __length_207=("${options[@]}")
@@ -2701,7 +2701,7 @@ xyl_multi_choose__961_v0() {
             # 2 for check mark
             go_up__891_v0 "$(( ${display_count_209} - ${selected_208} ))"
             array_213=("")
-            eprintf__883_v0 "\\x1b[9999D" array_213[@]
+            eprintf__883_v0 "\\x1b[G" array_213[@]
             array_214=("")
             eprintf__883_v0 "\\x1b[K" array_214[@]
             check_mark_247="$(if [ "${checked_221[${global_selected_242}]}" != 0 ]; then echo "✓ "; else echo "• "; fi)"
@@ -2713,7 +2713,7 @@ xyl_multi_choose__961_v0() {
             eprintf__883_v0 "${ret_colored_secondary866_v0__400_25}" array_215[@]
             go_down__892_v0 "$(( ${display_count_209} - ${selected_208} ))"
             array_216=("")
-            eprintf__883_v0 "\\x1b[9999D" array_216[@]
+            eprintf__883_v0 "\\x1b[G" array_216[@]
             continue
         elif [ "$(( $(( $([ "_${key_239}" != "_a" ]; echo $?) || $([ "_${key_239}" != "_A" ]; echo $?) )) && $(( ${limit} < 0 )) ))" != 0 ]; then
             count_checked__960_v0 checked_221[@]
@@ -2728,7 +2728,7 @@ xyl_multi_choose__961_v0() {
             done
             go_up__891_v0 "${display_count_209}"
             array_219=("")
-            eprintf__883_v0 "\\x1b[9999D" array_219[@]
+            eprintf__883_v0 "\\x1b[G" array_219[@]
             render_multi_choose_page__957_v0 page_options_227[@] checked_221[@] "${page_start_228}" "${selected_208}" "${cursor}" "${display_count_209}" "${term_width_181}"
             continue
         elif [ "$([ "_${key_239}" != "_INPUT" ]; echo $?)" != 0 ]; then
@@ -2752,7 +2752,7 @@ xyl_multi_choose__961_v0() {
             remove_line__887_v0 "$(( ${display_count_209} - 1 ))"
             remove_current_line__888_v0 
             array_222=("")
-            eprintf__883_v0 "\\x1b[9999D" array_222[@]
+            eprintf__883_v0 "\\x1b[G" array_222[@]
             render_multi_choose_page__957_v0 page_options_227[@] checked_221[@] "${page_start_228}" "${selected_208}" "${cursor}" "${display_count_209}" "${term_width_181}"
             render_page_indicator__958_v0 "${current_page_207}" "${total_pages_206}"
         elif [ "$(( ${prev_selected_240} != ${selected_208} ))" != 0 ]; then
@@ -2778,7 +2778,7 @@ xyl_multi_choose__961_v0() {
             diff_254="$(( ${selected_208} - ${prev_selected_240} ))"
             go_up_or_down__893_v0 "${diff_254}"
             array_227=("")
-            eprintf__883_v0 "\\x1b[9999D" array_227[@]
+            eprintf__883_v0 "\\x1b[G" array_227[@]
             array_228=("")
             eprintf__883_v0 "\\x1b[K" array_228[@]
             new_global_255="$(( ${page_start_228} + ${selected_208} ))"
@@ -2791,7 +2791,7 @@ xyl_multi_choose__961_v0() {
             eprintf__883_v0 "${ret_colored_secondary866_v0__453_25}" array_229[@]
             go_down__892_v0 "$(( ${display_count_209} - ${selected_208} ))"
             array_230=("")
-            eprintf__883_v0 "\\x1b[9999D" array_230[@]
+            eprintf__883_v0 "\\x1b[G" array_230[@]
         fi
     done
     total_lines_257="$(( ${display_count_209} + 2 ))"
@@ -3469,12 +3469,12 @@ remove_line__1273_v0() {
         eprintf__1269_v0 "${sequence_353}" array_265[@]
     fi
     array_266=("")
-    eprintf__1269_v0 "\\x1b[9999D" array_266[@]
+    eprintf__1269_v0 "\\x1b[G" array_266[@]
 }
 
 remove_current_line__1274_v0() {
     array_267=("")
-    eprintf__1269_v0 "\\x1b[2K\\x1b[9999D" array_267[@]
+    eprintf__1269_v0 "\\x1b[2K\\x1b[G" array_267[@]
 }
 
 go_up__1277_v0() {
@@ -3815,12 +3815,12 @@ xyl_confirm__1341_v0() {
             if [ "${selected_334}" != 0 ]; then
                 selected_334=0
                 array_301=("")
-                eprintf__1269_v0 "\\x1b[9999D\\x1b[K" array_301[@]
+                eprintf__1269_v0 "\\x1b[G\\x1b[K" array_301[@]
                 render_confirm_options__1340_v0 "${selected_334}" "${term_width_311}"
             elif [ "$(( ! ${selected_334} ))" != 0 ]; then
                 selected_334=1
                 array_302=("")
-                eprintf__1269_v0 "\\x1b[9999D\\x1b[K" array_302[@]
+                eprintf__1269_v0 "\\x1b[G\\x1b[K" array_302[@]
                 render_confirm_options__1340_v0 "${selected_334}" "${term_width_311}"
             fi
         elif [ "$(( $([ "_${key_351}" != "_y" ]; echo $?) || $([ "_${key_351}" != "_Y" ]; echo $?) ))" != 0 ]; then
@@ -4417,7 +4417,7 @@ eprintf_colored__1652_v0() {
 
 remove_current_line__1656_v0() {
     array_339=("")
-    eprintf__1651_v0 "\\x1b[2K\\x1b[9999D" array_339[@]
+    eprintf__1651_v0 "\\x1b[2K\\x1b[G" array_339[@]
 }
 
 # move the cursor up or down `cnt` lines.
@@ -4890,12 +4890,12 @@ remove_line__1854_v0() {
         eprintf__1850_v0 "${sequence_489}" array_364[@]
     fi
     array_365=("")
-    eprintf__1850_v0 "\\x1b[9999D" array_365[@]
+    eprintf__1850_v0 "\\x1b[G" array_365[@]
 }
 
 remove_current_line__1855_v0() {
     array_366=("")
-    eprintf__1850_v0 "\\x1b[2K\\x1b[9999D" array_366[@]
+    eprintf__1850_v0 "\\x1b[2K\\x1b[G" array_366[@]
 }
 
 print_blank__1856_v0() {
@@ -5255,10 +5255,10 @@ render_page_indicator__1925_v0() {
     local total_pages=$2
     if [ "$(( ${total_pages} > 1 ))" != 0 ]; then
         array_400=("")
-        eprintf__1850_v0 "\\x1b[9999D\\x1b[K" array_400[@]
+        eprintf__1850_v0 "\\x1b[G\\x1b[K" array_400[@]
         eprintf_colored__1851_v0 "Page $(( ${page} + 1 ))/${total_pages}" 90
         array_401=("")
-        eprintf__1850_v0 "\\x1b[9999D" array_401[@]
+        eprintf__1850_v0 "\\x1b[G" array_401[@]
     fi
 }
 
@@ -5303,7 +5303,7 @@ xyl_choose__1926_v0() {
     fi
     new_line__1857_v0 "${display_count_452}"
     array_407=("")
-    eprintf__1850_v0 "\\x1b[9999D" array_407[@]
+    eprintf__1850_v0 "\\x1b[G" array_407[@]
     if [ "$(( ${total_pages_449} > 1 ))" != 0 ]; then
         eprintf_colored__1851_v0 "Page $(( ${current_page_450} + 1 ))/${total_pages_449}" 90
     fi
@@ -5319,7 +5319,7 @@ xyl_choose__1926_v0() {
     fi
     go_up__1858_v0 "$(( ${display_count_452} + 1 ))"
     array_410=("")
-    eprintf__1850_v0 "\\x1b[9999D" array_410[@]
+    eprintf__1850_v0 "\\x1b[G" array_410[@]
     get_page_options__1921_v0 options[@] "${current_page_450}" "${page_size}"
     page_options_468=("${ret_get_page_options1921_v0[@]}")
     render_choose_page__1923_v0 page_options_468[@] "${selected_451}" "${cursor}" "${display_count_452}" "${term_width_423}"
@@ -5390,7 +5390,7 @@ xyl_choose__1926_v0() {
             remove_line__1854_v0 "$(( ${display_count_452} - 1 ))"
             remove_current_line__1855_v0 
             array_416=("")
-            eprintf__1850_v0 "\\x1b[9999D" array_416[@]
+            eprintf__1850_v0 "\\x1b[G" array_416[@]
             render_choose_page__1923_v0 page_options_468[@] "${selected_451}" "${cursor}" "${display_count_452}" "${term_width_423}"
             render_page_indicator__1925_v0 "${current_page_450}" "${total_pages_449}"
         elif [ "$(( ${prev_selected_485} != ${selected_451} ))" != 0 ]; then
@@ -5406,7 +5406,7 @@ xyl_choose__1926_v0() {
             diff_491="$(( ${selected_451} - ${prev_selected_485} ))"
             go_up_or_down__1860_v0 "${diff_491}"
             array_420=("")
-            eprintf__1850_v0 "\\x1b[9999D" array_420[@]
+            eprintf__1850_v0 "\\x1b[G" array_420[@]
             array_421=("")
             eprintf__1850_v0 "\\x1b[K" array_421[@]
             cutoff_text__1870_v0 "${page_options_468[${selected_451}]}" "${max_option_width_488}"
@@ -5417,7 +5417,7 @@ xyl_choose__1926_v0() {
             eprintf__1850_v0 "${ret_colored_secondary1833_v0__224_25}" array_422[@]
             go_down__1859_v0 "$(( ${display_count_452} - ${selected_451} ))"
             array_423=("")
-            eprintf__1850_v0 "\\x1b[9999D" array_423[@]
+            eprintf__1850_v0 "\\x1b[G" array_423[@]
         fi
     done
     total_lines_492="$(( ${display_count_452} + 2 ))"

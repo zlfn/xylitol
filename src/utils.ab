@@ -47,14 +47,24 @@ pub fun colored(message: Text, color: Int): Text {
     return "\x1b[{color as Text}m" + message + "\x1b[0m"
 }
 
-/// remove `cnt` characters from the terminal.
+/// remove `cnt` characters to the left of the cursor, clearing to end of line.
+/// Does nothing when `cnt` is not positive.
 pub fun remove(cnt: Int): Null {
-   trust $ printf '%0.s\b \b' \$(seq 1 {cnt}) >&2 $
+    if cnt > 0 {
+        eprintf("\x1b[{cnt as Text}D\x1b[K")
+    }
 }
 
 /// remove `cnt` lines from the terminal (starting from current line, going up).
+/// Removes no line when `cnt` is not positive.
 pub fun remove_line(cnt: Int): Null {
-    trust $ printf '\x1b[2K\x1b[1A%.0s' \$(seq {cnt as Text}) >&2 $
+    if cnt > 0 {
+        let sequence = ""
+        for _ in 0..cnt {
+            sequence += "\x1b[2K\x1b[1A"
+        }
+        eprintf(sequence)
+    }
     eprintf("\x1b[9999D")
 }
 

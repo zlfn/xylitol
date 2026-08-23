@@ -8,13 +8,16 @@ pub fun get_char(): Text {
 
 /// Reads a key from terminal, including special keys (arrows, backspace, etc.)
 pub fun get_key(): Text {
-    const var = trust $ read -rsn1 k < /dev/tty; if [[ "\$k" == \$'\e' ]]; then read -rsn2 r < /dev/tty; k+=\$r; fi; printf '%q' "\$k" $
+    const var = trust $ IFS= read -rsn1 k < /dev/tty; if [[ "\$k" == \$'\e' ]]; then IFS= read -rsn2 r < /dev/tty; k+=\$r; fi; printf '%q' "\$k" $
     if {
         var == "$'\E[A'": return "UP"
         var == "$'\E[B'": return "DOWN"
         var == "$'\E[C'": return "RIGHT"
         var == "$'\E[D'": return "LEFT"
         var == "$'\177'": return "BACKSPACE"
+        var == "$'\\t'": return "TAB"
+        var == "$'\\001'": return "CTRL_A"
+        var == "\\ ": return "SPACE"
         var == "''": return "INPUT"
         else: return var
     }

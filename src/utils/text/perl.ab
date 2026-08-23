@@ -3,9 +3,6 @@
 import { parse_int } from "std/text"
 
 /// "None" until the first call decides, then "Yes" or "No".
-///
-/// Deciding eagerly would spawn two subshells every time this module is loaded,
-/// which the compiler does once per import path spelling.
 let _perl_state = "None"
 
 fun perl_available(): Bool {

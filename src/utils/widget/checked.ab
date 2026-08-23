@@ -1,12 +1,5 @@
 /// Which items of a multi-select widget are ticked.
-///
-/// The state sits at module level, so only one such widget may be open at a
-/// time. Reach it through `utils.ab` rather than importing this file directly:
-/// the compiler keys modules by the literal text of the import path, so a
-/// second spelling would hand that caller its own copy of these variables.
 let _checked = [Bool]
-/// Tracked alongside `_checked` because counting it on every keypress would
-/// walk the whole list.
 let _count = 0
 let _total = 0
 let _limit = -1

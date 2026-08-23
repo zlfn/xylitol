@@ -265,9 +265,6 @@ eprintf_colored__162_v0() {
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
-# 
-# Deciding eagerly would spawn two subshells every time this module is loaded,
-# which the compiler does once per import path spelling.
 _perl_state_3="None"
 # perl_available()
 perl_available__184_v0() {
@@ -292,8 +289,8 @@ perl_available__184_v0() {
 perl_get_cjk_width__185_v0() {
     local text_1459="${1}"
     perl_available__184_v0 
-    local ret_perl_available184_v0__22_12="${ret_perl_available184_v0}"
-    if [ "$(( ! ret_perl_available184_v0__22_12 ))" != 0 ]; then
+    local ret_perl_available184_v0__19_12="${ret_perl_available184_v0}"
+    if [ "$(( ! ret_perl_available184_v0__19_12 ))" != 0 ]; then
         ret_perl_get_cjk_width185_v0=''
         return 1
     fi
@@ -712,14 +709,8 @@ colored_accent__264_v0() {
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
-# 
-# Deciding eagerly would spawn two subshells every time this module is loaded,
-# which the compiler does once per import path spelling.
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
-# 
-# Deciding eagerly would spawn two subshells every time this module is loaded,
-# which the compiler does once per import path spelling.
 # colored(message: Text, color: Int)
 colored__316_v0() {
     local message_1525="${1}"
@@ -731,9 +722,6 @@ colored__316_v0() {
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
-# 
-# Deciding eagerly would spawn two subshells every time this module is loaded,
-# which the compiler does once per import path spelling.
 # global variables to store terminal size
 # (prevent multiple queries in one session)
 _got_term_size_16=0
@@ -811,13 +799,6 @@ term_width__361_v0() {
 # // Cursor /////
 # move the cursor up or down `cnt` lines.
 # Which items of a multi-select widget are ticked.
-# 
-# The state sits at module level, so only one such widget may be open at a
-# time. Reach it through `utils.ab` rather than importing this file directly:
-# the compiler keys modules by the literal text of the import path, so a
-# second spelling would hand that caller its own copy of these variables.
-# Tracked alongside `_checked` because counting it on every keypress would
-# walk the whole list.
 # print_help_line(pending: Text, line: Text, note_at: Int)
 print_help_line__394_v0() {
     local pending_1522="${1}"
@@ -1053,9 +1034,6 @@ eprintf__661_v0() {
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
-# 
-# Deciding eagerly would spawn two subshells every time this module is loaded,
-# which the compiler does once per import path spelling.
 _perl_state_24="None"
 # perl_available()
 perl_available__668_v0() {
@@ -1080,8 +1058,8 @@ perl_available__668_v0() {
 perl_get_cjk_width__669_v0() {
     local text_2949="${1}"
     perl_available__668_v0 
-    local ret_perl_available668_v0__22_12="${ret_perl_available668_v0}"
-    if [ "$(( ! ret_perl_available668_v0__22_12 ))" != 0 ]; then
+    local ret_perl_available668_v0__19_12="${ret_perl_available668_v0}"
+    if [ "$(( ! ret_perl_available668_v0__19_12 ))" != 0 ]; then
         ret_perl_get_cjk_width669_v0=''
         return 1
     fi
@@ -1587,9 +1565,6 @@ colored_secondary__747_v0() {
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
-# 
-# Deciding eagerly would spawn two subshells every time this module is loaded,
-# which the compiler does once per import path spelling.
 _perl_state_34="None"
 # perl_available()
 perl_available__764_v0() {
@@ -1614,8 +1589,8 @@ perl_available__764_v0() {
 perl_get_cjk_width__765_v0() {
     local text_3024="${1}"
     perl_available__764_v0 
-    local ret_perl_available764_v0__22_12="${ret_perl_available764_v0}"
-    if [ "$(( ! ret_perl_available764_v0__22_12 ))" != 0 ]; then
+    local ret_perl_available764_v0__19_12="${ret_perl_available764_v0}"
+    if [ "$(( ! ret_perl_available764_v0__19_12 ))" != 0 ]; then
         ret_perl_get_cjk_width765_v0=''
         return 1
     fi
@@ -1643,8 +1618,8 @@ perl_truncate_cjk__766_v0() {
     local text_3035="${1}"
     local max_width_3036="${2}"
     perl_available__764_v0 
-    local ret_perl_available764_v0__33_12="${ret_perl_available764_v0}"
-    if [ "$(( ! ret_perl_available764_v0__33_12 ))" != 0 ]; then
+    local ret_perl_available764_v0__30_12="${ret_perl_available764_v0}"
+    if [ "$(( ! ret_perl_available764_v0__30_12 ))" != 0 ]; then
         ret_perl_truncate_cjk766_v0=''
         return 1
     fi
@@ -1872,9 +1847,6 @@ cutoff_text__777_v0() {
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
-# 
-# Deciding eagerly would spawn two subshells every time this module is loaded,
-# which the compiler does once per import path spelling.
 # eprintf(format: Text, args: [Text])
 eprintf__798_v0() {
     local format_3067="${1}"
@@ -1966,9 +1938,6 @@ render_tooltip__804_v0() {
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
-# 
-# Deciding eagerly would spawn two subshells every time this module is loaded,
-# which the compiler does once per import path spelling.
 # global variables to store terminal size
 # (prevent multiple queries in one session)
 _got_term_size_37=0
@@ -2046,13 +2015,6 @@ term_width__845_v0() {
 # // Cursor /////
 # move the cursor up or down `cnt` lines.
 # Which items of a multi-select widget are ticked.
-# 
-# The state sits at module level, so only one such widget may be open at a
-# time. Reach it through `utils.ab` rather than importing this file directly:
-# the compiler keys modules by the literal text of the import path, so a
-# second spelling would hand that caller its own copy of these variables.
-# Tracked alongside `_checked` because counting it on every keypress would
-# walk the whole list.
 # print_help_line(pending: Text, line: Text, note_at: Int)
 print_help_line__878_v0() {
     local pending_2999="${1}"
@@ -2333,7 +2295,7 @@ execute_input__1095_v0() {
 # get_key()
 get_key__1176_v0() {
     local command_176
-    command_176="$(read -rsn1 k < /dev/tty; if [[ "$k" == $'\e' ]]; then read -rsn2 r < /dev/tty; k+=$r; fi; printf '%q' "$k")"
+    command_176="$(IFS= read -rsn1 k < /dev/tty; if [[ "$k" == $'\e' ]]; then IFS= read -rsn2 r < /dev/tty; k+=$r; fi; printf '%q' "$k")"
     __status=$?
     local var_16411="${command_176}"
     if [ "$([ "_${var_16411}" != "_\$'\\E[A'" ]; echo $?)" != 0 ]; then
@@ -2350,6 +2312,15 @@ get_key__1176_v0() {
         return 0
     elif [ "$([ "_${var_16411}" != "_\$'\\177'" ]; echo $?)" != 0 ]; then
         ret_get_key1176_v0="BACKSPACE"
+        return 0
+    elif [ "$([ "_${var_16411}" != "_\$'\\t'" ]; echo $?)" != 0 ]; then
+        ret_get_key1176_v0="TAB"
+        return 0
+    elif [ "$([ "_${var_16411}" != "_\$'\\001'" ]; echo $?)" != 0 ]; then
+        ret_get_key1176_v0="CTRL_A"
+        return 0
+    elif [ "$([ "_${var_16411}" != "_\\ " ]; echo $?)" != 0 ]; then
+        ret_get_key1176_v0="SPACE"
         return 0
     elif [ "$([ "_${var_16411}" != "_''" ]; echo $?)" != 0 ]; then
         ret_get_key1176_v0="INPUT"
@@ -2391,9 +2362,6 @@ eprintf__1194_v0() {
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
-# 
-# Deciding eagerly would spawn two subshells every time this module is loaded,
-# which the compiler does once per import path spelling.
 _perl_state_46="None"
 # perl_available()
 perl_available__1201_v0() {
@@ -2418,8 +2386,8 @@ perl_available__1201_v0() {
 perl_get_cjk_width__1202_v0() {
     local text_16251="${1}"
     perl_available__1201_v0 
-    local ret_perl_available1201_v0__22_12="${ret_perl_available1201_v0}"
-    if [ "$(( ! ret_perl_available1201_v0__22_12 ))" != 0 ]; then
+    local ret_perl_available1201_v0__19_12="${ret_perl_available1201_v0}"
+    if [ "$(( ! ret_perl_available1201_v0__19_12 ))" != 0 ]; then
         ret_perl_get_cjk_width1202_v0=''
         return 1
     fi
@@ -2944,9 +2912,6 @@ colored_secondary__1280_v0() {
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
-# 
-# Deciding eagerly would spawn two subshells every time this module is loaded,
-# which the compiler does once per import path spelling.
 _perl_state_56="None"
 # perl_available()
 perl_available__1297_v0() {
@@ -2971,8 +2936,8 @@ perl_available__1297_v0() {
 perl_get_cjk_width__1298_v0() {
     local text_16331="${1}"
     perl_available__1297_v0 
-    local ret_perl_available1297_v0__22_12="${ret_perl_available1297_v0}"
-    if [ "$(( ! ret_perl_available1297_v0__22_12 ))" != 0 ]; then
+    local ret_perl_available1297_v0__19_12="${ret_perl_available1297_v0}"
+    if [ "$(( ! ret_perl_available1297_v0__19_12 ))" != 0 ]; then
         ret_perl_get_cjk_width1298_v0=''
         return 1
     fi
@@ -3000,8 +2965,8 @@ perl_truncate_cjk__1299_v0() {
     local text_16342="${1}"
     local max_width_16343="${2}"
     perl_available__1297_v0 
-    local ret_perl_available1297_v0__33_12="${ret_perl_available1297_v0}"
-    if [ "$(( ! ret_perl_available1297_v0__33_12 ))" != 0 ]; then
+    local ret_perl_available1297_v0__30_12="${ret_perl_available1297_v0}"
+    if [ "$(( ! ret_perl_available1297_v0__30_12 ))" != 0 ]; then
         ret_perl_truncate_cjk1299_v0=''
         return 1
     fi
@@ -3229,9 +3194,6 @@ cutoff_text__1310_v0() {
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
-# 
-# Deciding eagerly would spawn two subshells every time this module is loaded,
-# which the compiler does once per import path spelling.
 # eprintf(format: Text, args: [Text])
 eprintf__1331_v0() {
     local format_16373="${1}"
@@ -3333,9 +3295,6 @@ eprintf__1347_v0() {
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
-# 
-# Deciding eagerly would spawn two subshells every time this module is loaded,
-# which the compiler does once per import path spelling.
 # global variables to store terminal size
 # (prevent multiple queries in one session)
 _got_term_size_59=0
@@ -3442,14 +3401,7 @@ redraw_row__1393_v0() {
 }
 
 # Which items of a multi-select widget are ticked.
-# 
-# The state sits at module level, so only one such widget may be open at a
-# time. Reach it through `utils.ab` rather than importing this file directly:
-# the compiler keys modules by the literal text of the import path, so a
-# second spelling would hand that caller its own copy of these variables.
 _checked_61=()
-# Tracked alongside `_checked` because counting it on every keypress would
-# walk the whole list.
 _count_62=0
 _total_63=0
 _limit_64=-1
@@ -3473,14 +3425,14 @@ done
 # checked_is(index: Int)
 checked_is__1396_v0() {
     local index_16396="${1}"
-    ret_checked_is1396_v0="${_checked_61[${index_16396}]?"Index out of bounds (at src/./choose/../utils/widget/checked.ab:26:21)"}"
+    ret_checked_is1396_v0="${_checked_61[${index_16396}]?"Index out of bounds (at src/./choose/../utils/widget/checked.ab:19:21)"}"
     return 0
 }
 
 # checked_toggle(index: Int)
 checked_toggle__1398_v0() {
     local index_16416="${1}"
-    if [ "${_checked_61[${index_16416}]?"Index out of bounds (at src/./choose/../utils/widget/checked.ab:36:17)"}" != 0 ]; then
+    if [ "${_checked_61[${index_16416}]?"Index out of bounds (at src/./choose/../utils/widget/checked.ab:29:17)"}" != 0 ]; then
         _checked_61["${index_16416}"]=0
         _count_62="$(( _count_62 - 1 ))"
         ret_checked_toggle1398_v0=1
@@ -4045,7 +3997,7 @@ chooser_step__1588_v0() {
         else
             _selected_75="$(( _page_count_82 - 1 ))"
         fi
-    elif [ "$(( _multi_77 && $(( $([ "_${key_16412}" != "_x" ]; echo $?) || $([ "_${key_16412}" != "_X" ]; echo $?) )) ))" != 0 ]; then
+    elif [ "$(( _multi_77 && $(( $(( $([ "_${key_16412}" != "_x" ]; echo $?) || $([ "_${key_16412}" != "_X" ]; echo $?) )) || $([ "_${key_16412}" != "_TAB" ]; echo $?) )) ))" != 0 ]; then
         checked_toggle__1398_v0 "$(( page_start_16415 + _selected_75 ))"
         local ret_checked_toggle1398_v0__310_16="${ret_checked_toggle1398_v0}"
         if [ "${ret_checked_toggle1398_v0__310_16}" != 0 ]; then
@@ -4053,7 +4005,7 @@ chooser_step__1588_v0() {
         fi
         ret_chooser_step1588_v0="${__CHOOSER_CONTINUE_67}"
         return 0
-    elif [ "$(( $(( _multi_77 && $(( $([ "_${key_16412}" != "_a" ]; echo $?) || $([ "_${key_16412}" != "_A" ]; echo $?) )) )) && $(( _limit_78 < 0 )) ))" != 0 ]; then
+    elif [ "$(( $(( _multi_77 && $(( $(( $([ "_${key_16412}" != "_a" ]; echo $?) || $([ "_${key_16412}" != "_A" ]; echo $?) )) || $([ "_${key_16412}" != "_CTRL_A" ]; echo $?) )) )) && $(( _limit_78 < 0 )) ))" != 0 ]; then
         checked_all__1399_v0 
         local ret_checked_all1399_v0__316_16="${ret_checked_all1399_v0}"
         if [ "${ret_checked_all1399_v0__316_16}" != 0 ]; then
@@ -4064,7 +4016,7 @@ chooser_step__1588_v0() {
         fi
         ret_chooser_step1588_v0="${__CHOOSER_CONTINUE_67}"
         return 0
-    elif [ "$([ "_${key_16412}" != "_INPUT" ]; echo $?)" != 0 ]; then
+    elif [ "$(( $([ "_${key_16412}" != "_INPUT" ]; echo $?) || $([ "_${key_16412}" != "_SPACE" ]; echo $?) ))" != 0 ]; then
         ret_chooser_step1588_v0="${__CHOOSER_DONE_69}"
         return 0
     else
@@ -4357,7 +4309,7 @@ execute_choose__1761_v0() {
 # get_key()
 get_key__1885_v0() {
     local command_322
-    command_322="$(read -rsn1 k < /dev/tty; if [[ "$k" == $'\e' ]]; then read -rsn2 r < /dev/tty; k+=$r; fi; printf '%q' "$k")"
+    command_322="$(IFS= read -rsn1 k < /dev/tty; if [[ "$k" == $'\e' ]]; then IFS= read -rsn2 r < /dev/tty; k+=$r; fi; printf '%q' "$k")"
     __status=$?
     local var_18483="${command_322}"
     if [ "$([ "_${var_18483}" != "_\$'\\E[A'" ]; echo $?)" != 0 ]; then
@@ -4374,6 +4326,15 @@ get_key__1885_v0() {
         return 0
     elif [ "$([ "_${var_18483}" != "_\$'\\177'" ]; echo $?)" != 0 ]; then
         ret_get_key1885_v0="BACKSPACE"
+        return 0
+    elif [ "$([ "_${var_18483}" != "_\$'\\t'" ]; echo $?)" != 0 ]; then
+        ret_get_key1885_v0="TAB"
+        return 0
+    elif [ "$([ "_${var_18483}" != "_\$'\\001'" ]; echo $?)" != 0 ]; then
+        ret_get_key1885_v0="CTRL_A"
+        return 0
+    elif [ "$([ "_${var_18483}" != "_\\ " ]; echo $?)" != 0 ]; then
+        ret_get_key1885_v0="SPACE"
         return 0
     elif [ "$([ "_${var_18483}" != "_''" ]; echo $?)" != 0 ]; then
         ret_get_key1885_v0="INPUT"
@@ -4415,9 +4376,6 @@ eprintf__1903_v0() {
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
-# 
-# Deciding eagerly would spawn two subshells every time this module is loaded,
-# which the compiler does once per import path spelling.
 _perl_state_90="None"
 # perl_available()
 perl_available__1910_v0() {
@@ -4442,8 +4400,8 @@ perl_available__1910_v0() {
 perl_get_cjk_width__1911_v0() {
     local text_18344="${1}"
     perl_available__1910_v0 
-    local ret_perl_available1910_v0__22_12="${ret_perl_available1910_v0}"
-    if [ "$(( ! ret_perl_available1910_v0__22_12 ))" != 0 ]; then
+    local ret_perl_available1910_v0__19_12="${ret_perl_available1910_v0}"
+    if [ "$(( ! ret_perl_available1910_v0__19_12 ))" != 0 ]; then
         ret_perl_get_cjk_width1911_v0=''
         return 1
     fi
@@ -4992,9 +4950,6 @@ background_secondary__1992_v0() {
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
-# 
-# Deciding eagerly would spawn two subshells every time this module is loaded,
-# which the compiler does once per import path spelling.
 _perl_state_100="None"
 # perl_available()
 perl_available__2006_v0() {
@@ -5019,8 +4974,8 @@ perl_available__2006_v0() {
 perl_get_cjk_width__2007_v0() {
     local text_18409="${1}"
     perl_available__2006_v0 
-    local ret_perl_available2006_v0__22_12="${ret_perl_available2006_v0}"
-    if [ "$(( ! ret_perl_available2006_v0__22_12 ))" != 0 ]; then
+    local ret_perl_available2006_v0__19_12="${ret_perl_available2006_v0}"
+    if [ "$(( ! ret_perl_available2006_v0__19_12 ))" != 0 ]; then
         ret_perl_get_cjk_width2007_v0=''
         return 1
     fi
@@ -5048,8 +5003,8 @@ perl_truncate_cjk__2008_v0() {
     local text_18420="${1}"
     local max_width_18421="${2}"
     perl_available__2006_v0 
-    local ret_perl_available2006_v0__33_12="${ret_perl_available2006_v0}"
-    if [ "$(( ! ret_perl_available2006_v0__33_12 ))" != 0 ]; then
+    local ret_perl_available2006_v0__30_12="${ret_perl_available2006_v0}"
+    if [ "$(( ! ret_perl_available2006_v0__30_12 ))" != 0 ]; then
         ret_perl_truncate_cjk2008_v0=''
         return 1
     fi
@@ -5277,9 +5232,6 @@ cutoff_text__2019_v0() {
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
-# 
-# Deciding eagerly would spawn two subshells every time this module is loaded,
-# which the compiler does once per import path spelling.
 # eprintf(format: Text, args: [Text])
 eprintf__2040_v0() {
     local format_18473="${1}"
@@ -5371,9 +5323,6 @@ render_tooltip__2046_v0() {
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
-# 
-# Deciding eagerly would spawn two subshells every time this module is loaded,
-# which the compiler does once per import path spelling.
 # global variables to store terminal size
 # (prevent multiple queries in one session)
 _got_term_size_103=0
@@ -5451,13 +5400,6 @@ term_width__2087_v0() {
 # // Cursor /////
 # move the cursor up or down `cnt` lines.
 # Which items of a multi-select widget are ticked.
-# 
-# The state sits at module level, so only one such widget may be open at a
-# time. Reach it through `utils.ab` rather than importing this file directly:
-# the compiler keys modules by the literal text of the import path, so a
-# second spelling would hand that caller its own copy of these variables.
-# Tracked alongside `_checked` because counting it on every keypress would
-# walk the whole list.
 # print_help_line(pending: Text, line: Text, note_at: Int)
 print_help_line__2120_v0() {
     local pending_18381="${1}"
@@ -5670,7 +5612,7 @@ xyl_confirm__2180_v0() {
         elif [ "$(( $([ "_${key_18484}" != "_n" ]; echo $?) || $([ "_${key_18484}" != "_N" ]; echo $?) ))" != 0 ]; then
             selected_18438=0
             break
-        elif [ "$([ "_${key_18484}" != "_INPUT" ]; echo $?)" != 0 ]; then
+        elif [ "$(( $([ "_${key_18484}" != "_INPUT" ]; echo $?) || $([ "_${key_18484}" != "_SPACE" ]; echo $?) ))" != 0 ]; then
             break
         else
             continue
@@ -5791,9 +5733,6 @@ eprintf__2472_v0() {
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
-# 
-# Deciding eagerly would spawn two subshells every time this module is loaded,
-# which the compiler does once per import path spelling.
 _perl_state_112="None"
 # perl_available()
 perl_available__2479_v0() {
@@ -5818,8 +5757,8 @@ perl_available__2479_v0() {
 perl_get_cjk_width__2480_v0() {
     local text_27840="${1}"
     perl_available__2479_v0 
-    local ret_perl_available2479_v0__22_12="${ret_perl_available2479_v0}"
-    if [ "$(( ! ret_perl_available2479_v0__22_12 ))" != 0 ]; then
+    local ret_perl_available2479_v0__19_12="${ret_perl_available2479_v0}"
+    if [ "$(( ! ret_perl_available2479_v0__19_12 ))" != 0 ]; then
         ret_perl_get_cjk_width2480_v0=''
         return 1
     fi
@@ -6381,14 +6320,8 @@ colored_accent__2559_v0() {
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
-# 
-# Deciding eagerly would spawn two subshells every time this module is loaded,
-# which the compiler does once per import path spelling.
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
-# 
-# Deciding eagerly would spawn two subshells every time this module is loaded,
-# which the compiler does once per import path spelling.
 # colored(message: Text, color: Int)
 colored__2611_v0() {
     local message_27893="${1}"
@@ -6400,9 +6333,6 @@ colored__2611_v0() {
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
-# 
-# Deciding eagerly would spawn two subshells every time this module is loaded,
-# which the compiler does once per import path spelling.
 # global variables to store terminal size
 # (prevent multiple queries in one session)
 _got_term_size_125=0
@@ -6480,13 +6410,6 @@ term_width__2656_v0() {
 # // Cursor /////
 # move the cursor up or down `cnt` lines.
 # Which items of a multi-select widget are ticked.
-# 
-# The state sits at module level, so only one such widget may be open at a
-# time. Reach it through `utils.ab` rather than importing this file directly:
-# the compiler keys modules by the literal text of the import path, so a
-# second spelling would hand that caller its own copy of these variables.
-# Tracked alongside `_checked` because counting it on every keypress would
-# walk the whole list.
 # print_help_line(pending: Text, line: Text, note_at: Int)
 print_help_line__2689_v0() {
     local pending_27890="${1}"
@@ -6616,7 +6539,7 @@ done
 # get_key()
 get_key__2798_v0() {
     local command_484
-    command_484="$(read -rsn1 k < /dev/tty; if [[ "$k" == $'\e' ]]; then read -rsn2 r < /dev/tty; k+=$r; fi; printf '%q' "$k")"
+    command_484="$(IFS= read -rsn1 k < /dev/tty; if [[ "$k" == $'\e' ]]; then IFS= read -rsn2 r < /dev/tty; k+=$r; fi; printf '%q' "$k")"
     __status=$?
     local var_28062="${command_484}"
     if [ "$([ "_${var_28062}" != "_\$'\\E[A'" ]; echo $?)" != 0 ]; then
@@ -6633,6 +6556,15 @@ get_key__2798_v0() {
         return 0
     elif [ "$([ "_${var_28062}" != "_\$'\\177'" ]; echo $?)" != 0 ]; then
         ret_get_key2798_v0="BACKSPACE"
+        return 0
+    elif [ "$([ "_${var_28062}" != "_\$'\\t'" ]; echo $?)" != 0 ]; then
+        ret_get_key2798_v0="TAB"
+        return 0
+    elif [ "$([ "_${var_28062}" != "_\$'\\001'" ]; echo $?)" != 0 ]; then
+        ret_get_key2798_v0="CTRL_A"
+        return 0
+    elif [ "$([ "_${var_28062}" != "_\\ " ]; echo $?)" != 0 ]; then
+        ret_get_key2798_v0="SPACE"
         return 0
     elif [ "$([ "_${var_28062}" != "_''" ]; echo $?)" != 0 ]; then
         ret_get_key2798_v0="INPUT"
@@ -6674,9 +6606,6 @@ eprintf__2816_v0() {
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
-# 
-# Deciding eagerly would spawn two subshells every time this module is loaded,
-# which the compiler does once per import path spelling.
 # global variables to store terminal size
 # (prevent multiple queries in one session)
 _got_term_size_133=0
@@ -7070,9 +6999,6 @@ colored_secondary__2902_v0() {
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
-# 
-# Deciding eagerly would spawn two subshells every time this module is loaded,
-# which the compiler does once per import path spelling.
 _perl_state_142="None"
 # perl_available()
 perl_available__2919_v0() {
@@ -7097,8 +7023,8 @@ perl_available__2919_v0() {
 perl_get_cjk_width__2920_v0() {
     local text_27957="${1}"
     perl_available__2919_v0 
-    local ret_perl_available2919_v0__22_12="${ret_perl_available2919_v0}"
-    if [ "$(( ! ret_perl_available2919_v0__22_12 ))" != 0 ]; then
+    local ret_perl_available2919_v0__19_12="${ret_perl_available2919_v0}"
+    if [ "$(( ! ret_perl_available2919_v0__19_12 ))" != 0 ]; then
         ret_perl_get_cjk_width2920_v0=''
         return 1
     fi
@@ -7126,8 +7052,8 @@ perl_truncate_cjk__2921_v0() {
     local text_27970="${1}"
     local max_width_27971="${2}"
     perl_available__2919_v0 
-    local ret_perl_available2919_v0__33_12="${ret_perl_available2919_v0}"
-    if [ "$(( ! ret_perl_available2919_v0__33_12 ))" != 0 ]; then
+    local ret_perl_available2919_v0__30_12="${ret_perl_available2919_v0}"
+    if [ "$(( ! ret_perl_available2919_v0__30_12 ))" != 0 ]; then
         ret_perl_truncate_cjk2921_v0=''
         return 1
     fi
@@ -7345,9 +7271,6 @@ cutoff_text__2932_v0() {
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
-# 
-# Deciding eagerly would spawn two subshells every time this module is loaded,
-# which the compiler does once per import path spelling.
 # eprintf(format: Text, args: [Text])
 eprintf__2953_v0() {
     local format_28005="${1}"
@@ -7449,9 +7372,6 @@ eprintf__2969_v0() {
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
-# 
-# Deciding eagerly would spawn two subshells every time this module is loaded,
-# which the compiler does once per import path spelling.
 # global variables to store terminal size
 # (prevent multiple queries in one session)
 # stty lock/unlock using environment variable for cross-module state
@@ -7489,14 +7409,7 @@ redraw_row__3015_v0() {
 }
 
 # Which items of a multi-select widget are ticked.
-# 
-# The state sits at module level, so only one such widget may be open at a
-# time. Reach it through `utils.ab` rather than importing this file directly:
-# the compiler keys modules by the literal text of the import path, so a
-# second spelling would hand that caller its own copy of these variables.
 _checked_147=()
-# Tracked alongside `_checked` because counting it on every keypress would
-# walk the whole list.
 _count_148=0
 _total_149=0
 _limit_150=-1
@@ -7520,14 +7433,14 @@ done
 # checked_is(index: Int)
 checked_is__3018_v0() {
     local index_28034="${1}"
-    ret_checked_is3018_v0="${_checked_147[${index_28034}]?"Index out of bounds (at src/./file/../choose/../utils/widget/checked.ab:26:21)"}"
+    ret_checked_is3018_v0="${_checked_147[${index_28034}]?"Index out of bounds (at src/./file/../choose/../utils/widget/checked.ab:19:21)"}"
     return 0
 }
 
 # checked_toggle(index: Int)
 checked_toggle__3020_v0() {
     local index_28067="${1}"
-    if [ "${_checked_147[${index_28067}]?"Index out of bounds (at src/./file/../choose/../utils/widget/checked.ab:36:17)"}" != 0 ]; then
+    if [ "${_checked_147[${index_28067}]?"Index out of bounds (at src/./file/../choose/../utils/widget/checked.ab:29:17)"}" != 0 ]; then
         _checked_147["${index_28067}"]=0
         _count_148="$(( _count_148 - 1 ))"
         ret_checked_toggle3020_v0=1
@@ -7967,7 +7880,7 @@ chooser_step__3106_v0() {
         else
             _selected_160="$(( _page_count_167 - 1 ))"
         fi
-    elif [ "$(( _multi_162 && $(( $([ "_${key_28063}" != "_x" ]; echo $?) || $([ "_${key_28063}" != "_X" ]; echo $?) )) ))" != 0 ]; then
+    elif [ "$(( _multi_162 && $(( $(( $([ "_${key_28063}" != "_x" ]; echo $?) || $([ "_${key_28063}" != "_X" ]; echo $?) )) || $([ "_${key_28063}" != "_TAB" ]; echo $?) )) ))" != 0 ]; then
         checked_toggle__3020_v0 "$(( page_start_28066 + _selected_160 ))"
         local ret_checked_toggle3020_v0__310_16="${ret_checked_toggle3020_v0}"
         if [ "${ret_checked_toggle3020_v0__310_16}" != 0 ]; then
@@ -7975,7 +7888,7 @@ chooser_step__3106_v0() {
         fi
         ret_chooser_step3106_v0="${__CHOOSER_CONTINUE_152}"
         return 0
-    elif [ "$(( $(( _multi_162 && $(( $([ "_${key_28063}" != "_a" ]; echo $?) || $([ "_${key_28063}" != "_A" ]; echo $?) )) )) && $(( _limit_163 < 0 )) ))" != 0 ]; then
+    elif [ "$(( $(( _multi_162 && $(( $(( $([ "_${key_28063}" != "_a" ]; echo $?) || $([ "_${key_28063}" != "_A" ]; echo $?) )) || $([ "_${key_28063}" != "_CTRL_A" ]; echo $?) )) )) && $(( _limit_163 < 0 )) ))" != 0 ]; then
         checked_all__3021_v0 
         local ret_checked_all3021_v0__316_16="${ret_checked_all3021_v0}"
         if [ "${ret_checked_all3021_v0__316_16}" != 0 ]; then
@@ -7986,7 +7899,7 @@ chooser_step__3106_v0() {
         fi
         ret_chooser_step3106_v0="${__CHOOSER_CONTINUE_152}"
         return 0
-    elif [ "$([ "_${key_28063}" != "_INPUT" ]; echo $?)" != 0 ]; then
+    elif [ "$(( $([ "_${key_28063}" != "_INPUT" ]; echo $?) || $([ "_${key_28063}" != "_SPACE" ]; echo $?) ))" != 0 ]; then
         ret_chooser_step3106_v0="${__CHOOSER_DONE_154}"
         return 0
     else

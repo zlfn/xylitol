@@ -306,13 +306,13 @@ pub fun chooser_step(): Int {
                 _selected = _page_count - 1
             }
         }
-        _multi and (key == "x" or key == "X") {
+        _multi and (key == "x" or key == "X" or key == "TAB") {
             if checked_toggle(page_start + _selected) {
                 redraw_current_line()
             }
             return CHOOSER_CONTINUE
         }
-        _multi and (key == "a" or key == "A") and _limit < 0 {
+        _multi and (key == "a" or key == "A" or key == "CTRL_A") and _limit < 0 {
             if checked_all() {
                 go_up(_display_count)
                 eprintf("\x1b[G")
@@ -320,7 +320,7 @@ pub fun chooser_step(): Int {
             }
             return CHOOSER_CONTINUE
         }
-        key == "INPUT" {
+        key == "INPUT" or key == "SPACE" {
             return CHOOSER_DONE
         }
         else: return CHOOSER_CONTINUE

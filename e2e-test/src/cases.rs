@@ -12,6 +12,9 @@ pub const DOWN: &str = "\x1b[B";
 pub const RIGHT: &str = "\x1b[C";
 pub const LEFT: &str = "\x1b[D";
 pub const ENTER: &str = "\n";
+pub const SPACE: &str = " ";
+pub const TAB: &str = "\t";
+pub const CTRL_A: &str = "\x01";
 
 #[derive(Default)]
 pub struct Expect {
@@ -193,11 +196,42 @@ fn interactive() -> Vec<Case> {
             expect: Expect { stdout: Some("alpha\nbravo"), ..Default::default() },
         },
         Case {
+            name: "choose: space confirms",
+            stdin: Some("printf 'alpha\\nbravo\\n'"),
+            args: "choose",
+            size: (40, 100),
+            steps: &[Step::Wait("alpha"), Step::Send(DOWN), Step::Send(SPACE)],
+            expect: Expect { stdout: Some("bravo"), ..Default::default() },
+        },
+        Case {
             name: "choose: selects everything",
             stdin: Some("printf 'alpha\\nbravo\\ncharlie\\n'"),
             args: "choose --no-limit",
             size: (40, 100),
             steps: &[Step::Wait("alpha"), Step::Send("a"), Step::Send(ENTER)],
+            expect: Expect { stdout: Some("alpha\nbravo\ncharlie"), ..Default::default() },
+        },
+        Case {
+            name: "choose: tab toggles",
+            stdin: Some("printf 'alpha\\nbravo\\ncharlie\\n'"),
+            args: "choose --no-limit",
+            size: (40, 100),
+            steps: &[
+                Step::Wait("alpha"),
+                Step::Send(TAB),
+                Step::Send(DOWN),
+                Step::Send(DOWN),
+                Step::Send(TAB),
+                Step::Send(ENTER),
+            ],
+            expect: Expect { stdout: Some("alpha\ncharlie"), ..Default::default() },
+        },
+        Case {
+            name: "choose: ctrl-a selects everything",
+            stdin: Some("printf 'alpha\\nbravo\\ncharlie\\n'"),
+            args: "choose --no-limit",
+            size: (40, 100),
+            steps: &[Step::Wait("alpha"), Step::Send(CTRL_A), Step::Send(ENTER)],
             expect: Expect { stdout: Some("alpha\nbravo\ncharlie"), ..Default::default() },
         },
         Case {

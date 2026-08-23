@@ -82,7 +82,7 @@ pub fun xyl_confirm(
                 selected = false
                 break
             }
-            key == "INPUT" {
+            key == "INPUT" or key == "SPACE" {
                 break
             }
             else: continue

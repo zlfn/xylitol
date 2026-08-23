@@ -2,12 +2,24 @@
 
 import { parse_int } from "std/text"
 
-let _perl_disabled = trust $ echo "\$XYLITOL_USE_PERL" $ == "No"
-let _perl_available = not _perl_disabled and (trust $ command -v perl > /dev/null && echo 0 || echo 1 $ == "0")
+/// "None" until the first call decides, then "Yes" or "No".
+///
+/// Deciding eagerly would spawn two subshells every time this module is loaded,
+/// which the compiler does once per import path spelling.
+let _perl_state = "None"
+
+fun perl_available(): Bool {
+    if _perl_state == "None" {
+        const disabled = trust $ echo "\$XYLITOL_USE_PERL" $ == "No"
+        const found = not disabled and (trust $ command -v perl > /dev/null && echo 0 || echo 1 $ == "0")
+        _perl_state = found then "Yes" else "No"
+    }
+    return _perl_state == "Yes"
+}
 
 /// Get the CJK width of the given text using Perl's Unicode properties.
 pub fun perl_get_cjk_width(text: Text): Int? {
-    if not _perl_available {
+    if not perl_available() {
         fail
     }
     const width_str = $ perl -CSDA -E '\$w=0;\$w+=/\p\{EastAsianWidth=Wide}|\p\{EastAsianWidth=Fullwidth}|\p\{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say \$w' "{text}" 2>/dev/null $?
@@ -18,7 +30,7 @@ pub fun perl_get_cjk_width(text: Text): Int? {
 /// Truncate text to fit within a given display width, considering CJK character widths.
 /// Returns the truncated string that fits within max_width display columns.
 pub fun perl_truncate_cjk(text: Text, max_width: Int): Text? {
-    if not _perl_available {
+    if not perl_available() {
         fail
     }
     const result = $ perl -CSDA -E '\$t=shift;\$m=shift;\$w=0;\$r="";\$c=/\p\{EastAsianWidth=Wide}|\p\{EastAsianWidth=Fullwidth}|\p\{EastAsianWidth=Ambiguous}/?2:1,(\$w+\$c<=\$m?(\$w+=\$c,\$r.=\$_):last) for split//,\$t; print \$r' "{text}" {max_width} 2>/dev/null $?
@@ -28,7 +40,7 @@ pub fun perl_truncate_cjk(text: Text, max_width: Int): Text? {
 /// Substring text by display width range [start, end), considering CJK character widths.
 /// Returns characters whose display positions fall within [start, end).
 pub fun perl_substr_cjk(text: Text, start: Int, end: Int): Text? {
-    if not _perl_available {
+    if not perl_available() {
         fail
     }
     let result = $ perl -CSDA -E '\$t=shift;\$s=shift;\$e=shift;\$w=0;\$r="";\$c=/\p\{EastAsianWidth=Wide}|\p\{EastAsianWidth=Fullwidth}|\p\{EastAsianWidth=Ambiguous}/?2:1,(\$w>=\$e?last:\$w+\$c>\$s?(\$r.=\$_):0),\$w+=\$c for split//,\$t; print \$r' "{text}" {start} {end} 2>/dev/null $?

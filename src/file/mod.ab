@@ -6,15 +6,12 @@ import { xyl_choose } from "../choose/mod.ab"
 
 /// Format a single entry for display
 /// Directories are colored with accent color and have trailing /
-fun format_entry_display(entry: [Text]): Text {
-    const name = entry[0]
-    const file_type = entry[1]
-
+fun format_entry_display(name: Text, file_type: Text, target: Text): Text {
     if file_type == "d" {
         return name + colored_primary("/")
     }
     if file_type == "l" {
-        return name + colored_accent(" > ") + colored_primary(entry[2])
+        return name + colored_accent(" > ") + colored_primary(target)
     }
     return name
 }
@@ -45,30 +42,38 @@ pub fun xyl_file(
         eprintf(colored_primary("Loading files..."))
 
         // Get directory entries
-        const raw_entries = get_directory_entries(current_path)
+        let listed_names = [Text]
+        let listed_types = [Text]
+        let listed_targets = [Text]
+        get_directory_entries(current_path, listed_names, listed_types, listed_targets)
 
-        // Build options list and parallel entries list
+        // Build options list and parallel entry lists
         let options = [Text]
-        let entries = [Text]
+        let names = [Text]
+        let types = [Text]
+        let targets = [Text]
 
         // Add parent directory entry (..)
         if current_path != "/" {
             options += [".."]
-            entries += ["..\td"]
+            names += [".."]
+            types += ["d"]
+            targets += [""]
         }
 
-        for raw_entry in raw_entries {
-            const entry = parse_entry(raw_entry)
-            const name = entry[0]
+        for i in 0..len(listed_names) {
+            const name = listed_names[i]
             // Skip hidden files if not showing them
             if not show_hidden and starts_with(name, ".") {
                 continue
             }
-            options += [format_entry_display(entry)]
-            entries += [raw_entry]
+            options += [format_entry_display(name, listed_types[i], listed_targets[i])]
+            names += [name]
+            types += [listed_types[i]]
+            targets += [listed_targets[i]]
         }
 
-        if len(entries) == 0 {
+        if len(names) == 0 {
             eprintf_colored("ERROR: Directory is empty or inaccessible.\n", 31)
             stty_unlock()
             return ""
@@ -87,9 +92,8 @@ pub fun xyl_file(
             return ""
         }
 
-        const entry = parse_entry(entries[selected_idx])
-        const name = entry[0]
-        const file_type = entry[1]
+        const name = names[selected_idx]
+        const file_type = types[selected_idx]
 
         if {
             name == ".." {
@@ -101,7 +105,7 @@ pub fun xyl_file(
             }
             file_type == "l" {
                 // Resolve symlink target path
-                const target = entry[2]
+                const target = targets[selected_idx]
                 let target_path = target
                 if not starts_with(target, "/") {
                     target_path = path_join(current_path, target)

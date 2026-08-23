@@ -1,49 +1,26 @@
-import { split, starts_with, char_at } from "std/text"
+import { split, starts_with, char_at, slice } from "std/text"
 pub import { dir_exists } from "std/fs"
 
-/// Get directory entries as array of "name\ttype" strings
-/// type: "d" for directory, "f" for file
-pub fun get_directory_entries(path: Text): [Text] {
-    // `names` comes from the `ls` builtin, which sorts under `LC_ALL=C`.
-    // The long listings below must use the same collation, otherwise the
-    // three arrays fall out of alignment for non-ASCII file names.
-    const raw_output = trust $ LC_ALL=C ls -lA "{path}" 2>/dev/null | tail -n +2 $
-    const types_output = trust $ LC_ALL=C ls -lA "{path}" | tail -n +2 | sed -E 's/^(.).*/\1/' $
-    const names = trust ls(path, true, false)
-
-    const types = split(types_output, "\n")
-    const raw = split(raw_output, "\n")
-    let entries = [Text]
-
-    for i in 0..len(raw) {
-        let file_type = "f"
-        let target = ""
-        if {
-            types[i]== "-" {
-                file_type = "f"
-            }
-            types[i] == "d" {
-                file_type = "d"
-            }
-            types[i] == "l" {
-                target = trust $ echo {raw[i]} | sed 's/.*-> //' $
-                file_type = "l"
-            }
-        }
-
-        if file_type == "l" {
-            entries += ["{names[i]}\t{types[i]}\t{target}"]
-        } else {
-            entries += ["{names[i]}\t{types[i]}"]
-        }
+/// Read the entries of `path` into three parallel arrays.
+/// `types` holds the first character of the long listing, so "d" for a
+/// directory and "l" for a symbolic link. `targets` holds the destination
+/// of a symbolic link and is empty for every other kind of entry.
+///
+/// `names` comes from the `ls` builtin, which sorts under `LC_ALL=C`.
+/// The long listings below must use the same collation, otherwise the
+/// three arrays fall out of alignment for non-ASCII file names.
+pub fun get_directory_entries(path: Text, ref names: [Text], ref types: [Text], ref targets: [Text]): Null {
+    names += trust ls(path, true, false)
+    const types_output = trust $ LC_ALL=C ls -lA "{path}" 2>/dev/null | tail -n +2 | sed 's/^\(.\).*/\1/' $
+    // The blanking expression runs first, otherwise it would also match the
+    // already rewritten target of a symbolic link. Every line is then given a
+    // leading ":" because `split` treats newlines as whitespace and would
+    // collapse the empty lines that non-link entries produce.
+    const targets_output = trust $ LC_ALL=C ls -lA "{path}" 2>/dev/null | tail -n +2 | sed -e '/^l/!s/.*//' -e '/^l/s/.* -> //' -e 's/^/:/' $
+    types += split(types_output, "\n")
+    for marked in split(targets_output, "\n") {
+        targets += [slice(marked, 1)]
     }
-
-    return entries
-}
-
-/// Parse entry string into [name, type, target]
-pub fun parse_entry(entry: Text): [Text] {
-    return split(entry, "\t")
 }
 
 /// Get current working directory

@@ -2,11 +2,14 @@ import * from "std/env"
 import * from "std/math"
 import * from "../utils.ab"
 
-fun get_page_options(options: [Text], page: Int, page_size: Int): [Text] {
+/// `options` is taken by reference and its length is passed in, because
+/// Amber copies a whole array both when it is passed by value and when
+/// `len` is called on it.
+fun get_page_options(ref options: [Text], total: Int, page: Int, page_size: Int): [Text] {
     const start = page * page_size
     let end = start + page_size
-    if end > len(options) {
-        end = len(options)
+    if end > total {
+        end = total
     }
     let result = [Text]
     for i in start..end {
@@ -83,12 +86,14 @@ fun render_page_indicator(page: Int, total_pages: Int): Null {
 /// - `header`: An optional header message to display above the options. (ANSI supported)
 /// - `page_size`: The number of options to display per page.
 pub fun xyl_choose(
-    options: [Text],
+    ref options: [Text],
     cursor: Text = "> ",
     header: Text = "\x1b[1mChoose:\x1b[0m",
     page_size: Int = 10,
 ): Text {
-    if len(options) == 0 {
+    // Counted once, see `get_page_options`.
+    const total = len(options)
+    if total == 0 {
         eprintf_colored("ERROR: No options provided.\n", 31)
         exit(1)
     }
@@ -107,13 +112,13 @@ pub fun xyl_choose(
         eprintf(cutoff_text(header, term_width) + "\n")
     }
 
-    const total_pages = math_floor((len(options) + page_size - 1) / page_size)
+    const total_pages = math_floor((total + page_size - 1) / page_size)
     let current_page = 0
     let selected = 0
 
     let display_count = page_size
-    if len(options) < page_size {
-        display_count = len(options)
+    if total < page_size {
+        display_count = total
     }
 
     new_line(display_count)
@@ -133,7 +138,7 @@ pub fun xyl_choose(
     go_up(display_count + 1)
     eprintf("\x1b[G")
 
-    let page_options = get_page_options(options, current_page, page_size)
+    let page_options = get_page_options(options, total, current_page, page_size)
     render_choose_page(page_options, selected, cursor, display_count, term_width)
 
     loop {
@@ -200,7 +205,7 @@ pub fun xyl_choose(
         const max_option_width = term_width - len(cursor) - 1
         if {
             prev_page != current_page {
-                page_options = get_page_options(options, current_page, page_size)
+                page_options = get_page_options(options, total, current_page, page_size)
                 if up_paged {
                     selected = len(page_options) - 1
                 }
@@ -263,13 +268,15 @@ fun count_checked(checked: [Bool]): Int {
 /// - `limit`: The maximum number of options the user can select. Use -1 for no limit.
 /// - `page_size`: The number of options to display per page.
 pub fun xyl_multi_choose(
-    options: [Text],
+    ref options: [Text],
     cursor: Text = "> ",
     header: Text = "Choose:",
     limit: Int = -1,
     page_size: Int = 10,
 ): [Text] {
-    if len(options) == 0 {
+    // Counted once, see `get_page_options`.
+    const total = len(options)
+    if total == 0 {
         eprintf_colored("ERROR: No options provided.\n", 31)
         return [Text]
     }
@@ -288,13 +295,13 @@ pub fun xyl_multi_choose(
         eprintf(cutoff_text(header, term_width) + "\n")
     }
 
-    const total_pages = math_floor((len(options) + page_size - 1) / page_size)
+    const total_pages = math_floor((total + page_size - 1) / page_size)
     let current_page = 0
     let selected = 0
 
     let display_count = page_size
-    if len(options) < page_size {
-        display_count = len(options)
+    if total < page_size {
+        display_count = total
     }
 
     new_line(display_count)
@@ -318,11 +325,11 @@ pub fun xyl_multi_choose(
     eprintf("\x1b[G")
 
     let checked = [Bool]
-    for _ in 0..len(options) {
+    for _ in 0..total {
         checked += [false]
     }
 
-    let page_options = get_page_options(options, current_page, page_size)
+    let page_options = get_page_options(options, total, current_page, page_size)
     let page_start = get_page_start(current_page, page_size)
     render_multi_choose_page(page_options, checked, page_start, selected, cursor, display_count, term_width)
 
@@ -403,7 +410,7 @@ pub fun xyl_multi_choose(
                 continue
             }
             (key == "a" or key == "A") and limit < 0 {
-                const all_checked = count_checked(checked) == len(options)
+                const all_checked = count_checked(checked) == total
                 for i in 0..len(checked) {
                     checked[i] = not all_checked
                 }
@@ -421,7 +428,7 @@ pub fun xyl_multi_choose(
         const max_option_width = term_width - len(cursor) - 2 - 1 // 2 for check mark
         if {
             prev_page != current_page {
-                page_options = get_page_options(options, current_page, page_size)
+                page_options = get_page_options(options, total, current_page, page_size)
                 page_start = get_page_start(current_page, page_size)
                 if up_paged {
                     selected = len(page_options) - 1
@@ -468,7 +475,7 @@ pub fun xyl_multi_choose(
     remove_current_line()
 
     let result = [Text]
-    for i in 0..len(options) {
+    for i in 0..total {
         if checked[i] {
             result += [options[i]]
         }

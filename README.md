@@ -18,6 +18,7 @@ amber build --target bash-3.2 src/main.ab xylitol.sh
 
 ## Commands
 * [`choose`](#choose): Choose an option from a list of choices
+* [`filter`](#filter): Pick from a list narrowed by typing
 * [`input`](#input): Prompt the user for input.
 * [`confirm`](#confirm): Prompt the user for confirmation (yes/no).
 * [`file`](#file): Pick a file from system.
@@ -25,13 +26,22 @@ amber build --target bash-3.2 src/main.ab xylitol.sh
 ## Choose
 Choose an option from a list of choices
 
-<img width="1200" height="500" alt="choose" src="https://github.com/user-attachments/assets/0e257fcd-975a-49c7-80dd-bca68f245baa" />
+<img width="1200" height="460" alt="choose" src="https://github.com/user-attachments/assets/5d9e4454-0e34-4e93-9f4c-7f9e6da5a93d" />
 
 ```bash
 cat songs.txt | ./xylitol.sh choose
 cat foods.txt | ./xylitol.sh choose --header="Grocery Shopping"
 ```
 
+## Filter
+Pick from a list narrowed by typing.
+
+<img width="1200" height="500" alt="filter" src="https://github.com/user-attachments/assets/ef875901-8bf6-400d-95cc-30ceed9560a9" />
+
+```bash
+cat cards.txt | ./xylitol.sh filter
+ls | ./xylitol.sh filter --no-limit --height=15
+```
 
 ## Input
 Prompt for input with a simple command.

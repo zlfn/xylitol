@@ -1,12 +1,11 @@
 ## `render_confirm_options`
 
 ```ab
-fun render_confirm_options(selected: Bool, term_width: Num): Null 
+fun render_confirm_options(selected: Bool, term_width: Int): Null 
 ```
 
 Renders the Yes/No selection with background colors
 Uses smaller buttons when terminal width is below 30 characters
-
 
 ## `xyl_confirm`
 
@@ -22,5 +21,4 @@ Prompts the user with a Yes/No confirmation dialog.
 
 ### Returns
 - `true` if the user selected Yes, `false` if No.
-
 

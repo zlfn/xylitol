@@ -1,37 +1,7 @@
-## `count_checked`
-
-```ab
-fun count_checked(checked: [Bool]): Num 
-```
-## `get_page_options`
-
-```ab
-fun get_page_options(options: [Text], page: Num, page_size: Num): [Text] 
-```
-## `get_page_start`
-
-```ab
-fun get_page_start(page: Num, page_size: Num): Num 
-```
-## `render_choose_page`
-
-```ab
-fun render_choose_page(page_options: [Text], sel: Num, cursor: Text, display_count: Num, term_width: Num): Null 
-```
-## `render_multi_choose_page`
-
-```ab
-fun render_multi_choose_page(page_options: [Text], checked: [Bool], page_start: Num, sel: Num, cursor: Text, display_count: Num, term_width: Num): Null 
-```
-## `render_page_indicator`
-
-```ab
-fun render_page_indicator(page: Num, total_pages: Num): Null 
-```
 ## `xyl_choose`
 
 ```ab
-pub fun xyl_choose(options: [Text], cursor: Text = "> ", header: Text = "\x1b[1mChoose:\x1b[0m", page_size: Num = 10,): Text 
+pub fun xyl_choose(options: [Text], cursor: Text = "> ", header: Text = "\x1b[1mChoose:\x1b[0m", page_size: Int = 10,): Text 
 ```
 
 Prompts the user to choose a single option from a list.
@@ -42,20 +12,18 @@ Prompts the user to choose a single option from a list.
 - `header`: An optional header message to display above the options. (ANSI supported)
 - `page_size`: The number of options to display per page.
 
-
 ## `xyl_multi_choose`
 
 ```ab
-pub fun xyl_multi_choose(options: [Text], cursor: Text = "> ", header: Text = "Choose:", limit: Num = - 1, page_size: Num = 10,): [Text] 
+pub fun xyl_multi_choose(options: [Text], cursor: Text = "> ", header: Text = "Choose:", limit: Int = - 1, page_size: Int = 10,): [Text] 
 ```
 
 Prompts the user to choose multiple options from a list.
 
-/ ### Parameters
+### Parameters
 - `options`: The list of options to choose from.
 - `cursor`: The cursor text to indicate the selected option.
 - `header`: An optional header message to display above the options. (ANSI supported)
 - `limit`: The maximum number of options the user can select. Use -1 for no limit.
 - `page_size`: The number of options to display per page.
-
 

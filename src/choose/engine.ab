@@ -1,5 +1,6 @@
 import * from "std/env"
 import * from "std/math"
+import { rpad } from "std/text"
 import * from "../utils.ab"
 
 /// A chooser driven by its caller.
@@ -31,10 +32,6 @@ let _term_width = 80
 let _has_header = false
 let _page = [Text]
 let _page_count = 0
-let _checked = [Bool]
-/// Tracked alongside `_checked` because counting it on every keypress would
-/// walk the whole list, and `or` evaluates both of its operands.
-let _checked_count = 0
 let _first_render = true
 /// Set when moving up off the top of a page. The cursor belongs on the last
 /// item of the previous page, but its length is only known once the caller
@@ -67,11 +64,11 @@ fun render_multi_page(): Null {
     const page_start = chooser_page_start()
     for i in 0.._page_count {
         const global_idx = page_start + i
-        const check_mark = _checked[global_idx] then "✓ " else "• "
+        const check_mark = checked_is(global_idx) then "✓ " else "• "
         const truncated = cutoff_text(_page[i], max_option_width)
         if {
             i == _selected: eprintf(colored_secondary(_cursor + check_mark + truncated + "\n"))
-            _checked[global_idx]: {
+            checked_is(global_idx): {
                 print_blank(cursor_len)
                 eprintf(colored_secondary(check_mark + truncated + "\n"))
             }
@@ -139,7 +136,6 @@ pub fun chooser_begin(total: Int, page_size: Int, header: Text, cursor: Text, mu
     _selected = 0
     _first_render = true
     _up_paged = false
-    _checked_count = 0
     _has_header = header != ""
 
     stty_lock()
@@ -164,10 +160,7 @@ pub fun chooser_begin(total: Int, page_size: Int, header: Text, cursor: Text, mu
     }
 
     if multi {
-        _checked = [Bool]
-        for _ in 0..total {
-            _checked += [false]
-        }
+        checked_init(total, limit)
     }
 
     new_line(_display_count)
@@ -219,47 +212,45 @@ pub fun chooser_set_page(page: [Text]): Null {
 
 /// Move the highlight from `prev_selected` to `_selected`, redrawing only
 /// those two lines.
-fun redraw_selection(prev_selected: Int): Null {
-    const page_start = chooser_page_start()
+/// Width left for an option once the cursor and any check mark are placed.
+fun option_width(): Int {
     const check_width = _multi then 3 else 1
-    const max_option_width = _term_width - len(_cursor) - check_width
-
-    go_up(_display_count - prev_selected)
-    eprintf("\x1b[K")
-    print_blank(len(_cursor))
-    if _multi {
-        const was_checked = _checked[page_start + prev_selected]
-        const prev_line = (was_checked then "✓ " else "• ") + cutoff_text(_page[prev_selected], max_option_width)
-        if was_checked {
-            eprintf(colored_secondary(prev_line))
-        } else {
-            eprintf(prev_line)
-        }
-    } else {
-        eprintf(cutoff_text(_page[prev_selected], max_option_width))
-    }
-
-    go_up_or_down(_selected - prev_selected)
-    eprintf("\x1b[G")
-    eprintf("\x1b[K")
-    const mark = _multi then (_checked[page_start + _selected] then "✓ " else "• ") else ""
-    eprintf(colored_secondary(_cursor + mark + cutoff_text(_page[_selected], max_option_width)))
-
-    go_down(_display_count - _selected)
-    eprintf("\x1b[G")
+    return _term_width - len(_cursor) - check_width
 }
 
-/// Redraw the highlighted line after its check mark changed. Multi mode only.
+/// The row for `index` on the current page, as it looks unhighlighted.
+fun unselected_line(index: Int): Text {
+    const blank = rpad("", " ", len(_cursor))
+    const truncated = cutoff_text(_page[index], option_width())
+    if not _multi {
+        return blank + truncated
+    }
+    if checked_is(chooser_page_start() + index) {
+        return blank + colored_secondary("✓ " + truncated)
+    }
+    return blank + "• " + truncated
+}
+
+/// The row for `index` on the current page, as it looks highlighted.
+fun selected_line(index: Int): Text {
+    const truncated = cutoff_text(_page[index], option_width())
+    if not _multi {
+        return colored_secondary(_cursor + truncated)
+    }
+    const mark = checked_is(chooser_page_start() + index) then "✓ " else "• "
+    return colored_secondary(_cursor + mark + truncated)
+}
+
+/// Move the highlight from `prev_selected` to `_selected`, redrawing only
+/// those two rows.
+fun redraw_selection(prev_selected: Int): Null {
+    redraw_row(_display_count, prev_selected, unselected_line(prev_selected))
+    redraw_row(_display_count, _selected, selected_line(_selected))
+}
+
+/// Redraw the highlighted row after its check mark changed. Multi mode only.
 fun redraw_current_line(): Null {
-    const page_start = chooser_page_start()
-    const max_option_width = _term_width - len(_cursor) - 3
-    go_up(_display_count - _selected)
-    eprintf("\x1b[G")
-    eprintf("\x1b[K")
-    const check_mark = _checked[page_start + _selected] then "✓ " else "• "
-    eprintf(colored_secondary(_cursor + check_mark + cutoff_text(_page[_selected], max_option_width)))
-    go_down(_display_count - _selected)
-    eprintf("\x1b[G")
+    redraw_row(_display_count, _selected, selected_line(_selected))
 }
 
 /// Read one key and update the selection.
@@ -316,30 +307,17 @@ pub fun chooser_step(): Int {
             }
         }
         _multi and (key == "x" or key == "X") {
-            const global_selected = page_start + _selected
-            if {
-                _checked[global_selected] {
-                    _checked[global_selected] = false
-                    _checked_count -= 1
-                }
-                _limit < 0 or _checked_count < _limit {
-                    _checked[global_selected] = true
-                    _checked_count += 1
-                }
-                else: return CHOOSER_CONTINUE
+            if checked_toggle(page_start + _selected) {
+                redraw_current_line()
             }
-            redraw_current_line()
             return CHOOSER_CONTINUE
         }
         _multi and (key == "a" or key == "A") and _limit < 0 {
-            const all_checked = _checked_count == _total
-            for i in 0.._total {
-                _checked[i] = not all_checked
+            if checked_all() {
+                go_up(_display_count)
+                eprintf("\x1b[G")
+                render_page()
             }
-            _checked_count = all_checked then 0 else _total
-            go_up(_display_count)
-            eprintf("\x1b[G")
-            render_page()
             return CHOOSER_CONTINUE
         }
         key == "INPUT" {
@@ -364,7 +342,7 @@ pub fun chooser_selected(): Int {
 
 /// Whether item `index` is checked. Only meaningful in multi mode.
 pub fun chooser_is_checked(index: Int): Bool {
-    return _checked[index]
+    return checked_is(index)
 }
 
 /// Erase the widget and unlock the terminal.

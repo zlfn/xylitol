@@ -1,0 +1,66 @@
+/// Which items of a multi-select widget are ticked.
+///
+/// The state sits at module level, so only one such widget may be open at a
+/// time. Reach it through `utils.ab` rather than importing this file directly:
+/// the compiler keys modules by the literal text of the import path, so a
+/// second spelling would hand that caller its own copy of these variables.
+let _checked = [Bool]
+/// Tracked alongside `_checked` because counting it on every keypress would
+/// walk the whole list.
+let _count = 0
+let _total = 0
+let _limit = -1
+
+/// Start over with `total` unticked items. A `limit` below zero means no cap.
+pub fun checked_init(total: Int, limit: Int): Null {
+    _checked = [Bool]
+    for _ in 0..total {
+        _checked += [false]
+    }
+    _count = 0
+    _total = total
+    _limit = limit
+}
+
+pub fun checked_is(index: Int): Bool {
+    return _checked[index]
+}
+
+pub fun checked_count(): Int {
+    return _count
+}
+
+/// Flip item `index`, unless ticking it would pass the limit.
+/// Returns whether anything changed.
+pub fun checked_toggle(index: Int): Bool {
+    if _checked[index] {
+        _checked[index] = false
+        _count -= 1
+        return true
+    }
+    if _limit >= 0 and _count >= _limit {
+        return false
+    }
+    _checked[index] = true
+    _count += 1
+    return true
+}
+
+/// Tick everything, or clear it all when everything already is.
+/// Refuses while a limit is set, since it could not be honoured.
+/// Returns whether anything changed.
+pub fun checked_all(): Bool {
+    if _limit >= 0 {
+        return false
+    }
+    const was_all = _count == _total
+    for i in 0.._total {
+        _checked[i] = not was_all
+    }
+    if was_all {
+        _count = 0
+    } else {
+        _count = _total
+    }
+    return true
+}

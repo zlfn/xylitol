@@ -1,0 +1,14 @@
+import { eprintf } from "../io.ab"
+import { go_up, go_down } from "../term.ab"
+
+/// Rewrite one row of the block a widget reserved, then park the cursor back
+/// where widgets keep it: column one of the line below the block.
+///
+/// `index` counts from the top of the block, which is `display_count` rows tall.
+pub fun redraw_row(display_count: Int, index: Int, line: Text): Null {
+    go_up(display_count - index)
+    eprintf("\x1b[G\x1b[K")
+    eprintf(line)
+    go_down(display_count - index)
+    eprintf("\x1b[G")
+}

@@ -1165,7 +1165,7 @@ stty_lock__685_v0() {
     stty_count__684_v0 
     local count_num_3049="${ret_stty_count684_v0}"
     if [ "$(( count_num_3049 == 0 ))" != 0 ]; then
-        stty -echo < /dev/tty
+        stty -echo -icanon min 1 time 0 < /dev/tty
         __status=$?
     fi
     count_num_3049="$(( count_num_3049 + 1 ))"
@@ -1182,7 +1182,7 @@ stty_unlock__686_v0() {
         export XYLITOL_RUNTIME_STTY_COUNT=${count_num_3118}
         __status=$?
         if [ "$(( count_num_3118 == 0 ))" != 0 ]; then
-            stty echo < /dev/tty
+            stty echo icanon < /dev/tty
             __status=$?
         fi
     fi
@@ -2295,7 +2295,7 @@ execute_input__1095_v0() {
 # get_key()
 get_key__1176_v0() {
     local command_176
-    command_176="$(IFS= read -rsn1 k < /dev/tty; if [[ "$k" == $'\e' ]]; then IFS= read -rsn2 r < /dev/tty; k+=$r; fi; case "$k" in $'\e[A') printf UP;; $'\e[B') printf DOWN;; $'\e[C') printf RIGHT;; $'\e[D') printf LEFT;; $'\177') printf BACKSPACE;; $'	') printf TAB;; $'\001') printf CTRL_A;; ' ') printf SPACE;; '') printf INPUT;; *) printf '%s' "$k";; esac)"
+    command_176="$(IFS= read -rsn1 k < /dev/tty; if [[ "$k" == $'\e' ]]; then IFS= read -rsn2 r < /dev/tty; k+=$r; fi; case "$k" in ($'\e[A') printf UP;; ($'\e[B') printf DOWN;; ($'\e[C') printf RIGHT;; ($'\e[D') printf LEFT;; ($'\177') printf BACKSPACE;; ($'	') printf TAB;; ($'\001') printf CTRL_A;; (' ') printf SPACE;; ('') printf INPUT;; (*) printf '%s' "$k";; esac)"
     __status=$?
     ret_get_key1176_v0="${command_176}"
     return 0
@@ -2463,7 +2463,7 @@ stty_lock__1218_v0() {
     stty_count__1217_v0 
     local count_num_16347="${ret_stty_count1217_v0}"
     if [ "$(( count_num_16347 == 0 ))" != 0 ]; then
-        stty -echo < /dev/tty
+        stty -echo -icanon min 1 time 0 < /dev/tty
         __status=$?
     fi
     count_num_16347="$(( count_num_16347 + 1 ))"
@@ -2480,7 +2480,7 @@ stty_unlock__1219_v0() {
         export XYLITOL_RUNTIME_STTY_COUNT=${count_num_16464}
         __status=$?
         if [ "$(( count_num_16464 == 0 ))" != 0 ]; then
-            stty echo < /dev/tty
+            stty echo icanon < /dev/tty
             __status=$?
         fi
     fi
@@ -4279,7 +4279,7 @@ execute_choose__1761_v0() {
 # get_key()
 get_key__1846_v0() {
     local command_322
-    command_322="$(IFS= read -rsn1 k < /dev/tty; if [[ "$k" == $'\e' ]]; then IFS= read -rsn2 r < /dev/tty; k+=$r; fi; case "$k" in $'\e[A') printf UP;; $'\e[B') printf DOWN;; $'\e[C') printf RIGHT;; $'\e[D') printf LEFT;; $'\177') printf BACKSPACE;; $'	') printf TAB;; $'\001') printf CTRL_A;; ' ') printf SPACE;; '') printf INPUT;; *) printf '%s' "$k";; esac)"
+    command_322="$(IFS= read -rsn1 k < /dev/tty; if [[ "$k" == $'\e' ]]; then IFS= read -rsn2 r < /dev/tty; k+=$r; fi; case "$k" in ($'\e[A') printf UP;; ($'\e[B') printf DOWN;; ($'\e[C') printf RIGHT;; ($'\e[D') printf LEFT;; ($'\177') printf BACKSPACE;; ($'	') printf TAB;; ($'\001') printf CTRL_A;; (' ') printf SPACE;; ('') printf INPUT;; (*) printf '%s' "$k";; esac)"
     __status=$?
     ret_get_key1846_v0="${command_322}"
     return 0
@@ -4447,7 +4447,7 @@ stty_lock__1888_v0() {
     stty_count__1887_v0 
     local count_num_24875="${ret_stty_count1887_v0}"
     if [ "$(( count_num_24875 == 0 ))" != 0 ]; then
-        stty -echo < /dev/tty
+        stty -echo -icanon min 1 time 0 < /dev/tty
         __status=$?
     fi
     count_num_24875="$(( count_num_24875 + 1 ))"
@@ -4464,7 +4464,7 @@ stty_unlock__1889_v0() {
         export XYLITOL_RUNTIME_STTY_COUNT=${count_num_24973}
         __status=$?
         if [ "$(( count_num_24973 == 0 ))" != 0 ]; then
-            stty echo < /dev/tty
+            stty echo icanon < /dev/tty
             __status=$?
         fi
     fi
@@ -5568,7 +5568,7 @@ _term_width_121=80
 # refresh_matches()
 refresh_matches__2140_v0() {
     local command_412
-    command_412="$(shopt -s nocasematch; __r=""; __i=0; for __it in "${_options_110[@]}"; do case "$__it" in *"${_query_112}"*) __r="$__r $__i";; esac; __i=$((__i+1)); done; printf '%s' "${__r# }")"
+    command_412="$(shopt -s nocasematch; __r=""; __i=0; for __it in "${_options_110[@]}"; do case "$__it" in (*"${_query_112}"*) __r="$__r $__i";; esac; __i=$((__i+1)); done; printf '%s' "${__r# }")"
     __status=$?
     local raw_24882="${command_412}"
     if [ "$([ "_${raw_24882}" != "_" ]; echo $?)" != 0 ]; then
@@ -6097,7 +6097,7 @@ execute_filter__2309_v0() {
 # get_key()
 get_key__2433_v0() {
     local command_467
-    command_467="$(IFS= read -rsn1 k < /dev/tty; if [[ "$k" == $'\e' ]]; then IFS= read -rsn2 r < /dev/tty; k+=$r; fi; case "$k" in $'\e[A') printf UP;; $'\e[B') printf DOWN;; $'\e[C') printf RIGHT;; $'\e[D') printf LEFT;; $'\177') printf BACKSPACE;; $'	') printf TAB;; $'\001') printf CTRL_A;; ' ') printf SPACE;; '') printf INPUT;; *) printf '%s' "$k";; esac)"
+    command_467="$(IFS= read -rsn1 k < /dev/tty; if [[ "$k" == $'\e' ]]; then IFS= read -rsn2 r < /dev/tty; k+=$r; fi; case "$k" in ($'\e[A') printf UP;; ($'\e[B') printf DOWN;; ($'\e[C') printf RIGHT;; ($'\e[D') printf LEFT;; ($'\177') printf BACKSPACE;; ($'	') printf TAB;; ($'\001') printf CTRL_A;; (' ') printf SPACE;; ('') printf INPUT;; (*) printf '%s' "$k";; esac)"
     __status=$?
     ret_get_key2433_v0="${command_467}"
     return 0
@@ -6265,7 +6265,7 @@ stty_lock__2475_v0() {
     stty_count__2474_v0 
     local count_num_26916="${ret_stty_count2474_v0}"
     if [ "$(( count_num_26916 == 0 ))" != 0 ]; then
-        stty -echo < /dev/tty
+        stty -echo -icanon min 1 time 0 < /dev/tty
         __status=$?
     fi
     count_num_26916="$(( count_num_26916 + 1 ))"
@@ -6282,7 +6282,7 @@ stty_unlock__2476_v0() {
         export XYLITOL_RUNTIME_STTY_COUNT=${count_num_27007}
         __status=$?
         if [ "$(( count_num_27007 == 0 ))" != 0 ]; then
-            stty echo < /dev/tty
+            stty echo icanon < /dev/tty
             __status=$?
         fi
     fi
@@ -7622,7 +7622,7 @@ stty_lock__3044_v0() {
     stty_count__3043_v0 
     local count_num_36421="${ret_stty_count3043_v0}"
     if [ "$(( count_num_36421 == 0 ))" != 0 ]; then
-        stty -echo < /dev/tty
+        stty -echo -icanon min 1 time 0 < /dev/tty
         __status=$?
     fi
     count_num_36421="$(( count_num_36421 + 1 ))"
@@ -7639,7 +7639,7 @@ stty_unlock__3045_v0() {
         export XYLITOL_RUNTIME_STTY_COUNT=${count_num_36442}
         __status=$?
         if [ "$(( count_num_36442 == 0 ))" != 0 ]; then
-            stty echo < /dev/tty
+            stty echo icanon < /dev/tty
             __status=$?
         fi
     fi
@@ -8297,7 +8297,7 @@ done
 # get_key()
 get_key__3346_v0() {
     local command_629
-    command_629="$(IFS= read -rsn1 k < /dev/tty; if [[ "$k" == $'\e' ]]; then IFS= read -rsn2 r < /dev/tty; k+=$r; fi; case "$k" in $'\e[A') printf UP;; $'\e[B') printf DOWN;; $'\e[C') printf RIGHT;; $'\e[D') printf LEFT;; $'\177') printf BACKSPACE;; $'	') printf TAB;; $'\001') printf CTRL_A;; ' ') printf SPACE;; '') printf INPUT;; *) printf '%s' "$k";; esac)"
+    command_629="$(IFS= read -rsn1 k < /dev/tty; if [[ "$k" == $'\e' ]]; then IFS= read -rsn2 r < /dev/tty; k+=$r; fi; case "$k" in ($'\e[A') printf UP;; ($'\e[B') printf DOWN;; ($'\e[C') printf RIGHT;; ($'\e[D') printf LEFT;; ($'\177') printf BACKSPACE;; ($'	') printf TAB;; ($'\001') printf CTRL_A;; (' ') printf SPACE;; ('') printf INPUT;; (*) printf '%s' "$k";; esac)"
     __status=$?
     ret_get_key3346_v0="${command_629}"
     return 0
@@ -8358,7 +8358,7 @@ stty_lock__3388_v0() {
     stty_count__3387_v0 
     local count_num_36453="${ret_stty_count3387_v0}"
     if [ "$(( count_num_36453 == 0 ))" != 0 ]; then
-        stty -echo < /dev/tty
+        stty -echo -icanon min 1 time 0 < /dev/tty
         __status=$?
     fi
     count_num_36453="$(( count_num_36453 + 1 ))"
@@ -8375,7 +8375,7 @@ stty_unlock__3389_v0() {
         export XYLITOL_RUNTIME_STTY_COUNT=${count_num_36601}
         __status=$?
         if [ "$(( count_num_36601 == 0 ))" != 0 ]; then
-            stty echo < /dev/tty
+            stty echo icanon < /dev/tty
             __status=$?
         fi
     fi
@@ -9952,7 +9952,7 @@ check_prerequirements__3827_v0() {
 # trap_cleanup()
 trap_cleanup__3828_v0() {
     trap 'printf "\x1b[?25h\x1b[0m" >&2; 
-            stty echo < /dev/tty' EXIT
+            stty echo icanon < /dev/tty' EXIT
     __status=$?
 }
 

@@ -31,6 +31,8 @@ pub fun get_key(): Text
 ```
 
 Reads a key from terminal, including special keys (arrows, backspace, etc.)
+IFS is cleared so that space and tab do not arrive as an empty string.
+Keys with no name of their own come back as the characters that were typed.
 
 ## `printf_colored`
 

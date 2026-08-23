@@ -22,7 +22,7 @@ let _term_width = 80
 /// Positions of the options holding the query, ignoring case.
 /// One shell pass, so a keystroke costs one process however long the list is.
 fun refresh_matches(): Null {
-    const raw = trust $ shopt -s nocasematch; __r=""; __i=0; for __it in "\$\{{nameof(_options)}[@]}"; do case "\$__it" in *"{_query}"*) __r="\$__r \$__i";; esac; __i=\$((__i+1)); done; printf '%s' "\$\{__r# }" $
+    const raw = trust $ shopt -s nocasematch; __r=""; __i=0; for __it in "\$\{{nameof(_options)}[@]}"; do case "\$__it" in (*"{_query}"*) __r="\$__r \$__i";; esac; __i=\$((__i+1)); done; printf '%s' "\$\{__r# }" $
     if raw == "" {
         _matches = [Text]
     } else {

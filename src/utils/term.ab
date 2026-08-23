@@ -22,7 +22,7 @@ fun stty_count(): Int {
 pub fun stty_lock(): Null {
     let count_num = stty_count()
     if count_num == 0 {
-        trust $ stty -echo < /dev/tty $
+        trust $ stty -echo -icanon min 1 time 0 < /dev/tty $
     }
     count_num += 1
     trust $ export XYLITOL_RUNTIME_STTY_COUNT={count_num} $
@@ -35,7 +35,7 @@ pub fun stty_unlock(): Null {
         count_num -= 1
         trust $ export XYLITOL_RUNTIME_STTY_COUNT={count_num} $
         if count_num == 0 {
-            trust $ stty echo < /dev/tty $
+            trust $ stty echo icanon < /dev/tty $
         }
     }
 }

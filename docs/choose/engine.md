@@ -61,13 +61,23 @@ pub fun chooser_step(): Int
 
 Read one key and update the selection.
 
+## `option_width`
+
+```ab
+fun option_width(): Int 
+```
+
+Move the highlight from `prev_selected` to `_selected`, redrawing only
+those two lines.
+Width left for an option once the cursor and any check mark are placed.
+
 ## `redraw_current_line`
 
 ```ab
 fun redraw_current_line(): Null 
 ```
 
-Redraw the highlighted line after its check mark changed. Multi mode only.
+Redraw the highlighted row after its check mark changed. Multi mode only.
 
 ## `redraw_selection`
 
@@ -76,7 +86,7 @@ fun redraw_selection(prev_selected: Int): Null
 ```
 
 Move the highlight from `prev_selected` to `_selected`, redrawing only
-those two lines.
+those two rows.
 
 ## `render_multi_page`
 
@@ -107,4 +117,20 @@ fun render_single_page(): Null
 ```ab
 fun render_tooltip_line(): Null 
 ```
+
+## `selected_line`
+
+```ab
+fun selected_line(index: Int): Text 
+```
+
+The row for `index` on the current page, as it looks highlighted.
+
+## `unselected_line`
+
+```ab
+fun unselected_line(index: Int): Text 
+```
+
+The row for `index` on the current page, as it looks unhighlighted.
 

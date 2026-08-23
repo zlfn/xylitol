@@ -2,24 +2,24 @@ import * from "std/env"
 import * from "../utils.ab"
 
 pub fun print_confirm_help(): Null {
-    let usage = ["Usage:", "./xylitol.sh", "confirm", "[flags]"]
+    const usage = ["Usage:", "./xylitol.sh", "confirm", "[flags]"]
     print_wrapped(usage)
     echo("")
-    let title = [colored_primary("confirm"), "-", "Display", "a", "Yes/No", "confirmation", "dialog."]
+    const title = [colored_primary("confirm"), "-", "Display", "a", "Yes/No", "confirmation", "dialog."]
     print_wrapped(title)
     echo("")
     printf(colored_secondary("Flags:") + "\n")
-    let names = [
+    const names = [
         "-h, --help",
         "--header=\"<text>\"",
         "--default=<yes|no>",
     ]
-    let texts = [
+    const texts = [
         "Show this help message",
         "Set a header text to display above the options",
         "Set the default selection",
     ]
-    let notes = [
+    const notes = [
         "",
         "(ANSI escape supported)",
         "(default: yes)",

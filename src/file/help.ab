@@ -2,35 +2,35 @@ import * from "std/env"
 import * from "../utils.ab"
 
 pub fun print_file_help(): Null {
-    let usage = ["Usage:", "./xylitol.sh", "file", "[<path>]", "[flags]"]
+    const usage = ["Usage:", "./xylitol.sh", "file", "[<path>]", "[flags]"]
     print_wrapped(usage)
     echo("")
-    let title = [colored_primary("file"), "-", "Browse", "filesystem", "and", "select", "a", "file."]
+    const title = [colored_primary("file"), "-", "Browse", "filesystem", "and", "select", "a", "file."]
     print_wrapped(title)
     echo("")
     printf(colored_secondary("Arguments:") + "\n")
-    let arg_names = ["[<path>]"]
-    let arg_texts = ["Starting directory path"]
-    let arg_notes = ["(default: current directory)"]
+    const arg_names = ["[<path>]"]
+    const arg_texts = ["Starting directory path"]
+    const arg_notes = ["(default: current directory)"]
     // 20 keeps this section on the same column as Flags below.
     render_help_entries(arg_names, arg_texts, arg_notes, 20)
     echo("")
     printf(colored_secondary("Flags:") + "\n")
-    let names = [
+    const names = [
         "-h, --help",
         "-a, --all",
         "--cursor=\"<text>\"",
         "--path=\"<path>\"",
         "--page-size=<number>",
     ]
-    let texts = [
+    const texts = [
         "Show this help message",
         "Show hidden files",
         "Set the cursor text",
         "Set the starting directory path",
         "Set the number of entries per page",
     ]
-    let notes = [
+    const notes = [
         "",
         "",
         "(default: '> ')",

@@ -2,49 +2,49 @@ import * from "std/env"
 import * from "./utils.ab"
 
 pub fun print_help() {
-    let usage = ["Usage:", "./xylitol.sh", "<command>", "[flags]"]
+    const usage = ["Usage:", "./xylitol.sh", "<command>", "[flags]"]
     print_wrapped(usage)
     echo("")
-    let title = [
+    const title = [
         "\x1b[1m" + colored_primary("Xylitol"),
         "-", "A", "tool", "for", colored_primary("fresh"), "shell", "scripts.",
     ]
     print_wrapped(title)
     echo("")
     printf(colored_secondary("Flags:") + "\n")
-    let flag_names = ["-h, --help", "-v, --version"]
-    let flag_texts = ["Show this help message", "Show version information"]
-    let flag_notes = ["", ""]
+    const flag_names = ["-h, --help", "-v, --version"]
+    const flag_texts = ["Show this help message", "Show version information"]
+    const flag_notes = ["", ""]
     // 13 keeps this section on the same column as Commands below.
     render_help_entries(flag_names, flag_texts, flag_notes, 13)
     echo("")
     printf(colored_secondary("Commands:") + "\n")
-    let cmd_names = ["input", "choose", "confirm", "file"]
-    let cmd_texts = [
+    const cmd_names = ["input", "choose", "confirm", "file"]
+    const cmd_texts = [
         "Prompt for some input",
         "Choose from a list of options",
         "Prompt for a yes/no confirmation",
         "Browse filesystem and select a file",
     ]
-    let cmd_notes = ["", "", "", ""]
+    const cmd_notes = ["", "", "", ""]
     render_help_entries(cmd_names, cmd_texts, cmd_notes, 13)
     echo("")
     printf(colored_secondary("Envs:") + "\n")
-    let env_names = [
+    const env_names = [
         "$XYLITOL_USE_PERL",
         "$XYLITOL_TRUECOLOR",
         "$XYLITOL_PRIMARY_COLOR",
         "$XYLITOL_SECONDARY_COLOR",
         "$XYLITOL_ACCENT_COLOR",
     ]
-    let env_texts = [
+    const env_texts = [
         "Use Perl for CJK / Optimization",
         "Enable 24-bit truecolor support",
         "Set the primary color",
         "Set the secondary color",
         "Set the accent color",
     ]
-    let env_notes = [
+    const env_notes = [
         "(\"Yes\" or \"No\", default: Yes)",
         "(\"Yes\" or \"No\", default: Yes)",
         "(default: 3;207;159;92)",
@@ -53,7 +53,7 @@ pub fun print_help() {
     ]
     render_help_entries(env_names, env_texts, env_notes)
     echo("")
-    let footer = [
+    const footer = [
         "Run", colored_accent("./xylitol.sh <command> --help"),
         "for", "more", "information", "on", "a", "command.",
     ]

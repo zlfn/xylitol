@@ -2,30 +2,30 @@ import * from "std/env"
 import * from "../utils.ab"
 
 pub fun print_input_help(): Null {
-    let usage = ["Usage:", "./xylitol.sh", "input", "[flags]"]
+    const usage = ["Usage:", "./xylitol.sh", "input", "[flags]"]
     print_wrapped(usage)
     echo("")
-    let title = [colored_primary("input"), "-", "Prompt", "for", "some", "input", "from", "the", "user."]
+    const title = [colored_primary("input"), "-", "Prompt", "for", "some", "input", "from", "the", "user."]
     print_wrapped(title)
     echo("")
     printf(colored_secondary("Flags:") + "\n")
-    let names = [
+    const names = [
         "-h, --help",
         "--placeholder=\"<text>\"",
         "--prompt=\"<text>\"",
         "--header=\"<text>\"",
         "--password",
     ]
-    let texts = [
+    const texts = [
         "Show this help message",
         "Set the placeholder text",
         "Set the prompt text",
         "Set a header text to display above the prompt",
         "Hide input (for password entry)",
     ]
-    let notes = [
+    const notes = [
         "",
-        "(default: 'Type here...')",
+        "(default: 'Type here...', needs Bash 4.0)",
         "(default: '> ')",
         "(ANSI escape supported)",
         "",

@@ -197,7 +197,7 @@ pub fun chooser_page_count(): Int {
 /// Hand the engine the labels of the current page and draw them.
 /// `page` must hold exactly `chooser_page_count()` labels, for the items
 /// starting at `chooser_page_start()`.
-pub fun chooser_set_page(ref page: [Text]): Null {
+pub fun chooser_set_page(page: [Text]): Null {
     _page = page
     _page_count = len(page)
     if _first_render {

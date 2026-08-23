@@ -1,26 +1,36 @@
 import { split, starts_with, char_at, slice } from "std/text"
 pub import { dir_exists } from "std/fs"
 
-/// Read the entries of `path` into three parallel arrays.
-/// `types` holds the first character of the long listing, so "d" for a
-/// directory and "l" for a symbolic link. `targets` holds the destination
-/// of a symbolic link and is empty for every other kind of entry.
+/// How many elements one entry takes up in `get_directory_entries`.
+pub const ENTRY_STRIDE = 3
+
+/// Read the entries of `path` as a flat array holding a name, a type and a
+/// link target for each one, so `entries[i * ENTRY_STRIDE]` is the name of
+/// entry `i`. The type is the first character of the long listing, so "d"
+/// for a directory and "l" for a symbolic link, and the target is empty for
+/// anything that is not a symbolic link.
 ///
-/// `names` comes from the `ls` builtin, which sorts under `LC_ALL=C`.
-/// The long listings below must use the same collation, otherwise the
-/// three arrays fall out of alignment for non-ASCII file names.
-pub fun get_directory_entries(path: Text, ref names: [Text], ref types: [Text], ref targets: [Text]): Null {
-    names += trust ls(path, true, false)
+/// Names come from the `ls` builtin, which sorts under `LC_ALL=C`. The long
+/// listings below must use the same collation, otherwise the three sources
+/// fall out of alignment for non-ASCII file names.
+pub fun get_directory_entries(path: Text): [Text] {
+    const names = trust ls(path, true, false)
     const types_output = trust $ LC_ALL=C ls -lA "{path}" 2>/dev/null | tail -n +2 | sed 's/^\(.\).*/\1/' $
     // The blanking expression runs first, otherwise it would also match the
     // already rewritten target of a symbolic link. Every line is then given a
     // leading ":" because `split` treats newlines as whitespace and would
     // collapse the empty lines that non-link entries produce.
     const targets_output = trust $ LC_ALL=C ls -lA "{path}" 2>/dev/null | tail -n +2 | sed -e '/^l/!s/.*//' -e '/^l/s/.* -> //' -e 's/^/:/' $
-    types += split(types_output, "\n")
-    for marked in split(targets_output, "\n") {
-        targets += [slice(marked, 1)]
+    const types = split(types_output, "\n")
+    const targets = split(targets_output, "\n")
+
+    let entries = [Text]
+    for i in 0..len(names) {
+        entries += [names[i]]
+        entries += [types[i]]
+        entries += [slice(targets[i], 1)]
     }
+    return entries
 }
 
 /// Get current working directory

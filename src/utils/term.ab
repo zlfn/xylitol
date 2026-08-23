@@ -56,7 +56,7 @@ fun store_term_size(size: Text): Bool {
 /// The read times out, otherwise terminals without the extension would
 /// wait for a reply that never arrives.
 fun query_term_size(): Bool {
-    const size = trust $ printf '\x1b[18t' > /dev/tty; IFS=';' read -t 0.5 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "\$height" =~ ^[1-9][0-9]*\$ && "\$width" =~ ^[1-9][0-9]*\$ ]] && echo "\$height \$width" $
+    const size = trust $ printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "\$height" =~ ^[1-9][0-9]*\$ && "\$width" =~ ^[1-9][0-9]*\$ ]] && echo "\$height \$width" $
     return store_term_size(size)
 }
 

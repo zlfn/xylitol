@@ -319,7 +319,7 @@ fun print_help_line(pending: Text, line: Text, note_at: Int): Null {
 /// wherever it lands.
 /// `min_name_width` keeps neighbouring sections on the same column when their
 /// longest names differ.
-pub fun render_help_entries(ref names: [Text], ref texts: [Text], ref notes: [Text], min_name_width: Int = 0): Null {
+pub fun render_help_entries(names: [Text], texts: [Text], notes: [Text], min_name_width: Int = 0): Null {
     const count = len(names)
     let name_width = min_name_width
     for i in 0..count {
@@ -387,7 +387,7 @@ pub fun render_help_entries(ref names: [Text], ref texts: [Text], ref notes: [Te
 ///
 /// Pieces are joined with single spaces and a break can only happen between
 /// them, so a piece that already carries colour stays intact.
-pub fun print_wrapped(ref pieces: [Text]): Null {
+pub fun print_wrapped(pieces: [Text]): Null {
     const width = term_width()
     let line = ""
     let line_len = 0

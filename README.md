@@ -6,14 +6,14 @@ it doesn't depend on external binaries and remains fully portable.
 
 ## Execution
 
-Just download and execute `xylitol.sh` script. (Bash 4.0+ is required.)  
+Just download and execute `xylitol.sh` script. (Bash 3.2+ is required.)  
 ANSI support is required for the terminal.
 
 or use [Amber](https://amber-lang.com/) to compile Bash script from amber code.
 
 ```
 bash <(curl -s "https://raw.githubusercontent.com/amber-lang/amber/master/setup/install.sh")
-amber build src/main.ab xylitol.sh
+amber build --target bash-3.2 src/main.ab xylitol.sh
 ```
 
 ## Commands

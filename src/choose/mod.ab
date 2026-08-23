@@ -10,7 +10,7 @@ import * from "./engine.ab"
 /// - `header`: An optional header message to display above the options. (ANSI supported)
 /// - `page_size`: The number of options to display per page.
 pub fun xyl_choose(
-    ref options: [Text],
+    options: [Text],
     cursor: Text = "> ",
     header: Text = "\x1b[1mChoose:\x1b[0m",
     page_size: Int = 10,
@@ -55,7 +55,7 @@ pub fun xyl_choose(
 /// - `limit`: The maximum number of options the user can select. Use -1 for no limit.
 /// - `page_size`: The number of options to display per page.
 pub fun xyl_multi_choose(
-    ref options: [Text],
+    options: [Text],
     cursor: Text = "> ",
     header: Text = "Choose:",
     limit: Int = -1,

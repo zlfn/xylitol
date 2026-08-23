@@ -38,6 +38,7 @@ The following environments are expected to work *perfectly*. This means XYLITOL 
 behave correctly for all input cases. Contributions that break functionality in these environments may be
 rejected or withheld until fixed.
 - Linux / macOS / WSL with all standard POSIX utilities installed.
+- Bash 4.0 or later
 - ASCII input excluding control characters
 
 The following environments are expected to work *adequetely*. This means XYLITOL should work
@@ -45,6 +46,7 @@ correctly in most situations, but may behave incorrectly in some extreme cases.
 Any contribution that causes issues in these environments will still be accepted.
 However, contributions that fix issues in these environments are encouraged.
 - Windows / FreeBSD
+- Bash 3.2, which is what macOS still ships as `/bin/bash`
 - Terminals without Xterm extensions
 - ANSI string input (only in cases explicitly documented as supported)
 - CJK text input
@@ -52,5 +54,6 @@ However, contributions that fix issues in these environments are encouraged.
 The following environments are *not guaranteed* to work correctly.
 Behavior in these environments may be inconsistent, and issues specific to them may not be addressed.
 - Terminals that do not meet the requirements listed in the "Terminal Requirements" section.
+- Bash older than 3.2, and other shells
 - Input containing control characters (e.g. newlines, tabs, backspaces, etc.)
 - Extremely large input (e.g. more than 10,000 options)

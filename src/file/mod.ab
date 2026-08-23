@@ -40,11 +40,7 @@ pub fun xyl_file(
     loop {
         eprintf(colored_primary("Loading files..."))
 
-        // Get directory entries
-        let listed_names = [Text]
-        let listed_types = [Text]
-        let listed_targets = [Text]
-        get_directory_entries(current_path, listed_names, listed_types, listed_targets)
+        const listed = get_directory_entries(current_path)
 
         // No display text is built here. The loop below formats one page at a
         // time, so a directory with thousands of entries only formats the
@@ -60,15 +56,17 @@ pub fun xyl_file(
             targets += [""]
         }
 
-        for i in 0..len(listed_names) {
-            const name = listed_names[i]
+        const listed_count = len(listed) / ENTRY_STRIDE
+        for i in 0..listed_count {
+            const at = i * ENTRY_STRIDE
+            const name = listed[at]
             // Skip hidden files if not showing them
             if not show_hidden and starts_with(name, ".") {
                 continue
             }
             names += [name]
-            types += [listed_types[i]]
-            targets += [listed_targets[i]]
+            types += [listed[at + 1]]
+            targets += [listed[at + 2]]
         }
 
         const total = len(names)

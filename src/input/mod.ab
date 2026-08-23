@@ -6,7 +6,9 @@ import * from "../utils.ab"
 ///
 /// ### Parameters
 /// - `prompt`: The prompt message to display to the user.
-/// - `placeholder`: The placeholder text to show in the input field.
+/// - `placeholder`: The placeholder text to show in the input field. Shown
+///   only on Bash 4.0 and later, which can put the keypress that dismisses it
+///   back into the line being edited.
 /// - `header`: An optional header message to display above the prompt. (ANSI supported)
 /// - `password`: A boolean indicating whether the input should be masked.
 pub fun xyl_input(
@@ -29,20 +31,27 @@ pub fun xyl_input(
     go_up(2)
     eprintf("\x1b[G")
 
-    eprintf(prompt)
-    eprintf_colored(placeholder, 90)
+    // Showing the placeholder means swallowing the first keypress to know when
+    // to erase it, and only `read -i` can hand that character back. Shells
+    // without it skip the placeholder rather than lose what was typed.
+    const can_preset = trust $ [ "\$\{EXEC_SHELL_VERSION[0]}" -ge 4 ] && echo 1 || echo 0 $
 
-    const char = get_char()
+    let char = ""
+    eprintf(prompt)
+    if can_preset == "1" {
+        eprintf_colored(placeholder, 90)
+        char = get_char()
+        remove(len(placeholder) + 1)
+    }
     remove(len(prompt))
-    remove(len(placeholder) + 1)
 
     let text = ""
     if not password {
         stty_unlock()
-        text = trust $ read -e -i {char} -p "{prompt}" text < /dev/tty; printf "%s" "\$text" $
+        text = trust $ if [ "\$\{EXEC_SHELL_VERSION[0]}" -ge 4 ]; then read -e -i "{char}" -p "{prompt}" text < /dev/tty; else read -e -p "{prompt}" text < /dev/tty; fi; printf "%s" "\$text" $
     } else {
         stty_unlock()
-        text = trust $ read -es -i {char} -p "{prompt}" text < /dev/tty; printf "%s" "\$text" $
+        text = trust $ if [ "\$\{EXEC_SHELL_VERSION[0]}" -ge 4 ]; then read -es -i "{char}" -p "{prompt}" text < /dev/tty; else read -es -p "{prompt}" text < /dev/tty; fi; printf "%s" "\$text" $
     }
 
     stty_lock()

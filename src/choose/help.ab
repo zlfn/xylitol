@@ -2,21 +2,21 @@ import * from "std/env"
 import * from "../utils.ab"
 
 pub fun print_choose_help(): Null {
-    let usage = ["Usage:", "./xylitol.sh", "choose", "[<options>", "...]", "[flags]"]
+    const usage = ["Usage:", "./xylitol.sh", "choose", "[<options>", "...]", "[flags]"]
     print_wrapped(usage)
     echo("")
-    let title = [colored_primary("choose"), "-", "Choose", "from", "a", "list", "of", "options."]
+    const title = [colored_primary("choose"), "-", "Choose", "from", "a", "list", "of", "options."]
     print_wrapped(title)
     echo("")
     printf(colored_secondary("Arguments:") + "\n")
-    let arg_names = ["[<options> ...]"]
-    let arg_texts = ["List of options to choose from"]
-    let arg_notes = [""]
+    const arg_names = ["[<options> ...]"]
+    const arg_texts = ["List of options to choose from"]
+    const arg_notes = [""]
     // 20 keeps this section on the same column as Flags below.
     render_help_entries(arg_names, arg_texts, arg_notes, 20)
     echo("")
     printf(colored_secondary("Flags:") + "\n")
-    let names = [
+    const names = [
         "-h, --help",
         "--limit=<number>",
         "--no-limit",
@@ -24,7 +24,7 @@ pub fun print_choose_help(): Null {
         "--header=\"<text>\"",
         "--page-size=<number>",
     ]
-    let texts = [
+    const texts = [
         "Show this help message",
         "Enable multi-selection mode with a limit of selections",
         "Enable multi-selection mode with no limit",
@@ -32,7 +32,7 @@ pub fun print_choose_help(): Null {
         "Set a header text to display above the options",
         "Set the number of options per page",
     ]
-    let notes = [
+    const notes = [
         "",
         "",
         "",

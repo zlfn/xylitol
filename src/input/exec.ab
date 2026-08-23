@@ -10,23 +10,20 @@ pub fun execute_input(parameters: [Text]): Text {
     let password = false
 
     for param in parameters {
-        if match_regex(param, "^-h$") or match_regex(param, "^--help$") {
+        if param == "-h" or param == "--help" {
             print_input_help()
             exit(0)
         }
-        if match_regex(param, "^--prompt=.*$") {
-            const result = split(param, "=")
-            prompt = result[1]
+        if starts_with(param, "--prompt=") {
+            prompt = slice(param, len("--prompt="))
         }
-        if match_regex(param, "^--placeholder=.*$") {
-            const result = split(param, "=")
-            placeholder = result[1]
+        if starts_with(param, "--placeholder=") {
+            placeholder = slice(param, len("--placeholder="))
         }
-        if match_regex(param, "^--header=.*$") {
-            const result = split(param, "=")
-            header = result[1]
+        if starts_with(param, "--header=") {
+            header = slice(param, len("--header="))
         }
-        if match_regex(param, "^--password$") {
+        if param == "--password" {
             password = true
         }
     }

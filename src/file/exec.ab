@@ -11,25 +11,23 @@ pub fun execute_file(parameters: [Text]): Text {
 
     for param in parameters[2..len(parameters)] {
         if {
-            match_regex(param, "^-h$") or match_regex(param, "^--help$") {
+            param == "-h" or param == "--help" {
                 print_file_help()
                 exit(0)
             }
-            match_regex(param, "^--cursor=.*$") {
-                const result = split(param, "=")
-                cursor = result[1]
+            starts_with(param, "--cursor=") {
+                cursor = slice(param, len("--cursor="))
             }
-            match_regex(param, "^--path=.*$") {
-                const result = split(param, "=")
-                start_path = result[1]
+            starts_with(param, "--path=") {
+                start_path = slice(param, len("--path="))
             }
-            match_regex(param, "^-a$") or match_regex(param, "^--all$") {
+            param == "-a" or param == "--all" {
                 show_hidden = true
             }
-            match_regex(param, "^--page-size=.*$") {
-                const result = split(param, "=")
-                page_size = parse_int(result[1]) failed {
-                    eprintf_colored("ERROR: Invalid page-size value: " + result[1] + "\n", 31)
+            starts_with(param, "--page-size=") {
+                const value = slice(param, len("--page-size="))
+                page_size = parse_int(value) failed {
+                    eprintf_colored("ERROR: Invalid page-size value: " + value + "\n", 31)
                     exit(1)
                 }
             }

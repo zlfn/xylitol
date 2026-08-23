@@ -1,4 +1,4 @@
-import { split, parse_int, match_regex } from "std/text"
+import { split, parse_int } from "std/text"
 
 /// global variables to store terminal size
 /// (prevent multiple queries in one session)
@@ -32,56 +32,43 @@ pub fun stty_unlock(): Null {
     }
 }
 
-/// Parse a size component, returning 0 when the text is not a number.
-fun parse_size(text: Text): Int {
-    // `match_regex` uses BRE by default, where `+` is a literal character
-    if not match_regex(text, "^[0-9][0-9]*$") {
-        return 0
+/// Store the size, given as a "rows columns" text of two positive integers.
+/// Both values are validated by the caller, so parsing cannot fail here.
+fun store_term_size(size: Text): Bool {
+    if size == "" {
+        return false
     }
-    return trust parse_int(text)
+    const parts = split(size, " ")
+    if len(parts) != 2 {
+        return false
+    }
+    _term_size = [trust parse_int(parts[1]), trust parse_int(parts[0])]
+    return true
 }
 
 /// Ask the terminal for its size with the xterm `\x1b[18t` extension.
 /// Response format: `\x1b[8;rows;colst`.
-/// The read times out, so terminals without the extension do not block execution.
+/// The read times out, otherwise terminals without the extension would
+/// wait for a reply that never arrives.
 fun query_term_size(): Bool {
-    const result = trust $ printf '\x1b[18t' > /dev/tty; IFS=';' read -t 0.5 -rsd t _ignore height width < /dev/tty 2>/dev/null; echo "\$height; \$width" $
-    const parts = split(result, ";")
-    if len(parts) != 2 {
-        return false
-    }
-    const rows = parse_size(parts[0])
-    const cols = parse_size(parts[1])
-    if rows <= 0 or cols <= 0 {
-        return false
-    }
-    _term_size = [cols, rows]
-    return true
+    const size = trust $ printf '\x1b[18t' > /dev/tty; IFS=';' read -t 0.5 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "\$height" =~ ^[1-9][0-9]*\$ && "\$width" =~ ^[1-9][0-9]*\$ ]] && echo "\$height \$width" $
+    return store_term_size(size)
 }
 
-/// Read the terminal size from the tty itself.
-/// Used when the terminal does not support the `\x1b[18t` extension.
+/// Read the terminal size from the tty itself with a `TIOCGWINSZ` ioctl.
 fun stty_term_size(): Bool {
-    const result = trust $ stty size < /dev/tty 2>/dev/null $
-    const parts = split(result, " ")
-    if len(parts) != 2 {
-        return false
-    }
-    const rows = parse_size(parts[0])
-    const cols = parse_size(parts[1])
-    if rows <= 0 or cols <= 0 {
-        return false
-    }
-    _term_size = [cols, rows]
-    return true
+    const size = trust $ read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "\$rows" =~ ^[1-9][0-9]*\$ && "\$cols" =~ ^[1-9][0-9]*\$ ]] && echo "\$rows \$cols" $
+    return store_term_size(size)
 }
 
 /// Get the terminal size (columns, rows).
+/// The tty is asked first because it answers without a round trip; the
+/// xterm extension is only needed when the tty does not know its size.
 /// Keeps the default size when it cannot be detected by any means.
 fun get_term_size(): Null {
-    let detected = query_term_size()
+    let detected = stty_term_size()
     if not detected {
-        detected = stty_term_size()
+        detected = query_term_size()
     }
     _got_term_size = true
 }

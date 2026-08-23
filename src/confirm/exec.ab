@@ -11,21 +11,20 @@ pub fun execute_confirm(parameters: [Text]): Text {
 
     for param in parameters {
         if {
-            match_regex(param, "^-h$") or match_regex(param, "^--help$") {
+            param == "-h" or param == "--help" {
                 print_confirm_help()
                 exit(0)
             }
-            match_regex(param, "^--header=.*$") {
-                const result = split(param, "=")
-                header = result[1]
+            starts_with(param, "--header=") {
+                header = slice(param, len("--header="))
             }
-            match_regex(param, "^--default=.*$") {
-                const result = split(param, "=")
+            starts_with(param, "--default=") {
+                const value = slice(param, len("--default="))
                 if {
-                    result[1] == "yes" or result[1] == "y": default_yes = true
-                    result[1] == "no" or result[1] == "n": default_yes = false
+                    value == "yes" or value == "y": default_yes = true
+                    value == "no" or value == "n": default_yes = false
                     else: {
-                        eprintf_colored("ERROR: Invalid default value: " + result[1] + ". Use 'yes' or 'no'.\n", 31)
+                        eprintf_colored("ERROR: Invalid default value: " + value + ". Use 'yes' or 'no'.\n", 31)
                         exit(1)
                     }
                 }

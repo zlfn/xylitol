@@ -8,10 +8,16 @@ let _term_size = [80, 24]
 /// stty lock/unlock using environment variable for cross-module state
 trust $ export XYLITOL_RUNTIME_STTY_COUNT=0 $
 
+/// Read the reference count, treating anything that is not a number as zero.
+/// The check happens in the shell so that `parse_int` cannot fail.
+fun stty_count(): Int {
+    const count = trust $ c="\$\{XYLITOL_RUNTIME_STTY_COUNT:-0}"; [[ "\$c" =~ ^[0-9]+\$ ]] && echo "\$c" || echo 0 $
+    return trust parse_int(count)
+}
+
 /// Lock the terminal (disable echo). Uses reference counting via environment variable.
 pub fun stty_lock(): Null {
-    const count = trust $ echo "\$\{XYLITOL_RUNTIME_STTY_COUNT:-0}" $
-    let count_num = parse_int(count) failed { 0 }
+    let count_num = stty_count()
     if count_num == 0 {
         trust $ stty -echo < /dev/tty $
     }
@@ -21,8 +27,7 @@ pub fun stty_lock(): Null {
 
 /// Unlock the terminal (enable echo). Uses reference counting via environment variable.
 pub fun stty_unlock(): Null {
-    const count = trust $ echo "\$\{XYLITOL_RUNTIME_STTY_COUNT:-0}" $
-    let count_num = parse_int(count) failed { 0 }
+    let count_num = stty_count()
     if count_num > 0 {
         count_num -= 1
         trust $ export XYLITOL_RUNTIME_STTY_COUNT={count_num} $

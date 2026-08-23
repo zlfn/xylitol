@@ -17,7 +17,7 @@ let _accent_color = [234, 72, 121, 95]
 /// Checks if the terminal supports 24-bit true color.
 /// Returns true if COLORTERM is "truecolor" or "24bit".
 fun get_supports_truecolor(): Bool {
-    const config = env_var_get("XYLITOL_TRUECOLOR") failed { "" }
+    const config = trust env_var_get("XYLITOL_TRUECOLOR")
     if config == "No" {
         _supports_truecolor = "No"
         return false
@@ -107,7 +107,7 @@ pub fun background_rgb(message: Text, r: Int, g: Int, b: Int, fallback: Int = 0)
 
 fun inner_get_xylitol_colors(): Null? {
     if not _got_xylitol_colors {
-        const primary_env = env_var_get("XYLITOL_PRIMARY_COLOR") failed { "" }
+        const primary_env = trust env_var_get("XYLITOL_PRIMARY_COLOR")
         if primary_env != "" {
             const parts = split(primary_env, ";")
             if len(parts) == 4 {
@@ -120,7 +120,7 @@ fun inner_get_xylitol_colors(): Null? {
             }
         }
 
-        const secondary_env = env_var_get("XYLITOL_SECONDARY_COLOR") failed { "" }
+        const secondary_env = trust env_var_get("XYLITOL_SECONDARY_COLOR")
         if secondary_env != "" {
             const parts = split(secondary_env, ";")
             if len(parts) == 4 {
@@ -133,7 +133,7 @@ fun inner_get_xylitol_colors(): Null? {
             }
         }
 
-        const accent_env = env_var_get("XYLITOL_ACCENT_COLOR") failed { "" }
+        const accent_env = trust env_var_get("XYLITOL_ACCENT_COLOR")
         if accent_env != "" {
             const parts = split(accent_env, ";")
             if len(parts) == 4 {

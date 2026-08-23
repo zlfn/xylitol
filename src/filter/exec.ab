@@ -14,7 +14,7 @@ fun read_stdin_options(): [Text] {
 
 pub fun execute_filter(parameters: [Text]): Text {
     let cursor = "> "
-    let prompt = "> "
+    let prompt = "/ "
     let placeholder = "Filter..."
     let header = ""
     let options = read_stdin_options()

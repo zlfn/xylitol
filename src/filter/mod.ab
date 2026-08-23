@@ -3,15 +3,17 @@ import { split, parse_int, slice, rpad } from "std/text"
 import * from "../utils.ab"
 
 let _options = [Text]
-/// Positions in `_options` that the query keeps, as text so that no parsing
-/// happens until a row is drawn.
+let _option_count = 0
+/// Positions in `_options` that the query keeps.
 let _matches = [Text]
+/// Held apart from `_matches` because `len` copies the array it is given.
+let _match_count = 0
 let _query = ""
 let _placeholder = ""
-let _prompt = "> "
+let _prompt = "/ "
 let _cursor = "> "
 let _height = 10
-/// First match shown, so the window scrolls without repaging.
+/// First match shown.
 let _offset = 0
 /// Highlighted row inside the window.
 let _sel = 0
@@ -19,21 +21,23 @@ let _multi = false
 let _has_header = false
 let _term_width = 80
 
-/// Positions of the options holding the query, ignoring case.
-/// One shell pass, so a keystroke costs one process however long the list is.
+/// Positions of the options holding the query, ignoring case, ranked so that an
+/// exact hit comes before a prefix and a prefix before a hit further in. Ties
+/// keep the order the options were given in. One shell pass.
 fun refresh_matches(): Null {
-    const raw = trust $ shopt -s nocasematch; __r=""; __i=0; for __it in "\$\{{nameof(_options)}[@]}"; do case "\$__it" in (*"{_query}"*) __r="\$__r \$__i";; esac; __i=\$((__i+1)); done; printf '%s' "\$\{__r# }" $
+    const raw = trust $ shopt -s nocasematch; __e=""; __p=""; __s=""; __i=0; for __it in "\$\{{nameof(_options)}[@]}"; do case "\$__it" in ("{_query}") __e="\$__e \$__i";; ("{_query}"*) __p="\$__p \$__i";; (*"{_query}"*) __s="\$__s \$__i";; esac; __i=\$((__i+1)); done; __a="\$__e\$__p\$__s"; printf '%s' "\$\{__a# }" $
     if raw == "" {
         _matches = [Text]
     } else {
         _matches = split(raw, " ")
     }
+    _match_count = len(_matches)
     _offset = 0
     _sel = 0
 }
 
 fun visible_count(): Int {
-    let count = len(_matches) - _offset
+    let count = _match_count - _offset
     if count > _height {
         count = _height
     }
@@ -90,7 +94,7 @@ fun render_rows(): Null {
 fun render_query(): Null {
     go_up(_height + 1)
     eprintf("\x1b[G\x1b[K")
-    eprintf(colored_secondary(_prompt))
+    eprintf(colored_primary(_prompt))
     if _query == "" {
         eprintf_colored(_placeholder, 90)
     } else {
@@ -101,8 +105,8 @@ fun render_query(): Null {
 }
 
 fun render_count(): Null {
-    eprintf("\x1b[K")
-    eprintf_colored("{len(_matches)}/{len(_options)}", 90)
+    eprintf("\x1b[G\x1b[K")
+    eprintf_colored("{_match_count}/{_option_count}", 90)
     eprintf("\x1b[G")
 }
 
@@ -133,7 +137,7 @@ fun move_selection(step: Int): Bool {
         _offset -= 1
         return true
     }
-    if next >= count and _offset + _height < len(_matches) {
+    if next >= count and _offset + _height < _match_count {
         _offset += 1
         return true
     }
@@ -153,7 +157,7 @@ fun move_selection(step: Int): Bool {
 /// - `height`: The number of options to display at once.
 pub fun xyl_filter(
     options: [Text],
-    prompt: Text = "> ",
+    prompt: Text = "/ ",
     placeholder: Text = "Filter...",
     header: Text = "",
     cursor: Text = "> ",
@@ -168,6 +172,7 @@ pub fun xyl_filter(
     }
 
     _options = options
+    _option_count = total
     _query = ""
     _prompt = prompt
     _placeholder = placeholder
@@ -181,7 +186,6 @@ pub fun xyl_filter(
     hide_cursor()
     _term_width = term_width()
 
-    // Header, query, count and tooltip take four of the terminal's lines.
     const max_height = term_height() - (_has_header then 4 else 3)
     _height = height
     if _height > max_height {
@@ -217,9 +221,6 @@ pub fun xyl_filter(
                 if visible_count() > 0 {
                     break
                 }
-                // Nothing matches, so there is nothing to hand back. Multi mode
-                // still confirms what is already ticked, otherwise a query that
-                // matches nothing would trap the user.
                 if _multi {
                     if checked_count() > 0 {
                         break
@@ -250,8 +251,6 @@ pub fun xyl_filter(
             }
             key == "BACKSPACE" {
                 if _query != "" {
-                    // A length of zero means "to the end" in `slice`, so the
-                    // last character left has to be dropped on its own.
                     if len(_query) == 1 {
                         _query = ""
                     } else {

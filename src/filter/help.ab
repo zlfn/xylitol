@@ -36,7 +36,7 @@ pub fun print_filter_help(): Null {
         "",
         "",
         "",
-        "(default: '> ')",
+        "(default: '/ ')",
         "(default: 'Filter...')",
         "(default: '> ')",
         "(ANSI escape supported)",

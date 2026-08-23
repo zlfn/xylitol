@@ -27,8 +27,9 @@ fun option_width(): Int
 fun refresh_matches(): Null 
 ```
 
-Positions of the options holding the query, ignoring case.
-One shell pass, so a keystroke costs one process however long the list is.
+Positions of the options holding the query, ignoring case, ranked so that an
+exact hit comes before a prefix and a prefix before a hit further in. Ties
+keep the order the options were given in. One shell pass.
 
 ## `render_count`
 
@@ -71,7 +72,7 @@ fun visible_count(): Int
 ## `xyl_filter`
 
 ```ab
-pub fun xyl_filter(options: [Text], prompt: Text = "> ", placeholder: Text = "Filter...", header: Text = "", cursor: Text = "> ", multi: Bool = false, limit: Int = - 1, height: Int = 10,): [Text] 
+pub fun xyl_filter(options: [Text], prompt: Text = "/ ", placeholder: Text = "Filter...", header: Text = "", cursor: Text = "> ", multi: Bool = false, limit: Int = - 1, height: Int = 10,): [Text] 
 ```
 
 Prompts the user to pick from a list narrowed by typing.

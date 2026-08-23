@@ -10,7 +10,6 @@ pub enum Step {
 pub const UP: &str = "\x1b[A";
 pub const DOWN: &str = "\x1b[B";
 pub const RIGHT: &str = "\x1b[C";
-pub const LEFT: &str = "\x1b[D";
 pub const ENTER: &str = "\n";
 pub const SPACE: &str = " ";
 pub const TAB: &str = "\t";
@@ -259,6 +258,22 @@ fn interactive() -> Vec<Case> {
             expect: Expect { stdout: Some("charlie"), ..Default::default() },
         },
         Case {
+            name: "filter: prefixes rank above later hits",
+            stdin: Some("printf 'dash\\nshadow\\nsh\\n'"),
+            args: "filter",
+            size: (40, 100),
+            steps: &[Step::Wait("dash"), Step::Send("sh"), Step::Wait("3/3"), Step::Send(ENTER)],
+            expect: Expect { stdout: Some("sh"), ..Default::default() },
+        },
+        Case {
+            name: "filter: prefix beats a later hit",
+            stdin: Some("printf 'dash\\nshadow\\n'"),
+            args: "filter",
+            size: (40, 100),
+            steps: &[Step::Wait("dash"), Step::Send("sh"), Step::Wait("2/2"), Step::Send(ENTER)],
+            expect: Expect { stdout: Some("shadow"), ..Default::default() },
+        },
+        Case {
             name: "filter: matches ignore case",
             stdin: Some("printf 'Alpha\\nBravo\\n'"),
             args: "filter",
@@ -338,6 +353,19 @@ fn interactive() -> Vec<Case> {
                 Step::Send(ENTER),
             ],
             expect: Expect { stdout: Some("alpha"), ..Default::default() },
+        },
+        Case {
+            name: "filter: narrows on CJK input",
+            stdin: Some("printf '애로우\\n버블스\\n체인지\\n'"),
+            args: "filter",
+            size: (40, 100),
+            steps: &[
+                Step::Wait("3/3"),
+                Step::Send("버"),
+                Step::Wait("1/3"),
+                Step::Send(ENTER),
+            ],
+            expect: Expect { stdout: Some("버블스"), ..Default::default() },
         },
         Case {
             name: "filter: space goes into the query",

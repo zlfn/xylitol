@@ -14,21 +14,17 @@ Type "clear"
 Enter
 Show
 
-Type "cat examples/inputs/kaguya.txt | ./xylitol.sh filter --height=8"
+Type "cat examples/inputs/clow_cards_en.txt | ./xylitol.sh filter --height=8"
 Enter
 Sleep 1.5s
 
-Type "a"
-Sleep 800ms
-Type "k"
-Sleep 1s
-Backspace
-Sleep 600ms
-Backspace
-Sleep 800ms
-Type "ro"
-Sleep 1s
+Type "s"
+Sleep 900ms
+Type "h"
+Sleep 1.4s
 Down
-Sleep 700ms
+Sleep 500ms
+Down
+Sleep 800ms
 Enter
 Sleep 2s

@@ -49,12 +49,10 @@ pub fun xyl_input(
     if not password {
         stty_unlock()
         text = trust $ if [ "\$\{EXEC_SHELL_VERSION[0]}" -ge 4 ]; then read -e -i "{char}" -p "{prompt}" text < /dev/tty; else read -e -p "{prompt}" text < /dev/tty; fi; printf "%s" "\$text" $
+        stty_lock()
     } else {
-        stty_unlock()
         text = trust $ if [ "\$\{EXEC_SHELL_VERSION[0]}" -ge 4 ]; then read -es -i "{char}" -p "{prompt}" text < /dev/tty; else read -es -p "{prompt}" text < /dev/tty; fi; printf "%s" "\$text" $
     }
-
-    stty_lock()
 
     // Calculate how many lines the input takes up (prompt + text may wrap)
     const input_display_len = get_visible_len(prompt + text)

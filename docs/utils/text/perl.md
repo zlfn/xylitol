@@ -1,3 +1,9 @@
+## `perl_available`
+
+```ab
+fun perl_available(): Bool 
+```
+
 ## `perl_get_cjk_width`
 
 ```ab

@@ -2,20 +2,20 @@ import * from "std/env"
 import * from "../utils.ab"
 
 pub fun print_file_help(): Null {
-    echo "Usage: ./xylitol.sh file [<path>] [flags]"
-    echo ""
+    echo("Usage: ./xylitol.sh file [<path>] [flags]")
+    echo("")
     printf(colored_primary("file"))
     printf(" - Browse filesystem and select a file.")
-    echo ""
-    echo ""
+    echo("")
+    echo("")
     printf(colored_secondary("Arguments: ") + "\n")
-    echo "  [<path>]               Starting directory path (default: current directory)"
-    echo ""
+    echo("  [<path>]               Starting directory path (default: current directory)")
+    echo("")
     printf(colored_secondary("Flags: ") + "\n")
-    echo "  -h, --help             Show this help message"
-    echo "  -a, --all              Show hidden files"
-    echo "  --cursor=\"<text>\"      Set the cursor text (default: '> ')"
-    echo "  --path=\"<path>\"        Set the starting directory path"
-    echo "  --page-size=<number>   Set the number of entries per page (default: 10)"
-    echo ""
+    echo("  -h, --help             Show this help message")
+    echo("  -a, --all              Show hidden files")
+    echo("  --cursor=\"<text>\"      Set the cursor text (default: '> ')")
+    echo("  --path=\"<path>\"        Set the starting directory path")
+    echo("  --page-size=<number>   Set the number of entries per page (default: 10)")
+    echo("")
 }

@@ -1,0 +1,38 @@
+import * from "./utils.ab"
+import { assert, assert_eq } from "std/test"
+
+test "has_ansi_escape" {
+    assert(not has_ansi_escape("Hello, World!"))
+    assert(not has_ansi_escape("안녕, 세상!"))
+    assert(has_ansi_escape("\x1b[31mRed Text\x1b[0m"))
+    assert(has_ansi_escape("Normal \x1b[32mGreen\x1b[0m Text"))
+    assert(has_ansi_escape("\x1b[1;34mBold Blue\x1b[0m"))
+}
+
+test "cutoff_text" {
+    assert_eq(cutoff_text("Hello, World!", 5), "He...")
+    assert_eq(cutoff_text("Short", 10), "Short")
+    assert_eq(cutoff_text("안녕하세요", 7), "안녕...")
+}
+
+test "strip_ansi" {
+    assert_eq(strip_ansi("\x1b[31mRed Text\x1b[0m"), "Red Text")
+    assert_eq(strip_ansi("\x1b[1mBold\x1b[0m and \x1b[31mRed\x1b[0m"), "Bold and Red")
+    assert_eq(strip_ansi("Hello World"), "Hello World")
+    assert_eq(strip_ansi("\x1b[38;2;3;207;159mTruecolor Text\x1b[0m"), "Truecolor Text")
+    assert_eq(strip_ansi("\x1b[48;2;255;100;50mBackground\x1b[0m"), "Background")
+    assert_eq(strip_ansi("\x1b[38;2;255;255;255;48;2;0;0;0mWhite on Black\x1b[0m"), "White on Black")
+    assert_eq(strip_ansi("\x1b[38;5;196mRed 256\x1b[0m"), "Red 256")
+    assert_eq(strip_ansi("\x1b[1m안녕하세요\x1b[0m"), "안녕하세요")
+}
+
+test "truncate_ansi" {
+    assert_eq(truncate_ansi("\x1b[31mRed Text\x1b[0m", 5), "\x1b[31mRed T\x1b[0m")
+    assert_eq(truncate_ansi("\x1b[32mSome message here\x1b[0m", 10), "\x1b[32mSome messa\x1b[0m")
+    assert_eq(truncate_ansi("\x1b[1mBold\x1b[0m and \x1b[31mRed\x1b[0m", 8), "\x1b[1mBold\x1b[0m and\x1b[31m\x1b[0m")
+    assert_eq(truncate_ansi("\x1b[34mShort\x1b[0m", 10), "\x1b[34mShort\x1b[0m")
+    assert_eq(truncate_ansi("Hello World", 8), "Hello Wo")
+    assert_eq(truncate_ansi("\x1b[38;2;3;207;159mTruecolor Text\x1b[0m", 10), "\x1b[38;2;3;207;159mTruecolor \x1b[0m")
+    assert_eq(truncate_ansi("\x1b[1m안녕하세요\x1b[0m", 6), "\x1b[1m안녕하\x1b[0m")
+    assert_eq(truncate_ansi("\x1b[1m안녕하세요\x1b[0m", 9), "\x1b[1m안녕하세\x1b[0m")
+}

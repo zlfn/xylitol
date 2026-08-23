@@ -1,15 +1,18 @@
 import { split, starts_with, char_at } from "std/text"
+pub import { dir_exists } from "std/fs"
 
 /// Get directory entries as array of "name\ttype" strings
 /// type: "d" for directory, "f" for file
 pub fun get_directory_entries(path: Text): [Text] {
-    let raw = trust $ ls -lA "{path}" 2>/dev/null | tail -n +2 $
-    let types = trust $ ls -lA "{path}" | tail -n +2 | sed -E 's/^(.).*/\1/' $
-    let names = trust $ ls -1A "{path}" $
+    // `names` comes from the `ls` builtin, which sorts under `LC_ALL=C`.
+    // The long listings below must use the same collation, otherwise the
+    // three arrays fall out of alignment for non-ASCII file names.
+    const raw_output = trust $ LC_ALL=C ls -lA "{path}" 2>/dev/null | tail -n +2 $
+    const types_output = trust $ LC_ALL=C ls -lA "{path}" | tail -n +2 | sed -E 's/^(.).*/\1/' $
+    const names = trust ls(path, true, false)
 
-    let types = split(types, "\n")
-    let raw = split(raw, "\n")
-    let names = split(names, "\n")
+    const types = split(types_output, "\n")
+    const raw = split(raw_output, "\n")
     let entries = [Text]
 
     for i in 0..len(raw) {
@@ -50,17 +53,11 @@ pub fun get_cwd(): Text {
 
 /// Normalize a path (resolve .. and .)
 pub fun normalize_path(path: Text): Text {
-    let normalized = trust $ cd "{path}" 2>/dev/null && pwd $
+    const normalized = trust $ cd "{path}" 2>/dev/null && pwd $
     if normalized == "" {
         return path
     }
     return normalized
-}
-
-/// Check if path is a directory
-pub fun is_directory(path: Text): Bool {
-    let result = trust $ [ -d "{path}" ] && echo "1" || echo "0" $
-    return result == "1"
 }
 
 /// Join two path components
@@ -73,6 +70,6 @@ pub fun path_join(base: Text, child: Text): Text {
 
 /// Get parent directory
 pub fun get_parent_dir(path: Text): Text {
-    let parent = trust $ dirname "{path}" $
+    const parent = trust $ dirname "{path}" $
     return parent
 }

@@ -1,13 +1,14 @@
 import * from "std/env"
 import * from "std/text"
+import { array_find } from "std/array"
 import * from "../utils.ab"
 import { xyl_choose } from "../choose/mod.ab"
 
 /// Format a single entry for display
 /// Directories are colored with accent color and have trailing /
 fun format_entry_display(entry: [Text]): Text {
-    let name = entry[0]
-    let file_type = entry[1]
+    const name = entry[0]
+    const file_type = entry[1]
 
     if file_type == "d" {
         return name + colored_primary("/")
@@ -33,9 +34,6 @@ pub fun xyl_file(
 ): Text {
     stty_lock()
 
-    let term_width = term_width()
-    let max_entry_width = term_width - len(cursor) - 1
-
     // Initialize current path
     let current_path = start_path
     if current_path == "" {
@@ -47,7 +45,7 @@ pub fun xyl_file(
         eprintf(colored_primary("Loading files..."))
 
         // Get directory entries
-        let raw_entries = get_directory_entries(current_path)
+        const raw_entries = get_directory_entries(current_path)
 
         // Build options list and parallel entries list
         let options = [Text]
@@ -60,11 +58,10 @@ pub fun xyl_file(
         }
 
         for raw_entry in raw_entries {
-            let entry = parse_entry(raw_entry)
-            let name = entry[0]
+            const entry = parse_entry(raw_entry)
+            const name = entry[0]
             // Skip hidden files if not showing them
-            let first_char = trust $ echo "{name}" | cut -c1 $
-            if not show_hidden and first_char == "." {
+            if not show_hidden and starts_with(name, ".") {
                 continue
             }
             options += [format_entry_display(entry)]
@@ -78,27 +75,21 @@ pub fun xyl_file(
         }
 
         // Use xyl_choose with current path as header
-        let header = colored_primary(current_path)
+        const header = colored_primary(current_path)
 
         remove_current_line()
-        let selected_option = xyl_choose(options, cursor, header, page_size)
+        const selected_option = xyl_choose(options, cursor, header, page_size)
 
         // Find selected entry index
-        let selected_idx = -1
-        for i in 0..len(options) {
-            if options[i] == selected_option {
-                selected_idx = i
-                break
-            }
-        }
+        const selected_idx = array_find(options, selected_option)
 
         if selected_idx < 0 {
             return ""
         }
 
-        let entry = parse_entry(entries[selected_idx])
-        let name = entry[0]
-        let file_type = entry[1]
+        const entry = parse_entry(entries[selected_idx])
+        const name = entry[0]
+        const file_type = entry[1]
 
         if {
             name == ".." {
@@ -110,13 +101,13 @@ pub fun xyl_file(
             }
             file_type == "l" {
                 // Resolve symlink target path
-                let target = entry[2]
+                const target = entry[2]
                 let target_path = target
                 if not starts_with(target, "/") {
                     target_path = path_join(current_path, target)
                 }
                 // Follow symlink if it points to a directory, otherwise return path
-                if is_directory(target_path) {
+                if dir_exists(target_path) {
                     current_path = target_path
                     current_path = normalize_path(current_path)
                 } else {

@@ -1,0 +1,26 @@
+import * from "./perl.ab"
+import { assert_eq } from "std/test"
+
+test "perl_get_cjk_width" {
+    assert_eq(trust perl_get_cjk_width("Hello"), 5)
+    assert_eq(trust perl_get_cjk_width("계절이 지나가는 하늘에는 가을로 가득 차 있습니다."), 49)
+    assert_eq(trust perl_get_cjk_width("古池や 蛙飛び込む 水の音"), 24)
+    assert_eq(trust perl_get_cjk_width("學而時習之 不亦說乎"), 19)
+    assert_eq(trust perl_get_cjk_width("😀😃😄😁😆😅😂🤣😊😇"), 20)
+    assert_eq(trust perl_get_cjk_width("🌸 Select Language"), 18)
+}
+
+test "perl_truncate_cjk" {
+    assert_eq(trust perl_truncate_cjk("안녕하세요 Hello", 10), "안녕하세요")
+    assert_eq(trust perl_truncate_cjk("Hello World", 5), "Hello")
+    assert_eq(trust perl_truncate_cjk("가나다라마바사", 8), "가나다라")
+    assert_eq(trust perl_truncate_cjk("가나다라마바사", 7), "가나다")
+    assert_eq(trust perl_truncate_cjk("Mix混合テスト", 7), "Mix混合")
+}
+
+test "perl_substr_cjk" {
+    assert_eq(trust perl_substr_cjk("안녕하세요 Hello", 4, 12), "하세요 H")
+    assert_eq(trust perl_substr_cjk("Hello World", 0, 5), "Hello")
+    assert_eq(trust perl_substr_cjk("가나다라마바사", 2, 10), "나다라마")
+    assert_eq(trust perl_substr_cjk("Mix混合テスト", 3, 9), "混合テ")
+}

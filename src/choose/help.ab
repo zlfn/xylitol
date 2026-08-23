@@ -2,21 +2,21 @@ import * from "std/env"
 import * from "../utils.ab"
 
 pub fun print_choose_help(): Null {
-    echo "Usage: ./xylitol.sh choose [<options> ...] [flags]"
-    echo ""
+    echo("Usage: ./xylitol.sh choose [<options> ...] [flags]")
+    echo("")
     printf(colored_primary("choose"))
     printf(" - Choose from a list of options.")
-    echo ""
-    echo ""
+    echo("")
+    echo("")
     printf(colored_secondary("Arguments: ") + "\n")
-    echo "  [<options> ...]        List of options to choose from"
-    echo ""
+    echo("  [<options> ...]        List of options to choose from")
+    echo("")
     printf(colored_secondary("Flags: ") + "\n")
-    echo "  -h, --help             Show this help message"
-    echo "  --limit=<number>       Enable multi-selection mode with a limit of selections"
-    echo "  --no-limit             Enable multi-selection mode with no limit"
-    echo "  --cursor=\"<text>\"      Set the cursor text (default: '> ')"
-    echo "  --header=\"<text>\"      Set a header text to display above the options (ANSI escape supported)"
-    echo "  --page-size=<number>   Set the number of options per page (default: 10)"
-    echo ""
+    echo("  -h, --help             Show this help message")
+    echo("  --limit=<number>       Enable multi-selection mode with a limit of selections")
+    echo("  --no-limit             Enable multi-selection mode with no limit")
+    echo("  --cursor=\"<text>\"      Set the cursor text (default: '> ')")
+    echo("  --header=\"<text>\"      Set a header text to display above the options (ANSI escape supported)")
+    echo("  --page-size=<number>   Set the number of options per page (default: 10)")
+    echo("")
 }

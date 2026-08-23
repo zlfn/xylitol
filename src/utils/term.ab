@@ -10,7 +10,7 @@ trust $ export XYLITOL_RUNTIME_STTY_COUNT=0 $
 
 /// Lock the terminal (disable echo). Uses reference counting via environment variable.
 pub fun stty_lock(): Null {
-    let count = trust $ echo "\$\{XYLITOL_RUNTIME_STTY_COUNT:-0}" $
+    const count = trust $ echo "\$\{XYLITOL_RUNTIME_STTY_COUNT:-0}" $
     let count_num = parse_int(count) failed { 0 }
     if count_num == 0 {
         trust $ stty -echo < /dev/tty $
@@ -21,7 +21,7 @@ pub fun stty_lock(): Null {
 
 /// Unlock the terminal (enable echo). Uses reference counting via environment variable.
 pub fun stty_unlock(): Null {
-    let count = trust $ echo "\$\{XYLITOL_RUNTIME_STTY_COUNT:-0}" $
+    const count = trust $ echo "\$\{XYLITOL_RUNTIME_STTY_COUNT:-0}" $
     let count_num = parse_int(count) failed { 0 }
     if count_num > 0 {
         count_num -= 1
@@ -45,13 +45,13 @@ fun parse_size(text: Text): Int {
 /// Response format: `\x1b[8;rows;colst`.
 /// The read times out, so terminals without the extension do not block execution.
 fun query_term_size(): Bool {
-    let result = trust $ printf '\x1b[18t' > /dev/tty; IFS=';' read -t 0.5 -rsd t _ignore height width < /dev/tty 2>/dev/null; echo "\$height; \$width" $
-    let parts = split(result, ";")
+    const result = trust $ printf '\x1b[18t' > /dev/tty; IFS=';' read -t 0.5 -rsd t _ignore height width < /dev/tty 2>/dev/null; echo "\$height; \$width" $
+    const parts = split(result, ";")
     if len(parts) != 2 {
         return false
     }
-    let rows = parse_size(parts[0])
-    let cols = parse_size(parts[1])
+    const rows = parse_size(parts[0])
+    const cols = parse_size(parts[1])
     if rows <= 0 or cols <= 0 {
         return false
     }
@@ -62,13 +62,13 @@ fun query_term_size(): Bool {
 /// Read the terminal size from the tty itself.
 /// Used when the terminal does not support the `\x1b[18t` extension.
 fun stty_term_size(): Bool {
-    let result = trust $ stty size < /dev/tty 2>/dev/null $
-    let parts = split(result, " ")
+    const result = trust $ stty size < /dev/tty 2>/dev/null $
+    const parts = split(result, " ")
     if len(parts) != 2 {
         return false
     }
-    let rows = parse_size(parts[0])
-    let cols = parse_size(parts[1])
+    const rows = parse_size(parts[0])
+    const cols = parse_size(parts[1])
     if rows <= 0 or cols <= 0 {
         return false
     }

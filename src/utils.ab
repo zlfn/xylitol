@@ -9,13 +9,13 @@ pub import * from "utils/truecolor.ab"
 
 /// Reads a single character from terminal.
 pub fun get_char(): Text {
-    let char = trust $ read -n 1 key < /dev/tty; printf "%s" "\$key" $
+    const char = trust $ read -n 1 key < /dev/tty; printf "%s" "\$key" $
     return char
 }
 
 /// Reads a key from terminal, including special keys (arrows, backspace, etc.)
 pub fun get_key(): Text {
-    let var = trust $ read -rsn1 k < /dev/tty; if [[ "\$k" == \$'\e' ]]; then read -rsn2 r < /dev/tty; k+=\$r; fi; printf '%q' "\$k" $
+    const var = trust $ read -rsn1 k < /dev/tty; if [[ "\$k" == \$'\e' ]]; then read -rsn2 r < /dev/tty; k+=\$r; fi; printf '%q' "\$k" $
     if {
         var == "$'\E[A'": return "UP"
         var == "$'\E[B'": return "DOWN"
@@ -33,8 +33,8 @@ pub fun printf_colored(message: Text, color: Int): Null {
 }
 
 pub fun eprintf(format: Text, args: [Text] = [""]): Null {
-    trust $ {nameof args}=("{format}" "\$\{{nameof args}[@]}") $
-    trust $ printf "\$\{{nameof args}[@]}" >&2 $
+    trust $ {nameof(args)}=("{format}" "\$\{{nameof(args)}[@]}") $
+    trust $ printf "\$\{{nameof(args)}[@]}" >&2 $
 }
 
 pub fun eprintf_colored(message: Text, color: Int): Null {
@@ -81,7 +81,7 @@ pub fun print_blank(cnt: Int): Null {
 }
 
 pub fun new_line(cnt: Int): Null {
-    for i in 0..cnt {
+    for _ in 0..cnt {
         eprintf("\n")
     }
 }
@@ -119,7 +119,7 @@ pub fun show_cursor(): Null {
 /// Returns true if the text contains "\x1b[".
 pub fun has_ansi_escape(text: Text): Bool {
     // Check for ESC character (0x1B = 27) or literal \x1b[
-    let has_escape = trust $ [[ "{text}" == *\$'\x1b'* || "{text}" == *'\x1b['* ]] && echo "1" || echo "0" $
+    const has_escape = trust $ [[ "{text}" == *\$'\x1b'* || "{text}" == *'\x1b['* ]] && echo "1" || echo "0" $
     return has_escape == "1"
 }
 
@@ -136,7 +136,7 @@ pub fun strip_ansi(text: Text): Text {
 
 /// Check if the text is all ASCII characters (code points 32-126).
 pub fun is_all_ascii(text: Text): Bool {
-    let result = trust $ printf "%s" "{text}" | LC_ALL=C grep -q '^[ -~]*\$' && echo 0 || echo 1 $
+    const result = trust $ printf "%s" "{text}" | LC_ALL=C grep -q '^[ -~]*\$' && echo 0 || echo 1 $
     return result == "0"
 }
 
@@ -145,7 +145,7 @@ pub fun is_all_ascii(text: Text): Bool {
 /// ### Parameters
 /// - `text`: Text that may contain ANSI escape sequences.
 pub fun get_visible_len(text: Text): Int {
-    let stripped = strip_ansi(text)
+    const stripped = strip_ansi(text)
     // Check if text is all ASCII
     if not is_all_ascii(stripped) {
         // Try using perl
@@ -160,7 +160,7 @@ pub fun get_visible_len(text: Text): Int {
 /// Truncate text to fit within max_width without adding any suffix.
 /// Simply cuts the text to fit within the specified width.
 pub fun truncate_text(text: Text, max_width: Int): Text {
-    let visible_len = get_visible_len(text)
+    const visible_len = get_visible_len(text)
     if visible_len <= max_width {
         return text
     }
@@ -181,48 +181,48 @@ pub fun truncate_ansi(text: Text, max_width: Int): Text {
     }
 
     // Check if text starts with \x1b[
-    let starts_with_ansi = trust $ [[ "{text}" == '\\x1b['* ]] && echo "1" || echo "0" $
+    const starts_with_ansi = trust $ [[ "{text}" == '\\x1b['* ]] && echo "1" || echo "0" $
 
     // Replace \x1b[ with newline, then split
-    let replaced = trust $ t="{text}"; printf '%s' "\$\{t//\\\\x1b[/
+    const replaced = trust $ t="{text}"; printf '%s' "\$\{t//\\\\x1b[/
 }" $
-    let parts = split(replaced, "\n")
+    const parts = split(replaced, "\n")
     let result = ""
     let remaining_width = max_width
 
     for idx in 0..len(parts) {
-        let part = parts[idx]
+        const part = parts[idx]
 
         // If text starts with ANSI, all parts are "ANSIparams m text" format
         // If not, first part is pure text
         if idx == 0 and starts_with_ansi == "0" {
             // First part is pure text (before any ANSI)
             if part != "" and remaining_width > 0 {
-                let truncated = truncate_text(part, remaining_width)
+                const truncated = truncate_text(part, remaining_width)
                 result += truncated
                 remaining_width -= get_visible_len(truncated)
             }
         } else {
             // Part is "ANSIparams m text" format - find first 'm'
-            let m_idx = trust $ __p="{part}"; for ((i=0; i<\$\{#__p}; i++)); do [[ "\$\{__p:\$i:1}" == "m" ]] && echo \$i && break; done $
+            const m_idx = trust $ __p="{part}"; for ((i=0; i<\$\{#__p}; i++)); do [[ "\$\{__p:\$i:1}" == "m" ]] && echo \$i && break; done $
             if m_idx != "" {
                 // Reconstruct ANSI sequence
-                let ansi_params = trust $ __p="{part}"; printf "%s" "\$\{__p:0:{m_idx}}" $
+                const ansi_params = trust $ __p="{part}"; printf "%s" "\$\{__p:0:{m_idx}}" $
                 result += "\\x1b[" + ansi_params + "m"
 
                 // Rest is text content
-                let m_idx_num = trust parse_int(m_idx)
-                let text_start = m_idx_num + 1
-                let text_part = trust $ __p="{part}"; printf "%s" "\$\{__p:{text_start}}" $
+                const m_idx_num = trust parse_int(m_idx)
+                const text_start = m_idx_num + 1
+                const text_part = trust $ __p="{part}"; printf "%s" "\$\{__p:{text_start}}" $
                 if text_part != "" and remaining_width > 0 {
-                    let truncated = truncate_text(text_part, remaining_width)
+                    const truncated = truncate_text(text_part, remaining_width)
                     result += truncated
                     remaining_width -= get_visible_len(truncated)
                 }
             } else {
                 // No 'm' found, treat as text
                 if part != "" and remaining_width > 0 {
-                    let truncated = truncate_text(part, remaining_width)
+                    const truncated = truncate_text(part, remaining_width)
                     result += truncated
                     remaining_width -= get_visible_len(truncated)
                 }
@@ -236,7 +236,7 @@ pub fun truncate_ansi(text: Text, max_width: Int): Text {
 /// Truncate text to fit within max_width, adding "..." if truncated.
 /// The max_width includes the "..." suffix.
 pub fun cutoff_text(text: Text, max_width: Int): Text {
-    let visible_len = get_visible_len(text)
+    const visible_len = get_visible_len(text)
     if visible_len <= max_width {
         return text
     }
@@ -254,8 +254,8 @@ pub fun cutoff_text(text: Text, max_width: Int): Text {
 /// - `total_len`: Pre-calculated total visible length of the tooltip.
 /// - `term_width`: Terminal width to truncate output.
 pub fun render_tooltip(items: [Text], total_len: Int, term_width: Int): Null {
-    let separator = " • "
-    let separator_len = 3
+    const separator = " • "
+    const separator_len = 3
 
     // Fast path: no truncation needed
     if total_len <= term_width {
@@ -277,9 +277,9 @@ pub fun render_tooltip(items: [Text], total_len: Int, term_width: Int): Null {
             if iter >= len(items) {
                 break
             }
-            let key = items[iter]
-            let action = items[iter + 1]
-            let part_len = len(key) + 1 + len(action)
+            const key = items[iter]
+            const action = items[iter + 1]
+            const part_len = len(key) + 1 + len(action)
 
             let needed = part_len
             if not first {
@@ -300,4 +300,3 @@ pub fun render_tooltip(items: [Text], total_len: Int, term_width: Int): Null {
         }
     }
 }
-

@@ -5,9 +5,9 @@ import * from "../utils.ab"
 
 fun read_stdin_options(): [Text] {
     let options = [Text]
-    let is_tty = trust $ [ -t 0 ] && echo "true" || echo "false" $
+    const is_tty = trust $ [ -t 0 ] && echo "true" || echo "false" $
     if is_tty == "false" {
-        trust $ while IFS= read -r line || [[ -n "\$line" ]]; do {nameof options}+=("\$line"); done $
+        trust $ while IFS= read -r line || [[ -n "\$line" ]]; do {nameof(options)}+=("\$line"); done $
     }
     return options
 }
@@ -20,22 +20,22 @@ pub fun execute_choose(parameters: [Text]): Text {
     let limit = -1
     let page_size = 10 
 
-    for param in parameters[2..9999] {
+    for param in parameters[2..len(parameters)] {
         if {
             match_regex(param, "^-h$") or match_regex(param, "^--help$") {
                 print_choose_help()
                 exit(0)
             }
             match_regex(param, "^--cursor=.*$") {
-                let result = split(param, "=")
+                const result = split(param, "=")
                 cursor = result[1]
             }
             match_regex(param, "^--header=.*$") {
-                let result = split(param, "=")
+                const result = split(param, "=")
                 header = result[1]
             }
             match_regex(param, "^--limit=.*$") {
-                let result = split(param, "=")
+                const result = split(param, "=")
                 limit = parse_int(result[1]) failed {
                     eprintf_colored("ERROR: Invalid limit value: " + result[1] + "\n", 31)
                     exit(1)
@@ -46,7 +46,7 @@ pub fun execute_choose(parameters: [Text]): Text {
                 multi = true
             }
             match_regex(param, "^--page-size=.*$") {
-                let result = split(param, "=")
+                const result = split(param, "=")
                 page_size = parse_int(result[1]) failed {
                     eprintf_colored("ERROR: Invalid page-size value: " + result[1] + "\n", 31)
                     exit(1)
@@ -58,10 +58,10 @@ pub fun execute_choose(parameters: [Text]): Text {
         }
     }
 
-    let display_header = header == "" or has_ansi_escape(header) then escape_ansi(header) else "\\x1b[1m" + colored_primary(header)
+    const display_header = header == "" or has_ansi_escape(header) then escape_ansi(header) else "\\x1b[1m" + colored_primary(header)
 
     if multi {
-        let results = xyl_multi_choose(options, cursor, display_header, limit, page_size)
+        const results = xyl_multi_choose(options, cursor, display_header, limit, page_size)
         return join(results, "\n")
     }
 

@@ -2,30 +2,30 @@ import * from "std/env"
 import * from "./utils.ab"
 
 pub fun print_help() {
-    echo "Usage: ./xylitol.sh <command> [flags]"
-    echo ""
+    echo("Usage: ./xylitol.sh <command> [flags]")
+    echo("")
     printf("\x1b[1m" + colored_primary("Xylitol"))
     printf(" - A tool for ")
     printf(colored_primary("fresh"))
     printf(" shell scripts.")
-    echo ""
-    echo ""
+    echo("")
+    echo("")
     printf(colored_secondary("Flags: ") + "\n")
-    echo "  -h, --help        Show this help message"
-    echo "  -v, --version     Show version information"
-    echo ""
+    echo("  -h, --help        Show this help message")
+    echo("  -v, --version     Show version information")
+    echo("")
     printf(colored_secondary("Commands: ") + "\n")
-    echo "  input             Prompt for some input"
-    echo "  choose            Choose from a list of options"
-    echo "  confirm           Prompt for a yes/no confirmation"
-    echo "  file              Browse filesystem and select a file"
-    echo ""
+    echo("  input             Prompt for some input")
+    echo("  choose            Choose from a list of options")
+    echo("  confirm           Prompt for a yes/no confirmation")
+    echo("  file              Browse filesystem and select a file")
+    echo("")
     printf(colored_secondary("Envs: ") + "\n")
     printf("  $XYLITOL_USE_PERL          Use Perl for CJK / Optimization " + colored("(\"Yes\" or \"No\", default: Yes)", 90) + "\n")
     printf("  $XYLITOL_TRUECOLOR         Enable 24-bit truecolor support " + colored("(\"Yes\" or \"No\", default: Yes)", 90) + "\n")
     printf("  $XYLITOL_PRIMARY_COLOR     Set the primary color " + colored("(default: 3;207;159;92)", 90) + "\n")
     printf("  $XYLITOL_SECONDARY_COLOR   Set the secondary color " + colored("(default: 3;118;206;94)", 90) + "\n")
     printf("  $XYLITOL_ACCENT_COLOR      Set the accent color " + colored("(default: 234;72;121;95)", 90) + "\n")
-    echo ""
+    echo("")
     printf("Run " + colored_accent("./xylitol.sh <command> --help") + " for more information on a command.\n") 
 }

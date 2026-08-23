@@ -8,7 +8,7 @@ import { execute_confirm } from "./confirm/exec.ab"
 import { execute_file } from "./file/exec.ab"
 
 const VERSION = "0.1.0"
-const AMBER_VERSION = "0.5.1-alpha"
+const AMBER_VERSION = "0.6.0-alpha"
 
 fun check_prerequirements(): Bool {
     $ echo "0" | bc -l > /dev/null $ failed {
@@ -31,37 +31,46 @@ main(args) {
     trap_cleanup()
     if not check_prerequirements(): exit(1)
 
+    // `args[1]` must not be read before the length is checked,
+    // because `or` evaluates both of its operands.
+    if len(args) < 2 {
+        print_help()
+        exit(0)
+    }
+
+    const command = args[1]
+
     if {
-        len(args) < 2 or args[1] == "help" or args[1] == "--help" or args[1] == "-h": {
+        command == "help" or command == "--help" or command == "-h": {
             print_help()
         }
-        args[1] == "input": {
-            echo execute_input(args)
+        command == "input": {
+            echo(execute_input(args))
         }
-        args[1] == "choose": {
-            echo execute_choose(args)
+        command == "choose": {
+            echo(execute_choose(args))
         }
-        args[1] == "confirm": {
-            let result = execute_confirm(args)
+        command == "confirm": {
+            const result = execute_confirm(args)
             if {
                 result == "yes": exit(0)
                 else: exit(1)
             }
         }
-        args[1] == "file": {
-            echo execute_file(args)
+        command == "file": {
+            echo(execute_file(args))
         }
-        args[1] == "version" or args[1] == "--version" or args[1] == "-v": {
+        command == "version" or command == "--version" or command == "-v": {
             printf(colored_primary("xylitol.sh"))
             printf(" version: ")
             printf(colored_accent(VERSION))
-            echo ""
+            echo("")
             printf_colored("written in Amber: ", 90)
             printf_colored("  " + AMBER_VERSION, 90)
         }
         else: {
             print_help()
-            printf_colored("ERROR: Unknown command '" + args[1] + "'", 91)
+            printf_colored("ERROR: Unknown command '" + command + "'", 91)
         }
     }
 }

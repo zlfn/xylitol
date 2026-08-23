@@ -9,25 +9,25 @@ pub fun execute_file(parameters: [Text]): Text {
     let show_hidden = false
     let page_size = 10
 
-    for param in parameters[2..9999] {
+    for param in parameters[2..len(parameters)] {
         if {
             match_regex(param, "^-h$") or match_regex(param, "^--help$") {
                 print_file_help()
                 exit(0)
             }
             match_regex(param, "^--cursor=.*$") {
-                let result = split(param, "=")
+                const result = split(param, "=")
                 cursor = result[1]
             }
             match_regex(param, "^--path=.*$") {
-                let result = split(param, "=")
+                const result = split(param, "=")
                 start_path = result[1]
             }
             match_regex(param, "^-a$") or match_regex(param, "^--all$") {
                 show_hidden = true
             }
             match_regex(param, "^--page-size=.*$") {
-                let result = split(param, "=")
+                const result = split(param, "=")
                 page_size = parse_int(result[1]) failed {
                     eprintf_colored("ERROR: Invalid page-size value: " + result[1] + "\n", 31)
                     exit(1)

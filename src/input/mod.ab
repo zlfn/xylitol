@@ -17,7 +17,7 @@ pub fun xyl_input(
 ): Text {
     stty_lock()
 
-    let term_width = term_width()
+    const term_width = term_width()
 
     if header != "" {
         eprintf(cutoff_text(header, term_width) + "\n")
@@ -32,7 +32,7 @@ pub fun xyl_input(
     eprintf(prompt)
     eprintf_colored(placeholder, 90)
 
-    let char = get_char()
+    const char = get_char()
     remove(len(prompt))
     remove(len(placeholder) + 1)
 
@@ -48,8 +48,8 @@ pub fun xyl_input(
     stty_lock()
 
     // Calculate how many lines the input takes up (prompt + text may wrap)
-    let input_display_len = get_visible_len(prompt + text)
-    let input_lines = math_ceil(input_display_len / term_width)
+    const input_display_len = get_visible_len(prompt + text)
+    const input_lines = math_ceil(input_display_len / term_width)
 
     if input_lines < 3 {
         go_down(2 - input_lines)

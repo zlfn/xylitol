@@ -2,20 +2,41 @@ import * from "std/env"
 import * from "../utils.ab"
 
 pub fun print_file_help(): Null {
-    echo("Usage: ./xylitol.sh file [<path>] [flags]")
+    let usage = ["Usage:", "./xylitol.sh", "file", "[<path>]", "[flags]"]
+    print_wrapped(usage)
     echo("")
-    printf(colored_primary("file"))
-    printf(" - Browse filesystem and select a file.")
+    let title = [colored_primary("file"), "-", "Browse", "filesystem", "and", "select", "a", "file."]
+    print_wrapped(title)
     echo("")
+    printf(colored_secondary("Arguments:") + "\n")
+    let arg_names = ["[<path>]"]
+    let arg_texts = ["Starting directory path"]
+    let arg_notes = ["(default: current directory)"]
+    // 20 keeps this section on the same column as Flags below.
+    render_help_entries(arg_names, arg_texts, arg_notes, 20)
     echo("")
-    printf(colored_secondary("Arguments: ") + "\n")
-    echo("  [<path>]               Starting directory path (default: current directory)")
-    echo("")
-    printf(colored_secondary("Flags: ") + "\n")
-    echo("  -h, --help             Show this help message")
-    echo("  -a, --all              Show hidden files")
-    echo("  --cursor=\"<text>\"      Set the cursor text (default: '> ')")
-    echo("  --path=\"<path>\"        Set the starting directory path")
-    echo("  --page-size=<number>   Set the number of entries per page (default: 10)")
+    printf(colored_secondary("Flags:") + "\n")
+    let names = [
+        "-h, --help",
+        "-a, --all",
+        "--cursor=\"<text>\"",
+        "--path=\"<path>\"",
+        "--page-size=<number>",
+    ]
+    let texts = [
+        "Show this help message",
+        "Show hidden files",
+        "Set the cursor text",
+        "Set the starting directory path",
+        "Set the number of entries per page",
+    ]
+    let notes = [
+        "",
+        "",
+        "(default: '> ')",
+        "",
+        "(default: 10)",
+    ]
+    render_help_entries(names, texts, notes)
     echo("")
 }

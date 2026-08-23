@@ -2,30 +2,60 @@ import * from "std/env"
 import * from "./utils.ab"
 
 pub fun print_help() {
-    echo("Usage: ./xylitol.sh <command> [flags]")
+    let usage = ["Usage:", "./xylitol.sh", "<command>", "[flags]"]
+    print_wrapped(usage)
     echo("")
-    printf("\x1b[1m" + colored_primary("Xylitol"))
-    printf(" - A tool for ")
-    printf(colored_primary("fresh"))
-    printf(" shell scripts.")
+    let title = [
+        "\x1b[1m" + colored_primary("Xylitol"),
+        "-", "A", "tool", "for", colored_primary("fresh"), "shell", "scripts.",
+    ]
+    print_wrapped(title)
     echo("")
+    printf(colored_secondary("Flags:") + "\n")
+    let flag_names = ["-h, --help", "-v, --version"]
+    let flag_texts = ["Show this help message", "Show version information"]
+    let flag_notes = ["", ""]
+    // 13 keeps this section on the same column as Commands below.
+    render_help_entries(flag_names, flag_texts, flag_notes, 13)
     echo("")
-    printf(colored_secondary("Flags: ") + "\n")
-    echo("  -h, --help        Show this help message")
-    echo("  -v, --version     Show version information")
+    printf(colored_secondary("Commands:") + "\n")
+    let cmd_names = ["input", "choose", "confirm", "file"]
+    let cmd_texts = [
+        "Prompt for some input",
+        "Choose from a list of options",
+        "Prompt for a yes/no confirmation",
+        "Browse filesystem and select a file",
+    ]
+    let cmd_notes = ["", "", "", ""]
+    render_help_entries(cmd_names, cmd_texts, cmd_notes, 13)
     echo("")
-    printf(colored_secondary("Commands: ") + "\n")
-    echo("  input             Prompt for some input")
-    echo("  choose            Choose from a list of options")
-    echo("  confirm           Prompt for a yes/no confirmation")
-    echo("  file              Browse filesystem and select a file")
+    printf(colored_secondary("Envs:") + "\n")
+    let env_names = [
+        "$XYLITOL_USE_PERL",
+        "$XYLITOL_TRUECOLOR",
+        "$XYLITOL_PRIMARY_COLOR",
+        "$XYLITOL_SECONDARY_COLOR",
+        "$XYLITOL_ACCENT_COLOR",
+    ]
+    let env_texts = [
+        "Use Perl for CJK / Optimization",
+        "Enable 24-bit truecolor support",
+        "Set the primary color",
+        "Set the secondary color",
+        "Set the accent color",
+    ]
+    let env_notes = [
+        "(\"Yes\" or \"No\", default: Yes)",
+        "(\"Yes\" or \"No\", default: Yes)",
+        "(default: 3;207;159;92)",
+        "(default: 3;118;206;94)",
+        "(default: 234;72;121;95)",
+    ]
+    render_help_entries(env_names, env_texts, env_notes)
     echo("")
-    printf(colored_secondary("Envs: ") + "\n")
-    printf("  $XYLITOL_USE_PERL          Use Perl for CJK / Optimization " + colored("(\"Yes\" or \"No\", default: Yes)", 90) + "\n")
-    printf("  $XYLITOL_TRUECOLOR         Enable 24-bit truecolor support " + colored("(\"Yes\" or \"No\", default: Yes)", 90) + "\n")
-    printf("  $XYLITOL_PRIMARY_COLOR     Set the primary color " + colored("(default: 3;207;159;92)", 90) + "\n")
-    printf("  $XYLITOL_SECONDARY_COLOR   Set the secondary color " + colored("(default: 3;118;206;94)", 90) + "\n")
-    printf("  $XYLITOL_ACCENT_COLOR      Set the accent color " + colored("(default: 234;72;121;95)", 90) + "\n")
-    echo("")
-    printf("Run " + colored_accent("./xylitol.sh <command> --help") + " for more information on a command.\n") 
+    let footer = [
+        "Run", colored_accent("./xylitol.sh <command> --help"),
+        "for", "more", "information", "on", "a", "command.",
+    ]
+    print_wrapped(footer)
 }

@@ -2,17 +2,34 @@ import * from "std/env"
 import * from "../utils.ab"
 
 pub fun print_input_help(): Null {
-    echo("Usage: ./xylitol.sh input [flags]")
+    let usage = ["Usage:", "./xylitol.sh", "input", "[flags]"]
+    print_wrapped(usage)
     echo("")
-    printf(colored_primary("input"))
-    printf(" - Prompt for some input from the user.")
+    let title = [colored_primary("input"), "-", "Prompt", "for", "some", "input", "from", "the", "user."]
+    print_wrapped(title)
     echo("")
-    echo("")
-    printf(colored_secondary("Flags: ") + "\n")
-    echo("  -h, --help                 Show this help message")
-    echo("  --placeholder=\"<text>\"     Set the placeholder text (default: 'Type here...')")
-    echo("  --prompt=\"<text>\"          Set the prompt text (default: '> ')")
-    echo("  --header=\"<text>\"          Set a header text to display above the prompt (ANSI escape supported)")
-    echo("  --password                 Hide input (for password entry)")
+    printf(colored_secondary("Flags:") + "\n")
+    let names = [
+        "-h, --help",
+        "--placeholder=\"<text>\"",
+        "--prompt=\"<text>\"",
+        "--header=\"<text>\"",
+        "--password",
+    ]
+    let texts = [
+        "Show this help message",
+        "Set the placeholder text",
+        "Set the prompt text",
+        "Set a header text to display above the prompt",
+        "Hide input (for password entry)",
+    ]
+    let notes = [
+        "",
+        "(default: 'Type here...')",
+        "(default: '> ')",
+        "(ANSI escape supported)",
+        "",
+    ]
+    render_help_entries(names, texts, notes)
     echo("")
 }

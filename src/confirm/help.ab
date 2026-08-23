@@ -2,15 +2,28 @@ import * from "std/env"
 import * from "../utils.ab"
 
 pub fun print_confirm_help(): Null {
-    echo("Usage: ./xylitol.sh confirm [flags]")
+    let usage = ["Usage:", "./xylitol.sh", "confirm", "[flags]"]
+    print_wrapped(usage)
     echo("")
-    printf(colored_primary("confirm"))
-    printf(" - Display a Yes/No confirmation dialog.")
+    let title = [colored_primary("confirm"), "-", "Display", "a", "Yes/No", "confirmation", "dialog."]
+    print_wrapped(title)
     echo("")
-    echo("")
-    printf(colored_secondary("Flags: ") + "\n")
-    echo("  -h, --help             Show this help message")
-    echo("  --header=\"<text>\"      Set a header text to display above the options (ANSI escape supported)")
-    echo("  --default=<yes|no>     Set the default selection (default: yes)")
+    printf(colored_secondary("Flags:") + "\n")
+    let names = [
+        "-h, --help",
+        "--header=\"<text>\"",
+        "--default=<yes|no>",
+    ]
+    let texts = [
+        "Show this help message",
+        "Set a header text to display above the options",
+        "Set the default selection",
+    ]
+    let notes = [
+        "",
+        "(ANSI escape supported)",
+        "(default: yes)",
+    ]
+    render_help_entries(names, texts, notes)
     echo("")
 }

@@ -1,0 +1,11 @@
+[package]
+name = "e2e-test"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rexpect = "0.7"
+
+[[bin]]
+name = "e2e-test"
+path = "src/main.rs"

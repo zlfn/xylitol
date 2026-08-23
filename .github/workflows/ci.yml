@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Amber
+        # The installer ends by asking for a nickname for its telemetry ping.
+        run: echo no | bash <(curl -sL "https://github.com/amber-lang/amber/releases/download/0.6.0-alpha/install.sh")
+
+      - name: Compile without warnings
+        run: |
+          amber build --target bash-3.2 src/main.ab /tmp/xylitol.sh 2> build.log
+          if [ -s build.log ]; then
+            cat build.log
+            echo "::error::the compiler had something to say"
+            exit 1
+          fi
+
+      # xylitol.sh is committed, so it has to be what the sources produce.
+      - name: Committed script is up to date
+        run: diff -u xylitol.sh /tmp/xylitol.sh
+
+      - name: Unit tests
+        run: amber test src/
+
+  e2e:
+    name: bash ${{ matrix.bash }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        bash: ["3.2", "4.0", "4.3", "4.4", "5.0", "5.2"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: e2e-test
+
+      - name: Drive xylitol through a terminal
+        run: cargo run --release --manifest-path e2e-test/Cargo.toml -- --docker bash:${{ matrix.bash }}
+
+  e2e-macos:
+    # The bash macOS ships is 3.2, and the userland is BSD rather than GNU.
+    name: macOS /bin/bash
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: e2e-test
+
+      - name: Drive xylitol through a terminal
+        run: cargo run --release --manifest-path e2e-test/Cargo.toml -- --bash /bin/bash

@@ -12,7 +12,7 @@ ANSI support is required for the terminal.
 or use [Amber](https://amber-lang.com/) to compile Bash script from amber code.
 
 ```
-bash <(curl -s "https://raw.githubusercontent.com/amber-lang/amber/master/setup/install.sh")
+bash <(curl -sL "https://github.com/amber-lang/amber/releases/download/0.6.0-alpha/install.sh")
 amber build --target bash-3.2 src/main.ab xylitol.sh
 ```
 
@@ -67,8 +67,8 @@ Prompt the user to select a file from the file tree.
 ```
 
 ### Tested on
+Every push drives the built script through a pseudo terminal on:
 ```
-- macOS 15+ / iTerm2 3.6.2+ / GNU bash 5.3.3+
-- macOS 15+ / iTerm2 3.6.2+ / Bash subshell in nushell 0.101.0+
-- Arch Linux ARM / Wezterm 20240203+ / GNU bash 5.3.3+
+- Ubuntu / docker bash 3.2, 4.0, 4.3, 4.4, 5.0, 5.2
+- macOS / /bin/bash (3.2)
 ```

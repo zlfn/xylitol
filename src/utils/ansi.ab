@@ -1,0 +1,130 @@
+import { split, parse_int } from "std/text"
+import { perl_get_cjk_width, perl_truncate_cjk } from "./perl.ab"
+
+/// Checks if the text contains ANSI escape sequences.
+/// Returns true if the text contains "\x1b[".
+pub fun has_ansi_escape(text: Text): Bool {
+    // Check for ESC character (0x1B = 27) or literal \x1b[
+    const has_escape = trust $ [[ "{text}" == *\$'\x1b'* || "{text}" == *'\x1b['* ]] && echo "1" || echo "0" $
+    return has_escape == "1"
+}
+
+/// Convert real ESC characters (0x1b) to literal \x1b string.
+/// This normalizes ANSI escape sequences for internal processing.
+pub fun escape_ansi(text: Text): Text {
+    return trust $ printf '%s' "{text}" | sed \$'s/\x1b/\\\\x1b/g' $
+}
+
+/// Remove ANSI escape sequences from text.
+pub fun strip_ansi(text: Text): Text {
+    return trust $ printf "%s" "{text}" | sed \$'s/\x1b\\[[0-9;]*m//g' | sed 's/\\\\x1b\\[[0-9;]*m//g' $
+}
+
+/// Check if the text is all ASCII characters (code points 32-126).
+pub fun is_all_ascii(text: Text): Bool {
+    const result = trust $ printf "%s" "{text}" | LC_ALL=C grep -q '^[ -~]*\$' && echo 0 || echo 1 $
+    return result == "0"
+}
+
+/// Get visible length of ANSI-colored text (excluding escape sequences).
+///
+/// ### Parameters
+/// - `text`: Text that may contain ANSI escape sequences.
+pub fun get_visible_len(text: Text): Int {
+    const stripped = strip_ansi(text)
+    // Check if text is all ASCII
+    if not is_all_ascii(stripped) {
+        // Try using perl
+        return perl_get_cjk_width(stripped) failed {
+            return len(stripped)
+        }
+    } else {
+        return len(stripped)
+    }
+}
+
+/// Truncate text to fit within max_width without adding any suffix.
+/// Simply cuts the text to fit within the specified width.
+pub fun truncate_text(text: Text, max_width: Int): Text {
+    const visible_len = get_visible_len(text)
+    if visible_len <= max_width {
+        return text
+    }
+    if not is_all_ascii(text) {
+        return perl_truncate_cjk(text, max_width) failed {
+            trust $ printf "%s" "{text}" | cut -c1-{max_width} $
+        }
+    }
+    return trust $ printf "%s" "{text}" | cut -c1-{max_width} $
+}
+
+/// Truncate ANSI-colored text to fit within max_width.
+/// Preserves ANSI escape sequences while truncating visible content.
+/// ANSI sequences are expected in literal \x1b format.
+pub fun truncate_ansi(text: Text, max_width: Int): Text {
+    if not has_ansi_escape(text) {
+        return truncate_text(text, max_width)
+    }
+
+    // Check if text starts with \x1b[
+    const starts_with_ansi = trust $ [[ "{text}" == '\\x1b['* ]] && echo "1" || echo "0" $
+
+    // Replace \x1b[ with newline, then split
+    const replaced = trust $ t="{text}"; printf '%s' "\$\{t//\\\\x1b[/
+}" $
+    const parts = split(replaced, "\n")
+    let result = ""
+    let remaining_width = max_width
+
+    for idx in 0..len(parts) {
+        const part = parts[idx]
+
+        // If text starts with ANSI, all parts are "ANSIparams m text" format
+        // If not, first part is pure text
+        if idx == 0 and starts_with_ansi == "0" {
+            // First part is pure text (before any ANSI)
+            if part != "" and remaining_width > 0 {
+                const truncated = truncate_text(part, remaining_width)
+                result += truncated
+                remaining_width -= get_visible_len(truncated)
+            }
+        } else {
+            // Part is "ANSIparams m text" format - find first 'm'
+            const m_idx = trust $ __p="{part}"; for ((i=0; i<\$\{#__p}; i++)); do [[ "\$\{__p:\$i:1}" == "m" ]] && echo \$i && break; done $
+            if m_idx != "" {
+                // Reconstruct ANSI sequence
+                const ansi_params = trust $ __p="{part}"; printf "%s" "\$\{__p:0:{m_idx}}" $
+                result += "\\x1b[" + ansi_params + "m"
+
+                // Rest is text content
+                const m_idx_num = trust parse_int(m_idx)
+                const text_start = m_idx_num + 1
+                const text_part = trust $ __p="{part}"; printf "%s" "\$\{__p:{text_start}}" $
+                if text_part != "" and remaining_width > 0 {
+                    const truncated = truncate_text(text_part, remaining_width)
+                    result += truncated
+                    remaining_width -= get_visible_len(truncated)
+                }
+            } else {
+                // No 'm' found, treat as text
+                if part != "" and remaining_width > 0 {
+                    const truncated = truncate_text(part, remaining_width)
+                    result += truncated
+                    remaining_width -= get_visible_len(truncated)
+                }
+            }
+        }
+    }
+
+    return result
+}
+
+/// Truncate text to fit within max_width, adding "..." if truncated.
+/// The max_width includes the "..." suffix.
+pub fun cutoff_text(text: Text, max_width: Int): Text {
+    const visible_len = get_visible_len(text)
+    if visible_len <= max_width {
+        return text
+    }
+    return truncate_ansi(text, max_width - 3) + "..."
+}

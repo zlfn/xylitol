@@ -1,4 +1,4 @@
-import * from "./utils.ab"
+import * from "./ansi.ab"
 import { assert, assert_eq } from "std/test"
 
 test "has_ansi_escape" {

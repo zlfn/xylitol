@@ -1,0 +1,57 @@
+import { eprintf, eprintf_colored, colored } from "../io.ab"
+
+/// Render a tooltip line with key-action pairs.
+/// Format: "key action • key action • ..."
+/// Truncates if exceeds term_width.
+///
+/// ### Parameters
+/// - `items`: Flat array of key, action pairs. e.g. ["↑↓", "select", "enter", "confirm"]
+/// - `total_len`: Pre-calculated total visible length of the tooltip.
+/// - `term_width`: Terminal width to truncate output.
+pub fun render_tooltip(items: [Text], total_len: Int, term_width: Int): Null {
+    const separator = " • "
+    const separator_len = 3
+
+    // Fast path: no truncation needed
+    if total_len <= term_width {
+        let iter = 0
+        loop {
+            if {
+                iter >= len(items): break
+                iter > 0: eprintf_colored(separator, 90)
+            }
+            eprintf(items[iter] + " " + colored(items[iter + 1], 2))
+            iter += 2
+        }
+    } else {
+        // Slow path: truncate
+        let current_len = 0
+        let first = true
+        let iter = 0
+        loop {
+            if iter >= len(items) {
+                break
+            }
+            const key = items[iter]
+            const action = items[iter + 1]
+            const part_len = len(key) + 1 + len(action)
+
+            let needed = part_len
+            if not first {
+                needed += separator_len
+            }
+
+            if current_len + needed > term_width {
+                break
+            }
+
+            if not first {
+                eprintf_colored(separator, 90)
+            }
+            eprintf(key + " " + colored(action, 2))
+            current_len += needed
+            first = false
+            iter += 2
+        }
+    }
+}

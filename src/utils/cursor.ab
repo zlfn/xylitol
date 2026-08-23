@@ -1,0 +1,67 @@
+import { eprintf } from "./io.ab"
+
+/// remove `cnt` characters to the left of the cursor, clearing to end of line.
+/// Does nothing when `cnt` is not positive.
+pub fun remove(cnt: Int): Null {
+    if cnt > 0 {
+        eprintf("\x1b[{cnt as Text}D\x1b[K")
+    }
+}
+
+/// remove `cnt` lines from the terminal (starting from current line, going up).
+/// Removes no line when `cnt` is not positive.
+pub fun remove_line(cnt: Int): Null {
+    if cnt > 0 {
+        let sequence = ""
+        for _ in 0..cnt {
+            sequence += "\x1b[2K\x1b[1A"
+        }
+        eprintf(sequence)
+    }
+    eprintf("\x1b[G")
+}
+
+/// remove the current line from the terminal.
+pub fun remove_current_line(): Null {
+    eprintf("\x1b[2K\x1b[G")
+}
+
+/// Prints blank spaces.
+/// ### Parameters
+/// - `cnt`: Number of spaces to print.
+pub fun print_blank(cnt: Int): Null {
+    trust $ printf '%*s' "{cnt as Text}" ' ' >&2 $
+}
+
+pub fun new_line(cnt: Int): Null {
+    for _ in 0..cnt {
+        eprintf("\n")
+    }
+}
+
+/// move the cursor up `cnt` lines.
+pub fun go_up(cnt: Int): Null {
+    eprintf("\x1b[{cnt as Text}A")
+}
+
+/// move the cursor down `cnt` lines.
+pub fun go_down(cnt: Int): Null {
+    eprintf("\x1b[{cnt as Text}B")
+}
+
+// move the cursor up or down `cnt` lines.
+pub fun go_up_or_down(cnt: Int): Null {
+    if cnt > 0 {
+        go_down(cnt)
+    } else {
+        go_up(-cnt)
+    }
+}
+
+pub fun hide_cursor(): Null {
+    eprintf("\x1b[?25l")
+}
+
+pub fun show_cursor(): Null {
+    eprintf("\x1b[?25h")
+}

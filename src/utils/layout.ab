@@ -1,0 +1,122 @@
+import { printf } from "std/env"
+import { split, slice, rpad } from "std/text"
+import { colored } from "./io.ab"
+import { has_ansi_escape, get_visible_len } from "./ansi.ab"
+import { term_width } from "./term.ab"
+
+/// Print one wrapped help line, dimming it from `note_at` onwards.
+fun print_help_line(pending: Text, line: Text, note_at: Int): Null {
+    if {
+        note_at < 0: printf(pending + line + "\n")
+        // A length of zero means "to the end" in `slice`, so a line that is
+        // all note has to be handled on its own.
+        note_at == 0: printf(pending + colored(line, 90) + "\n")
+        else: printf(pending + slice(line, 0, note_at) + colored(slice(line, note_at), 90) + "\n")
+    }
+}
+
+/// Render aligned help entries.
+///
+/// The name column is sized to the longest name. A description and its note
+/// flow as one paragraph that wraps under that column, with the note dimmed
+/// wherever it lands.
+/// `min_name_width` keeps neighbouring sections on the same column when their
+/// longest names differ.
+pub fun render_help_entries(names: [Text], texts: [Text], notes: [Text], min_name_width: Int = 0): Null {
+    const count = len(names)
+    let name_width = min_name_width
+    for i in 0..count {
+        const width = len(names[i])
+        if width > name_width {
+            name_width = width
+        }
+    }
+    const width = term_width()
+    // Two spaces of margin, then three between a name and its description.
+    let indent = name_width + 5
+    // Once the description column gets too narrow to read, stop putting the
+    // description beside the name and place it underneath instead.
+    const stacked = width - indent < 24
+    if stacked {
+        indent = 6
+    }
+    const avail = width - indent
+    const blank = rpad("", " ", indent)
+
+    for i in 0..count {
+        let pending = blank
+        if stacked {
+            printf("  " + names[i] + "\n")
+        } else {
+            pending = rpad("  " + names[i], " ", indent)
+        }
+        let words = split(texts[i], " ")
+        const note_start = len(words)
+        if notes[i] != "" {
+            // A note reads badly when split, so it moves between lines whole
+            // unless it is too long to ever fit on one.
+            if len(notes[i]) > avail {
+                words += split(notes[i], " ")
+            } else {
+                words += [notes[i]]
+            }
+        }
+
+        let line = ""
+        // Where the note begins on the line being built, so it can be dimmed
+        // after wrapping decides how much of it fits. -1 while there is none.
+        let note_at = -1
+
+        for j in 0..len(words) {
+            const word = words[j]
+            const candidate = line == "" then word else line + " " + word
+            if len(candidate) > avail and line != "" {
+                print_help_line(pending, line, note_at)
+                pending = blank
+                line = word
+                note_at = j >= note_start then 0 else -1
+            } else {
+                if j >= note_start and note_at < 0 {
+                    note_at = len(candidate) - len(word)
+                }
+                line = candidate
+            }
+        }
+        print_help_line(pending, line, note_at)
+    }
+}
+
+/// Print `pieces` as one paragraph wrapped to the terminal width.
+///
+/// Pieces are joined with single spaces and a break can only happen between
+/// them, so a piece that already carries colour stays intact.
+pub fun print_wrapped(pieces: [Text]): Null {
+    const width = term_width()
+    let line = ""
+    let line_len = 0
+
+    for piece in pieces {
+        let piece_len = len(piece)
+        if has_ansi_escape(piece) {
+            piece_len = get_visible_len(piece)
+        }
+        if {
+            line == "": {
+                line = piece
+                line_len = piece_len
+            }
+            line_len + 1 + piece_len > width: {
+                printf(line + "\n")
+                line = piece
+                line_len = piece_len
+            }
+            else: {
+                line += " " + piece
+                line_len += 1 + piece_len
+            }
+        }
+    }
+    if line != "" {
+        printf(line + "\n")
+    }
+}

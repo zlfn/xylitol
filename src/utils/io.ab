@@ -1,0 +1,41 @@
+import { printf } from "std/env"
+
+/// Reads a single character from terminal.
+pub fun get_char(): Text {
+    const char = trust $ read -n 1 key < /dev/tty; printf "%s" "\$key" $
+    return char
+}
+
+/// Reads a key from terminal, including special keys (arrows, backspace, etc.)
+pub fun get_key(): Text {
+    const var = trust $ read -rsn1 k < /dev/tty; if [[ "\$k" == \$'\e' ]]; then read -rsn2 r < /dev/tty; k+=\$r; fi; printf '%q' "\$k" $
+    if {
+        var == "$'\E[A'": return "UP"
+        var == "$'\E[B'": return "DOWN"
+        var == "$'\E[C'": return "RIGHT"
+        var == "$'\E[D'": return "LEFT"
+        var == "$'\177'": return "BACKSPACE"
+        var == "''": return "INPUT"
+        else: return var
+    }
+}
+
+pub fun printf_colored(message: Text, color: Int): Null {
+    /// Prints a text with a specified color.
+    printf("\x1b[{color as Text}m%s\x1b[0m", [message])
+}
+
+pub fun eprintf(format: Text, args: [Text] = [""]): Null {
+    trust $ {nameof(args)}=("{format}" "\$\{{nameof(args)}[@]}") $
+    trust $ printf "\$\{{nameof(args)}[@]}" >&2 $
+}
+
+pub fun eprintf_colored(message: Text, color: Int): Null {
+    /// Prints an error message with a specified color.
+    eprintf("\x1b[{color as Text}m%s\x1b[0m", [message])
+}
+
+pub fun colored(message: Text, color: Int): Text {
+    /// Returns a text wrapped in color codes.
+    return "\x1b[{color as Text}m" + message + "\x1b[0m"
+}

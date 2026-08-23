@@ -1,0 +1,305 @@
+import * from "std/env"
+import { split, parse_int, slice, rpad } from "std/text"
+import * from "../utils.ab"
+
+let _options = [Text]
+/// Positions in `_options` that the query keeps, as text so that no parsing
+/// happens until a row is drawn.
+let _matches = [Text]
+let _query = ""
+let _placeholder = ""
+let _prompt = "> "
+let _cursor = "> "
+let _height = 10
+/// First match shown, so the window scrolls without repaging.
+let _offset = 0
+/// Highlighted row inside the window.
+let _sel = 0
+let _multi = false
+let _has_header = false
+let _term_width = 80
+
+/// Positions of the options holding the query, ignoring case.
+/// One shell pass, so a keystroke costs one process however long the list is.
+fun refresh_matches(): Null {
+    const raw = trust $ shopt -s nocasematch; __r=""; __i=0; for __it in "\$\{{nameof(_options)}[@]}"; do case "\$__it" in *"{_query}"*) __r="\$__r \$__i";; esac; __i=\$((__i+1)); done; printf '%s' "\$\{__r# }" $
+    if raw == "" {
+        _matches = [Text]
+    } else {
+        _matches = split(raw, " ")
+    }
+    _offset = 0
+    _sel = 0
+}
+
+fun visible_count(): Int {
+    let count = len(_matches) - _offset
+    if count > _height {
+        count = _height
+    }
+    if count < 0 {
+        count = 0
+    }
+    return count
+}
+
+/// Position in `_options` of the match drawn on `row`.
+fun option_index(row: Int): Int {
+    return trust parse_int(_matches[_offset + row])
+}
+
+fun option_width(): Int {
+    const check_width = _multi then 3 else 1
+    return _term_width - len(_cursor) - check_width
+}
+
+fun row_line(row: Int, highlighted: Bool): Text {
+    const truncated = cutoff_text(_options[option_index(row)], option_width())
+    const blank = rpad("", " ", len(_cursor))
+    if not _multi {
+        if highlighted {
+            return colored_secondary(_cursor + truncated)
+        }
+        return blank + truncated
+    }
+    const ticked = checked_is(option_index(row))
+    const mark = ticked then "✓ " else "• "
+    if highlighted {
+        return colored_secondary(_cursor + mark + truncated)
+    }
+    if ticked {
+        return blank + colored_secondary(mark + truncated)
+    }
+    return blank + mark + truncated
+}
+
+/// Draw every row of the window, from the line the cursor rests on.
+fun render_rows(): Null {
+    const count = visible_count()
+    go_up(_height)
+    eprintf("\x1b[G")
+    for row in 0..count {
+        eprintf("\x1b[K" + row_line(row, row == _sel) + "\n")
+    }
+    for _ in count.._height {
+        eprintf("\x1b[K\n")
+    }
+    eprintf("\x1b[G")
+}
+
+fun render_query(): Null {
+    go_up(_height + 1)
+    eprintf("\x1b[G\x1b[K")
+    eprintf(colored_secondary(_prompt))
+    if _query == "" {
+        eprintf_colored(_placeholder, 90)
+    } else {
+        eprintf(cutoff_text(_query, _term_width - len(_prompt)))
+    }
+    go_down(_height + 1)
+    eprintf("\x1b[G")
+}
+
+fun render_count(): Null {
+    eprintf("\x1b[K")
+    eprintf_colored("{len(_matches)}/{len(_options)}", 90)
+    eprintf("\x1b[G")
+}
+
+fun render_tooltip_line(): Null {
+    if _multi {
+        render_tooltip(["↑↓", "select", "tab", "toggle", "ctrl-a", "all", "enter", "confirm"], 51, _term_width)
+    } else {
+        render_tooltip(["↑↓", "select", "enter", "confirm"], 25, _term_width)
+    }
+}
+
+/// Move the highlight by `step`, scrolling the window when it runs off an end.
+/// Returns whether the whole window has to be drawn again.
+fun move_selection(step: Int): Bool {
+    const count = visible_count()
+    if count == 0 {
+        return false
+    }
+    const next = _sel + step
+    if next >= 0 and next < count {
+        const prev = _sel
+        _sel = next
+        redraw_row(_height, prev, row_line(prev, false))
+        redraw_row(_height, _sel, row_line(_sel, true))
+        return false
+    }
+    if next < 0 and _offset > 0 {
+        _offset -= 1
+        return true
+    }
+    if next >= count and _offset + _height < len(_matches) {
+        _offset += 1
+        return true
+    }
+    return false
+}
+
+/// Prompts the user to pick from a list narrowed by typing.
+///
+/// ### Parameters
+/// - `options`: The list of options to pick from.
+/// - `prompt`: The text shown in front of the query.
+/// - `placeholder`: The text shown while the query is empty.
+/// - `header`: An optional header message to display above the query. (ANSI supported)
+/// - `cursor`: The cursor text to indicate the highlighted option.
+/// - `multi`: Whether more than one option can be picked.
+/// - `limit`: The maximum number of options that can be picked. Use -1 for no limit.
+/// - `height`: The number of options to display at once.
+pub fun xyl_filter(
+    options: [Text],
+    prompt: Text = "> ",
+    placeholder: Text = "Filter...",
+    header: Text = "",
+    cursor: Text = "> ",
+    multi: Bool = false,
+    limit: Int = -1,
+    height: Int = 10,
+): [Text] {
+    const total = len(options)
+    if total == 0 {
+        eprintf_colored("ERROR: No options provided.\n", 31)
+        exit(1)
+    }
+
+    _options = options
+    _query = ""
+    _prompt = prompt
+    _placeholder = placeholder
+    _cursor = cursor
+    _multi = multi
+    _has_header = header != ""
+    _offset = 0
+    _sel = 0
+
+    stty_lock()
+    hide_cursor()
+    _term_width = term_width()
+
+    // Header, query, count and tooltip take four of the terminal's lines.
+    const max_height = term_height() - (_has_header then 4 else 3)
+    _height = height
+    if _height > max_height {
+        _height = max_height
+    }
+    if _height < 1 {
+        _height = 1
+    }
+
+    if multi {
+        checked_init(total, limit)
+    }
+    refresh_matches()
+
+    if _has_header {
+        eprintf(cutoff_text(header, _term_width) + "\n")
+    }
+    new_line(1)
+    new_line(_height)
+    render_count()
+    new_line(1)
+    render_tooltip_line()
+    go_up(1)
+    eprintf("\x1b[G")
+
+    render_rows()
+    render_query()
+
+    loop {
+        const key = get_key()
+        if {
+            key == "INPUT" {
+                if visible_count() > 0 {
+                    break
+                }
+                // Nothing matches, so there is nothing to hand back. Multi mode
+                // still confirms what is already ticked, otherwise a query that
+                // matches nothing would trap the user.
+                if _multi {
+                    if checked_count() > 0 {
+                        break
+                    }
+                }
+            }
+            key == "UP" {
+                if move_selection(-1) {
+                    render_rows()
+                }
+            }
+            key == "DOWN" {
+                if move_selection(1) {
+                    render_rows()
+                }
+            }
+            _multi and key == "TAB" {
+                if visible_count() > 0 {
+                    if checked_toggle(option_index(_sel)) {
+                        redraw_row(_height, _sel, row_line(_sel, true))
+                    }
+                }
+            }
+            _multi and key == "CTRL_A" {
+                if checked_all() {
+                    render_rows()
+                }
+            }
+            key == "BACKSPACE" {
+                if _query != "" {
+                    // A length of zero means "to the end" in `slice`, so the
+                    // last character left has to be dropped on its own.
+                    if len(_query) == 1 {
+                        _query = ""
+                    } else {
+                        _query = slice(_query, 0, len(_query) - 1)
+                    }
+                    refresh_matches()
+                    render_rows()
+                    render_query()
+                    render_count()
+                }
+            }
+            else {
+                let typed = key
+                if key == "SPACE" {
+                    typed = " "
+                }
+                if len(typed) == 1 {
+                    _query += typed
+                    refresh_matches()
+                    render_rows()
+                    render_query()
+                    render_count()
+                }
+            }
+        }
+    }
+
+    let total_lines = _height + 3
+    if _has_header {
+        total_lines += 1
+    }
+    go_down(1)
+    remove_line(total_lines - 1)
+    remove_current_line()
+    stty_unlock()
+    show_cursor()
+
+    let result = [Text]
+    if _multi {
+        for i in 0..total {
+            if checked_is(i) {
+                result += [_options[i]]
+            }
+        }
+        return result
+    }
+    if visible_count() > 0 {
+        result += [_options[option_index(_sel)]]
+    }
+    return result
+}

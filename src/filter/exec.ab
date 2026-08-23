@@ -1,0 +1,70 @@
+import * from "std/text"
+import * from "./mod.ab"
+import * from "./help.ab"
+import * from "../utils.ab"
+
+fun read_stdin_options(): [Text] {
+    let options = [Text]
+    const is_tty = trust $ [ -t 0 ] && echo "true" || echo "false" $
+    if is_tty == "false" {
+        trust $ while IFS= read -r line || [[ -n "\$line" ]]; do {nameof(options)}+=("\$line"); done $
+    }
+    return options
+}
+
+pub fun execute_filter(parameters: [Text]): Text {
+    let cursor = "> "
+    let prompt = "> "
+    let placeholder = "Filter..."
+    let header = ""
+    let options = read_stdin_options()
+    let multi = false
+    let limit = -1
+    let height = 10
+
+    for param in parameters[2..len(parameters)] {
+        if {
+            param == "-h" or param == "--help" {
+                print_filter_help()
+                exit(0)
+            }
+            starts_with(param, "--cursor=") {
+                cursor = slice(param, len("--cursor="))
+            }
+            starts_with(param, "--prompt=") {
+                prompt = slice(param, len("--prompt="))
+            }
+            starts_with(param, "--placeholder=") {
+                placeholder = slice(param, len("--placeholder="))
+            }
+            starts_with(param, "--header=") {
+                header = slice(param, len("--header="))
+            }
+            starts_with(param, "--limit=") {
+                const value = slice(param, len("--limit="))
+                limit = parse_int(value) failed {
+                    eprintf_colored("ERROR: Invalid limit value: " + value + "\n", 31)
+                    exit(1)
+                }
+                multi = true
+            }
+            param == "--no-limit" {
+                multi = true
+            }
+            starts_with(param, "--height=") {
+                const value = slice(param, len("--height="))
+                height = parse_int(value) failed {
+                    eprintf_colored("ERROR: Invalid height value: " + value + "\n", 31)
+                    exit(1)
+                }
+            }
+            else {
+                options += [param]
+            }
+        }
+    }
+
+    const display_header = header == "" or has_ansi_escape(header) then escape_ansi(header) else "\\x1b[1m" + colored_primary(header)
+    const results = xyl_filter(options, prompt, placeholder, display_header, cursor, multi, limit, height)
+    return join(results, "\n")
+}

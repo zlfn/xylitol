@@ -7,20 +7,10 @@ pub fun get_char(): Text {
 }
 
 /// Reads a key from terminal, including special keys (arrows, backspace, etc.)
+/// IFS is cleared so that space and tab do not arrive as an empty string.
+/// Keys with no name of their own come back as the characters that were typed.
 pub fun get_key(): Text {
-    const var = trust $ IFS= read -rsn1 k < /dev/tty; if [[ "\$k" == \$'\e' ]]; then IFS= read -rsn2 r < /dev/tty; k+=\$r; fi; printf '%q' "\$k" $
-    if {
-        var == "$'\E[A'": return "UP"
-        var == "$'\E[B'": return "DOWN"
-        var == "$'\E[C'": return "RIGHT"
-        var == "$'\E[D'": return "LEFT"
-        var == "$'\177'": return "BACKSPACE"
-        var == "$'\\t'": return "TAB"
-        var == "$'\\001'": return "CTRL_A"
-        var == "\\ ": return "SPACE"
-        var == "''": return "INPUT"
-        else: return var
-    }
+    return trust $ IFS= read -rsn1 k < /dev/tty; if [[ "\$k" == \$'\e' ]]; then IFS= read -rsn2 r < /dev/tty; k+=\$r; fi; case "\$k" in \$'\e[A') printf UP;; \$'\e[B') printf DOWN;; \$'\e[C') printf RIGHT;; \$'\e[D') printf LEFT;; \$'\177') printf BACKSPACE;; \$'\t') printf TAB;; \$'\\001') printf CTRL_A;; ' ') printf SPACE;; '') printf INPUT;; *) printf '%s' "\$k";; esac $
 }
 
 pub fun printf_colored(message: Text, color: Int): Null {

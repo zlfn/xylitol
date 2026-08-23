@@ -4,6 +4,7 @@ import { printf } from "std/env"
 import { print_help } from "./help.ab"
 import { execute_input } from "./input/exec.ab"
 import { execute_choose } from "./choose/exec.ab"
+import { execute_filter } from "./filter/exec.ab"
 import { execute_confirm } from "./confirm/exec.ab"
 import { execute_file } from "./file/exec.ab"
 
@@ -49,6 +50,9 @@ main(args) {
         }
         command == "choose": {
             echo(execute_choose(args))
+        }
+        command == "filter": {
+            echo(execute_filter(args))
         }
         command == "confirm": {
             const result = execute_confirm(args)

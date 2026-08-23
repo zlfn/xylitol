@@ -1,0 +1,47 @@
+import * from "std/env"
+import * from "../utils.ab"
+
+pub fun print_filter_help(): Null {
+    const usage = ["Usage:", "./xylitol.sh", "filter", "[<options>", "...]", "[flags]"]
+    print_wrapped(usage)
+    echo("")
+    const title = [colored_primary("filter"), "-", "Pick", "from", "a", "list", "narrowed", "by", "typing."]
+    print_wrapped(title)
+    echo("")
+    printf(colored_secondary("Arguments:") + "\n")
+    render_help_entries(["[<options> ...]"], ["List of options to pick from"], [""], 20)
+    echo("")
+    printf(colored_secondary("Flags:") + "\n")
+    const names = [
+        "-h, --help",
+        "--limit=<number>",
+        "--no-limit",
+        "--prompt=\"<text>\"",
+        "--placeholder=\"<text>\"",
+        "--cursor=\"<text>\"",
+        "--header=\"<text>\"",
+        "--height=<number>",
+    ]
+    const texts = [
+        "Show this help message",
+        "Enable multi-selection mode with a limit of selections",
+        "Enable multi-selection mode with no limit",
+        "Set the text shown in front of the query",
+        "Set the text shown while the query is empty",
+        "Set the cursor text",
+        "Set a header text to display above the query",
+        "Set the number of options shown at once",
+    ]
+    const notes = [
+        "",
+        "",
+        "",
+        "(default: '> ')",
+        "(default: 'Filter...')",
+        "(default: '> ')",
+        "(ANSI escape supported)",
+        "(default: 10)",
+    ]
+    render_help_entries(names, texts, notes)
+    echo("")
+}

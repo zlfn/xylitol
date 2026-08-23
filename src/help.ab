@@ -19,14 +19,15 @@ pub fun print_help() {
     render_help_entries(flag_names, flag_texts, flag_notes, 13)
     echo("")
     printf(colored_secondary("Commands:") + "\n")
-    const cmd_names = ["input", "choose", "confirm", "file"]
+    const cmd_names = ["input", "choose", "filter", "confirm", "file"]
     const cmd_texts = [
         "Prompt for some input",
         "Choose from a list of options",
+        "Pick from a list narrowed by typing",
         "Prompt for a yes/no confirmation",
         "Browse filesystem and select a file",
     ]
-    const cmd_notes = ["", "", "", ""]
+    const cmd_notes = ["", "", "", "", ""]
     render_help_entries(cmd_names, cmd_texts, cmd_notes, 13)
     echo("")
     printf(colored_secondary("Envs:") + "\n")

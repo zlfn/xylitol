@@ -26,21 +26,29 @@ pub fun is_all_ascii(text: Text): Bool {
     return result == "0"
 }
 
+/// Width of plain ASCII text carrying no escape sequence, or -1 for anything
+/// that has to be measured the slow way.
+fun plain_len(text: Text): Int {
+    const measured = trust $ LC_ALL=C; __t="{text}"; case "\$__t" in (*[!\\ -~]*) echo -1;; (*'\x1b['*) echo -1;; (*) echo "\$\{#__t}";; esac $
+    return trust parse_int(measured)
+}
+
 /// Get visible length of ANSI-colored text (excluding escape sequences).
 ///
 /// ### Parameters
 /// - `text`: Text that may contain ANSI escape sequences.
 pub fun get_visible_len(text: Text): Int {
+    const plain = plain_len(text)
+    if plain >= 0 {
+        return plain
+    }
     const stripped = strip_ansi(text)
-    // Check if text is all ASCII
     if not is_all_ascii(stripped) {
-        // Try using perl
         return perl_get_cjk_width(stripped) failed {
             return len(stripped)
         }
-    } else {
-        return len(stripped)
     }
+    return len(stripped)
 }
 
 /// Truncate text to fit within max_width without adding any suffix.

@@ -44,6 +44,15 @@ pub fun is_all_ascii(text: Text): Bool
 
 Check if the text is all ASCII characters (code points 32-126).
 
+## `plain_len`
+
+```ab
+fun plain_len(text: Text): Int 
+```
+
+Width of plain ASCII text carrying no escape sequence, or -1 for anything
+that has to be measured the slow way.
+
 ## `strip_ansi`
 
 ```ab

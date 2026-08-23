@@ -1,8 +1,7 @@
 import { printf } from "std/env"
 import { split, slice, rpad } from "std/text"
-import { colored } from "./io.ab"
-import { has_ansi_escape, get_visible_len } from "./ansi.ab"
-import { term_width } from "./term.ab"
+import { colored } from "../io.ab"
+import { term_width } from "../term.ab"
 
 /// Print one wrapped help line, dimming it from `note_at` onwards.
 fun print_help_line(pending: Text, line: Text, note_at: Int): Null {
@@ -83,40 +82,5 @@ pub fun render_help_entries(names: [Text], texts: [Text], notes: [Text], min_nam
             }
         }
         print_help_line(pending, line, note_at)
-    }
-}
-
-/// Print `pieces` as one paragraph wrapped to the terminal width.
-///
-/// Pieces are joined with single spaces and a break can only happen between
-/// them, so a piece that already carries colour stays intact.
-pub fun print_wrapped(pieces: [Text]): Null {
-    const width = term_width()
-    let line = ""
-    let line_len = 0
-
-    for piece in pieces {
-        let piece_len = len(piece)
-        if has_ansi_escape(piece) {
-            piece_len = get_visible_len(piece)
-        }
-        if {
-            line == "": {
-                line = piece
-                line_len = piece_len
-            }
-            line_len + 1 + piece_len > width: {
-                printf(line + "\n")
-                line = piece
-                line_len = piece_len
-            }
-            else: {
-                line += " " + piece
-                line_len += 1 + piece_len
-            }
-        }
-    }
-    if line != "" {
-        printf(line + "\n")
     }
 }

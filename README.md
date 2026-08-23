@@ -25,8 +25,7 @@ amber build --target bash-3.2 src/main.ab xylitol.sh
 ## Choose
 Choose an option from a list of choices
 
-<img width="1200" height="381" alt="image" src="https://github.com/user-attachments/assets/dca320f6-6bdd-4fa1-abe2-b97a6f7a4cde" />
-
+<img width="1200" height="500" alt="choose" src="https://github.com/user-attachments/assets/0e257fcd-975a-49c7-80dd-bca68f245baa" />
 
 ```bash
 cat songs.txt | ./xylitol.sh choose
@@ -37,9 +36,7 @@ cat foods.txt | ./xylitol.sh choose --header="Grocery Shopping"
 ## Input
 Prompt for input with a simple command.
 
-<img width="1200" height="151" alt="image" src="https://github.com/user-attachments/assets/8ffcd022-a55c-4614-aa6a-5b2783c7ea71" />
-
-
+<img width="1200" height="280" alt="input" src="https://github.com/user-attachments/assets/014c06b4-de1d-4740-9760-36ad3f647ba7" />
 
 ```bash
 ./xylitol.sh input > answer.txt
@@ -50,8 +47,7 @@ Prompt for input with a simple command.
 ## Confirm
 Prompt the user for confirmation (yes/no).
 
-<img width="1200" height="184" alt="image" src="https://github.com/user-attachments/assets/2eb07a60-eae6-44e6-aa36-a28c4e33c720" />
-
+<img width="1200" height="320" alt="confirm" src="https://github.com/user-attachments/assets/ea726595-612c-4098-a5a7-e6f3c2cedfd7" />
 
 ```bash
 ./xylitol.sh confirm && rm file.txt || echo "File not removed"
@@ -60,7 +56,7 @@ Prompt the user for confirmation (yes/no).
 ## File
 Prompt the user to select a file from the file tree.
 
-<img width="1200" height="449" alt="image" src="https://github.com/user-attachments/assets/94d44b95-7be6-48e6-9ddf-6588bb787b91" />
+<img width="1200" height="560" alt="file" src="https://github.com/user-attachments/assets/f8a930b8-7dcf-4051-98e0-cdd9518e5f61" />
 
 ```bash
 ./xylitol.sh file ~/.config

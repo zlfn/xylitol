@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# The exact colors below only apply when truecolor is asked for; without this
+# xylitol uses the 95/93 fallbacks, which follow the terminal's own theme.
+export XYLITOL_TRUECOLOR="Yes"
 export XYLITOL_PRIMARY_COLOR="246;177;206;95" # Pink
 export XYLITOL_SECONDARY_COLOR="239;224;127;93" # Yellow
 

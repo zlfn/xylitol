@@ -39,14 +39,14 @@ pub fun print_help() {
     ]
     const env_texts = [
         "Use Perl for CJK / Optimization",
-        "Enable 24-bit truecolor support",
+        "Use 24-bit color instead of the terminal palette",
         "Set the primary color",
         "Set the secondary color",
         "Set the accent color",
     ]
     const env_notes = [
         "(\"Yes\" or \"No\", default: Yes)",
-        "(\"Yes\" or \"No\", default: Yes)",
+        "(\"Yes\" or \"No\", default: No)",
         "(default: 3;207;159;92)",
         "(default: 3;118;206;94)",
         "(default: 234;72;121;95)",

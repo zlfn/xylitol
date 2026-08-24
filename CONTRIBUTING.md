@@ -6,7 +6,7 @@ Bash is a highly limited language, and controlling all possible terminal cases i
 Therefore, XYLITOL only supports a reasonable terminal environments, and all execution environments 
 are assumed to meet at least the following conditions:
 - ANSI Escape Sequences are supported, including color output and cursor movement.
-- POSIX standard utilities (such as `sed`, `bc`, etc.) are available.
+- POSIX standard utilities (`sed`, `grep`, `cut`, `ls`, `tail`, `stty`) are available.
 - The terminal width is at least 20 columns.
 - The terminal height is at least 10 lines.
 - The terminal will not be resized during execution.

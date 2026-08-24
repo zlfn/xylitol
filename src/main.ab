@@ -11,18 +11,6 @@ import { execute_file } from "./file/exec.ab"
 const VERSION = "0.1.0"
 const AMBER_VERSION = "0.6.0-alpha"
 
-fun check_prerequirements(): Bool {
-    $ echo "0" | bc -l > /dev/null $ failed {
-        eprintf_colored("Error: ", 91)
-        eprintf("bc is not installed. Please install bc to use xylitol.\n")
-        eprintf("  For Debian/Ubuntu: sudo apt install bc\n")
-        eprintf("  For Fedora: sudo dnf install bc\n")
-        eprintf("  For Arch Linux: sudo pacman -S bc\n")
-        return false
-    }
-    return true
-}
-
 fun trap_cleanup(): Null {
     trust $ trap 'printf "\x1b[?25h\x1b[0m" >&2; 
             stty echo icanon < /dev/tty' EXIT $
@@ -30,7 +18,6 @@ fun trap_cleanup(): Null {
 
 main(args) {
     trap_cleanup()
-    if not check_prerequirements(): exit(1)
 
     // `args[1]` must not be read before the length is checked,
     // because `or` evaluates both of its operands.

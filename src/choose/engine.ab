@@ -1,5 +1,4 @@
 import * from "std/env"
-import * from "std/math"
 import { rpad } from "std/text"
 import * from "../utils.ab"
 
@@ -153,7 +152,7 @@ pub fun chooser_begin(total: Int, page_size: Int, header: Text, cursor: Text, mu
         eprintf(cutoff_text(header, _term_width) + "\n")
     }
 
-    _total_pages = math_floor((total + _page_size - 1) / _page_size)
+    _total_pages = (total + _page_size - 1) / _page_size
     _display_count = _page_size
     if total < _page_size {
         _display_count = total

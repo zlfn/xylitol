@@ -396,6 +396,36 @@ fn interactive() -> Vec<Case> {
             },
         },
         Case {
+            name: "input: returns a value wider than the terminal",
+            stdin: None,
+            args: "input",
+            size: (40, 30),
+            steps: &[
+                Step::Wait(">"),
+                Step::Send("0123456789012345678901234567890123456789"),
+                Step::Send(ENTER),
+            ],
+            expect: Expect {
+                stdout: Some("0123456789012345678901234567890123456789"),
+                ..Default::default()
+            },
+        },
+        Case {
+            name: "input: returns a value filling the terminal exactly",
+            stdin: None,
+            args: "input",
+            size: (40, 30),
+            steps: &[
+                Step::Wait(">"),
+                Step::Send("0123456789012345678901234567"),
+                Step::Send(ENTER),
+            ],
+            expect: Expect {
+                stdout: Some("0123456789012345678901234567"),
+                ..Default::default()
+            },
+        },
+        Case {
             name: "input: hides a password",
             stdin: None,
             args: "input --password",

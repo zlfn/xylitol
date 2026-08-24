@@ -41,11 +41,11 @@ split__4_v0() {
 
 # join(list: [Text], delimiter: Text)
 join__7_v0() {
-    local list_18090=("${!1}")
-    local delimiter_18091="${2}"
+    local list_18168=("${!1}")
+    local delimiter_18169="${2}"
     local command_1
-    command_1="$(IFS="${delimiter_18091}" ; printf "%s
-" "${list_18090[*]}")"
+    command_1="$(IFS="${delimiter_18169}" ; printf "%s
+" "${list_18168[*]}")"
     __status=$?
     ret_join7_v0="${command_1}"
     return 0
@@ -66,9 +66,9 @@ parse_int__13_v0() {
 
 # starts_with(text: Text, prefix: Text)
 starts_with__22_v0() {
-    local text_3163="${1}"
-    local prefix_3164="${2}"
-    [[ "${text_3163}" == "${prefix_3164}"* ]]
+    local text_3197="${1}"
+    local prefix_3198="${2}"
+    [[ "${text_3197}" == "${prefix_3198}"* ]]
     __status=$?
     ret_starts_with22_v0="$(( __status == 0 ))"
     return 0
@@ -96,22 +96,22 @@ slice__24_v0() {
 
 # lpad(text: Text, pad: Text, length: Int)
 lpad__27_v0() {
-    local text_29633="${1}"
-    local pad_29634="${2}"
-    local length_29635="${3}"
-    local __length_3="${text_29633}"
-    if [ "$(( length_29635 <= ${#__length_3} ))" != 0 ]; then
-        ret_lpad27_v0="${text_29633}"
+    local text_29759="${1}"
+    local pad_29760="${2}"
+    local length_29761="${3}"
+    local __length_3="${text_29759}"
+    if [ "$(( length_29761 <= ${#__length_3} ))" != 0 ]; then
+        ret_lpad27_v0="${text_29759}"
         return 0
     fi
-    local __length_4="${text_29633}"
-    local pad_len_29636="$(( length_29635 - ${#__length_4} ))"
-    local padding_29637=""
-    printf -v padding_29637 "%${pad_len_29636}s" ""
+    local __length_4="${text_29759}"
+    local pad_len_29762="$(( length_29761 - ${#__length_4} ))"
+    local padding_29763=""
+    printf -v padding_29763 "%${pad_len_29762}s" ""
     __status=$?
-    padding_29637="${padding_29637// /${pad_29634}}"
+    padding_29763="${padding_29763// /${pad_29760}}"
     __status=$?
-    ret_lpad27_v0="${padding_29637}""${text_29633}"
+    ret_lpad27_v0="${padding_29763}""${text_29759}"
     return 0
 }
 
@@ -138,29 +138,29 @@ rpad__28_v0() {
 
 # cpad(text: Text, pad: Text, length: Int)
 cpad__29_v0() {
-    local text_29627="${1}"
-    local pad_29628="${2}"
-    local length_29629="${3}"
-    local __length_7="${text_29627}"
-    local text_length_29630="${#__length_7}"
-    if [ "$(( length_29629 <= text_length_29630 ))" != 0 ]; then
-        ret_cpad29_v0="${text_29627}"
+    local text_29753="${1}"
+    local pad_29754="${2}"
+    local length_29755="${3}"
+    local __length_7="${text_29753}"
+    local text_length_29756="${#__length_7}"
+    if [ "$(( length_29755 <= text_length_29756 ))" != 0 ]; then
+        ret_cpad29_v0="${text_29753}"
         return 0
     fi
-    local total_padding_29631="$(( length_29629 - text_length_29630 ))"
-    local left_padding_length_29632="$(( text_length_29630 + $(( total_padding_29631 / 2 )) ))"
-    lpad__27_v0 "${text_29627}" "${pad_29628}" "${left_padding_length_29632}"
-    local left_padded_29638="${ret_lpad27_v0}"
-    rpad__28_v0 "${left_padded_29638}" "${pad_29628}" "${length_29629}"
-    local center_padded_29639="${ret_rpad28_v0}"
-    ret_cpad29_v0="${center_padded_29639}"
+    local total_padding_29757="$(( length_29755 - text_length_29756 ))"
+    local left_padding_length_29758="$(( text_length_29756 + $(( total_padding_29757 / 2 )) ))"
+    lpad__27_v0 "${text_29753}" "${pad_29754}" "${left_padding_length_29758}"
+    local left_padded_29764="${ret_lpad27_v0}"
+    rpad__28_v0 "${left_padded_29764}" "${pad_29754}" "${length_29755}"
+    local center_padded_29765="${ret_rpad28_v0}"
+    ret_cpad29_v0="${center_padded_29765}"
     return 0
 }
 
 # dir_exists(path: Text)
 dir_exists__38_v0() {
-    local path_40292="${1}"
-    [ -d "${path_40292}" ]
+    local path_40472="${1}"
+    [ -d "${path_40472}" ]
     __status=$?
     ret_dir_exists38_v0="$(( __status == 0 ))"
     return 0
@@ -237,18 +237,18 @@ echo_colored__134_v0() {
 
 # printf_colored(message: Text, color: Int)
 printf_colored__160_v0() {
-    local message_40295="${1}"
-    local color_40296="${2}"
+    local message_40475="${1}"
+    local color_40476="${2}"
     # Prints a text with a specified color.
-    local array_12=("${message_40295}")
-    printf__128_v1 "\\x1b[${color_40296}m%s\\x1b[0m" array_12[@]
+    local array_12=("${message_40475}")
+    printf__128_v1 "\\x1b[${color_40476}m%s\\x1b[0m" array_12[@]
 }
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
 _perl_state_3="None"
 # perl_available()
-perl_available__184_v0() {
+perl_available__185_v0() {
     if [ "$([ "_${_perl_state_3}" != "_None" ]; echo $?)" != 0 ]; then
         local command_13
         command_13="$(echo "$XYLITOL_USE_PERL")"
@@ -262,73 +262,73 @@ perl_available__184_v0() {
         found_1501="$(( $(( ! disabled_1500 )) && $([ "_${command_14}" != "_0" ]; echo $?) ))"
         _perl_state_3="$(if [ "${found_1501}" != 0 ]; then echo "Yes"; else echo "No"; fi)"
     fi
-    ret_perl_available184_v0="$([ "_${_perl_state_3}" != "_Yes" ]; echo $?)"
+    ret_perl_available185_v0="$([ "_${_perl_state_3}" != "_Yes" ]; echo $?)"
     return 0
 }
 
 # perl_get_cjk_width(text: Text)
-perl_get_cjk_width__185_v0() {
+perl_get_cjk_width__186_v0() {
     local text_1499="${1}"
-    perl_available__184_v0 
-    local ret_perl_available184_v0__19_12="${ret_perl_available184_v0}"
-    if [ "$(( ! ret_perl_available184_v0__19_12 ))" != 0 ]; then
-        ret_perl_get_cjk_width185_v0=''
+    perl_available__185_v0 
+    local ret_perl_available185_v0__19_12="${ret_perl_available185_v0}"
+    if [ "$(( ! ret_perl_available185_v0__19_12 ))" != 0 ]; then
+        ret_perl_get_cjk_width186_v0=''
         return 1
     fi
     local command_15
     command_15="$(perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text_1499}" 2>/dev/null)"
     __status=$?
     if [ "${__status}" != 0 ]; then
-        ret_perl_get_cjk_width185_v0=''
+        ret_perl_get_cjk_width186_v0=''
         return "${__status}"
     fi
     local width_str_1502="${command_15}"
     parse_int__13_v0 "${width_str_1502}"
     __status=$?
     if [ "${__status}" != 0 ]; then
-        ret_perl_get_cjk_width185_v0=''
+        ret_perl_get_cjk_width186_v0=''
         return "${__status}"
     fi
     local width_1503="${ret_parse_int13_v0}"
-    ret_perl_get_cjk_width185_v0="${width_1503}"
+    ret_perl_get_cjk_width186_v0="${width_1503}"
     return 0
 }
 
 # has_ansi_escape(text: Text)
-has_ansi_escape__190_v0() {
+has_ansi_escape__191_v0() {
     local text_1489="${1}"
     # Check for ESC character (0x1B = 27) or literal \x1b[
     local command_16
     command_16="$([[ "${text_1489}" == *$'\x1b'* || "${text_1489}" == *'\x1b['* ]] && echo "1" || echo "0")"
     __status=$?
     local has_escape_1490="${command_16}"
-    ret_has_ansi_escape190_v0="$([ "_${has_escape_1490}" != "_1" ]; echo $?)"
+    ret_has_ansi_escape191_v0="$([ "_${has_escape_1490}" != "_1" ]; echo $?)"
     return 0
 }
 
 # strip_ansi(text: Text)
-strip_ansi__192_v0() {
+strip_ansi__193_v0() {
     local text_1495="${1}"
     local command_17
     command_17="$(printf "%s" "${text_1495}" | sed $'s/\x1b\[[0-9;]*m//g' | sed 's/\\x1b\[[0-9;]*m//g')"
     __status=$?
-    ret_strip_ansi192_v0="${command_17}"
+    ret_strip_ansi193_v0="${command_17}"
     return 0
 }
 
 # is_all_ascii(text: Text)
-is_all_ascii__193_v0() {
+is_all_ascii__194_v0() {
     local text_1497="${1}"
     local command_18
     command_18="$(printf "%s" "${text_1497}" | LC_ALL=C grep -q '^[ -~]*$' && echo 0 || echo 1)"
     __status=$?
     local result_1498="${command_18}"
-    ret_is_all_ascii193_v0="$([ "_${result_1498}" != "_0" ]; echo $?)"
+    ret_is_all_ascii194_v0="$([ "_${result_1498}" != "_0" ]; echo $?)"
     return 0
 }
 
 # plain_len(text: Text)
-plain_len__194_v0() {
+plain_len__195_v0() {
     local text_1492="${1}"
     local command_19
     command_19="$(LC_ALL=C; __t="${text_1492}"; case "$__t" in (*[!\ -~]*) echo -1;; (*'\x1b['*) echo -1;; (*) echo "${#__t}";; esac)"
@@ -336,36 +336,36 @@ plain_len__194_v0() {
     local measured_1493="${command_19}"
     parse_int__13_v0 "${measured_1493}"
     __status=$?
-    ret_plain_len194_v0="${ret_parse_int13_v0}"
+    ret_plain_len195_v0="${ret_parse_int13_v0}"
     return 0
 }
 
 # get_visible_len(text: Text)
-get_visible_len__195_v0() {
+get_visible_len__196_v0() {
     local text_1491="${1}"
-    plain_len__194_v0 "${text_1491}"
-    local plain_1494="${ret_plain_len194_v0}"
+    plain_len__195_v0 "${text_1491}"
+    local plain_1494="${ret_plain_len195_v0}"
     if [ "$(( plain_1494 >= 0 ))" != 0 ]; then
-        ret_get_visible_len195_v0="${plain_1494}"
+        ret_get_visible_len196_v0="${plain_1494}"
         return 0
     fi
-    strip_ansi__192_v0 "${text_1491}"
-    local stripped_1496="${ret_strip_ansi192_v0}"
-    is_all_ascii__193_v0 "${stripped_1496}"
-    local ret_is_all_ascii193_v0__46_12="${ret_is_all_ascii193_v0}"
-    if [ "$(( ! ret_is_all_ascii193_v0__46_12 ))" != 0 ]; then
-        perl_get_cjk_width__185_v0 "${stripped_1496}"
+    strip_ansi__193_v0 "${text_1491}"
+    local stripped_1496="${ret_strip_ansi193_v0}"
+    is_all_ascii__194_v0 "${stripped_1496}"
+    local ret_is_all_ascii194_v0__46_12="${ret_is_all_ascii194_v0}"
+    if [ "$(( ! ret_is_all_ascii194_v0__46_12 ))" != 0 ]; then
+        perl_get_cjk_width__186_v0 "${stripped_1496}"
         __status=$?
         if [ "${__status}" != 0 ]; then
             local __length_20="${stripped_1496}"
-            ret_get_visible_len195_v0="${#__length_20}"
+            ret_get_visible_len196_v0="${#__length_20}"
             return 0
         fi
-        ret_get_visible_len195_v0="${ret_perl_get_cjk_width185_v0}"
+        ret_get_visible_len196_v0="${ret_perl_get_cjk_width186_v0}"
         return 0
     fi
     local __length_21="${stripped_1496}"
-    ret_get_visible_len195_v0="${#__length_21}"
+    ret_get_visible_len196_v0="${#__length_21}"
     return 0
 }
 
@@ -377,89 +377,89 @@ _term_size_5=(80 24)
 export XYLITOL_RUNTIME_STTY_COUNT=0
 __status=$?
 # store_term_size(size: Text)
-store_term_size__204_v0() {
+store_term_size__205_v0() {
     local size_1476="${1}"
     if [ "$([ "_${size_1476}" != "_" ]; echo $?)" != 0 ]; then
-        ret_store_term_size204_v0=0
+        ret_store_term_size205_v0=0
         return 0
     fi
     split__4_v0 "${size_1476}" " "
     local parts_1480=("${ret_split4_v0[@]}")
     local __length_23=("${parts_1480[@]}")
     if [ "$(( ${#__length_23[@]} != 2 ))" != 0 ]; then
-        ret_store_term_size204_v0=0
+        ret_store_term_size205_v0=0
         return 0
     fi
-    parse_int__13_v0 "${parts_1480[1]?"Index out of bounds (at src/utils/term.ab:53:41)"}"
+    parse_int__13_v0 "${parts_1480[1]?"Index out of bounds (at src/utils/term.ab:57:41)"}"
     __status=$?
-    local ret_parse_int13_v0__53_25="${ret_parse_int13_v0}"
-    parse_int__13_v0 "${parts_1480[0]?"Index out of bounds (at src/utils/term.ab:53:68)"}"
+    local ret_parse_int13_v0__57_25="${ret_parse_int13_v0}"
+    parse_int__13_v0 "${parts_1480[0]?"Index out of bounds (at src/utils/term.ab:57:68)"}"
     __status=$?
-    local ret_parse_int13_v0__53_52="${ret_parse_int13_v0}"
-    _term_size_5=("${ret_parse_int13_v0__53_25}" "${ret_parse_int13_v0__53_52}")
-    ret_store_term_size204_v0=1
+    local ret_parse_int13_v0__57_52="${ret_parse_int13_v0}"
+    _term_size_5=("${ret_parse_int13_v0__57_25}" "${ret_parse_int13_v0__57_52}")
+    ret_store_term_size205_v0=1
     return 0
 }
 
 # query_term_size()
-query_term_size__205_v0() {
+query_term_size__206_v0() {
     local command_25
     command_25="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
     __status=$?
     local size_1483="${command_25}"
-    store_term_size__204_v0 "${size_1483}"
-    ret_query_term_size205_v0="${ret_store_term_size204_v0}"
+    store_term_size__205_v0 "${size_1483}"
+    ret_query_term_size206_v0="${ret_store_term_size205_v0}"
     return 0
 }
 
 # stty_term_size()
-stty_term_size__206_v0() {
+stty_term_size__207_v0() {
     local command_26
     command_26="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
     __status=$?
     local size_1475="${command_26}"
-    store_term_size__204_v0 "${size_1475}"
-    ret_stty_term_size206_v0="${ret_store_term_size204_v0}"
+    store_term_size__205_v0 "${size_1475}"
+    ret_stty_term_size207_v0="${ret_store_term_size205_v0}"
     return 0
 }
 
 # get_term_size()
-get_term_size__207_v0() {
-    stty_term_size__206_v0 
-    local detected_1482="${ret_stty_term_size206_v0}"
+get_term_size__208_v0() {
+    stty_term_size__207_v0 
+    local detected_1482="${ret_stty_term_size207_v0}"
     if [ "$(( ! detected_1482 ))" != 0 ]; then
-        query_term_size__205_v0 
-        detected_1482="${ret_query_term_size205_v0}"
+        query_term_size__206_v0 
+        detected_1482="${ret_query_term_size206_v0}"
     fi
     _got_term_size_4=1
 }
 
 # term_width()
-term_width__209_v0() {
+term_width__210_v0() {
     if [ "$(( ! _got_term_size_4 ))" != 0 ]; then
-        get_term_size__207_v0 
+        get_term_size__208_v0 
     fi
-    ret_term_width209_v0="${_term_size_5[0]?"Index out of bounds (at src/utils/term.ab:96:23)"}"
+    ret_term_width210_v0="${_term_size_5[0]?"Index out of bounds (at src/utils/term.ab:100:23)"}"
     return 0
 }
 
 # // Cursor /////
 # move the cursor up or down `cnt` lines.
 # print_wrapped(pieces: [Text])
-print_wrapped__221_v0() {
+print_wrapped__222_v0() {
     local pieces_1474=("${!1}")
-    term_width__209_v0 
-    local width_1484="${ret_term_width209_v0}"
+    term_width__210_v0 
+    local width_1484="${ret_term_width210_v0}"
     local line_1485=""
     local line_len_1486=0
     for piece_1487 in "${pieces_1474[@]}"; do
         local __length_29="${piece_1487}"
         local piece_len_1488="${#__length_29}"
-        has_ansi_escape__190_v0 "${piece_1487}"
-        local ret_has_ansi_escape190_v0__186_12="${ret_has_ansi_escape190_v0}"
-        if [ "${ret_has_ansi_escape190_v0__186_12}" != 0 ]; then
-            get_visible_len__195_v0 "${piece_1487}"
-            piece_len_1488="${ret_get_visible_len195_v0}"
+        has_ansi_escape__191_v0 "${piece_1487}"
+        local ret_has_ansi_escape191_v0__190_12="${ret_has_ansi_escape191_v0}"
+        if [ "${ret_has_ansi_escape191_v0__190_12}" != 0 ]; then
+            get_visible_len__196_v0 "${piece_1487}"
+            piece_len_1488="${ret_get_visible_len196_v0}"
         fi
         if [ "$([ "_${line_1485}" != "_" ]; echo $?)" != 0 ]; then
             line_1485="${piece_1487}"
@@ -495,50 +495,50 @@ _primary_color_10=(3 207 159 92)
 _secondary_color_11=(3 118 206 94)
 _accent_color_12=(234 72 121 95)
 # get_supports_truecolor()
-get_supports_truecolor__258_v0() {
+get_supports_truecolor__259_v0() {
     env_var_get__120_v0 "XYLITOL_TRUECOLOR"
     __status=$?
     local config_1524="${ret_env_var_get120_v0}"
     _supports_truecolor_8="$(if [ "$([ "_${config_1524}" != "_Yes" ]; echo $?)" != 0 ]; then echo "Yes"; else echo "No"; fi)"
-    ret_get_supports_truecolor258_v0="$([ "_${_supports_truecolor_8}" != "_Yes" ]; echo $?)"
+    ret_get_supports_truecolor259_v0="$([ "_${_supports_truecolor_8}" != "_Yes" ]; echo $?)"
     return 0
 }
 
 # colored_rgb(message: Text, r: Int, g: Int, b: Int, fallback: Int)
-colored_rgb__259_v0() {
+colored_rgb__260_v0() {
     local message_1519="${1}"
     local r_1520="${2}"
     local g_1521="${3}"
     local b_1522="${4}"
     local fallback_1523="${5}"
     if [ "$([ "_${_supports_truecolor_8}" != "_Yes" ]; echo $?)" != 0 ]; then
-        ret_colored_rgb259_v0="\\x1b[38;2;${r_1520};${g_1521};${b_1522}m""${message_1519}""\\x1b[0m"
+        ret_colored_rgb260_v0="\\x1b[38;2;${r_1520};${g_1521};${b_1522}m""${message_1519}""\\x1b[0m"
         return 0
     elif [ "$([ "_${_supports_truecolor_8}" != "_None" ]; echo $?)" != 0 ]; then
-        get_supports_truecolor__258_v0 
-        local ret_get_supports_truecolor258_v0__45_17="${ret_get_supports_truecolor258_v0}"
-        if [ "${ret_get_supports_truecolor258_v0__45_17}" != 0 ]; then
-            ret_colored_rgb259_v0="\\x1b[38;2;${r_1520};${g_1521};${b_1522}m""${message_1519}""\\x1b[0m"
+        get_supports_truecolor__259_v0 
+        local ret_get_supports_truecolor259_v0__45_17="${ret_get_supports_truecolor259_v0}"
+        if [ "${ret_get_supports_truecolor259_v0__45_17}" != 0 ]; then
+            ret_colored_rgb260_v0="\\x1b[38;2;${r_1520};${g_1521};${b_1522}m""${message_1519}""\\x1b[0m"
             return 0
         elif [ "$(( fallback_1523 == 0 ))" != 0 ]; then
-            ret_colored_rgb259_v0="${message_1519}"
+            ret_colored_rgb260_v0="${message_1519}"
             return 0
         else
-            ret_colored_rgb259_v0="\\x1b[${fallback_1523}m""${message_1519}""\\x1b[0m"
+            ret_colored_rgb260_v0="\\x1b[${fallback_1523}m""${message_1519}""\\x1b[0m"
             return 0
         fi
     else
         if [ "$(( fallback_1523 == 0 ))" != 0 ]; then
-            ret_colored_rgb259_v0="${message_1519}"
+            ret_colored_rgb260_v0="${message_1519}"
             return 0
         fi
-        ret_colored_rgb259_v0="\\x1b[${fallback_1523}m""${message_1519}""\\x1b[0m"
+        ret_colored_rgb260_v0="\\x1b[${fallback_1523}m""${message_1519}""\\x1b[0m"
         return 0
     fi
 }
 
 # inner_get_xylitol_colors()
-inner_get_xylitol_colors__261_v0() {
+inner_get_xylitol_colors__262_v0() {
     if [ "$(( ! _got_xylitol_colors_9 ))" != 0 ]; then
         env_var_get__120_v0 "XYLITOL_PRIMARY_COLOR"
         __status=$?
@@ -551,28 +551,28 @@ inner_get_xylitol_colors__261_v0() {
                 parse_int__13_v0 "${parts_1509[0]?"Index out of bounds (at src/utils/truecolor.ab:110:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors261_v0=''
+                    ret_inner_get_xylitol_colors262_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__110_21="${ret_parse_int13_v0}"
                 parse_int__13_v0 "${parts_1509[1]?"Index out of bounds (at src/utils/truecolor.ab:111:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors261_v0=''
+                    ret_inner_get_xylitol_colors262_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__111_21="${ret_parse_int13_v0}"
                 parse_int__13_v0 "${parts_1509[2]?"Index out of bounds (at src/utils/truecolor.ab:112:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors261_v0=''
+                    ret_inner_get_xylitol_colors262_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__112_21="${ret_parse_int13_v0}"
                 parse_int__13_v0 "${parts_1509[3]?"Index out of bounds (at src/utils/truecolor.ab:113:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors261_v0=''
+                    ret_inner_get_xylitol_colors262_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__113_21="${ret_parse_int13_v0}"
@@ -590,28 +590,28 @@ inner_get_xylitol_colors__261_v0() {
                 parse_int__13_v0 "${parts_1511[0]?"Index out of bounds (at src/utils/truecolor.ab:123:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors261_v0=''
+                    ret_inner_get_xylitol_colors262_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__123_21="${ret_parse_int13_v0}"
                 parse_int__13_v0 "${parts_1511[1]?"Index out of bounds (at src/utils/truecolor.ab:124:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors261_v0=''
+                    ret_inner_get_xylitol_colors262_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__124_21="${ret_parse_int13_v0}"
                 parse_int__13_v0 "${parts_1511[2]?"Index out of bounds (at src/utils/truecolor.ab:125:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors261_v0=''
+                    ret_inner_get_xylitol_colors262_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__125_21="${ret_parse_int13_v0}"
                 parse_int__13_v0 "${parts_1511[3]?"Index out of bounds (at src/utils/truecolor.ab:126:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors261_v0=''
+                    ret_inner_get_xylitol_colors262_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__126_21="${ret_parse_int13_v0}"
@@ -629,28 +629,28 @@ inner_get_xylitol_colors__261_v0() {
                 parse_int__13_v0 "${parts_1513[0]?"Index out of bounds (at src/utils/truecolor.ab:136:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors261_v0=''
+                    ret_inner_get_xylitol_colors262_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__136_21="${ret_parse_int13_v0}"
                 parse_int__13_v0 "${parts_1513[1]?"Index out of bounds (at src/utils/truecolor.ab:137:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors261_v0=''
+                    ret_inner_get_xylitol_colors262_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__137_21="${ret_parse_int13_v0}"
                 parse_int__13_v0 "${parts_1513[2]?"Index out of bounds (at src/utils/truecolor.ab:138:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors261_v0=''
+                    ret_inner_get_xylitol_colors262_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__138_21="${ret_parse_int13_v0}"
                 parse_int__13_v0 "${parts_1513[3]?"Index out of bounds (at src/utils/truecolor.ab:139:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors261_v0=''
+                    ret_inner_get_xylitol_colors262_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__139_21="${ret_parse_int13_v0}"
@@ -662,8 +662,8 @@ inner_get_xylitol_colors__261_v0() {
 }
 
 # get_xylitol_colors()
-get_xylitol_colors__262_v0() {
-    inner_get_xylitol_colors__261_v0 
+get_xylitol_colors__263_v0() {
+    inner_get_xylitol_colors__262_v0 
     __status=$?
     if [ "${__status}" != 0 ]; then
         echo_colored__134_v0 "WARN: Failed to parse Xylitol colors from envs." 33
@@ -672,35 +672,35 @@ get_xylitol_colors__262_v0() {
 }
 
 # colored_primary(message: Text)
-colored_primary__263_v0() {
+colored_primary__264_v0() {
     local message_1506="${1}"
     if [ "$(( ! _got_xylitol_colors_9 ))" != 0 ]; then
-        get_xylitol_colors__262_v0 
+        get_xylitol_colors__263_v0 
     fi
-    colored_rgb__259_v0 "${message_1506}" "${_primary_color_10[0]?"Index out of bounds (at src/utils/truecolor.ab:159:48)"}" "${_primary_color_10[1]?"Index out of bounds (at src/utils/truecolor.ab:159:67)"}" "${_primary_color_10[2]?"Index out of bounds (at src/utils/truecolor.ab:159:86)"}" "${_primary_color_10[3]?"Index out of bounds (at src/utils/truecolor.ab:159:105)"}"
-    ret_colored_primary263_v0="${ret_colored_rgb259_v0}"
+    colored_rgb__260_v0 "${message_1506}" "${_primary_color_10[0]?"Index out of bounds (at src/utils/truecolor.ab:159:48)"}" "${_primary_color_10[1]?"Index out of bounds (at src/utils/truecolor.ab:159:67)"}" "${_primary_color_10[2]?"Index out of bounds (at src/utils/truecolor.ab:159:86)"}" "${_primary_color_10[3]?"Index out of bounds (at src/utils/truecolor.ab:159:105)"}"
+    ret_colored_primary264_v0="${ret_colored_rgb260_v0}"
     return 0
 }
 
 # colored_secondary(message: Text)
-colored_secondary__264_v0() {
+colored_secondary__265_v0() {
     local message_1526="${1}"
     if [ "$(( ! _got_xylitol_colors_9 ))" != 0 ]; then
-        get_xylitol_colors__262_v0 
+        get_xylitol_colors__263_v0 
     fi
-    colored_rgb__259_v0 "${message_1526}" "${_secondary_color_11[0]?"Index out of bounds (at src/utils/truecolor.ab:166:50)"}" "${_secondary_color_11[1]?"Index out of bounds (at src/utils/truecolor.ab:166:71)"}" "${_secondary_color_11[2]?"Index out of bounds (at src/utils/truecolor.ab:166:92)"}" "${_secondary_color_11[3]?"Index out of bounds (at src/utils/truecolor.ab:166:113)"}"
-    ret_colored_secondary264_v0="${ret_colored_rgb259_v0}"
+    colored_rgb__260_v0 "${message_1526}" "${_secondary_color_11[0]?"Index out of bounds (at src/utils/truecolor.ab:166:50)"}" "${_secondary_color_11[1]?"Index out of bounds (at src/utils/truecolor.ab:166:71)"}" "${_secondary_color_11[2]?"Index out of bounds (at src/utils/truecolor.ab:166:92)"}" "${_secondary_color_11[3]?"Index out of bounds (at src/utils/truecolor.ab:166:113)"}"
+    ret_colored_secondary265_v0="${ret_colored_rgb260_v0}"
     return 0
 }
 
 # colored_accent(message: Text)
-colored_accent__265_v0() {
+colored_accent__266_v0() {
     local message_1577="${1}"
     if [ "$(( ! _got_xylitol_colors_9 ))" != 0 ]; then
-        get_xylitol_colors__262_v0 
+        get_xylitol_colors__263_v0 
     fi
-    colored_rgb__259_v0 "${message_1577}" "${_accent_color_12[0]?"Index out of bounds (at src/utils/truecolor.ab:173:47)"}" "${_accent_color_12[1]?"Index out of bounds (at src/utils/truecolor.ab:173:65)"}" "${_accent_color_12[2]?"Index out of bounds (at src/utils/truecolor.ab:173:83)"}" "${_accent_color_12[3]?"Index out of bounds (at src/utils/truecolor.ab:173:101)"}"
-    ret_colored_accent265_v0="${ret_colored_rgb259_v0}"
+    colored_rgb__260_v0 "${message_1577}" "${_accent_color_12[0]?"Index out of bounds (at src/utils/truecolor.ab:173:47)"}" "${_accent_color_12[1]?"Index out of bounds (at src/utils/truecolor.ab:173:65)"}" "${_accent_color_12[2]?"Index out of bounds (at src/utils/truecolor.ab:173:83)"}" "${_accent_color_12[3]?"Index out of bounds (at src/utils/truecolor.ab:173:101)"}"
+    ret_colored_accent266_v0="${ret_colored_rgb260_v0}"
     return 0
 }
 
@@ -709,11 +709,11 @@ colored_accent__265_v0() {
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
 # colored(message: Text, color: Int)
-colored__318_v0() {
+colored__319_v0() {
     local message_1565="${1}"
     local color_1566="${2}"
     # Returns a text wrapped in color codes.
-    ret_colored318_v0="\\x1b[${color_1566}m""${message_1565}""\\x1b[0m"
+    ret_colored319_v0="\\x1b[${color_1566}m""${message_1565}""\\x1b[0m"
     return 0
 }
 
@@ -727,69 +727,69 @@ _term_size_17=(80 24)
 export XYLITOL_RUNTIME_STTY_COUNT=0
 __status=$?
 # store_term_size(size: Text)
-store_term_size__359_v0() {
+store_term_size__361_v0() {
     local size_1539="${1}"
     if [ "$([ "_${size_1539}" != "_" ]; echo $?)" != 0 ]; then
-        ret_store_term_size359_v0=0
+        ret_store_term_size361_v0=0
         return 0
     fi
     split__4_v0 "${size_1539}" " "
     local parts_1540=("${ret_split4_v0[@]}")
     local __length_42=("${parts_1540[@]}")
     if [ "$(( ${#__length_42[@]} != 2 ))" != 0 ]; then
-        ret_store_term_size359_v0=0
+        ret_store_term_size361_v0=0
         return 0
     fi
-    parse_int__13_v0 "${parts_1540[1]?"Index out of bounds (at src/utils/widget/../term.ab:53:41)"}"
+    parse_int__13_v0 "${parts_1540[1]?"Index out of bounds (at src/utils/widget/../term.ab:57:41)"}"
     __status=$?
-    local ret_parse_int13_v0__53_25="${ret_parse_int13_v0}"
-    parse_int__13_v0 "${parts_1540[0]?"Index out of bounds (at src/utils/widget/../term.ab:53:68)"}"
+    local ret_parse_int13_v0__57_25="${ret_parse_int13_v0}"
+    parse_int__13_v0 "${parts_1540[0]?"Index out of bounds (at src/utils/widget/../term.ab:57:68)"}"
     __status=$?
-    local ret_parse_int13_v0__53_52="${ret_parse_int13_v0}"
-    _term_size_17=("${ret_parse_int13_v0__53_25}" "${ret_parse_int13_v0__53_52}")
-    ret_store_term_size359_v0=1
+    local ret_parse_int13_v0__57_52="${ret_parse_int13_v0}"
+    _term_size_17=("${ret_parse_int13_v0__57_25}" "${ret_parse_int13_v0__57_52}")
+    ret_store_term_size361_v0=1
     return 0
 }
 
 # query_term_size()
-query_term_size__360_v0() {
+query_term_size__362_v0() {
     local command_44
     command_44="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
     __status=$?
     local size_1542="${command_44}"
-    store_term_size__359_v0 "${size_1542}"
-    ret_query_term_size360_v0="${ret_store_term_size359_v0}"
+    store_term_size__361_v0 "${size_1542}"
+    ret_query_term_size362_v0="${ret_store_term_size361_v0}"
     return 0
 }
 
 # stty_term_size()
-stty_term_size__361_v0() {
+stty_term_size__363_v0() {
     local command_45
     command_45="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
     __status=$?
     local size_1538="${command_45}"
-    store_term_size__359_v0 "${size_1538}"
-    ret_stty_term_size361_v0="${ret_store_term_size359_v0}"
+    store_term_size__361_v0 "${size_1538}"
+    ret_stty_term_size363_v0="${ret_store_term_size361_v0}"
     return 0
 }
 
 # get_term_size()
-get_term_size__362_v0() {
-    stty_term_size__361_v0 
-    local detected_1541="${ret_stty_term_size361_v0}"
+get_term_size__364_v0() {
+    stty_term_size__363_v0 
+    local detected_1541="${ret_stty_term_size363_v0}"
     if [ "$(( ! detected_1541 ))" != 0 ]; then
-        query_term_size__360_v0 
-        detected_1541="${ret_query_term_size360_v0}"
+        query_term_size__362_v0 
+        detected_1541="${ret_query_term_size362_v0}"
     fi
     _got_term_size_16=1
 }
 
 # term_width()
-term_width__364_v0() {
+term_width__366_v0() {
     if [ "$(( ! _got_term_size_16 ))" != 0 ]; then
-        get_term_size__362_v0 
+        get_term_size__364_v0 
     fi
-    ret_term_width364_v0="${_term_size_17[0]?"Index out of bounds (at src/utils/widget/../term.ab:96:23)"}"
+    ret_term_width366_v0="${_term_size_17[0]?"Index out of bounds (at src/utils/widget/../term.ab:100:23)"}"
     return 0
 }
 
@@ -797,7 +797,7 @@ term_width__364_v0() {
 # move the cursor up or down `cnt` lines.
 # Which items of a multi-select widget are ticked.
 # print_help_line(pending: Text, line: Text, note_at: Int)
-print_help_line__397_v0() {
+print_help_line__399_v0() {
     local pending_1562="${1}"
     local line_1563="${2}"
     local note_at_1564="${3}"
@@ -808,26 +808,26 @@ print_help_line__397_v0() {
     # A length of zero means "to the end" in `slice`, so a line that is
     # all note has to be handled on its own.
     elif [ "$(( note_at_1564 == 0 ))" != 0 ]; then
-        colored__318_v0 "${line_1563}" 90
-        local ret_colored318_v0__12_40="${ret_colored318_v0}"
+        colored__319_v0 "${line_1563}" 90
+        local ret_colored319_v0__12_40="${ret_colored319_v0}"
         local array_48=()
-        printf__128_v0 "${pending_1562}""${ret_colored318_v0__12_40}""
+        printf__128_v0 "${pending_1562}""${ret_colored319_v0__12_40}""
 " array_48[@]
     else
         slice__24_v0 "${line_1563}" 0 "${note_at_1564}"
         local ret_slice24_v0__13_32="${ret_slice24_v0}"
         slice__24_v0 "${line_1563}" "${note_at_1564}" 0
         local ret_slice24_v0__13_66="${ret_slice24_v0}"
-        colored__318_v0 "${ret_slice24_v0__13_66}" 90
-        local ret_colored318_v0__13_58="${ret_colored318_v0}"
+        colored__319_v0 "${ret_slice24_v0__13_66}" 90
+        local ret_colored319_v0__13_58="${ret_colored319_v0}"
         local array_49=()
-        printf__128_v0 "${pending_1562}""${ret_slice24_v0__13_32}""${ret_colored318_v0__13_58}""
+        printf__128_v0 "${pending_1562}""${ret_slice24_v0__13_32}""${ret_colored319_v0__13_58}""
 " array_49[@]
     fi
 }
 
 # render_help_entries(names: [Text], texts: [Text], notes: [Text], min_name_width: Int)
-render_help_entries__398_v0() {
+render_help_entries__400_v0() {
     local names_1530=("${!1}")
     local texts_1531=("${!2}")
     local notes_1532=("${!3}")
@@ -845,8 +845,8 @@ render_help_entries__398_v0() {
             name_width_1535="${width_1537}"
         fi
 done
-    term_width__364_v0 
-    local width_1543="${ret_term_width364_v0}"
+    term_width__366_v0 
+    local width_1543="${ret_term_width366_v0}"
     # Two spaces of margin, then three between a name and its description.
     local indent_1544="$(( name_width_1535 + 5 ))"
     # Once the description column gets too narrow to read, stop putting the
@@ -904,7 +904,7 @@ done
             candidate_1561="$(if [ "$([ "_${line_1557}" != "_" ]; echo $?)" != 0 ]; then echo "${word_1560}"; else echo "${line_1557}"" ""${word_1560}"; fi)"
             local __length_57="${candidate_1561}"
             if [ "$(( $(( ${#__length_57} > avail_1546 )) && $([ "_${line_1557}" == "_" ]; echo $?) ))" != 0 ]; then
-                print_help_line__397_v0 "${pending_1554}" "${line_1557}" "${note_at_1558}"
+                print_help_line__399_v0 "${pending_1554}" "${line_1557}" "${note_at_1558}"
                 pending_1554="${blank_1552}"
                 line_1557="${word_1560}"
                 note_at_1558="$(if [ "$(( j_1559 >= note_start_1556 ))" != 0 ]; then echo 0; else echo -1; fi)"
@@ -917,221 +917,230 @@ done
                 line_1557="${candidate_1561}"
             fi
 done
-        print_help_line__397_v0 "${pending_1554}" "${line_1557}" "${note_at_1558}"
+        print_help_line__399_v0 "${pending_1554}" "${line_1557}" "${note_at_1558}"
 done
 }
 
 # Facade over the helper modules, so every caller keeps importing one path.
 # print_help()
-print_help__555_v0() {
+print_help__557_v0() {
     local usage_1473=("Usage:" "./xylitol.sh" "<command>" "[flags]")
-    print_wrapped__221_v0 usage_1473[@]
+    print_wrapped__222_v0 usage_1473[@]
     printf '%s\n' ""
-    colored_primary__263_v0 "Xylitol"
-    local ret_colored_primary263_v0__9_21="${ret_colored_primary263_v0}"
-    colored_primary__263_v0 "fresh"
-    local ret_colored_primary263_v0__10_34="${ret_colored_primary263_v0}"
-    local title_1525=("\\x1b[1m""${ret_colored_primary263_v0__9_21}" "-" "A" "tool" "for" "${ret_colored_primary263_v0__10_34}" "shell" "scripts.")
-    print_wrapped__221_v0 title_1525[@]
+    colored_primary__264_v0 "Xylitol"
+    local ret_colored_primary264_v0__9_21="${ret_colored_primary264_v0}"
+    colored_primary__264_v0 "fresh"
+    local ret_colored_primary264_v0__10_34="${ret_colored_primary264_v0}"
+    local title_1525=("\\x1b[1m""${ret_colored_primary264_v0__9_21}" "-" "A" "tool" "for" "${ret_colored_primary264_v0__10_34}" "shell" "scripts.")
+    print_wrapped__222_v0 title_1525[@]
     printf '%s\n' ""
-    colored_secondary__264_v0 "Flags:"
-    local ret_colored_secondary264_v0__14_12="${ret_colored_secondary264_v0}"
+    colored_secondary__265_v0 "Flags:"
+    local ret_colored_secondary265_v0__14_12="${ret_colored_secondary265_v0}"
     local array_62=()
-    printf__128_v0 "${ret_colored_secondary264_v0__14_12}""
+    printf__128_v0 "${ret_colored_secondary265_v0__14_12}""
 " array_62[@]
     local flag_names_1527=("-h, --help" "-v, --version")
     local flag_texts_1528=("Show this help message" "Show version information")
     local flag_notes_1529=("" "")
     # 13 keeps this section on the same column as Commands below.
-    render_help_entries__398_v0 flag_names_1527[@] flag_texts_1528[@] flag_notes_1529[@] 13
+    render_help_entries__400_v0 flag_names_1527[@] flag_texts_1528[@] flag_notes_1529[@] 13
     printf '%s\n' ""
-    colored_secondary__264_v0 "Commands:"
-    local ret_colored_secondary264_v0__21_12="${ret_colored_secondary264_v0}"
+    colored_secondary__265_v0 "Commands:"
+    local ret_colored_secondary265_v0__21_12="${ret_colored_secondary265_v0}"
     local array_66=()
-    printf__128_v0 "${ret_colored_secondary264_v0__21_12}""
+    printf__128_v0 "${ret_colored_secondary265_v0__21_12}""
 " array_66[@]
     local cmd_names_1571=("input" "choose" "filter" "confirm" "file")
     local cmd_texts_1572=("Prompt for some input" "Choose from a list of options" "Pick from a list narrowed by typing" "Prompt for a yes/no confirmation" "Browse filesystem and select a file")
     local cmd_notes_1573=("" "" "" "" "")
-    render_help_entries__398_v0 cmd_names_1571[@] cmd_texts_1572[@] cmd_notes_1573[@] 13
+    render_help_entries__400_v0 cmd_names_1571[@] cmd_texts_1572[@] cmd_notes_1573[@] 13
     printf '%s\n' ""
-    colored_secondary__264_v0 "Envs:"
-    local ret_colored_secondary264_v0__33_12="${ret_colored_secondary264_v0}"
+    colored_secondary__265_v0 "Envs:"
+    local ret_colored_secondary265_v0__33_12="${ret_colored_secondary265_v0}"
     local array_70=()
-    printf__128_v0 "${ret_colored_secondary264_v0__33_12}""
+    printf__128_v0 "${ret_colored_secondary265_v0__33_12}""
 " array_70[@]
     local env_names_1574=("\$XYLITOL_USE_PERL" "\$XYLITOL_TRUECOLOR" "\$XYLITOL_PRIMARY_COLOR" "\$XYLITOL_SECONDARY_COLOR" "\$XYLITOL_ACCENT_COLOR")
     local env_texts_1575=("Use Perl for CJK / Optimization" "Use 24-bit color instead of the terminal palette" "Set the primary color" "Set the secondary color" "Set the accent color")
     local env_notes_1576=("(\"Yes\" or \"No\", default: Yes)" "(\"Yes\" or \"No\", default: No)" "(default: 3;207;159;92)" "(default: 3;118;206;94)" "(default: 234;72;121;95)")
-    render_help_entries__398_v0 env_names_1574[@] env_texts_1575[@] env_notes_1576[@] 0
+    render_help_entries__400_v0 env_names_1574[@] env_texts_1575[@] env_notes_1576[@] 0
     printf '%s\n' ""
-    colored_accent__265_v0 "./xylitol.sh <command> --help"
-    local ret_colored_accent265_v0__58_16="${ret_colored_accent265_v0}"
-    local footer_1578=("Run" "${ret_colored_accent265_v0__58_16}" "for" "more" "information" "on" "a" "command.")
-    print_wrapped__221_v0 footer_1578[@]
+    colored_accent__266_v0 "./xylitol.sh <command> --help"
+    local ret_colored_accent266_v0__58_16="${ret_colored_accent266_v0}"
+    local footer_1578=("Run" "${ret_colored_accent266_v0__58_16}" "for" "more" "information" "on" "a" "command.")
+    print_wrapped__222_v0 footer_1578[@]
 }
 
 # get_char()
-get_char__635_v0() {
+get_char__637_v0() {
     local command_75
     command_75="$(read -n 1 key < /dev/tty; printf "%s" "$key")"
     __status=$?
-    local char_3243="${command_75}"
-    ret_get_char635_v0="${char_3243}"
+    local char_3279="${command_75}"
+    ret_get_char637_v0="${char_3279}"
     return 0
 }
 
 # eprintf(format: Text, args: [Text])
-eprintf__638_v0() {
-    local format_3215="${1}"
-    local args_3216=("${!2}")
-    args_3216=("${format_3215}" "${args_3216[@]}")
+eprintf__640_v0() {
+    local format_3253="${1}"
+    local args_3254=("${!2}")
+    args_3254=("${format_3253}" "${args_3254[@]}")
     __status=$?
-    printf "${args_3216[@]}" >&2
+    printf "${args_3254[@]}" >&2
     __status=$?
 }
 
 # eprintf_colored(message: Text, color: Int)
-eprintf_colored__639_v0() {
-    local message_3241="${1}"
-    local color_3242="${2}"
+eprintf_colored__641_v0() {
+    local message_3277="${1}"
+    local color_3278="${2}"
     # Prints an error message with a specified color.
-    local array_76=("${message_3241}")
-    eprintf__638_v0 "\\x1b[${color_3242}m%s\\x1b[0m" array_76[@]
+    local array_76=("${message_3277}")
+    eprintf__640_v0 "\\x1b[${color_3278}m%s\\x1b[0m" array_76[@]
 }
 
 # eprintf(format: Text, args: [Text])
-eprintf__654_v0() {
-    local format_3219="${1}"
-    local args_3220=("${!2}")
-    args_3220=("${format_3219}" "${args_3220[@]}")
+eprintf__656_v0() {
+    local format_3211="${1}"
+    local args_3212=("${!2}")
+    args_3212=("${format_3211}" "${args_3212[@]}")
     __status=$?
-    printf "${args_3220[@]}" >&2
+    printf "${args_3212[@]}" >&2
     __status=$?
+}
+
+# eprintf_colored(message: Text, color: Int)
+eprintf_colored__657_v0() {
+    local message_3209="${1}"
+    local color_3210="${2}"
+    # Prints an error message with a specified color.
+    local array_77=("${message_3209}")
+    eprintf__656_v0 "\\x1b[${color_3210}m%s\\x1b[0m" array_77[@]
 }
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
 _perl_state_24="None"
 # perl_available()
-perl_available__661_v0() {
+perl_available__664_v0() {
     if [ "$([ "_${_perl_state_24}" != "_None" ]; echo $?)" != 0 ]; then
-        local command_77
-        command_77="$(echo "$XYLITOL_USE_PERL")"
-        __status=$?
-        local disabled_3109
-        disabled_3109="$([ "_${command_77}" != "_No" ]; echo $?)"
         local command_78
-        command_78="$(command -v perl > /dev/null && echo 0 || echo 1)"
+        command_78="$(echo "$XYLITOL_USE_PERL")"
         __status=$?
-        local found_3110
-        found_3110="$(( $(( ! disabled_3109 )) && $([ "_${command_78}" != "_0" ]; echo $?) ))"
-        _perl_state_24="$(if [ "${found_3110}" != 0 ]; then echo "Yes"; else echo "No"; fi)"
+        local disabled_3143
+        disabled_3143="$([ "_${command_78}" != "_No" ]; echo $?)"
+        local command_79
+        command_79="$(command -v perl > /dev/null && echo 0 || echo 1)"
+        __status=$?
+        local found_3144
+        found_3144="$(( $(( ! disabled_3143 )) && $([ "_${command_79}" != "_0" ]; echo $?) ))"
+        _perl_state_24="$(if [ "${found_3144}" != 0 ]; then echo "Yes"; else echo "No"; fi)"
     fi
-    ret_perl_available661_v0="$([ "_${_perl_state_24}" != "_Yes" ]; echo $?)"
+    ret_perl_available664_v0="$([ "_${_perl_state_24}" != "_Yes" ]; echo $?)"
     return 0
 }
 
 # perl_get_cjk_width(text: Text)
-perl_get_cjk_width__662_v0() {
-    local text_3108="${1}"
-    perl_available__661_v0 
-    local ret_perl_available661_v0__19_12="${ret_perl_available661_v0}"
-    if [ "$(( ! ret_perl_available661_v0__19_12 ))" != 0 ]; then
-        ret_perl_get_cjk_width662_v0=''
+perl_get_cjk_width__665_v0() {
+    local text_3142="${1}"
+    perl_available__664_v0 
+    local ret_perl_available664_v0__19_12="${ret_perl_available664_v0}"
+    if [ "$(( ! ret_perl_available664_v0__19_12 ))" != 0 ]; then
+        ret_perl_get_cjk_width665_v0=''
         return 1
     fi
-    local command_79
-    command_79="$(perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text_3108}" 2>/dev/null)"
+    local command_80
+    command_80="$(perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text_3142}" 2>/dev/null)"
     __status=$?
     if [ "${__status}" != 0 ]; then
-        ret_perl_get_cjk_width662_v0=''
+        ret_perl_get_cjk_width665_v0=''
         return "${__status}"
     fi
-    local width_str_3111="${command_79}"
-    parse_int__13_v0 "${width_str_3111}"
+    local width_str_3145="${command_80}"
+    parse_int__13_v0 "${width_str_3145}"
     __status=$?
     if [ "${__status}" != 0 ]; then
-        ret_perl_get_cjk_width662_v0=''
+        ret_perl_get_cjk_width665_v0=''
         return "${__status}"
     fi
-    local width_3112="${ret_parse_int13_v0}"
-    ret_perl_get_cjk_width662_v0="${width_3112}"
+    local width_3146="${ret_parse_int13_v0}"
+    ret_perl_get_cjk_width665_v0="${width_3146}"
     return 0
 }
 
 # has_ansi_escape(text: Text)
-has_ansi_escape__667_v0() {
-    local text_3098="${1}"
+has_ansi_escape__670_v0() {
+    local text_3132="${1}"
     # Check for ESC character (0x1B = 27) or literal \x1b[
-    local command_80
-    command_80="$([[ "${text_3098}" == *$'\x1b'* || "${text_3098}" == *'\x1b['* ]] && echo "1" || echo "0")"
+    local command_81
+    command_81="$([[ "${text_3132}" == *$'\x1b'* || "${text_3132}" == *'\x1b['* ]] && echo "1" || echo "0")"
     __status=$?
-    local has_escape_3099="${command_80}"
-    ret_has_ansi_escape667_v0="$([ "_${has_escape_3099}" != "_1" ]; echo $?)"
+    local has_escape_3133="${command_81}"
+    ret_has_ansi_escape670_v0="$([ "_${has_escape_3133}" != "_1" ]; echo $?)"
     return 0
 }
 
 # strip_ansi(text: Text)
-strip_ansi__669_v0() {
-    local text_3104="${1}"
-    local command_81
-    command_81="$(printf "%s" "${text_3104}" | sed $'s/\x1b\[[0-9;]*m//g' | sed 's/\\x1b\[[0-9;]*m//g')"
+strip_ansi__672_v0() {
+    local text_3138="${1}"
+    local command_82
+    command_82="$(printf "%s" "${text_3138}" | sed $'s/\x1b\[[0-9;]*m//g' | sed 's/\\x1b\[[0-9;]*m//g')"
     __status=$?
-    ret_strip_ansi669_v0="${command_81}"
+    ret_strip_ansi672_v0="${command_82}"
     return 0
 }
 
 # is_all_ascii(text: Text)
-is_all_ascii__670_v0() {
-    local text_3106="${1}"
-    local command_82
-    command_82="$(printf "%s" "${text_3106}" | LC_ALL=C grep -q '^[ -~]*$' && echo 0 || echo 1)"
+is_all_ascii__673_v0() {
+    local text_3140="${1}"
+    local command_83
+    command_83="$(printf "%s" "${text_3140}" | LC_ALL=C grep -q '^[ -~]*$' && echo 0 || echo 1)"
     __status=$?
-    local result_3107="${command_82}"
-    ret_is_all_ascii670_v0="$([ "_${result_3107}" != "_0" ]; echo $?)"
+    local result_3141="${command_83}"
+    ret_is_all_ascii673_v0="$([ "_${result_3141}" != "_0" ]; echo $?)"
     return 0
 }
 
 # plain_len(text: Text)
-plain_len__671_v0() {
-    local text_3101="${1}"
-    local command_83
-    command_83="$(LC_ALL=C; __t="${text_3101}"; case "$__t" in (*[!\ -~]*) echo -1;; (*'\x1b['*) echo -1;; (*) echo "${#__t}";; esac)"
+plain_len__674_v0() {
+    local text_3135="${1}"
+    local command_84
+    command_84="$(LC_ALL=C; __t="${text_3135}"; case "$__t" in (*[!\ -~]*) echo -1;; (*'\x1b['*) echo -1;; (*) echo "${#__t}";; esac)"
     __status=$?
-    local measured_3102="${command_83}"
-    parse_int__13_v0 "${measured_3102}"
+    local measured_3136="${command_84}"
+    parse_int__13_v0 "${measured_3136}"
     __status=$?
-    ret_plain_len671_v0="${ret_parse_int13_v0}"
+    ret_plain_len674_v0="${ret_parse_int13_v0}"
     return 0
 }
 
 # get_visible_len(text: Text)
-get_visible_len__672_v0() {
-    local text_3100="${1}"
-    plain_len__671_v0 "${text_3100}"
-    local plain_3103="${ret_plain_len671_v0}"
-    if [ "$(( plain_3103 >= 0 ))" != 0 ]; then
-        ret_get_visible_len672_v0="${plain_3103}"
+get_visible_len__675_v0() {
+    local text_3134="${1}"
+    plain_len__674_v0 "${text_3134}"
+    local plain_3137="${ret_plain_len674_v0}"
+    if [ "$(( plain_3137 >= 0 ))" != 0 ]; then
+        ret_get_visible_len675_v0="${plain_3137}"
         return 0
     fi
-    strip_ansi__669_v0 "${text_3100}"
-    local stripped_3105="${ret_strip_ansi669_v0}"
-    is_all_ascii__670_v0 "${stripped_3105}"
-    local ret_is_all_ascii670_v0__46_12="${ret_is_all_ascii670_v0}"
-    if [ "$(( ! ret_is_all_ascii670_v0__46_12 ))" != 0 ]; then
-        perl_get_cjk_width__662_v0 "${stripped_3105}"
+    strip_ansi__672_v0 "${text_3134}"
+    local stripped_3139="${ret_strip_ansi672_v0}"
+    is_all_ascii__673_v0 "${stripped_3139}"
+    local ret_is_all_ascii673_v0__46_12="${ret_is_all_ascii673_v0}"
+    if [ "$(( ! ret_is_all_ascii673_v0__46_12 ))" != 0 ]; then
+        perl_get_cjk_width__665_v0 "${stripped_3139}"
         __status=$?
         if [ "${__status}" != 0 ]; then
-            local __length_84="${stripped_3105}"
-            ret_get_visible_len672_v0="${#__length_84}"
+            local __length_85="${stripped_3139}"
+            ret_get_visible_len675_v0="${#__length_85}"
             return 0
         fi
-        ret_get_visible_len672_v0="${ret_perl_get_cjk_width662_v0}"
+        ret_get_visible_len675_v0="${ret_perl_get_cjk_width665_v0}"
         return 0
     fi
-    local __length_85="${stripped_3105}"
-    ret_get_visible_len672_v0="${#__length_85}"
+    local __length_86="${stripped_3139}"
+    ret_get_visible_len675_v0="${#__length_86}"
     return 0
 }
 
@@ -1143,208 +1152,215 @@ _term_size_26=(80 24)
 export XYLITOL_RUNTIME_STTY_COUNT=0
 __status=$?
 # stty_count()
-stty_count__678_v0() {
-    local command_87
-    command_87="$(c="${XYLITOL_RUNTIME_STTY_COUNT:-0}"; [[ "$c" =~ ^[0-9]+$ ]] && echo "$c" || echo 0)"
+stty_count__681_v0() {
+    local command_88
+    command_88="$(c="${XYLITOL_RUNTIME_STTY_COUNT:-0}"; [[ "$c" =~ ^[0-9]+$ ]] && echo "$c" || echo 0)"
     __status=$?
-    local count_3173="${command_87}"
-    parse_int__13_v0 "${count_3173}"
+    local count_3207="${command_88}"
+    parse_int__13_v0 "${count_3207}"
     __status=$?
-    ret_stty_count678_v0="${ret_parse_int13_v0}"
+    ret_stty_count681_v0="${ret_parse_int13_v0}"
     return 0
 }
 
 # stty_lock()
-stty_lock__679_v0() {
-    stty_count__678_v0 
-    local count_num_3174="${ret_stty_count678_v0}"
-    if [ "$(( count_num_3174 == 0 ))" != 0 ]; then
-        stty -echo -icanon min 1 time 0 < /dev/tty
+stty_lock__682_v0() {
+    stty_count__681_v0 
+    local count_num_3208="${ret_stty_count681_v0}"
+    if [ "$(( count_num_3208 == 0 ))" != 0 ]; then
+        stty -echo -icanon min 1 time 0 2>/dev/null < /dev/tty
         __status=$?
+        if [ "${__status}" != 0 ]; then
+            eprintf_colored__657_v0 "Error: " 91
+            local array_89=("")
+            eprintf__656_v0 "xylitol needs a terminal, and /dev/tty is not available here.
+" array_89[@]
+            exit 1
+        fi
     fi
-    count_num_3174="$(( count_num_3174 + 1 ))"
-    export XYLITOL_RUNTIME_STTY_COUNT=${count_num_3174}
+    count_num_3208="$(( count_num_3208 + 1 ))"
+    export XYLITOL_RUNTIME_STTY_COUNT=${count_num_3208}
     __status=$?
 }
 
 # stty_unlock()
-stty_unlock__680_v0() {
-    stty_count__678_v0 
-    local count_num_3246="${ret_stty_count678_v0}"
-    if [ "$(( count_num_3246 > 0 ))" != 0 ]; then
-        count_num_3246="$(( count_num_3246 - 1 ))"
-        export XYLITOL_RUNTIME_STTY_COUNT=${count_num_3246}
+stty_unlock__683_v0() {
+    stty_count__681_v0 
+    local count_num_3282="${ret_stty_count681_v0}"
+    if [ "$(( count_num_3282 > 0 ))" != 0 ]; then
+        count_num_3282="$(( count_num_3282 - 1 ))"
+        export XYLITOL_RUNTIME_STTY_COUNT=${count_num_3282}
         __status=$?
-        if [ "$(( count_num_3246 == 0 ))" != 0 ]; then
-            stty echo icanon < /dev/tty
+        if [ "$(( count_num_3282 == 0 ))" != 0 ]; then
+            stty echo icanon 2>/dev/null < /dev/tty
             __status=$?
         fi
     fi
 }
 
 # store_term_size(size: Text)
-store_term_size__681_v0() {
-    local size_3089="${1}"
-    if [ "$([ "_${size_3089}" != "_" ]; echo $?)" != 0 ]; then
-        ret_store_term_size681_v0=0
+store_term_size__684_v0() {
+    local size_3123="${1}"
+    if [ "$([ "_${size_3123}" != "_" ]; echo $?)" != 0 ]; then
+        ret_store_term_size684_v0=0
         return 0
     fi
-    split__4_v0 "${size_3089}" " "
-    local parts_3090=("${ret_split4_v0[@]}")
-    local __length_88=("${parts_3090[@]}")
-    if [ "$(( ${#__length_88[@]} != 2 ))" != 0 ]; then
-        ret_store_term_size681_v0=0
+    split__4_v0 "${size_3123}" " "
+    local parts_3124=("${ret_split4_v0[@]}")
+    local __length_90=("${parts_3124[@]}")
+    if [ "$(( ${#__length_90[@]} != 2 ))" != 0 ]; then
+        ret_store_term_size684_v0=0
         return 0
     fi
-    parse_int__13_v0 "${parts_3090[1]?"Index out of bounds (at src/./input/../utils/term.ab:53:41)"}"
+    parse_int__13_v0 "${parts_3124[1]?"Index out of bounds (at src/./input/../utils/term.ab:57:41)"}"
     __status=$?
-    local ret_parse_int13_v0__53_25="${ret_parse_int13_v0}"
-    parse_int__13_v0 "${parts_3090[0]?"Index out of bounds (at src/./input/../utils/term.ab:53:68)"}"
+    local ret_parse_int13_v0__57_25="${ret_parse_int13_v0}"
+    parse_int__13_v0 "${parts_3124[0]?"Index out of bounds (at src/./input/../utils/term.ab:57:68)"}"
     __status=$?
-    local ret_parse_int13_v0__53_52="${ret_parse_int13_v0}"
-    _term_size_26=("${ret_parse_int13_v0__53_25}" "${ret_parse_int13_v0__53_52}")
-    ret_store_term_size681_v0=1
+    local ret_parse_int13_v0__57_52="${ret_parse_int13_v0}"
+    _term_size_26=("${ret_parse_int13_v0__57_25}" "${ret_parse_int13_v0__57_52}")
+    ret_store_term_size684_v0=1
     return 0
 }
 
 # query_term_size()
-query_term_size__682_v0() {
-    local command_90
-    command_90="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
+query_term_size__685_v0() {
+    local command_92
+    command_92="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
     __status=$?
-    local size_3092="${command_90}"
-    store_term_size__681_v0 "${size_3092}"
-    ret_query_term_size682_v0="${ret_store_term_size681_v0}"
+    local size_3126="${command_92}"
+    store_term_size__684_v0 "${size_3126}"
+    ret_query_term_size685_v0="${ret_store_term_size684_v0}"
     return 0
 }
 
 # stty_term_size()
-stty_term_size__683_v0() {
-    local command_91
-    command_91="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
+stty_term_size__686_v0() {
+    local command_93
+    command_93="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
     __status=$?
-    local size_3088="${command_91}"
-    store_term_size__681_v0 "${size_3088}"
-    ret_stty_term_size683_v0="${ret_store_term_size681_v0}"
+    local size_3122="${command_93}"
+    store_term_size__684_v0 "${size_3122}"
+    ret_stty_term_size686_v0="${ret_store_term_size684_v0}"
     return 0
 }
 
 # get_term_size()
-get_term_size__684_v0() {
-    stty_term_size__683_v0 
-    local detected_3091="${ret_stty_term_size683_v0}"
-    if [ "$(( ! detected_3091 ))" != 0 ]; then
-        query_term_size__682_v0 
-        detected_3091="${ret_query_term_size682_v0}"
+get_term_size__687_v0() {
+    stty_term_size__686_v0 
+    local detected_3125="${ret_stty_term_size686_v0}"
+    if [ "$(( ! detected_3125 ))" != 0 ]; then
+        query_term_size__685_v0 
+        detected_3125="${ret_query_term_size685_v0}"
     fi
     _got_term_size_25=1
 }
 
 # term_width()
-term_width__686_v0() {
+term_width__689_v0() {
     if [ "$(( ! _got_term_size_25 ))" != 0 ]; then
-        get_term_size__684_v0 
+        get_term_size__687_v0 
     fi
-    ret_term_width686_v0="${_term_size_26[0]?"Index out of bounds (at src/./input/../utils/term.ab:96:23)"}"
+    ret_term_width689_v0="${_term_size_26[0]?"Index out of bounds (at src/./input/../utils/term.ab:100:23)"}"
     return 0
 }
 
 # // Cursor /////
 # remove(cnt: Int)
-remove__688_v0() {
-    local cnt_3244="${1}"
-    if [ "$(( cnt_3244 > 0 ))" != 0 ]; then
-        local array_92=("")
-        eprintf__654_v0 "\\x1b[${cnt_3244}D\\x1b[K" array_92[@]
+remove__691_v0() {
+    local cnt_3280="${1}"
+    if [ "$(( cnt_3280 > 0 ))" != 0 ]; then
+        local array_94=("")
+        eprintf__656_v0 "\\x1b[${cnt_3280}D\\x1b[K" array_94[@]
     fi
 }
 
 # remove_line(cnt: Int)
-remove_line__689_v0() {
-    local cnt_3250="${1}"
-    if [ "$(( cnt_3250 > 0 ))" != 0 ]; then
-        local sequence_3251=""
-        local __range_start_3252=0
-        local __range_end_3252="${cnt_3250}"
-        local __dir_3252=$(( ${__range_start_3252} <= ${__range_end_3252} ? 1 : -1 ))
-        for (( ____3252=${__range_start_3252}; ____3252 * ${__dir_3252} < ${__range_end_3252} * ${__dir_3252}; ____3252+=${__dir_3252} )); do
-            sequence_3251+="\\x1b[2K\\x1b[1A"
+remove_line__692_v0() {
+    local cnt_3286="${1}"
+    if [ "$(( cnt_3286 > 0 ))" != 0 ]; then
+        local sequence_3287=""
+        local __range_start_3288=0
+        local __range_end_3288="${cnt_3286}"
+        local __dir_3288=$(( ${__range_start_3288} <= ${__range_end_3288} ? 1 : -1 ))
+        for (( ____3288=${__range_start_3288}; ____3288 * ${__dir_3288} < ${__range_end_3288} * ${__dir_3288}; ____3288+=${__dir_3288} )); do
+            sequence_3287+="\\x1b[2K\\x1b[1A"
 done
-        local array_93=("")
-        eprintf__654_v0 "${sequence_3251}" array_93[@]
+        local array_95=("")
+        eprintf__656_v0 "${sequence_3287}" array_95[@]
     fi
-    local array_94=("")
-    eprintf__654_v0 "\\x1b[G" array_94[@]
+    local array_96=("")
+    eprintf__656_v0 "\\x1b[G" array_96[@]
 }
 
 # remove_current_line()
-remove_current_line__690_v0() {
-    local array_95=("")
-    eprintf__654_v0 "\\x1b[2K\\x1b[G" array_95[@]
+remove_current_line__693_v0() {
+    local array_97=("")
+    eprintf__656_v0 "\\x1b[2K\\x1b[G" array_97[@]
 }
 
 # new_line(cnt: Int)
-new_line__692_v0() {
-    local cnt_3217="${1}"
-    local __range_start_3218=0
-    local __range_end_3218="${cnt_3217}"
-    local __dir_3218=$(( ${__range_start_3218} <= ${__range_end_3218} ? 1 : -1 ))
-    for (( ____3218=${__range_start_3218}; ____3218 * ${__dir_3218} < ${__range_end_3218} * ${__dir_3218}; ____3218+=${__dir_3218} )); do
-        local array_96=("")
-        eprintf__654_v0 "
-" array_96[@]
+new_line__695_v0() {
+    local cnt_3255="${1}"
+    local __range_start_3256=0
+    local __range_end_3256="${cnt_3255}"
+    local __dir_3256=$(( ${__range_start_3256} <= ${__range_end_3256} ? 1 : -1 ))
+    for (( ____3256=${__range_start_3256}; ____3256 * ${__dir_3256} < ${__range_end_3256} * ${__dir_3256}; ____3256+=${__dir_3256} )); do
+        local array_98=("")
+        eprintf__656_v0 "
+" array_98[@]
 done
 }
 
 # go_up(cnt: Int)
-go_up__693_v0() {
-    local cnt_3238="${1}"
-    local array_97=("")
-    eprintf__654_v0 "\\x1b[${cnt_3238}A" array_97[@]
+go_up__696_v0() {
+    local cnt_3274="${1}"
+    local array_99=("")
+    eprintf__656_v0 "\\x1b[${cnt_3274}A" array_99[@]
 }
 
 # go_down(cnt: Int)
-go_down__694_v0() {
-    local cnt_3249="${1}"
-    local array_98=("")
-    eprintf__654_v0 "\\x1b[${cnt_3249}B" array_98[@]
+go_down__697_v0() {
+    local cnt_3285="${1}"
+    local array_100=("")
+    eprintf__656_v0 "\\x1b[${cnt_3285}B" array_100[@]
 }
 
 # move the cursor up or down `cnt` lines.
 # print_wrapped(pieces: [Text])
-print_wrapped__698_v0() {
-    local pieces_3087=("${!1}")
-    term_width__686_v0 
-    local width_3093="${ret_term_width686_v0}"
-    local line_3094=""
-    local line_len_3095=0
-    for piece_3096 in "${pieces_3087[@]}"; do
-        local __length_101="${piece_3096}"
-        local piece_len_3097="${#__length_101}"
-        has_ansi_escape__667_v0 "${piece_3096}"
-        local ret_has_ansi_escape667_v0__186_12="${ret_has_ansi_escape667_v0}"
-        if [ "${ret_has_ansi_escape667_v0__186_12}" != 0 ]; then
-            get_visible_len__672_v0 "${piece_3096}"
-            piece_len_3097="${ret_get_visible_len672_v0}"
+print_wrapped__701_v0() {
+    local pieces_3121=("${!1}")
+    term_width__689_v0 
+    local width_3127="${ret_term_width689_v0}"
+    local line_3128=""
+    local line_len_3129=0
+    for piece_3130 in "${pieces_3121[@]}"; do
+        local __length_103="${piece_3130}"
+        local piece_len_3131="${#__length_103}"
+        has_ansi_escape__670_v0 "${piece_3130}"
+        local ret_has_ansi_escape670_v0__190_12="${ret_has_ansi_escape670_v0}"
+        if [ "${ret_has_ansi_escape670_v0__190_12}" != 0 ]; then
+            get_visible_len__675_v0 "${piece_3130}"
+            piece_len_3131="${ret_get_visible_len675_v0}"
         fi
-        if [ "$([ "_${line_3094}" != "_" ]; echo $?)" != 0 ]; then
-            line_3094="${piece_3096}"
-            line_len_3095="${piece_len_3097}"
-        elif [ "$(( $(( $(( line_len_3095 + 1 )) + piece_len_3097 )) > width_3093 ))" != 0 ]; then
-            local array_102=()
-            printf__128_v0 "${line_3094}""
-" array_102[@]
-            line_3094="${piece_3096}"
-            line_len_3095="${piece_len_3097}"
+        if [ "$([ "_${line_3128}" != "_" ]; echo $?)" != 0 ]; then
+            line_3128="${piece_3130}"
+            line_len_3129="${piece_len_3131}"
+        elif [ "$(( $(( $(( line_len_3129 + 1 )) + piece_len_3131 )) > width_3127 ))" != 0 ]; then
+            local array_104=()
+            printf__128_v0 "${line_3128}""
+" array_104[@]
+            line_3128="${piece_3130}"
+            line_len_3129="${piece_len_3131}"
         else
-            line_3094+=" ""${piece_3096}"
-            line_len_3095="$(( line_len_3095 + $(( 1 + piece_len_3097 )) ))"
+            line_3128+=" ""${piece_3130}"
+            line_len_3129="$(( line_len_3129 + $(( 1 + piece_len_3131 )) ))"
         fi
     done
-    if [ "$([ "_${line_3094}" == "_" ]; echo $?)" != 0 ]; then
-        local array_103=()
-        printf__128_v0 "${line_3094}""
-" array_103[@]
+    if [ "$([ "_${line_3128}" == "_" ]; echo $?)" != 0 ]; then
+        local array_105=()
+        printf__128_v0 "${line_3128}""
+" array_105[@]
     fi
 }
 
@@ -1360,84 +1376,84 @@ _got_xylitol_colors_30=0
 _primary_color_31=(3 207 159 92)
 _secondary_color_32=(3 118 206 94)
 # get_supports_truecolor()
-get_supports_truecolor__735_v0() {
+get_supports_truecolor__738_v0() {
     env_var_get__120_v0 "XYLITOL_TRUECOLOR"
     __status=$?
-    local config_3125="${ret_env_var_get120_v0}"
-    _supports_truecolor_29="$(if [ "$([ "_${config_3125}" != "_Yes" ]; echo $?)" != 0 ]; then echo "Yes"; else echo "No"; fi)"
-    ret_get_supports_truecolor735_v0="$([ "_${_supports_truecolor_29}" != "_Yes" ]; echo $?)"
+    local config_3159="${ret_env_var_get120_v0}"
+    _supports_truecolor_29="$(if [ "$([ "_${config_3159}" != "_Yes" ]; echo $?)" != 0 ]; then echo "Yes"; else echo "No"; fi)"
+    ret_get_supports_truecolor738_v0="$([ "_${_supports_truecolor_29}" != "_Yes" ]; echo $?)"
     return 0
 }
 
 # colored_rgb(message: Text, r: Int, g: Int, b: Int, fallback: Int)
-colored_rgb__736_v0() {
-    local message_3120="${1}"
-    local r_3121="${2}"
-    local g_3122="${3}"
-    local b_3123="${4}"
-    local fallback_3124="${5}"
+colored_rgb__739_v0() {
+    local message_3154="${1}"
+    local r_3155="${2}"
+    local g_3156="${3}"
+    local b_3157="${4}"
+    local fallback_3158="${5}"
     if [ "$([ "_${_supports_truecolor_29}" != "_Yes" ]; echo $?)" != 0 ]; then
-        ret_colored_rgb736_v0="\\x1b[38;2;${r_3121};${g_3122};${b_3123}m""${message_3120}""\\x1b[0m"
+        ret_colored_rgb739_v0="\\x1b[38;2;${r_3155};${g_3156};${b_3157}m""${message_3154}""\\x1b[0m"
         return 0
     elif [ "$([ "_${_supports_truecolor_29}" != "_None" ]; echo $?)" != 0 ]; then
-        get_supports_truecolor__735_v0 
-        local ret_get_supports_truecolor735_v0__45_17="${ret_get_supports_truecolor735_v0}"
-        if [ "${ret_get_supports_truecolor735_v0__45_17}" != 0 ]; then
-            ret_colored_rgb736_v0="\\x1b[38;2;${r_3121};${g_3122};${b_3123}m""${message_3120}""\\x1b[0m"
+        get_supports_truecolor__738_v0 
+        local ret_get_supports_truecolor738_v0__45_17="${ret_get_supports_truecolor738_v0}"
+        if [ "${ret_get_supports_truecolor738_v0__45_17}" != 0 ]; then
+            ret_colored_rgb739_v0="\\x1b[38;2;${r_3155};${g_3156};${b_3157}m""${message_3154}""\\x1b[0m"
             return 0
-        elif [ "$(( fallback_3124 == 0 ))" != 0 ]; then
-            ret_colored_rgb736_v0="${message_3120}"
+        elif [ "$(( fallback_3158 == 0 ))" != 0 ]; then
+            ret_colored_rgb739_v0="${message_3154}"
             return 0
         else
-            ret_colored_rgb736_v0="\\x1b[${fallback_3124}m""${message_3120}""\\x1b[0m"
+            ret_colored_rgb739_v0="\\x1b[${fallback_3158}m""${message_3154}""\\x1b[0m"
             return 0
         fi
     else
-        if [ "$(( fallback_3124 == 0 ))" != 0 ]; then
-            ret_colored_rgb736_v0="${message_3120}"
+        if [ "$(( fallback_3158 == 0 ))" != 0 ]; then
+            ret_colored_rgb739_v0="${message_3154}"
             return 0
         fi
-        ret_colored_rgb736_v0="\\x1b[${fallback_3124}m""${message_3120}""\\x1b[0m"
+        ret_colored_rgb739_v0="\\x1b[${fallback_3158}m""${message_3154}""\\x1b[0m"
         return 0
     fi
 }
 
 # inner_get_xylitol_colors()
-inner_get_xylitol_colors__738_v0() {
+inner_get_xylitol_colors__741_v0() {
     if [ "$(( ! _got_xylitol_colors_30 ))" != 0 ]; then
         env_var_get__120_v0 "XYLITOL_PRIMARY_COLOR"
         __status=$?
-        local primary_env_3114="${ret_env_var_get120_v0}"
-        if [ "$([ "_${primary_env_3114}" == "_" ]; echo $?)" != 0 ]; then
-            split__4_v0 "${primary_env_3114}" ";"
-            local parts_3115=("${ret_split4_v0[@]}")
-            local __length_107=("${parts_3115[@]}")
-            if [ "$(( ${#__length_107[@]} == 4 ))" != 0 ]; then
-                parse_int__13_v0 "${parts_3115[0]?"Index out of bounds (at src/./input/../utils/truecolor.ab:110:37)"}"
+        local primary_env_3148="${ret_env_var_get120_v0}"
+        if [ "$([ "_${primary_env_3148}" == "_" ]; echo $?)" != 0 ]; then
+            split__4_v0 "${primary_env_3148}" ";"
+            local parts_3149=("${ret_split4_v0[@]}")
+            local __length_109=("${parts_3149[@]}")
+            if [ "$(( ${#__length_109[@]} == 4 ))" != 0 ]; then
+                parse_int__13_v0 "${parts_3149[0]?"Index out of bounds (at src/./input/../utils/truecolor.ab:110:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors738_v0=''
+                    ret_inner_get_xylitol_colors741_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__110_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_3115[1]?"Index out of bounds (at src/./input/../utils/truecolor.ab:111:37)"}"
+                parse_int__13_v0 "${parts_3149[1]?"Index out of bounds (at src/./input/../utils/truecolor.ab:111:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors738_v0=''
+                    ret_inner_get_xylitol_colors741_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__111_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_3115[2]?"Index out of bounds (at src/./input/../utils/truecolor.ab:112:37)"}"
+                parse_int__13_v0 "${parts_3149[2]?"Index out of bounds (at src/./input/../utils/truecolor.ab:112:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors738_v0=''
+                    ret_inner_get_xylitol_colors741_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__112_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_3115[3]?"Index out of bounds (at src/./input/../utils/truecolor.ab:113:37)"}"
+                parse_int__13_v0 "${parts_3149[3]?"Index out of bounds (at src/./input/../utils/truecolor.ab:113:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors738_v0=''
+                    ret_inner_get_xylitol_colors741_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__113_21="${ret_parse_int13_v0}"
@@ -1446,37 +1462,37 @@ inner_get_xylitol_colors__738_v0() {
         fi
         env_var_get__120_v0 "XYLITOL_SECONDARY_COLOR"
         __status=$?
-        local secondary_env_3116="${ret_env_var_get120_v0}"
-        if [ "$([ "_${secondary_env_3116}" == "_" ]; echo $?)" != 0 ]; then
-            split__4_v0 "${secondary_env_3116}" ";"
-            local parts_3117=("${ret_split4_v0[@]}")
-            local __length_109=("${parts_3117[@]}")
-            if [ "$(( ${#__length_109[@]} == 4 ))" != 0 ]; then
-                parse_int__13_v0 "${parts_3117[0]?"Index out of bounds (at src/./input/../utils/truecolor.ab:123:37)"}"
+        local secondary_env_3150="${ret_env_var_get120_v0}"
+        if [ "$([ "_${secondary_env_3150}" == "_" ]; echo $?)" != 0 ]; then
+            split__4_v0 "${secondary_env_3150}" ";"
+            local parts_3151=("${ret_split4_v0[@]}")
+            local __length_111=("${parts_3151[@]}")
+            if [ "$(( ${#__length_111[@]} == 4 ))" != 0 ]; then
+                parse_int__13_v0 "${parts_3151[0]?"Index out of bounds (at src/./input/../utils/truecolor.ab:123:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors738_v0=''
+                    ret_inner_get_xylitol_colors741_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__123_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_3117[1]?"Index out of bounds (at src/./input/../utils/truecolor.ab:124:37)"}"
+                parse_int__13_v0 "${parts_3151[1]?"Index out of bounds (at src/./input/../utils/truecolor.ab:124:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors738_v0=''
+                    ret_inner_get_xylitol_colors741_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__124_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_3117[2]?"Index out of bounds (at src/./input/../utils/truecolor.ab:125:37)"}"
+                parse_int__13_v0 "${parts_3151[2]?"Index out of bounds (at src/./input/../utils/truecolor.ab:125:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors738_v0=''
+                    ret_inner_get_xylitol_colors741_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__125_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_3117[3]?"Index out of bounds (at src/./input/../utils/truecolor.ab:126:37)"}"
+                parse_int__13_v0 "${parts_3151[3]?"Index out of bounds (at src/./input/../utils/truecolor.ab:126:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors738_v0=''
+                    ret_inner_get_xylitol_colors741_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__126_21="${ret_parse_int13_v0}"
@@ -1485,37 +1501,37 @@ inner_get_xylitol_colors__738_v0() {
         fi
         env_var_get__120_v0 "XYLITOL_ACCENT_COLOR"
         __status=$?
-        local accent_env_3118="${ret_env_var_get120_v0}"
-        if [ "$([ "_${accent_env_3118}" == "_" ]; echo $?)" != 0 ]; then
-            split__4_v0 "${accent_env_3118}" ";"
-            local parts_3119=("${ret_split4_v0[@]}")
-            local __length_111=("${parts_3119[@]}")
-            if [ "$(( ${#__length_111[@]} == 4 ))" != 0 ]; then
-                parse_int__13_v0 "${parts_3119[0]?"Index out of bounds (at src/./input/../utils/truecolor.ab:136:37)"}"
+        local accent_env_3152="${ret_env_var_get120_v0}"
+        if [ "$([ "_${accent_env_3152}" == "_" ]; echo $?)" != 0 ]; then
+            split__4_v0 "${accent_env_3152}" ";"
+            local parts_3153=("${ret_split4_v0[@]}")
+            local __length_113=("${parts_3153[@]}")
+            if [ "$(( ${#__length_113[@]} == 4 ))" != 0 ]; then
+                parse_int__13_v0 "${parts_3153[0]?"Index out of bounds (at src/./input/../utils/truecolor.ab:136:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors738_v0=''
+                    ret_inner_get_xylitol_colors741_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__136_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_3119[1]?"Index out of bounds (at src/./input/../utils/truecolor.ab:137:37)"}"
+                parse_int__13_v0 "${parts_3153[1]?"Index out of bounds (at src/./input/../utils/truecolor.ab:137:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors738_v0=''
+                    ret_inner_get_xylitol_colors741_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__137_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_3119[2]?"Index out of bounds (at src/./input/../utils/truecolor.ab:138:37)"}"
+                parse_int__13_v0 "${parts_3153[2]?"Index out of bounds (at src/./input/../utils/truecolor.ab:138:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors738_v0=''
+                    ret_inner_get_xylitol_colors741_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__138_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_3119[3]?"Index out of bounds (at src/./input/../utils/truecolor.ab:139:37)"}"
+                parse_int__13_v0 "${parts_3153[3]?"Index out of bounds (at src/./input/../utils/truecolor.ab:139:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors738_v0=''
+                    ret_inner_get_xylitol_colors741_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__139_21="${ret_parse_int13_v0}"
@@ -1526,8 +1542,8 @@ inner_get_xylitol_colors__738_v0() {
 }
 
 # get_xylitol_colors()
-get_xylitol_colors__739_v0() {
-    inner_get_xylitol_colors__738_v0 
+get_xylitol_colors__742_v0() {
+    inner_get_xylitol_colors__741_v0 
     __status=$?
     if [ "${__status}" != 0 ]; then
         echo_colored__134_v0 "WARN: Failed to parse Xylitol colors from envs." 33
@@ -1536,24 +1552,24 @@ get_xylitol_colors__739_v0() {
 }
 
 # colored_primary(message: Text)
-colored_primary__740_v0() {
-    local message_3113="${1}"
+colored_primary__743_v0() {
+    local message_3147="${1}"
     if [ "$(( ! _got_xylitol_colors_30 ))" != 0 ]; then
-        get_xylitol_colors__739_v0 
+        get_xylitol_colors__742_v0 
     fi
-    colored_rgb__736_v0 "${message_3113}" "${_primary_color_31[0]?"Index out of bounds (at src/./input/../utils/truecolor.ab:159:48)"}" "${_primary_color_31[1]?"Index out of bounds (at src/./input/../utils/truecolor.ab:159:67)"}" "${_primary_color_31[2]?"Index out of bounds (at src/./input/../utils/truecolor.ab:159:86)"}" "${_primary_color_31[3]?"Index out of bounds (at src/./input/../utils/truecolor.ab:159:105)"}"
-    ret_colored_primary740_v0="${ret_colored_rgb736_v0}"
+    colored_rgb__739_v0 "${message_3147}" "${_primary_color_31[0]?"Index out of bounds (at src/./input/../utils/truecolor.ab:159:48)"}" "${_primary_color_31[1]?"Index out of bounds (at src/./input/../utils/truecolor.ab:159:67)"}" "${_primary_color_31[2]?"Index out of bounds (at src/./input/../utils/truecolor.ab:159:86)"}" "${_primary_color_31[3]?"Index out of bounds (at src/./input/../utils/truecolor.ab:159:105)"}"
+    ret_colored_primary743_v0="${ret_colored_rgb739_v0}"
     return 0
 }
 
 # colored_secondary(message: Text)
-colored_secondary__741_v0() {
-    local message_3127="${1}"
+colored_secondary__744_v0() {
+    local message_3161="${1}"
     if [ "$(( ! _got_xylitol_colors_30 ))" != 0 ]; then
-        get_xylitol_colors__739_v0 
+        get_xylitol_colors__742_v0 
     fi
-    colored_rgb__736_v0 "${message_3127}" "${_secondary_color_32[0]?"Index out of bounds (at src/./input/../utils/truecolor.ab:166:50)"}" "${_secondary_color_32[1]?"Index out of bounds (at src/./input/../utils/truecolor.ab:166:71)"}" "${_secondary_color_32[2]?"Index out of bounds (at src/./input/../utils/truecolor.ab:166:92)"}" "${_secondary_color_32[3]?"Index out of bounds (at src/./input/../utils/truecolor.ab:166:113)"}"
-    ret_colored_secondary741_v0="${ret_colored_rgb736_v0}"
+    colored_rgb__739_v0 "${message_3161}" "${_secondary_color_32[0]?"Index out of bounds (at src/./input/../utils/truecolor.ab:166:50)"}" "${_secondary_color_32[1]?"Index out of bounds (at src/./input/../utils/truecolor.ab:166:71)"}" "${_secondary_color_32[2]?"Index out of bounds (at src/./input/../utils/truecolor.ab:166:92)"}" "${_secondary_color_32[3]?"Index out of bounds (at src/./input/../utils/truecolor.ab:166:113)"}"
+    ret_colored_secondary744_v0="${ret_colored_rgb739_v0}"
     return 0
 }
 
@@ -1561,387 +1577,387 @@ colored_secondary__741_v0() {
 # "None" until the first call decides, then "Yes" or "No".
 _perl_state_34="None"
 # perl_available()
-perl_available__758_v0() {
+perl_available__761_v0() {
     if [ "$([ "_${_perl_state_34}" != "_None" ]; echo $?)" != 0 ]; then
-        local command_113
-        command_113="$(echo "$XYLITOL_USE_PERL")"
+        local command_115
+        command_115="$(echo "$XYLITOL_USE_PERL")"
         __status=$?
-        local disabled_3187
-        disabled_3187="$([ "_${command_113}" != "_No" ]; echo $?)"
-        local command_114
-        command_114="$(command -v perl > /dev/null && echo 0 || echo 1)"
+        local disabled_3225
+        disabled_3225="$([ "_${command_115}" != "_No" ]; echo $?)"
+        local command_116
+        command_116="$(command -v perl > /dev/null && echo 0 || echo 1)"
         __status=$?
-        local found_3188
-        found_3188="$(( $(( ! disabled_3187 )) && $([ "_${command_114}" != "_0" ]; echo $?) ))"
-        _perl_state_34="$(if [ "${found_3188}" != 0 ]; then echo "Yes"; else echo "No"; fi)"
+        local found_3226
+        found_3226="$(( $(( ! disabled_3225 )) && $([ "_${command_116}" != "_0" ]; echo $?) ))"
+        _perl_state_34="$(if [ "${found_3226}" != 0 ]; then echo "Yes"; else echo "No"; fi)"
     fi
-    ret_perl_available758_v0="$([ "_${_perl_state_34}" != "_Yes" ]; echo $?)"
+    ret_perl_available761_v0="$([ "_${_perl_state_34}" != "_Yes" ]; echo $?)"
     return 0
 }
 
 # perl_get_cjk_width(text: Text)
-perl_get_cjk_width__759_v0() {
-    local text_3186="${1}"
-    perl_available__758_v0 
-    local ret_perl_available758_v0__19_12="${ret_perl_available758_v0}"
-    if [ "$(( ! ret_perl_available758_v0__19_12 ))" != 0 ]; then
-        ret_perl_get_cjk_width759_v0=''
+perl_get_cjk_width__762_v0() {
+    local text_3224="${1}"
+    perl_available__761_v0 
+    local ret_perl_available761_v0__19_12="${ret_perl_available761_v0}"
+    if [ "$(( ! ret_perl_available761_v0__19_12 ))" != 0 ]; then
+        ret_perl_get_cjk_width762_v0=''
         return 1
     fi
-    local command_115
-    command_115="$(perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text_3186}" 2>/dev/null)"
+    local command_117
+    command_117="$(perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text_3224}" 2>/dev/null)"
     __status=$?
     if [ "${__status}" != 0 ]; then
-        ret_perl_get_cjk_width759_v0=''
+        ret_perl_get_cjk_width762_v0=''
         return "${__status}"
     fi
-    local width_str_3189="${command_115}"
-    parse_int__13_v0 "${width_str_3189}"
+    local width_str_3227="${command_117}"
+    parse_int__13_v0 "${width_str_3227}"
     __status=$?
     if [ "${__status}" != 0 ]; then
-        ret_perl_get_cjk_width759_v0=''
+        ret_perl_get_cjk_width762_v0=''
         return "${__status}"
     fi
-    local width_3190="${ret_parse_int13_v0}"
-    ret_perl_get_cjk_width759_v0="${width_3190}"
+    local width_3228="${ret_parse_int13_v0}"
+    ret_perl_get_cjk_width762_v0="${width_3228}"
     return 0
 }
 
 # perl_truncate_cjk(text: Text, max_width: Int)
-perl_truncate_cjk__760_v0() {
-    local text_3197="${1}"
-    local max_width_3198="${2}"
-    perl_available__758_v0 
-    local ret_perl_available758_v0__30_12="${ret_perl_available758_v0}"
-    if [ "$(( ! ret_perl_available758_v0__30_12 ))" != 0 ]; then
-        ret_perl_truncate_cjk760_v0=''
+perl_truncate_cjk__763_v0() {
+    local text_3235="${1}"
+    local max_width_3236="${2}"
+    perl_available__761_v0 
+    local ret_perl_available761_v0__30_12="${ret_perl_available761_v0}"
+    if [ "$(( ! ret_perl_available761_v0__30_12 ))" != 0 ]; then
+        ret_perl_truncate_cjk763_v0=''
         return 1
     fi
-    local command_116
-    command_116="$(perl -CSDA -E '$t=shift;$m=shift;$w=0;$r="";$c=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1,($w+$c<=$m?($w+=$c,$r.=$_):last) for split//,$t; print $r' "${text_3197}" ${max_width_3198} 2>/dev/null)"
+    local command_118
+    command_118="$(perl -CSDA -E '$t=shift;$m=shift;$w=0;$r="";$c=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1,($w+$c<=$m?($w+=$c,$r.=$_):last) for split//,$t; print $r' "${text_3235}" ${max_width_3236} 2>/dev/null)"
     __status=$?
     if [ "${__status}" != 0 ]; then
-        ret_perl_truncate_cjk760_v0=''
+        ret_perl_truncate_cjk763_v0=''
         return "${__status}"
     fi
-    local result_3199="${command_116}"
-    ret_perl_truncate_cjk760_v0="${result_3199}"
+    local result_3237="${command_118}"
+    ret_perl_truncate_cjk763_v0="${result_3237}"
     return 0
 }
 
 # has_ansi_escape(text: Text)
-has_ansi_escape__764_v0() {
-    local text_3165="${1}"
+has_ansi_escape__767_v0() {
+    local text_3199="${1}"
     # Check for ESC character (0x1B = 27) or literal \x1b[
-    local command_117
-    command_117="$([[ "${text_3165}" == *$'\x1b'* || "${text_3165}" == *'\x1b['* ]] && echo "1" || echo "0")"
+    local command_119
+    command_119="$([[ "${text_3199}" == *$'\x1b'* || "${text_3199}" == *'\x1b['* ]] && echo "1" || echo "0")"
     __status=$?
-    local has_escape_3166="${command_117}"
-    ret_has_ansi_escape764_v0="$([ "_${has_escape_3166}" != "_1" ]; echo $?)"
+    local has_escape_3200="${command_119}"
+    ret_has_ansi_escape767_v0="$([ "_${has_escape_3200}" != "_1" ]; echo $?)"
     return 0
 }
 
 # escape_ansi(text: Text)
-escape_ansi__765_v0() {
-    local text_3167="${1}"
-    local command_118
-    command_118="$(printf '%s' "${text_3167}" | sed $'s/\x1b/\\x1b/g')"
+escape_ansi__768_v0() {
+    local text_3201="${1}"
+    local command_120
+    command_120="$(printf '%s' "${text_3201}" | sed $'s/\x1b/\\x1b/g')"
     __status=$?
-    ret_escape_ansi765_v0="${command_118}"
+    ret_escape_ansi768_v0="${command_120}"
     return 0
 }
 
 # strip_ansi(text: Text)
-strip_ansi__766_v0() {
-    local text_3182="${1}"
-    local command_119
-    command_119="$(printf "%s" "${text_3182}" | sed $'s/\x1b\[[0-9;]*m//g' | sed 's/\\x1b\[[0-9;]*m//g')"
+strip_ansi__769_v0() {
+    local text_3220="${1}"
+    local command_121
+    command_121="$(printf "%s" "${text_3220}" | sed $'s/\x1b\[[0-9;]*m//g' | sed 's/\\x1b\[[0-9;]*m//g')"
     __status=$?
-    ret_strip_ansi766_v0="${command_119}"
+    ret_strip_ansi769_v0="${command_121}"
     return 0
 }
 
 # is_all_ascii(text: Text)
-is_all_ascii__767_v0() {
-    local text_3184="${1}"
-    local command_120
-    command_120="$(printf "%s" "${text_3184}" | LC_ALL=C grep -q '^[ -~]*$' && echo 0 || echo 1)"
+is_all_ascii__770_v0() {
+    local text_3222="${1}"
+    local command_122
+    command_122="$(printf "%s" "${text_3222}" | LC_ALL=C grep -q '^[ -~]*$' && echo 0 || echo 1)"
     __status=$?
-    local result_3185="${command_120}"
-    ret_is_all_ascii767_v0="$([ "_${result_3185}" != "_0" ]; echo $?)"
+    local result_3223="${command_122}"
+    ret_is_all_ascii770_v0="$([ "_${result_3223}" != "_0" ]; echo $?)"
     return 0
 }
 
 # plain_len(text: Text)
-plain_len__768_v0() {
-    local text_3179="${1}"
-    local command_121
-    command_121="$(LC_ALL=C; __t="${text_3179}"; case "$__t" in (*[!\ -~]*) echo -1;; (*'\x1b['*) echo -1;; (*) echo "${#__t}";; esac)"
+plain_len__771_v0() {
+    local text_3217="${1}"
+    local command_123
+    command_123="$(LC_ALL=C; __t="${text_3217}"; case "$__t" in (*[!\ -~]*) echo -1;; (*'\x1b['*) echo -1;; (*) echo "${#__t}";; esac)"
     __status=$?
-    local measured_3180="${command_121}"
-    parse_int__13_v0 "${measured_3180}"
+    local measured_3218="${command_123}"
+    parse_int__13_v0 "${measured_3218}"
     __status=$?
-    ret_plain_len768_v0="${ret_parse_int13_v0}"
+    ret_plain_len771_v0="${ret_parse_int13_v0}"
     return 0
 }
 
 # get_visible_len(text: Text)
-get_visible_len__769_v0() {
-    local text_3178="${1}"
-    plain_len__768_v0 "${text_3178}"
-    local plain_3181="${ret_plain_len768_v0}"
-    if [ "$(( plain_3181 >= 0 ))" != 0 ]; then
-        ret_get_visible_len769_v0="${plain_3181}"
+get_visible_len__772_v0() {
+    local text_3216="${1}"
+    plain_len__771_v0 "${text_3216}"
+    local plain_3219="${ret_plain_len771_v0}"
+    if [ "$(( plain_3219 >= 0 ))" != 0 ]; then
+        ret_get_visible_len772_v0="${plain_3219}"
         return 0
     fi
-    strip_ansi__766_v0 "${text_3178}"
-    local stripped_3183="${ret_strip_ansi766_v0}"
-    is_all_ascii__767_v0 "${stripped_3183}"
-    local ret_is_all_ascii767_v0__46_12="${ret_is_all_ascii767_v0}"
-    if [ "$(( ! ret_is_all_ascii767_v0__46_12 ))" != 0 ]; then
-        perl_get_cjk_width__759_v0 "${stripped_3183}"
+    strip_ansi__769_v0 "${text_3216}"
+    local stripped_3221="${ret_strip_ansi769_v0}"
+    is_all_ascii__770_v0 "${stripped_3221}"
+    local ret_is_all_ascii770_v0__46_12="${ret_is_all_ascii770_v0}"
+    if [ "$(( ! ret_is_all_ascii770_v0__46_12 ))" != 0 ]; then
+        perl_get_cjk_width__762_v0 "${stripped_3221}"
         __status=$?
         if [ "${__status}" != 0 ]; then
-            local __length_122="${stripped_3183}"
-            ret_get_visible_len769_v0="${#__length_122}"
+            local __length_124="${stripped_3221}"
+            ret_get_visible_len772_v0="${#__length_124}"
             return 0
         fi
-        ret_get_visible_len769_v0="${ret_perl_get_cjk_width759_v0}"
+        ret_get_visible_len772_v0="${ret_perl_get_cjk_width762_v0}"
         return 0
     fi
-    local __length_123="${stripped_3183}"
-    ret_get_visible_len769_v0="${#__length_123}"
+    local __length_125="${stripped_3221}"
+    ret_get_visible_len772_v0="${#__length_125}"
     return 0
 }
 
 # truncate_text(text: Text, max_width: Int)
-truncate_text__770_v0() {
-    local text_3194="${1}"
-    local max_width_3195="${2}"
-    get_visible_len__769_v0 "${text_3194}"
-    local visible_len_3196="${ret_get_visible_len769_v0}"
-    if [ "$(( visible_len_3196 <= max_width_3195 ))" != 0 ]; then
-        ret_truncate_text770_v0="${text_3194}"
+truncate_text__773_v0() {
+    local text_3232="${1}"
+    local max_width_3233="${2}"
+    get_visible_len__772_v0 "${text_3232}"
+    local visible_len_3234="${ret_get_visible_len772_v0}"
+    if [ "$(( visible_len_3234 <= max_width_3233 ))" != 0 ]; then
+        ret_truncate_text773_v0="${text_3232}"
         return 0
     fi
-    is_all_ascii__767_v0 "${text_3194}"
-    local ret_is_all_ascii767_v0__61_12="${ret_is_all_ascii767_v0}"
-    if [ "$(( ! ret_is_all_ascii767_v0__61_12 ))" != 0 ]; then
-        perl_truncate_cjk__760_v0 "${text_3194}" "${max_width_3195}"
+    is_all_ascii__770_v0 "${text_3232}"
+    local ret_is_all_ascii770_v0__61_12="${ret_is_all_ascii770_v0}"
+    if [ "$(( ! ret_is_all_ascii770_v0__61_12 ))" != 0 ]; then
+        perl_truncate_cjk__763_v0 "${text_3232}" "${max_width_3233}"
         __status=$?
         if [ "${__status}" != 0 ]; then
-            printf "%s" "${text_3194}" | cut -c1-${max_width_3195}
+            printf "%s" "${text_3232}" | cut -c1-${max_width_3233}
             __status=$?
         fi
-        ret_truncate_text770_v0="${ret_perl_truncate_cjk760_v0}"
+        ret_truncate_text773_v0="${ret_perl_truncate_cjk763_v0}"
         return 0
     fi
-    local command_124
-    command_124="$(printf "%s" "${text_3194}" | cut -c1-${max_width_3195})"
+    local command_126
+    command_126="$(printf "%s" "${text_3232}" | cut -c1-${max_width_3233})"
     __status=$?
-    ret_truncate_text770_v0="${command_124}"
+    ret_truncate_text773_v0="${command_126}"
     return 0
 }
 
 # truncate_ansi(text: Text, max_width: Int)
-truncate_ansi__771_v0() {
-    local text_3192="${1}"
-    local max_width_3193="${2}"
-    has_ansi_escape__764_v0 "${text_3192}"
-    local ret_has_ansi_escape764_v0__73_12="${ret_has_ansi_escape764_v0}"
-    if [ "$(( ! ret_has_ansi_escape764_v0__73_12 ))" != 0 ]; then
-        truncate_text__770_v0 "${text_3192}" "${max_width_3193}"
-        ret_truncate_ansi771_v0="${ret_truncate_text770_v0}"
+truncate_ansi__774_v0() {
+    local text_3230="${1}"
+    local max_width_3231="${2}"
+    has_ansi_escape__767_v0 "${text_3230}"
+    local ret_has_ansi_escape767_v0__73_12="${ret_has_ansi_escape767_v0}"
+    if [ "$(( ! ret_has_ansi_escape767_v0__73_12 ))" != 0 ]; then
+        truncate_text__773_v0 "${text_3230}" "${max_width_3231}"
+        ret_truncate_ansi774_v0="${ret_truncate_text773_v0}"
         return 0
     fi
     # Check if text starts with \x1b[
-    local command_125
-    command_125="$([[ "${text_3192}" == '\x1b['* ]] && echo "1" || echo "0")"
+    local command_127
+    command_127="$([[ "${text_3230}" == '\x1b['* ]] && echo "1" || echo "0")"
     __status=$?
-    local starts_with_ansi_3200="${command_125}"
+    local starts_with_ansi_3238="${command_127}"
     # Replace \x1b[ with newline, then split
-    local command_126
-    command_126="$(t="${text_3192}"; printf '%s' "${t//\\x1b[/
+    local command_128
+    command_128="$(t="${text_3230}"; printf '%s' "${t//\\x1b[/
 }")"
     __status=$?
-    local replaced_3201="${command_126}"
-    split__4_v0 "${replaced_3201}" "
+    local replaced_3239="${command_128}"
+    split__4_v0 "${replaced_3239}" "
 "
-    local parts_3202=("${ret_split4_v0[@]}")
-    local result_3203=""
-    local remaining_width_3204="${max_width_3193}"
-    local __range_start_3205=0
-    local __length_127=("${parts_3202[@]}")
-    local __range_end_3205="${#__length_127[@]}"
-    local __dir_3205=$(( ${__range_start_3205} <= ${__range_end_3205} ? 1 : -1 ))
-    for (( idx_3205=${__range_start_3205}; idx_3205 * ${__dir_3205} < ${__range_end_3205} * ${__dir_3205}; idx_3205+=${__dir_3205} )); do
-        local part_3206="${parts_3202[${idx_3205}]?"Index out of bounds (at src/./input/../utils/text/ansi.ab:88:28)"}"
+    local parts_3240=("${ret_split4_v0[@]}")
+    local result_3241=""
+    local remaining_width_3242="${max_width_3231}"
+    local __range_start_3243=0
+    local __length_129=("${parts_3240[@]}")
+    local __range_end_3243="${#__length_129[@]}"
+    local __dir_3243=$(( ${__range_start_3243} <= ${__range_end_3243} ? 1 : -1 ))
+    for (( idx_3243=${__range_start_3243}; idx_3243 * ${__dir_3243} < ${__range_end_3243} * ${__dir_3243}; idx_3243+=${__dir_3243} )); do
+        local part_3244="${parts_3240[${idx_3243}]?"Index out of bounds (at src/./input/../utils/text/ansi.ab:88:28)"}"
         # If text starts with ANSI, all parts are "ANSIparams m text" format
         # If not, first part is pure text
-        if [ "$(( $(( idx_3205 == 0 )) && $([ "_${starts_with_ansi_3200}" != "_0" ]; echo $?) ))" != 0 ]; then
+        if [ "$(( $(( idx_3243 == 0 )) && $([ "_${starts_with_ansi_3238}" != "_0" ]; echo $?) ))" != 0 ]; then
             # First part is pure text (before any ANSI)
-            if [ "$(( $([ "_${part_3206}" == "_" ]; echo $?) && $(( remaining_width_3204 > 0 )) ))" != 0 ]; then
-                truncate_text__770_v0 "${part_3206}" "${remaining_width_3204}"
-                local ret_truncate_text770_v0__95_35="${ret_truncate_text770_v0}"
-                local truncated_3207="${ret_truncate_text770_v0__95_35}"
-                result_3203+="${truncated_3207}"
-                get_visible_len__769_v0 "${truncated_3207}"
-                local ret_get_visible_len769_v0__97_36="${ret_get_visible_len769_v0}"
-                remaining_width_3204="$(( remaining_width_3204 - ret_get_visible_len769_v0__97_36 ))"
+            if [ "$(( $([ "_${part_3244}" == "_" ]; echo $?) && $(( remaining_width_3242 > 0 )) ))" != 0 ]; then
+                truncate_text__773_v0 "${part_3244}" "${remaining_width_3242}"
+                local ret_truncate_text773_v0__95_35="${ret_truncate_text773_v0}"
+                local truncated_3245="${ret_truncate_text773_v0__95_35}"
+                result_3241+="${truncated_3245}"
+                get_visible_len__772_v0 "${truncated_3245}"
+                local ret_get_visible_len772_v0__97_36="${ret_get_visible_len772_v0}"
+                remaining_width_3242="$(( remaining_width_3242 - ret_get_visible_len772_v0__97_36 ))"
             fi
         else
             # Part is "ANSIparams m text" format - find first 'm'
-            local command_128
-            command_128="$(__p="${part_3206}"; for ((i=0; i<${#__p}; i++)); do [[ "${__p:$i:1}" == "m" ]] && echo $i && break; done)"
+            local command_130
+            command_130="$(__p="${part_3244}"; for ((i=0; i<${#__p}; i++)); do [[ "${__p:$i:1}" == "m" ]] && echo $i && break; done)"
             __status=$?
-            local m_idx_3208="${command_128}"
-            if [ "$([ "_${m_idx_3208}" == "_" ]; echo $?)" != 0 ]; then
+            local m_idx_3246="${command_130}"
+            if [ "$([ "_${m_idx_3246}" == "_" ]; echo $?)" != 0 ]; then
                 # Reconstruct ANSI sequence
-                local command_129
-                command_129="$(__p="${part_3206}"; printf "%s" "${__p:0:${m_idx_3208}}")"
+                local command_131
+                command_131="$(__p="${part_3244}"; printf "%s" "${__p:0:${m_idx_3246}}")"
                 __status=$?
-                local ansi_params_3209="${command_129}"
-                result_3203+="\\x1b[""${ansi_params_3209}""m"
+                local ansi_params_3247="${command_131}"
+                result_3241+="\\x1b[""${ansi_params_3247}""m"
                 # Rest is text content
-                parse_int__13_v0 "${m_idx_3208}"
+                parse_int__13_v0 "${m_idx_3246}"
                 __status=$?
                 local ret_parse_int13_v0__108_41="${ret_parse_int13_v0}"
-                local m_idx_num_3210="${ret_parse_int13_v0__108_41}"
-                local text_start_3211="$(( m_idx_num_3210 + 1 ))"
-                local command_130
-                command_130="$(__p="${part_3206}"; printf "%s" "${__p:${text_start_3211}}")"
+                local m_idx_num_3248="${ret_parse_int13_v0__108_41}"
+                local text_start_3249="$(( m_idx_num_3248 + 1 ))"
+                local command_132
+                command_132="$(__p="${part_3244}"; printf "%s" "${__p:${text_start_3249}}")"
                 __status=$?
-                local text_part_3212="${command_130}"
-                if [ "$(( $([ "_${text_part_3212}" == "_" ]; echo $?) && $(( remaining_width_3204 > 0 )) ))" != 0 ]; then
-                    truncate_text__770_v0 "${text_part_3212}" "${remaining_width_3204}"
-                    local ret_truncate_text770_v0__112_39="${ret_truncate_text770_v0}"
-                    local truncated_3213="${ret_truncate_text770_v0__112_39}"
-                    result_3203+="${truncated_3213}"
-                    get_visible_len__769_v0 "${truncated_3213}"
-                    local ret_get_visible_len769_v0__114_40="${ret_get_visible_len769_v0}"
-                    remaining_width_3204="$(( remaining_width_3204 - ret_get_visible_len769_v0__114_40 ))"
+                local text_part_3250="${command_132}"
+                if [ "$(( $([ "_${text_part_3250}" == "_" ]; echo $?) && $(( remaining_width_3242 > 0 )) ))" != 0 ]; then
+                    truncate_text__773_v0 "${text_part_3250}" "${remaining_width_3242}"
+                    local ret_truncate_text773_v0__112_39="${ret_truncate_text773_v0}"
+                    local truncated_3251="${ret_truncate_text773_v0__112_39}"
+                    result_3241+="${truncated_3251}"
+                    get_visible_len__772_v0 "${truncated_3251}"
+                    local ret_get_visible_len772_v0__114_40="${ret_get_visible_len772_v0}"
+                    remaining_width_3242="$(( remaining_width_3242 - ret_get_visible_len772_v0__114_40 ))"
                 fi
             else
                 # No 'm' found, treat as text
-                if [ "$(( $([ "_${part_3206}" == "_" ]; echo $?) && $(( remaining_width_3204 > 0 )) ))" != 0 ]; then
-                    truncate_text__770_v0 "${part_3206}" "${remaining_width_3204}"
-                    local ret_truncate_text770_v0__119_39="${ret_truncate_text770_v0}"
-                    local truncated_3214="${ret_truncate_text770_v0__119_39}"
-                    result_3203+="${truncated_3214}"
-                    get_visible_len__769_v0 "${truncated_3214}"
-                    local ret_get_visible_len769_v0__121_40="${ret_get_visible_len769_v0}"
-                    remaining_width_3204="$(( remaining_width_3204 - ret_get_visible_len769_v0__121_40 ))"
+                if [ "$(( $([ "_${part_3244}" == "_" ]; echo $?) && $(( remaining_width_3242 > 0 )) ))" != 0 ]; then
+                    truncate_text__773_v0 "${part_3244}" "${remaining_width_3242}"
+                    local ret_truncate_text773_v0__119_39="${ret_truncate_text773_v0}"
+                    local truncated_3252="${ret_truncate_text773_v0__119_39}"
+                    result_3241+="${truncated_3252}"
+                    get_visible_len__772_v0 "${truncated_3252}"
+                    local ret_get_visible_len772_v0__121_40="${ret_get_visible_len772_v0}"
+                    remaining_width_3242="$(( remaining_width_3242 - ret_get_visible_len772_v0__121_40 ))"
                 fi
             fi
         fi
 done
-    ret_truncate_ansi771_v0="${result_3203}"
+    ret_truncate_ansi774_v0="${result_3241}"
     return 0
 }
 
 # cutoff_text(text: Text, max_width: Int)
-cutoff_text__772_v0() {
-    local text_3176="${1}"
-    local max_width_3177="${2}"
-    get_visible_len__769_v0 "${text_3176}"
-    local visible_len_3191="${ret_get_visible_len769_v0}"
-    if [ "$(( visible_len_3191 <= max_width_3177 ))" != 0 ]; then
-        ret_cutoff_text772_v0="${text_3176}"
+cutoff_text__775_v0() {
+    local text_3214="${1}"
+    local max_width_3215="${2}"
+    get_visible_len__772_v0 "${text_3214}"
+    local visible_len_3229="${ret_get_visible_len772_v0}"
+    if [ "$(( visible_len_3229 <= max_width_3215 ))" != 0 ]; then
+        ret_cutoff_text775_v0="${text_3214}"
         return 0
     fi
-    truncate_ansi__771_v0 "${text_3176}" "$(( max_width_3177 - 3 ))"
-    local ret_truncate_ansi771_v0__137_12="${ret_truncate_ansi771_v0}"
-    ret_cutoff_text772_v0="${ret_truncate_ansi771_v0__137_12}""..."
+    truncate_ansi__774_v0 "${text_3214}" "$(( max_width_3215 - 3 ))"
+    local ret_truncate_ansi774_v0__137_12="${ret_truncate_ansi774_v0}"
+    ret_cutoff_text775_v0="${ret_truncate_ansi774_v0__137_12}""..."
     return 0
 }
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
 # eprintf(format: Text, args: [Text])
-eprintf__793_v0() {
-    local format_3229="${1}"
-    local args_3230=("${!2}")
-    args_3230=("${format_3229}" "${args_3230[@]}")
+eprintf__796_v0() {
+    local format_3265="${1}"
+    local args_3266=("${!2}")
+    args_3266=("${format_3265}" "${args_3266[@]}")
     __status=$?
-    printf "${args_3230[@]}" >&2
+    printf "${args_3266[@]}" >&2
     __status=$?
 }
 
 # eprintf_colored(message: Text, color: Int)
-eprintf_colored__794_v0() {
-    local message_3227="${1}"
-    local color_3228="${2}"
+eprintf_colored__797_v0() {
+    local message_3263="${1}"
+    local color_3264="${2}"
     # Prints an error message with a specified color.
-    local array_131=("${message_3227}")
-    eprintf__793_v0 "\\x1b[${color_3228}m%s\\x1b[0m" array_131[@]
+    local array_133=("${message_3263}")
+    eprintf__796_v0 "\\x1b[${color_3264}m%s\\x1b[0m" array_133[@]
 }
 
 # colored(message: Text, color: Int)
-colored__795_v0() {
-    local message_3161="${1}"
-    local color_3162="${2}"
+colored__798_v0() {
+    local message_3195="${1}"
+    local color_3196="${2}"
     # Returns a text wrapped in color codes.
-    ret_colored795_v0="\\x1b[${color_3162}m""${message_3161}""\\x1b[0m"
+    ret_colored798_v0="\\x1b[${color_3196}m""${message_3195}""\\x1b[0m"
     return 0
 }
 
 # render_tooltip(items: [Text], total_len: Int, term_width: Int)
-render_tooltip__799_v0() {
-    local items_3221=("${!1}")
-    local total_len_3222="${2}"
-    local term_width_3223="${3}"
-    local separator_3224=" • "
-    local separator_len_3225=3
+render_tooltip__802_v0() {
+    local items_3257=("${!1}")
+    local total_len_3258="${2}"
+    local term_width_3259="${3}"
+    local separator_3260=" • "
+    local separator_len_3261=3
     # Fast path: no truncation needed
-    if [ "$(( total_len_3222 <= term_width_3223 ))" != 0 ]; then
-        local iter_3226=0
+    if [ "$(( total_len_3258 <= term_width_3259 ))" != 0 ]; then
+        local iter_3262=0
         while :
         do
-            local __length_132=("${items_3221[@]}")
-            if [ "$(( iter_3226 >= ${#__length_132[@]} ))" != 0 ]; then
+            local __length_134=("${items_3257[@]}")
+            if [ "$(( iter_3262 >= ${#__length_134[@]} ))" != 0 ]; then
                 break
-            elif [ "$(( iter_3226 > 0 ))" != 0 ]; then
-                eprintf_colored__794_v0 "${separator_3224}" 90
+            elif [ "$(( iter_3262 > 0 ))" != 0 ]; then
+                eprintf_colored__797_v0 "${separator_3260}" 90
             fi
-            colored__795_v0 "${items_3221[$(( iter_3226 + 1 ))]?"Index out of bounds (at src/./input/../utils/widget/tooltip.ab:23:55)"}" 2
-            local ret_colored795_v0__23_41="${ret_colored795_v0}"
-            local array_133=("")
-            eprintf__793_v0 "${items_3221[${iter_3226}]?"Index out of bounds (at src/./input/../utils/widget/tooltip.ab:23:27)"}"" ""${ret_colored795_v0__23_41}" array_133[@]
-            iter_3226="$(( iter_3226 + 2 ))"
+            colored__798_v0 "${items_3257[$(( iter_3262 + 1 ))]?"Index out of bounds (at src/./input/../utils/widget/tooltip.ab:23:55)"}" 2
+            local ret_colored798_v0__23_41="${ret_colored798_v0}"
+            local array_135=("")
+            eprintf__796_v0 "${items_3257[${iter_3262}]?"Index out of bounds (at src/./input/../utils/widget/tooltip.ab:23:27)"}"" ""${ret_colored798_v0__23_41}" array_135[@]
+            iter_3262="$(( iter_3262 + 2 ))"
         done
     else
         # Slow path: truncate
-        local current_len_3231=0
-        local first_3232=1
-        local iter_3233=0
+        local current_len_3267=0
+        local first_3268=1
+        local iter_3269=0
         while :
         do
-            local __length_134=("${items_3221[@]}")
-            if [ "$(( iter_3233 >= ${#__length_134[@]} ))" != 0 ]; then
+            local __length_136=("${items_3257[@]}")
+            if [ "$(( iter_3269 >= ${#__length_136[@]} ))" != 0 ]; then
                 break
             fi
-            local key_3234="${items_3221[${iter_3233}]?"Index out of bounds (at src/./input/../utils/widget/tooltip.ab:35:31)"}"
-            local action_3235="${items_3221[$(( iter_3233 + 1 ))]?"Index out of bounds (at src/./input/../utils/widget/tooltip.ab:36:34)"}"
-            local __length_135="${key_3234}"
-            local __length_136="${action_3235}"
-            local part_len_3236="$(( $(( ${#__length_135} + 1 )) + ${#__length_136} ))"
-            local needed_3237="${part_len_3236}"
-            if [ "$(( ! first_3232 ))" != 0 ]; then
-                needed_3237="$(( needed_3237 + separator_len_3225 ))"
+            local key_3270="${items_3257[${iter_3269}]?"Index out of bounds (at src/./input/../utils/widget/tooltip.ab:35:31)"}"
+            local action_3271="${items_3257[$(( iter_3269 + 1 ))]?"Index out of bounds (at src/./input/../utils/widget/tooltip.ab:36:34)"}"
+            local __length_137="${key_3270}"
+            local __length_138="${action_3271}"
+            local part_len_3272="$(( $(( ${#__length_137} + 1 )) + ${#__length_138} ))"
+            local needed_3273="${part_len_3272}"
+            if [ "$(( ! first_3268 ))" != 0 ]; then
+                needed_3273="$(( needed_3273 + separator_len_3261 ))"
             fi
-            if [ "$(( $(( current_len_3231 + needed_3237 )) > term_width_3223 ))" != 0 ]; then
+            if [ "$(( $(( current_len_3267 + needed_3273 )) > term_width_3259 ))" != 0 ]; then
                 break
             fi
-            if [ "$(( ! first_3232 ))" != 0 ]; then
-                eprintf_colored__794_v0 "${separator_3224}" 90
+            if [ "$(( ! first_3268 ))" != 0 ]; then
+                eprintf_colored__797_v0 "${separator_3260}" 90
             fi
-            colored__795_v0 "${action_3235}" 2
-            local ret_colored795_v0__51_33="${ret_colored795_v0}"
-            local array_137=("")
-            eprintf__793_v0 "${key_3234}"" ""${ret_colored795_v0__51_33}" array_137[@]
-            current_len_3231="$(( current_len_3231 + needed_3237 ))"
-            first_3232=0
-            iter_3233="$(( iter_3233 + 2 ))"
+            colored__798_v0 "${action_3271}" 2
+            local ret_colored798_v0__51_33="${ret_colored798_v0}"
+            local array_139=("")
+            eprintf__796_v0 "${key_3270}"" ""${ret_colored798_v0__51_33}" array_139[@]
+            current_len_3267="$(( current_len_3267 + needed_3273 ))"
+            first_3268=0
+            iter_3269="$(( iter_3269 + 2 ))"
         done
     fi
 }
@@ -1956,69 +1972,69 @@ _term_size_38=(80 24)
 export XYLITOL_RUNTIME_STTY_COUNT=0
 __status=$?
 # store_term_size(size: Text)
-store_term_size__836_v0() {
-    local size_3140="${1}"
-    if [ "$([ "_${size_3140}" != "_" ]; echo $?)" != 0 ]; then
-        ret_store_term_size836_v0=0
+store_term_size__840_v0() {
+    local size_3174="${1}"
+    if [ "$([ "_${size_3174}" != "_" ]; echo $?)" != 0 ]; then
+        ret_store_term_size840_v0=0
         return 0
     fi
-    split__4_v0 "${size_3140}" " "
-    local parts_3141=("${ret_split4_v0[@]}")
-    local __length_139=("${parts_3141[@]}")
-    if [ "$(( ${#__length_139[@]} != 2 ))" != 0 ]; then
-        ret_store_term_size836_v0=0
+    split__4_v0 "${size_3174}" " "
+    local parts_3175=("${ret_split4_v0[@]}")
+    local __length_141=("${parts_3175[@]}")
+    if [ "$(( ${#__length_141[@]} != 2 ))" != 0 ]; then
+        ret_store_term_size840_v0=0
         return 0
     fi
-    parse_int__13_v0 "${parts_3141[1]?"Index out of bounds (at src/./input/../utils/widget/../term.ab:53:41)"}"
+    parse_int__13_v0 "${parts_3175[1]?"Index out of bounds (at src/./input/../utils/widget/../term.ab:57:41)"}"
     __status=$?
-    local ret_parse_int13_v0__53_25="${ret_parse_int13_v0}"
-    parse_int__13_v0 "${parts_3141[0]?"Index out of bounds (at src/./input/../utils/widget/../term.ab:53:68)"}"
+    local ret_parse_int13_v0__57_25="${ret_parse_int13_v0}"
+    parse_int__13_v0 "${parts_3175[0]?"Index out of bounds (at src/./input/../utils/widget/../term.ab:57:68)"}"
     __status=$?
-    local ret_parse_int13_v0__53_52="${ret_parse_int13_v0}"
-    _term_size_38=("${ret_parse_int13_v0__53_25}" "${ret_parse_int13_v0__53_52}")
-    ret_store_term_size836_v0=1
+    local ret_parse_int13_v0__57_52="${ret_parse_int13_v0}"
+    _term_size_38=("${ret_parse_int13_v0__57_25}" "${ret_parse_int13_v0__57_52}")
+    ret_store_term_size840_v0=1
     return 0
 }
 
 # query_term_size()
-query_term_size__837_v0() {
-    local command_141
-    command_141="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
+query_term_size__841_v0() {
+    local command_143
+    command_143="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
     __status=$?
-    local size_3143="${command_141}"
-    store_term_size__836_v0 "${size_3143}"
-    ret_query_term_size837_v0="${ret_store_term_size836_v0}"
+    local size_3177="${command_143}"
+    store_term_size__840_v0 "${size_3177}"
+    ret_query_term_size841_v0="${ret_store_term_size840_v0}"
     return 0
 }
 
 # stty_term_size()
-stty_term_size__838_v0() {
-    local command_142
-    command_142="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
+stty_term_size__842_v0() {
+    local command_144
+    command_144="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
     __status=$?
-    local size_3139="${command_142}"
-    store_term_size__836_v0 "${size_3139}"
-    ret_stty_term_size838_v0="${ret_store_term_size836_v0}"
+    local size_3173="${command_144}"
+    store_term_size__840_v0 "${size_3173}"
+    ret_stty_term_size842_v0="${ret_store_term_size840_v0}"
     return 0
 }
 
 # get_term_size()
-get_term_size__839_v0() {
-    stty_term_size__838_v0 
-    local detected_3142="${ret_stty_term_size838_v0}"
-    if [ "$(( ! detected_3142 ))" != 0 ]; then
-        query_term_size__837_v0 
-        detected_3142="${ret_query_term_size837_v0}"
+get_term_size__843_v0() {
+    stty_term_size__842_v0 
+    local detected_3176="${ret_stty_term_size842_v0}"
+    if [ "$(( ! detected_3176 ))" != 0 ]; then
+        query_term_size__841_v0 
+        detected_3176="${ret_query_term_size841_v0}"
     fi
     _got_term_size_37=1
 }
 
 # term_width()
-term_width__841_v0() {
+term_width__845_v0() {
     if [ "$(( ! _got_term_size_37 ))" != 0 ]; then
-        get_term_size__839_v0 
+        get_term_size__843_v0 
     fi
-    ret_term_width841_v0="${_term_size_38[0]?"Index out of bounds (at src/./input/../utils/widget/../term.ab:96:23)"}"
+    ret_term_width845_v0="${_term_size_38[0]?"Index out of bounds (at src/./input/../utils/widget/../term.ab:100:23)"}"
     return 0
 }
 
@@ -2026,443 +2042,452 @@ term_width__841_v0() {
 # move the cursor up or down `cnt` lines.
 # Which items of a multi-select widget are ticked.
 # print_help_line(pending: Text, line: Text, note_at: Int)
-print_help_line__874_v0() {
-    local pending_3158="${1}"
-    local line_3159="${2}"
-    local note_at_3160="${3}"
-    if [ "$(( note_at_3160 < 0 ))" != 0 ]; then
-        local array_144=()
-        printf__128_v0 "${pending_3158}""${line_3159}""
-" array_144[@]
+print_help_line__878_v0() {
+    local pending_3192="${1}"
+    local line_3193="${2}"
+    local note_at_3194="${3}"
+    if [ "$(( note_at_3194 < 0 ))" != 0 ]; then
+        local array_146=()
+        printf__128_v0 "${pending_3192}""${line_3193}""
+" array_146[@]
     # A length of zero means "to the end" in `slice`, so a line that is
     # all note has to be handled on its own.
-    elif [ "$(( note_at_3160 == 0 ))" != 0 ]; then
-        colored__795_v0 "${line_3159}" 90
-        local ret_colored795_v0__12_40="${ret_colored795_v0}"
-        local array_145=()
-        printf__128_v0 "${pending_3158}""${ret_colored795_v0__12_40}""
-" array_145[@]
+    elif [ "$(( note_at_3194 == 0 ))" != 0 ]; then
+        colored__798_v0 "${line_3193}" 90
+        local ret_colored798_v0__12_40="${ret_colored798_v0}"
+        local array_147=()
+        printf__128_v0 "${pending_3192}""${ret_colored798_v0__12_40}""
+" array_147[@]
     else
-        slice__24_v0 "${line_3159}" 0 "${note_at_3160}"
+        slice__24_v0 "${line_3193}" 0 "${note_at_3194}"
         local ret_slice24_v0__13_32="${ret_slice24_v0}"
-        slice__24_v0 "${line_3159}" "${note_at_3160}" 0
+        slice__24_v0 "${line_3193}" "${note_at_3194}" 0
         local ret_slice24_v0__13_66="${ret_slice24_v0}"
-        colored__795_v0 "${ret_slice24_v0__13_66}" 90
-        local ret_colored795_v0__13_58="${ret_colored795_v0}"
-        local array_146=()
-        printf__128_v0 "${pending_3158}""${ret_slice24_v0__13_32}""${ret_colored795_v0__13_58}""
-" array_146[@]
+        colored__798_v0 "${ret_slice24_v0__13_66}" 90
+        local ret_colored798_v0__13_58="${ret_colored798_v0}"
+        local array_148=()
+        printf__128_v0 "${pending_3192}""${ret_slice24_v0__13_32}""${ret_colored798_v0__13_58}""
+" array_148[@]
     fi
 }
 
 # render_help_entries(names: [Text], texts: [Text], notes: [Text], min_name_width: Int)
-render_help_entries__875_v0() {
-    local names_3131=("${!1}")
-    local texts_3132=("${!2}")
-    local notes_3133=("${!3}")
-    local min_name_width_3134="${4}"
-    local __length_147=("${names_3131[@]}")
-    local count_3135="${#__length_147[@]}"
-    local name_width_3136="${min_name_width_3134}"
-    local __range_start_3137=0
-    local __range_end_3137="${count_3135}"
-    local __dir_3137=$(( ${__range_start_3137} <= ${__range_end_3137} ? 1 : -1 ))
-    for (( i_3137=${__range_start_3137}; i_3137 * ${__dir_3137} < ${__range_end_3137} * ${__dir_3137}; i_3137+=${__dir_3137} )); do
-        local __length_148="${names_3131[${i_3137}]?"Index out of bounds (at src/./input/../utils/widget/help.ab:28:33)"}"
-        local width_3138="${#__length_148}"
-        if [ "$(( width_3138 > name_width_3136 ))" != 0 ]; then
-            name_width_3136="${width_3138}"
+render_help_entries__879_v0() {
+    local names_3165=("${!1}")
+    local texts_3166=("${!2}")
+    local notes_3167=("${!3}")
+    local min_name_width_3168="${4}"
+    local __length_149=("${names_3165[@]}")
+    local count_3169="${#__length_149[@]}"
+    local name_width_3170="${min_name_width_3168}"
+    local __range_start_3171=0
+    local __range_end_3171="${count_3169}"
+    local __dir_3171=$(( ${__range_start_3171} <= ${__range_end_3171} ? 1 : -1 ))
+    for (( i_3171=${__range_start_3171}; i_3171 * ${__dir_3171} < ${__range_end_3171} * ${__dir_3171}; i_3171+=${__dir_3171} )); do
+        local __length_150="${names_3165[${i_3171}]?"Index out of bounds (at src/./input/../utils/widget/help.ab:28:33)"}"
+        local width_3172="${#__length_150}"
+        if [ "$(( width_3172 > name_width_3170 ))" != 0 ]; then
+            name_width_3170="${width_3172}"
         fi
 done
-    term_width__841_v0 
-    local width_3144="${ret_term_width841_v0}"
+    term_width__845_v0 
+    local width_3178="${ret_term_width845_v0}"
     # Two spaces of margin, then three between a name and its description.
-    local indent_3145="$(( name_width_3136 + 5 ))"
+    local indent_3179="$(( name_width_3170 + 5 ))"
     # Once the description column gets too narrow to read, stop putting the
     # description beside the name and place it underneath instead.
-    local stacked_3146="$(( $(( width_3144 - indent_3145 )) < 24 ))"
-    if [ "${stacked_3146}" != 0 ]; then
-        indent_3145=6
+    local stacked_3180="$(( $(( width_3178 - indent_3179 )) < 24 ))"
+    if [ "${stacked_3180}" != 0 ]; then
+        indent_3179=6
     fi
-    local avail_3147="$(( width_3144 - indent_3145 ))"
-    rpad__28_v0 "" " " "${indent_3145}"
-    local blank_3148="${ret_rpad28_v0}"
-    local __range_start_3149=0
-    local __range_end_3149="${count_3135}"
-    local __dir_3149=$(( ${__range_start_3149} <= ${__range_end_3149} ? 1 : -1 ))
-    for (( i_3149=${__range_start_3149}; i_3149 * ${__dir_3149} < ${__range_end_3149} * ${__dir_3149}; i_3149+=${__dir_3149} )); do
-        local pending_3150="${blank_3148}"
-        if [ "${stacked_3146}" != 0 ]; then
-            local array_149=()
-            printf__128_v0 "  ""${names_3131[${i_3149}]?"Index out of bounds (at src/./input/../utils/widget/help.ab:48:33)"}""
-" array_149[@]
+    local avail_3181="$(( width_3178 - indent_3179 ))"
+    rpad__28_v0 "" " " "${indent_3179}"
+    local blank_3182="${ret_rpad28_v0}"
+    local __range_start_3183=0
+    local __range_end_3183="${count_3169}"
+    local __dir_3183=$(( ${__range_start_3183} <= ${__range_end_3183} ? 1 : -1 ))
+    for (( i_3183=${__range_start_3183}; i_3183 * ${__dir_3183} < ${__range_end_3183} * ${__dir_3183}; i_3183+=${__dir_3183} )); do
+        local pending_3184="${blank_3182}"
+        if [ "${stacked_3180}" != 0 ]; then
+            local array_151=()
+            printf__128_v0 "  ""${names_3165[${i_3183}]?"Index out of bounds (at src/./input/../utils/widget/help.ab:48:33)"}""
+" array_151[@]
         else
-            rpad__28_v0 "  ""${names_3131[${i_3149}]?"Index out of bounds (at src/./input/../utils/widget/help.ab:50:41)"}" " " "${indent_3145}"
+            rpad__28_v0 "  ""${names_3165[${i_3183}]?"Index out of bounds (at src/./input/../utils/widget/help.ab:50:41)"}" " " "${indent_3179}"
             local ret_rpad28_v0__50_23="${ret_rpad28_v0}"
-            pending_3150="${ret_rpad28_v0__50_23}"
+            pending_3184="${ret_rpad28_v0__50_23}"
         fi
-        split__4_v0 "${texts_3132[${i_3149}]?"Index out of bounds (at src/./input/../utils/widget/help.ab:52:33)"}" " "
+        split__4_v0 "${texts_3166[${i_3183}]?"Index out of bounds (at src/./input/../utils/widget/help.ab:52:33)"}" " "
         local ret_split4_v0__52_21=("${ret_split4_v0[@]}")
-        local words_3151=("${ret_split4_v0__52_21[@]}")
-        local __length_150=("${words_3151[@]}")
-        local note_start_3152="${#__length_150[@]}"
-        if [ "$([ "_${notes_3133[${i_3149}]?"Index out of bounds (at src/./input/../utils/widget/help.ab:54:18)"}" == "_" ]; echo $?)" != 0 ]; then
+        local words_3185=("${ret_split4_v0__52_21[@]}")
+        local __length_152=("${words_3185[@]}")
+        local note_start_3186="${#__length_152[@]}"
+        if [ "$([ "_${notes_3167[${i_3183}]?"Index out of bounds (at src/./input/../utils/widget/help.ab:54:18)"}" == "_" ]; echo $?)" != 0 ]; then
             # A note reads badly when split, so it moves between lines whole
             # unless it is too long to ever fit on one.
-            local __length_151="${notes_3133[${i_3149}]?"Index out of bounds (at src/./input/../utils/widget/help.ab:57:26)"}"
-            if [ "$(( ${#__length_151} > avail_3147 ))" != 0 ]; then
-                split__4_v0 "${notes_3133[${i_3149}]?"Index out of bounds (at src/./input/../utils/widget/help.ab:58:38)"}" " "
+            local __length_153="${notes_3167[${i_3183}]?"Index out of bounds (at src/./input/../utils/widget/help.ab:57:26)"}"
+            if [ "$(( ${#__length_153} > avail_3181 ))" != 0 ]; then
+                split__4_v0 "${notes_3167[${i_3183}]?"Index out of bounds (at src/./input/../utils/widget/help.ab:58:38)"}" " "
                 local ret_split4_v0__58_26=("${ret_split4_v0[@]}")
-                words_3151+=("${ret_split4_v0__58_26[@]}")
+                words_3185+=("${ret_split4_v0__58_26[@]}")
             else
-                local array_152=("${notes_3133[${i_3149}]?"Index out of bounds (at src/./input/../utils/widget/help.ab:60:33)"}")
-                words_3151+=("${array_152[@]}")
+                local array_154=("${notes_3167[${i_3183}]?"Index out of bounds (at src/./input/../utils/widget/help.ab:60:33)"}")
+                words_3185+=("${array_154[@]}")
             fi
         fi
-        local line_3153=""
+        local line_3187=""
         # Where the note begins on the line being built, so it can be dimmed
         # after wrapping decides how much of it fits. -1 while there is none.
-        local note_at_3154=-1
-        local __range_start_3155=0
-        local __length_153=("${words_3151[@]}")
-        local __range_end_3155="${#__length_153[@]}"
-        local __dir_3155=$(( ${__range_start_3155} <= ${__range_end_3155} ? 1 : -1 ))
-        for (( j_3155=${__range_start_3155}; j_3155 * ${__dir_3155} < ${__range_end_3155} * ${__dir_3155}; j_3155+=${__dir_3155} )); do
-            local word_3156="${words_3151[${j_3155}]?"Index out of bounds (at src/./input/../utils/widget/help.ab:70:32)"}"
-            local candidate_3157
-            candidate_3157="$(if [ "$([ "_${line_3153}" != "_" ]; echo $?)" != 0 ]; then echo "${word_3156}"; else echo "${line_3153}"" ""${word_3156}"; fi)"
-            local __length_154="${candidate_3157}"
-            if [ "$(( $(( ${#__length_154} > avail_3147 )) && $([ "_${line_3153}" == "_" ]; echo $?) ))" != 0 ]; then
-                print_help_line__874_v0 "${pending_3150}" "${line_3153}" "${note_at_3154}"
-                pending_3150="${blank_3148}"
-                line_3153="${word_3156}"
-                note_at_3154="$(if [ "$(( j_3155 >= note_start_3152 ))" != 0 ]; then echo 0; else echo -1; fi)"
+        local note_at_3188=-1
+        local __range_start_3189=0
+        local __length_155=("${words_3185[@]}")
+        local __range_end_3189="${#__length_155[@]}"
+        local __dir_3189=$(( ${__range_start_3189} <= ${__range_end_3189} ? 1 : -1 ))
+        for (( j_3189=${__range_start_3189}; j_3189 * ${__dir_3189} < ${__range_end_3189} * ${__dir_3189}; j_3189+=${__dir_3189} )); do
+            local word_3190="${words_3185[${j_3189}]?"Index out of bounds (at src/./input/../utils/widget/help.ab:70:32)"}"
+            local candidate_3191
+            candidate_3191="$(if [ "$([ "_${line_3187}" != "_" ]; echo $?)" != 0 ]; then echo "${word_3190}"; else echo "${line_3187}"" ""${word_3190}"; fi)"
+            local __length_156="${candidate_3191}"
+            if [ "$(( $(( ${#__length_156} > avail_3181 )) && $([ "_${line_3187}" == "_" ]; echo $?) ))" != 0 ]; then
+                print_help_line__878_v0 "${pending_3184}" "${line_3187}" "${note_at_3188}"
+                pending_3184="${blank_3182}"
+                line_3187="${word_3190}"
+                note_at_3188="$(if [ "$(( j_3189 >= note_start_3186 ))" != 0 ]; then echo 0; else echo -1; fi)"
             else
-                if [ "$(( $(( j_3155 >= note_start_3152 )) && $(( note_at_3154 < 0 )) ))" != 0 ]; then
-                    local __length_155="${candidate_3157}"
-                    local __length_156="${word_3156}"
-                    note_at_3154="$(( ${#__length_155} - ${#__length_156} ))"
+                if [ "$(( $(( j_3189 >= note_start_3186 )) && $(( note_at_3188 < 0 )) ))" != 0 ]; then
+                    local __length_157="${candidate_3191}"
+                    local __length_158="${word_3190}"
+                    note_at_3188="$(( ${#__length_157} - ${#__length_158} ))"
                 fi
-                line_3153="${candidate_3157}"
+                line_3187="${candidate_3191}"
             fi
 done
-        print_help_line__874_v0 "${pending_3150}" "${line_3153}" "${note_at_3154}"
+        print_help_line__878_v0 "${pending_3184}" "${line_3187}" "${note_at_3188}"
 done
 }
 
 # Facade over the helper modules, so every caller keeps importing one path.
 # xyl_input(prompt: Text, placeholder: Text, header: Text, password: Bool)
-xyl_input__933_v0() {
-    local prompt_3169="${1}"
-    local placeholder_3170="${2}"
-    local header_3171="${3}"
-    local password_3172="${4}"
-    stty_lock__679_v0 
-    term_width__686_v0 
-    local term_width_3175="${ret_term_width686_v0}"
-    if [ "$([ "_${header_3171}" == "_" ]; echo $?)" != 0 ]; then
-        cutoff_text__772_v0 "${header_3171}" "${term_width_3175}"
-        local ret_cutoff_text772_v0__24_17="${ret_cutoff_text772_v0}"
-        local array_157=("")
-        eprintf__638_v0 "${ret_cutoff_text772_v0__24_17}""
-" array_157[@]
+xyl_input__937_v0() {
+    local prompt_3203="${1}"
+    local placeholder_3204="${2}"
+    local header_3205="${3}"
+    local password_3206="${4}"
+    stty_lock__682_v0 
+    term_width__689_v0 
+    local term_width_3213="${ret_term_width689_v0}"
+    if [ "$([ "_${header_3205}" == "_" ]; echo $?)" != 0 ]; then
+        cutoff_text__775_v0 "${header_3205}" "${term_width_3213}"
+        local ret_cutoff_text775_v0__24_17="${ret_cutoff_text775_v0}"
+        local array_159=("")
+        eprintf__640_v0 "${ret_cutoff_text775_v0__24_17}""
+" array_159[@]
     fi
-    new_line__692_v0 2
+    new_line__695_v0 2
     # "enter submit" = 12
-    local array_158=("enter" "submit")
-    render_tooltip__799_v0 array_158[@] 12 "${term_width_3175}"
-    go_up__693_v0 2
-    local array_159=("")
-    eprintf__638_v0 "\\x1b[G" array_159[@]
+    local array_160=("enter" "submit")
+    render_tooltip__802_v0 array_160[@] 12 "${term_width_3213}"
+    go_up__696_v0 2
+    local array_161=("")
+    eprintf__640_v0 "\\x1b[G" array_161[@]
     # Showing the placeholder means swallowing the first keypress to know when
     # to erase it, and only `read -i` can hand that character back. Shells
     # without it skip the placeholder rather than lose what was typed.
-    local command_160
-    command_160="$([ "${EXEC_SHELL_VERSION[0]}" -ge 4 ] && echo 1 || echo 0)"
+    local command_162
+    command_162="$([ "${EXEC_SHELL_VERSION[0]}" -ge 4 ] && echo 1 || echo 0)"
     __status=$?
-    local can_preset_3239="${command_160}"
-    local char_3240=""
-    local array_161=("")
-    eprintf__638_v0 "${prompt_3169}" array_161[@]
-    if [ "$([ "_${can_preset_3239}" != "_1" ]; echo $?)" != 0 ]; then
-        eprintf_colored__639_v0 "${placeholder_3170}" 90
-        get_char__635_v0 
-        char_3240="${ret_get_char635_v0}"
-        local __length_162="${placeholder_3170}"
-        remove__688_v0 "$(( ${#__length_162} + 1 ))"
+    local can_preset_3275="${command_162}"
+    local char_3276=""
+    local array_163=("")
+    eprintf__640_v0 "${prompt_3203}" array_163[@]
+    if [ "$([ "_${can_preset_3275}" != "_1" ]; echo $?)" != 0 ]; then
+        eprintf_colored__641_v0 "${placeholder_3204}" 90
+        get_char__637_v0 
+        char_3276="${ret_get_char637_v0}"
+        local __length_164="${placeholder_3204}"
+        remove__691_v0 "$(( ${#__length_164} + 1 ))"
     fi
-    local __length_163="${prompt_3169}"
-    remove__688_v0 "${#__length_163}"
-    local text_3245=""
-    if [ "$(( ! password_3172 ))" != 0 ]; then
-        stty_unlock__680_v0 
-        local command_164
-        command_164="$(if [ "${EXEC_SHELL_VERSION[0]}" -ge 4 ]; then read -e -i "${char_3240}" -p "${prompt_3169}" text < /dev/tty; else read -e -p "${prompt_3169}" text < /dev/tty; fi; printf "%s" "$text")"
+    local __length_165="${prompt_3203}"
+    remove__691_v0 "${#__length_165}"
+    local text_3281=""
+    if [ "$(( ! password_3206 ))" != 0 ]; then
+        stty_unlock__683_v0 
+        local command_166
+        command_166="$(if [ "${EXEC_SHELL_VERSION[0]}" -ge 4 ]; then read -e -i "${char_3276}" -p "${prompt_3203}" text < /dev/tty; else read -e -p "${prompt_3203}" text < /dev/tty; fi; printf "%s" "$text")"
         __status=$?
-        text_3245="${command_164}"
-        stty_lock__679_v0 
+        text_3281="${command_166}"
+        stty_lock__682_v0 
     else
-        local command_165
-        command_165="$(if [ "${EXEC_SHELL_VERSION[0]}" -ge 4 ]; then read -es -i "${char_3240}" -p "${prompt_3169}" text < /dev/tty; else read -es -p "${prompt_3169}" text < /dev/tty; fi; printf "%s" "$text")"
+        local command_167
+        command_167="$(if [ "${EXEC_SHELL_VERSION[0]}" -ge 4 ]; then read -es -i "${char_3276}" -p "${prompt_3203}" text < /dev/tty; else read -es -p "${prompt_3203}" text < /dev/tty; fi; printf "%s" "$text")"
         __status=$?
-        text_3245="${command_165}"
+        text_3281="${command_167}"
     fi
     # Calculate how many lines the input takes up (prompt + text may wrap)
-    get_visible_len__769_v0 "${prompt_3169}""${text_3245}"
-    local input_display_len_3247="${ret_get_visible_len769_v0}"
-    local input_lines_3248="$(( $(( $(( input_display_len_3247 + term_width_3175 )) - 1 )) / term_width_3175 ))"
-    if [ "$(( input_lines_3248 < 1 ))" != 0 ]; then
-        input_lines_3248=1
+    get_visible_len__772_v0 "${prompt_3203}""${text_3281}"
+    local input_display_len_3283="${ret_get_visible_len772_v0}"
+    local input_lines_3284="$(( $(( $(( input_display_len_3283 + term_width_3213 )) - 1 )) / term_width_3213 ))"
+    if [ "$(( input_lines_3284 < 1 ))" != 0 ]; then
+        input_lines_3284=1
     fi
-    if [ "$(( input_lines_3248 < 3 ))" != 0 ]; then
-        go_down__694_v0 "$(( 2 - input_lines_3248 ))"
-        remove_line__689_v0 2
-        remove_current_line__690_v0 
+    if [ "$(( input_lines_3284 < 3 ))" != 0 ]; then
+        go_down__697_v0 "$(( 2 - input_lines_3284 ))"
+        remove_line__692_v0 2
+        remove_current_line__693_v0 
     fi
-    if [ "$(( input_lines_3248 >= 3 ))" != 0 ]; then
-        remove_line__689_v0 "${input_lines_3248}"
+    if [ "$(( input_lines_3284 >= 3 ))" != 0 ]; then
+        remove_line__692_v0 "${input_lines_3284}"
     fi
-    if [ "$([ "_${header_3171}" == "_" ]; echo $?)" != 0 ]; then
-        remove_line__689_v0 1
-        remove_current_line__690_v0 
+    if [ "$([ "_${header_3205}" == "_" ]; echo $?)" != 0 ]; then
+        remove_line__692_v0 1
+        remove_current_line__693_v0 
     fi
-    stty_unlock__680_v0 
-    ret_xyl_input933_v0="${text_3245}"
+    stty_unlock__683_v0 
+    ret_xyl_input937_v0="${text_3281}"
     return 0
 }
 
 # print_input_help()
-print_input_help__1033_v0() {
-    local usage_3086=("Usage:" "./xylitol.sh" "input" "[flags]")
-    print_wrapped__698_v0 usage_3086[@]
+print_input_help__1037_v0() {
+    local usage_3120=("Usage:" "./xylitol.sh" "input" "[flags]")
+    print_wrapped__701_v0 usage_3120[@]
     printf '%s\n' ""
-    colored_primary__740_v0 "input"
-    local ret_colored_primary740_v0__8_20="${ret_colored_primary740_v0}"
-    local title_3126=("${ret_colored_primary740_v0__8_20}" "-" "Prompt" "for" "some" "input" "from" "the" "user.")
-    print_wrapped__698_v0 title_3126[@]
+    colored_primary__743_v0 "input"
+    local ret_colored_primary743_v0__8_20="${ret_colored_primary743_v0}"
+    local title_3160=("${ret_colored_primary743_v0__8_20}" "-" "Prompt" "for" "some" "input" "from" "the" "user.")
+    print_wrapped__701_v0 title_3160[@]
     printf '%s\n' ""
-    colored_secondary__741_v0 "Flags:"
-    local ret_colored_secondary741_v0__11_12="${ret_colored_secondary741_v0}"
-    local array_168=()
-    printf__128_v0 "${ret_colored_secondary741_v0__11_12}""
-" array_168[@]
-    local names_3128=("-h, --help" "--placeholder=\"<text>\"" "--prompt=\"<text>\"" "--header=\"<text>\"" "--password")
-    local texts_3129=("Show this help message" "Set the placeholder text" "Set the prompt text" "Set a header text to display above the prompt" "Hide input (for password entry)")
-    local notes_3130=("" "(default: 'Type here...', needs Bash 4.0)" "(default: '> ')" "(ANSI escape supported)" "")
-    render_help_entries__875_v0 names_3128[@] texts_3129[@] notes_3130[@] 0
+    colored_secondary__744_v0 "Flags:"
+    local ret_colored_secondary744_v0__11_12="${ret_colored_secondary744_v0}"
+    local array_170=()
+    printf__128_v0 "${ret_colored_secondary744_v0__11_12}""
+" array_170[@]
+    local names_3162=("-h, --help" "--placeholder=\"<text>\"" "--prompt=\"<text>\"" "--header=\"<text>\"" "--password")
+    local texts_3163=("Show this help message" "Set the placeholder text" "Set the prompt text" "Set a header text to display above the prompt" "Hide input (for password entry)")
+    local notes_3164=("" "(default: 'Type here...', needs Bash 4.0)" "(default: '> ')" "(ANSI escape supported)" "")
+    render_help_entries__879_v0 names_3162[@] texts_3163[@] notes_3164[@] 0
     printf '%s\n' ""
 }
 
 # execute_input(parameters: [Text])
-execute_input__1091_v0() {
-    local parameters_3080=("${!1}")
-    local prompt_3081="> "
-    local placeholder_3082="Type here..."
-    local header_3083=""
-    local password_3084=0
-    for param_3085 in "${parameters_3080[@]}"; do
-        if [ "$(( $([ "_${param_3085}" != "_-h" ]; echo $?) || $([ "_${param_3085}" != "_--help" ]; echo $?) ))" != 0 ]; then
-            print_input_help__1033_v0 
+execute_input__1095_v0() {
+    local parameters_3114=("${!1}")
+    local prompt_3115="> "
+    local placeholder_3116="Type here..."
+    local header_3117=""
+    local password_3118=0
+    for param_3119 in "${parameters_3114[@]}"; do
+        if [ "$(( $([ "_${param_3119}" != "_-h" ]; echo $?) || $([ "_${param_3119}" != "_--help" ]; echo $?) ))" != 0 ]; then
+            print_input_help__1037_v0 
             exit 0
         fi
-        starts_with__22_v0 "${param_3085}" "--prompt="
+        starts_with__22_v0 "${param_3119}" "--prompt="
         local ret_starts_with22_v0__17_12="${ret_starts_with22_v0}"
         if [ "${ret_starts_with22_v0__17_12}" != 0 ]; then
-            local __length_174="--prompt="
-            slice__24_v0 "${param_3085}" "${#__length_174}" 0
-            prompt_3081="${ret_slice24_v0}"
+            local __length_176="--prompt="
+            slice__24_v0 "${param_3119}" "${#__length_176}" 0
+            prompt_3115="${ret_slice24_v0}"
         fi
-        starts_with__22_v0 "${param_3085}" "--placeholder="
+        starts_with__22_v0 "${param_3119}" "--placeholder="
         local ret_starts_with22_v0__20_12="${ret_starts_with22_v0}"
         if [ "${ret_starts_with22_v0__20_12}" != 0 ]; then
-            local __length_175="--placeholder="
-            slice__24_v0 "${param_3085}" "${#__length_175}" 0
-            placeholder_3082="${ret_slice24_v0}"
+            local __length_177="--placeholder="
+            slice__24_v0 "${param_3119}" "${#__length_177}" 0
+            placeholder_3116="${ret_slice24_v0}"
         fi
-        starts_with__22_v0 "${param_3085}" "--header="
+        starts_with__22_v0 "${param_3119}" "--header="
         local ret_starts_with22_v0__23_12="${ret_starts_with22_v0}"
         if [ "${ret_starts_with22_v0__23_12}" != 0 ]; then
-            local __length_176="--header="
-            slice__24_v0 "${param_3085}" "${#__length_176}" 0
-            header_3083="${ret_slice24_v0}"
+            local __length_178="--header="
+            slice__24_v0 "${param_3119}" "${#__length_178}" 0
+            header_3117="${ret_slice24_v0}"
         fi
-        if [ "$([ "_${param_3085}" != "_--password" ]; echo $?)" != 0 ]; then
-            password_3084=1
+        if [ "$([ "_${param_3119}" != "_--password" ]; echo $?)" != 0 ]; then
+            password_3118=1
         fi
     done
-    has_ansi_escape__764_v0 "${header_3083}"
-    local ret_has_ansi_escape764_v0__31_44="${ret_has_ansi_escape764_v0}"
-    escape_ansi__765_v0 "${header_3083}"
-    local ret_escape_ansi765_v0__31_73="${ret_escape_ansi765_v0}"
-    colored_primary__740_v0 "${header_3083}"
-    local ret_colored_primary740_v0__31_111="${ret_colored_primary740_v0}"
-    local display_header_3168
-    display_header_3168="$(if [ "$(( $([ "_${header_3083}" != "_" ]; echo $?) || ret_has_ansi_escape764_v0__31_44 ))" != 0 ]; then echo "${ret_escape_ansi765_v0__31_73}"; else echo "\\x1b[1m""${ret_colored_primary740_v0__31_111}"; fi)"
-    xyl_input__933_v0 "${prompt_3081}" "${placeholder_3082}" "${display_header_3168}" "${password_3084}"
-    ret_execute_input1091_v0="${ret_xyl_input933_v0}"
+    has_ansi_escape__767_v0 "${header_3117}"
+    local ret_has_ansi_escape767_v0__31_44="${ret_has_ansi_escape767_v0}"
+    escape_ansi__768_v0 "${header_3117}"
+    local ret_escape_ansi768_v0__31_73="${ret_escape_ansi768_v0}"
+    colored_primary__743_v0 "${header_3117}"
+    local ret_colored_primary743_v0__31_111="${ret_colored_primary743_v0}"
+    local display_header_3202
+    display_header_3202="$(if [ "$(( $([ "_${header_3117}" != "_" ]; echo $?) || ret_has_ansi_escape767_v0__31_44 ))" != 0 ]; then echo "${ret_escape_ansi768_v0__31_73}"; else echo "\\x1b[1m""${ret_colored_primary743_v0__31_111}"; fi)"
+    xyl_input__937_v0 "${prompt_3115}" "${placeholder_3116}" "${display_header_3202}" "${password_3118}"
+    ret_execute_input1095_v0="${ret_xyl_input937_v0}"
     return 0
 }
 
 # get_key()
-get_key__1172_v0() {
-    local command_177
-    command_177="$(IFS= read -rsn1 k < /dev/tty; if [[ "$k" == $'\e' ]]; then IFS= read -rsn2 r < /dev/tty; k+=$r; fi; case "$k" in ($'\e[A') printf UP;; ($'\e[B') printf DOWN;; ($'\e[C') printf RIGHT;; ($'\e[D') printf LEFT;; ($'\177') printf BACKSPACE;; ($'	') printf TAB;; ($'\001') printf CTRL_A;; (' ') printf SPACE;; ('') printf INPUT;; (*) printf '%s' "$k";; esac)"
+get_key__1176_v0() {
+    local command_179
+    command_179="$(IFS= read -rsn1 k < /dev/tty; if [[ "$k" == $'\e' ]]; then IFS= read -rsn2 r < /dev/tty; k+=$r; fi; case "$k" in ($'\e[A') printf UP;; ($'\e[B') printf DOWN;; ($'\e[C') printf RIGHT;; ($'\e[D') printf LEFT;; ($'\177') printf BACKSPACE;; ($'	') printf TAB;; ($'\001') printf CTRL_A;; (' ') printf SPACE;; ('') printf INPUT;; (*) printf '%s' "$k";; esac)"
     __status=$?
-    ret_get_key1172_v0="${command_177}"
+    ret_get_key1176_v0="${command_179}"
     return 0
 }
 
 # eprintf(format: Text, args: [Text])
-eprintf__1174_v0() {
-    local format_17945="${1}"
-    local args_17946=("${!2}")
-    args_17946=("${format_17945}" "${args_17946[@]}")
+eprintf__1178_v0() {
+    local format_18021="${1}"
+    local args_18022=("${!2}")
+    args_18022=("${format_18021}" "${args_18022[@]}")
     __status=$?
-    printf "${args_17946[@]}" >&2
+    printf "${args_18022[@]}" >&2
     __status=$?
 }
 
 # eprintf_colored(message: Text, color: Int)
-eprintf_colored__1175_v0() {
-    local message_17943="${1}"
-    local color_17944="${2}"
+eprintf_colored__1179_v0() {
+    local message_18019="${1}"
+    local color_18020="${2}"
     # Prints an error message with a specified color.
-    local array_178=("${message_17943}")
-    eprintf__1174_v0 "\\x1b[${color_17944}m%s\\x1b[0m" array_178[@]
+    local array_180=("${message_18019}")
+    eprintf__1178_v0 "\\x1b[${color_18020}m%s\\x1b[0m" array_180[@]
 }
 
 # eprintf(format: Text, args: [Text])
-eprintf__1190_v0() {
-    local format_17966="${1}"
-    local args_17967=("${!2}")
-    args_17967=("${format_17966}" "${args_17967[@]}")
+eprintf__1194_v0() {
+    local format_18044="${1}"
+    local args_18045=("${!2}")
+    args_18045=("${format_18044}" "${args_18045[@]}")
     __status=$?
-    printf "${args_17967[@]}" >&2
+    printf "${args_18045[@]}" >&2
     __status=$?
+}
+
+# eprintf_colored(message: Text, color: Int)
+eprintf_colored__1195_v0() {
+    local message_18042="${1}"
+    local color_18043="${2}"
+    # Prints an error message with a specified color.
+    local array_181=("${message_18042}")
+    eprintf__1194_v0 "\\x1b[${color_18043}m%s\\x1b[0m" array_181[@]
 }
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
 _perl_state_46="None"
 # perl_available()
-perl_available__1197_v0() {
+perl_available__1202_v0() {
     if [ "$([ "_${_perl_state_46}" != "_None" ]; echo $?)" != 0 ]; then
-        local command_179
-        command_179="$(echo "$XYLITOL_USE_PERL")"
+        local command_182
+        command_182="$(echo "$XYLITOL_USE_PERL")"
         __status=$?
-        local disabled_17898
-        disabled_17898="$([ "_${command_179}" != "_No" ]; echo $?)"
-        local command_180
-        command_180="$(command -v perl > /dev/null && echo 0 || echo 1)"
+        local disabled_17974
+        disabled_17974="$([ "_${command_182}" != "_No" ]; echo $?)"
+        local command_183
+        command_183="$(command -v perl > /dev/null && echo 0 || echo 1)"
         __status=$?
-        local found_17899
-        found_17899="$(( $(( ! disabled_17898 )) && $([ "_${command_180}" != "_0" ]; echo $?) ))"
-        _perl_state_46="$(if [ "${found_17899}" != 0 ]; then echo "Yes"; else echo "No"; fi)"
+        local found_17975
+        found_17975="$(( $(( ! disabled_17974 )) && $([ "_${command_183}" != "_0" ]; echo $?) ))"
+        _perl_state_46="$(if [ "${found_17975}" != 0 ]; then echo "Yes"; else echo "No"; fi)"
     fi
-    ret_perl_available1197_v0="$([ "_${_perl_state_46}" != "_Yes" ]; echo $?)"
+    ret_perl_available1202_v0="$([ "_${_perl_state_46}" != "_Yes" ]; echo $?)"
     return 0
 }
 
 # perl_get_cjk_width(text: Text)
-perl_get_cjk_width__1198_v0() {
-    local text_17897="${1}"
-    perl_available__1197_v0 
-    local ret_perl_available1197_v0__19_12="${ret_perl_available1197_v0}"
-    if [ "$(( ! ret_perl_available1197_v0__19_12 ))" != 0 ]; then
-        ret_perl_get_cjk_width1198_v0=''
+perl_get_cjk_width__1203_v0() {
+    local text_17973="${1}"
+    perl_available__1202_v0 
+    local ret_perl_available1202_v0__19_12="${ret_perl_available1202_v0}"
+    if [ "$(( ! ret_perl_available1202_v0__19_12 ))" != 0 ]; then
+        ret_perl_get_cjk_width1203_v0=''
         return 1
     fi
-    local command_181
-    command_181="$(perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text_17897}" 2>/dev/null)"
+    local command_184
+    command_184="$(perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text_17973}" 2>/dev/null)"
     __status=$?
     if [ "${__status}" != 0 ]; then
-        ret_perl_get_cjk_width1198_v0=''
+        ret_perl_get_cjk_width1203_v0=''
         return "${__status}"
     fi
-    local width_str_17900="${command_181}"
-    parse_int__13_v0 "${width_str_17900}"
+    local width_str_17976="${command_184}"
+    parse_int__13_v0 "${width_str_17976}"
     __status=$?
     if [ "${__status}" != 0 ]; then
-        ret_perl_get_cjk_width1198_v0=''
+        ret_perl_get_cjk_width1203_v0=''
         return "${__status}"
     fi
-    local width_17901="${ret_parse_int13_v0}"
-    ret_perl_get_cjk_width1198_v0="${width_17901}"
+    local width_17977="${ret_parse_int13_v0}"
+    ret_perl_get_cjk_width1203_v0="${width_17977}"
     return 0
 }
 
 # has_ansi_escape(text: Text)
-has_ansi_escape__1203_v0() {
-    local text_17887="${1}"
+has_ansi_escape__1208_v0() {
+    local text_17963="${1}"
     # Check for ESC character (0x1B = 27) or literal \x1b[
-    local command_182
-    command_182="$([[ "${text_17887}" == *$'\x1b'* || "${text_17887}" == *'\x1b['* ]] && echo "1" || echo "0")"
+    local command_185
+    command_185="$([[ "${text_17963}" == *$'\x1b'* || "${text_17963}" == *'\x1b['* ]] && echo "1" || echo "0")"
     __status=$?
-    local has_escape_17888="${command_182}"
-    ret_has_ansi_escape1203_v0="$([ "_${has_escape_17888}" != "_1" ]; echo $?)"
+    local has_escape_17964="${command_185}"
+    ret_has_ansi_escape1208_v0="$([ "_${has_escape_17964}" != "_1" ]; echo $?)"
     return 0
 }
 
 # strip_ansi(text: Text)
-strip_ansi__1205_v0() {
-    local text_17893="${1}"
-    local command_183
-    command_183="$(printf "%s" "${text_17893}" | sed $'s/\x1b\[[0-9;]*m//g' | sed 's/\\x1b\[[0-9;]*m//g')"
+strip_ansi__1210_v0() {
+    local text_17969="${1}"
+    local command_186
+    command_186="$(printf "%s" "${text_17969}" | sed $'s/\x1b\[[0-9;]*m//g' | sed 's/\\x1b\[[0-9;]*m//g')"
     __status=$?
-    ret_strip_ansi1205_v0="${command_183}"
+    ret_strip_ansi1210_v0="${command_186}"
     return 0
 }
 
 # is_all_ascii(text: Text)
-is_all_ascii__1206_v0() {
-    local text_17895="${1}"
-    local command_184
-    command_184="$(printf "%s" "${text_17895}" | LC_ALL=C grep -q '^[ -~]*$' && echo 0 || echo 1)"
+is_all_ascii__1211_v0() {
+    local text_17971="${1}"
+    local command_187
+    command_187="$(printf "%s" "${text_17971}" | LC_ALL=C grep -q '^[ -~]*$' && echo 0 || echo 1)"
     __status=$?
-    local result_17896="${command_184}"
-    ret_is_all_ascii1206_v0="$([ "_${result_17896}" != "_0" ]; echo $?)"
+    local result_17972="${command_187}"
+    ret_is_all_ascii1211_v0="$([ "_${result_17972}" != "_0" ]; echo $?)"
     return 0
 }
 
 # plain_len(text: Text)
-plain_len__1207_v0() {
-    local text_17890="${1}"
-    local command_185
-    command_185="$(LC_ALL=C; __t="${text_17890}"; case "$__t" in (*[!\ -~]*) echo -1;; (*'\x1b['*) echo -1;; (*) echo "${#__t}";; esac)"
+plain_len__1212_v0() {
+    local text_17966="${1}"
+    local command_188
+    command_188="$(LC_ALL=C; __t="${text_17966}"; case "$__t" in (*[!\ -~]*) echo -1;; (*'\x1b['*) echo -1;; (*) echo "${#__t}";; esac)"
     __status=$?
-    local measured_17891="${command_185}"
-    parse_int__13_v0 "${measured_17891}"
+    local measured_17967="${command_188}"
+    parse_int__13_v0 "${measured_17967}"
     __status=$?
-    ret_plain_len1207_v0="${ret_parse_int13_v0}"
+    ret_plain_len1212_v0="${ret_parse_int13_v0}"
     return 0
 }
 
 # get_visible_len(text: Text)
-get_visible_len__1208_v0() {
-    local text_17889="${1}"
-    plain_len__1207_v0 "${text_17889}"
-    local plain_17892="${ret_plain_len1207_v0}"
-    if [ "$(( plain_17892 >= 0 ))" != 0 ]; then
-        ret_get_visible_len1208_v0="${plain_17892}"
+get_visible_len__1213_v0() {
+    local text_17965="${1}"
+    plain_len__1212_v0 "${text_17965}"
+    local plain_17968="${ret_plain_len1212_v0}"
+    if [ "$(( plain_17968 >= 0 ))" != 0 ]; then
+        ret_get_visible_len1213_v0="${plain_17968}"
         return 0
     fi
-    strip_ansi__1205_v0 "${text_17889}"
-    local stripped_17894="${ret_strip_ansi1205_v0}"
-    is_all_ascii__1206_v0 "${stripped_17894}"
-    local ret_is_all_ascii1206_v0__46_12="${ret_is_all_ascii1206_v0}"
-    if [ "$(( ! ret_is_all_ascii1206_v0__46_12 ))" != 0 ]; then
-        perl_get_cjk_width__1198_v0 "${stripped_17894}"
+    strip_ansi__1210_v0 "${text_17965}"
+    local stripped_17970="${ret_strip_ansi1210_v0}"
+    is_all_ascii__1211_v0 "${stripped_17970}"
+    local ret_is_all_ascii1211_v0__46_12="${ret_is_all_ascii1211_v0}"
+    if [ "$(( ! ret_is_all_ascii1211_v0__46_12 ))" != 0 ]; then
+        perl_get_cjk_width__1203_v0 "${stripped_17970}"
         __status=$?
         if [ "${__status}" != 0 ]; then
-            local __length_186="${stripped_17894}"
-            ret_get_visible_len1208_v0="${#__length_186}"
+            local __length_189="${stripped_17970}"
+            ret_get_visible_len1213_v0="${#__length_189}"
             return 0
         fi
-        ret_get_visible_len1208_v0="${ret_perl_get_cjk_width1198_v0}"
+        ret_get_visible_len1213_v0="${ret_perl_get_cjk_width1203_v0}"
         return 0
     fi
-    local __length_187="${stripped_17894}"
-    ret_get_visible_len1208_v0="${#__length_187}"
+    local __length_190="${stripped_17970}"
+    ret_get_visible_len1213_v0="${#__length_190}"
     return 0
 }
 
@@ -2474,227 +2499,234 @@ _term_size_48=(80 24)
 export XYLITOL_RUNTIME_STTY_COUNT=0
 __status=$?
 # stty_count()
-stty_count__1214_v0() {
-    local command_189
-    command_189="$(c="${XYLITOL_RUNTIME_STTY_COUNT:-0}"; [[ "$c" =~ ^[0-9]+$ ]] && echo "$c" || echo 0)"
+stty_count__1219_v0() {
+    local command_192
+    command_192="$(c="${XYLITOL_RUNTIME_STTY_COUNT:-0}"; [[ "$c" =~ ^[0-9]+$ ]] && echo "$c" || echo 0)"
     __status=$?
-    local count_17964="${command_189}"
-    parse_int__13_v0 "${count_17964}"
+    local count_18040="${command_192}"
+    parse_int__13_v0 "${count_18040}"
     __status=$?
-    ret_stty_count1214_v0="${ret_parse_int13_v0}"
+    ret_stty_count1219_v0="${ret_parse_int13_v0}"
     return 0
 }
 
 # stty_lock()
-stty_lock__1215_v0() {
-    stty_count__1214_v0 
-    local count_num_17965="${ret_stty_count1214_v0}"
-    if [ "$(( count_num_17965 == 0 ))" != 0 ]; then
-        stty -echo -icanon min 1 time 0 < /dev/tty
+stty_lock__1220_v0() {
+    stty_count__1219_v0 
+    local count_num_18041="${ret_stty_count1219_v0}"
+    if [ "$(( count_num_18041 == 0 ))" != 0 ]; then
+        stty -echo -icanon min 1 time 0 2>/dev/null < /dev/tty
         __status=$?
+        if [ "${__status}" != 0 ]; then
+            eprintf_colored__1195_v0 "Error: " 91
+            local array_193=("")
+            eprintf__1194_v0 "xylitol needs a terminal, and /dev/tty is not available here.
+" array_193[@]
+            exit 1
+        fi
     fi
-    count_num_17965="$(( count_num_17965 + 1 ))"
-    export XYLITOL_RUNTIME_STTY_COUNT=${count_num_17965}
+    count_num_18041="$(( count_num_18041 + 1 ))"
+    export XYLITOL_RUNTIME_STTY_COUNT=${count_num_18041}
     __status=$?
 }
 
 # stty_unlock()
-stty_unlock__1216_v0() {
-    stty_count__1214_v0 
-    local count_num_18085="${ret_stty_count1214_v0}"
-    if [ "$(( count_num_18085 > 0 ))" != 0 ]; then
-        count_num_18085="$(( count_num_18085 - 1 ))"
-        export XYLITOL_RUNTIME_STTY_COUNT=${count_num_18085}
+stty_unlock__1221_v0() {
+    stty_count__1219_v0 
+    local count_num_18163="${ret_stty_count1219_v0}"
+    if [ "$(( count_num_18163 > 0 ))" != 0 ]; then
+        count_num_18163="$(( count_num_18163 - 1 ))"
+        export XYLITOL_RUNTIME_STTY_COUNT=${count_num_18163}
         __status=$?
-        if [ "$(( count_num_18085 == 0 ))" != 0 ]; then
-            stty echo icanon < /dev/tty
+        if [ "$(( count_num_18163 == 0 ))" != 0 ]; then
+            stty echo icanon 2>/dev/null < /dev/tty
             __status=$?
         fi
     fi
 }
 
 # store_term_size(size: Text)
-store_term_size__1217_v0() {
-    local size_17878="${1}"
-    if [ "$([ "_${size_17878}" != "_" ]; echo $?)" != 0 ]; then
-        ret_store_term_size1217_v0=0
+store_term_size__1222_v0() {
+    local size_17954="${1}"
+    if [ "$([ "_${size_17954}" != "_" ]; echo $?)" != 0 ]; then
+        ret_store_term_size1222_v0=0
         return 0
     fi
-    split__4_v0 "${size_17878}" " "
-    local parts_17879=("${ret_split4_v0[@]}")
-    local __length_190=("${parts_17879[@]}")
-    if [ "$(( ${#__length_190[@]} != 2 ))" != 0 ]; then
-        ret_store_term_size1217_v0=0
+    split__4_v0 "${size_17954}" " "
+    local parts_17955=("${ret_split4_v0[@]}")
+    local __length_194=("${parts_17955[@]}")
+    if [ "$(( ${#__length_194[@]} != 2 ))" != 0 ]; then
+        ret_store_term_size1222_v0=0
         return 0
     fi
-    parse_int__13_v0 "${parts_17879[1]?"Index out of bounds (at src/./choose/../utils/term.ab:53:41)"}"
+    parse_int__13_v0 "${parts_17955[1]?"Index out of bounds (at src/./choose/../utils/term.ab:57:41)"}"
     __status=$?
-    local ret_parse_int13_v0__53_25="${ret_parse_int13_v0}"
-    parse_int__13_v0 "${parts_17879[0]?"Index out of bounds (at src/./choose/../utils/term.ab:53:68)"}"
+    local ret_parse_int13_v0__57_25="${ret_parse_int13_v0}"
+    parse_int__13_v0 "${parts_17955[0]?"Index out of bounds (at src/./choose/../utils/term.ab:57:68)"}"
     __status=$?
-    local ret_parse_int13_v0__53_52="${ret_parse_int13_v0}"
-    _term_size_48=("${ret_parse_int13_v0__53_25}" "${ret_parse_int13_v0__53_52}")
-    ret_store_term_size1217_v0=1
+    local ret_parse_int13_v0__57_52="${ret_parse_int13_v0}"
+    _term_size_48=("${ret_parse_int13_v0__57_25}" "${ret_parse_int13_v0__57_52}")
+    ret_store_term_size1222_v0=1
     return 0
 }
 
 # query_term_size()
-query_term_size__1218_v0() {
-    local command_192
-    command_192="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
+query_term_size__1223_v0() {
+    local command_196
+    command_196="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
     __status=$?
-    local size_17881="${command_192}"
-    store_term_size__1217_v0 "${size_17881}"
-    ret_query_term_size1218_v0="${ret_store_term_size1217_v0}"
+    local size_17957="${command_196}"
+    store_term_size__1222_v0 "${size_17957}"
+    ret_query_term_size1223_v0="${ret_store_term_size1222_v0}"
     return 0
 }
 
 # stty_term_size()
-stty_term_size__1219_v0() {
-    local command_193
-    command_193="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
+stty_term_size__1224_v0() {
+    local command_197
+    command_197="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
     __status=$?
-    local size_17877="${command_193}"
-    store_term_size__1217_v0 "${size_17877}"
-    ret_stty_term_size1219_v0="${ret_store_term_size1217_v0}"
+    local size_17953="${command_197}"
+    store_term_size__1222_v0 "${size_17953}"
+    ret_stty_term_size1224_v0="${ret_store_term_size1222_v0}"
     return 0
 }
 
 # get_term_size()
-get_term_size__1220_v0() {
-    stty_term_size__1219_v0 
-    local detected_17880="${ret_stty_term_size1219_v0}"
-    if [ "$(( ! detected_17880 ))" != 0 ]; then
-        query_term_size__1218_v0 
-        detected_17880="${ret_query_term_size1218_v0}"
+get_term_size__1225_v0() {
+    stty_term_size__1224_v0 
+    local detected_17956="${ret_stty_term_size1224_v0}"
+    if [ "$(( ! detected_17956 ))" != 0 ]; then
+        query_term_size__1223_v0 
+        detected_17956="${ret_query_term_size1223_v0}"
     fi
     _got_term_size_47=1
 }
 
 # term_width()
-term_width__1222_v0() {
+term_width__1227_v0() {
     if [ "$(( ! _got_term_size_47 ))" != 0 ]; then
-        get_term_size__1220_v0 
+        get_term_size__1225_v0 
     fi
-    ret_term_width1222_v0="${_term_size_48[0]?"Index out of bounds (at src/./choose/../utils/term.ab:96:23)"}"
+    ret_term_width1227_v0="${_term_size_48[0]?"Index out of bounds (at src/./choose/../utils/term.ab:100:23)"}"
     return 0
 }
 
 # term_height()
-term_height__1223_v0() {
+term_height__1228_v0() {
     if [ "$(( ! _got_term_size_47 ))" != 0 ]; then
-        get_term_size__1220_v0 
+        get_term_size__1225_v0 
     fi
-    ret_term_height1223_v0="${_term_size_48[1]?"Index out of bounds (at src/./choose/../utils/term.ab:104:23)"}"
+    ret_term_height1228_v0="${_term_size_48[1]?"Index out of bounds (at src/./choose/../utils/term.ab:108:23)"}"
     return 0
 }
 
 # // Cursor /////
 # remove_line(cnt: Int)
-remove_line__1225_v0() {
-    local cnt_18057="${1}"
-    if [ "$(( cnt_18057 > 0 ))" != 0 ]; then
-        local sequence_18058=""
-        local __range_start_18059=0
-        local __range_end_18059="${cnt_18057}"
-        local __dir_18059=$(( ${__range_start_18059} <= ${__range_end_18059} ? 1 : -1 ))
-        for (( ____18059=${__range_start_18059}; ____18059 * ${__dir_18059} < ${__range_end_18059} * ${__dir_18059}; ____18059+=${__dir_18059} )); do
-            sequence_18058+="\\x1b[2K\\x1b[1A"
+remove_line__1230_v0() {
+    local cnt_18135="${1}"
+    if [ "$(( cnt_18135 > 0 ))" != 0 ]; then
+        local sequence_18136=""
+        local __range_start_18137=0
+        local __range_end_18137="${cnt_18135}"
+        local __dir_18137=$(( ${__range_start_18137} <= ${__range_end_18137} ? 1 : -1 ))
+        for (( ____18137=${__range_start_18137}; ____18137 * ${__dir_18137} < ${__range_end_18137} * ${__dir_18137}; ____18137+=${__dir_18137} )); do
+            sequence_18136+="\\x1b[2K\\x1b[1A"
 done
-        local array_194=("")
-        eprintf__1190_v0 "${sequence_18058}" array_194[@]
+        local array_198=("")
+        eprintf__1194_v0 "${sequence_18136}" array_198[@]
     fi
-    local array_195=("")
-    eprintf__1190_v0 "\\x1b[G" array_195[@]
+    local array_199=("")
+    eprintf__1194_v0 "\\x1b[G" array_199[@]
 }
 
 # remove_current_line()
-remove_current_line__1226_v0() {
-    local array_196=("")
-    eprintf__1190_v0 "\\x1b[2K\\x1b[G" array_196[@]
+remove_current_line__1231_v0() {
+    local array_200=("")
+    eprintf__1194_v0 "\\x1b[2K\\x1b[G" array_200[@]
 }
 
 # print_blank(cnt: Int)
-print_blank__1227_v0() {
-    local cnt_18048="${1}"
-    printf '%*s' "${cnt_18048}" ' ' >&2
+print_blank__1232_v0() {
+    local cnt_18126="${1}"
+    printf '%*s' "${cnt_18126}" ' ' >&2
     __status=$?
 }
 
 # new_line(cnt: Int)
-new_line__1228_v0() {
-    local cnt_18012="${1}"
-    local __range_start_18013=0
-    local __range_end_18013="${cnt_18012}"
-    local __dir_18013=$(( ${__range_start_18013} <= ${__range_end_18013} ? 1 : -1 ))
-    for (( ____18013=${__range_start_18013}; ____18013 * ${__dir_18013} < ${__range_end_18013} * ${__dir_18013}; ____18013+=${__dir_18013} )); do
-        local array_197=("")
-        eprintf__1190_v0 "
-" array_197[@]
+new_line__1233_v0() {
+    local cnt_18090="${1}"
+    local __range_start_18091=0
+    local __range_end_18091="${cnt_18090}"
+    local __dir_18091=$(( ${__range_start_18091} <= ${__range_end_18091} ? 1 : -1 ))
+    for (( ____18091=${__range_start_18091}; ____18091 * ${__dir_18091} < ${__range_end_18091} * ${__dir_18091}; ____18091+=${__dir_18091} )); do
+        local array_201=("")
+        eprintf__1194_v0 "
+" array_201[@]
 done
 }
 
 # go_up(cnt: Int)
-go_up__1229_v0() {
-    local cnt_18031="${1}"
-    local array_198=("")
-    eprintf__1190_v0 "\\x1b[${cnt_18031}A" array_198[@]
+go_up__1234_v0() {
+    local cnt_18109="${1}"
+    local array_202=("")
+    eprintf__1194_v0 "\\x1b[${cnt_18109}A" array_202[@]
 }
 
 # go_down(cnt: Int)
-go_down__1230_v0() {
-    local cnt_18084="${1}"
-    local array_199=("")
-    eprintf__1190_v0 "\\x1b[${cnt_18084}B" array_199[@]
+go_down__1235_v0() {
+    local cnt_18162="${1}"
+    local array_203=("")
+    eprintf__1194_v0 "\\x1b[${cnt_18162}B" array_203[@]
 }
 
 # move the cursor up or down `cnt` lines.
 # hide_cursor()
-hide_cursor__1232_v0() {
-    local array_200=("")
-    eprintf__1190_v0 "\\x1b[?25l" array_200[@]
+hide_cursor__1237_v0() {
+    local array_204=("")
+    eprintf__1194_v0 "\\x1b[?25l" array_204[@]
 }
 
 # show_cursor()
-show_cursor__1233_v0() {
-    local array_201=("")
-    eprintf__1190_v0 "\\x1b[?25h" array_201[@]
+show_cursor__1238_v0() {
+    local array_205=("")
+    eprintf__1194_v0 "\\x1b[?25h" array_205[@]
 }
 
 # print_wrapped(pieces: [Text])
-print_wrapped__1234_v0() {
-    local pieces_17876=("${!1}")
-    term_width__1222_v0 
-    local width_17882="${ret_term_width1222_v0}"
-    local line_17883=""
-    local line_len_17884=0
-    for piece_17885 in "${pieces_17876[@]}"; do
-        local __length_204="${piece_17885}"
-        local piece_len_17886="${#__length_204}"
-        has_ansi_escape__1203_v0 "${piece_17885}"
-        local ret_has_ansi_escape1203_v0__186_12="${ret_has_ansi_escape1203_v0}"
-        if [ "${ret_has_ansi_escape1203_v0__186_12}" != 0 ]; then
-            get_visible_len__1208_v0 "${piece_17885}"
-            piece_len_17886="${ret_get_visible_len1208_v0}"
+print_wrapped__1239_v0() {
+    local pieces_17952=("${!1}")
+    term_width__1227_v0 
+    local width_17958="${ret_term_width1227_v0}"
+    local line_17959=""
+    local line_len_17960=0
+    for piece_17961 in "${pieces_17952[@]}"; do
+        local __length_208="${piece_17961}"
+        local piece_len_17962="${#__length_208}"
+        has_ansi_escape__1208_v0 "${piece_17961}"
+        local ret_has_ansi_escape1208_v0__190_12="${ret_has_ansi_escape1208_v0}"
+        if [ "${ret_has_ansi_escape1208_v0__190_12}" != 0 ]; then
+            get_visible_len__1213_v0 "${piece_17961}"
+            piece_len_17962="${ret_get_visible_len1213_v0}"
         fi
-        if [ "$([ "_${line_17883}" != "_" ]; echo $?)" != 0 ]; then
-            line_17883="${piece_17885}"
-            line_len_17884="${piece_len_17886}"
-        elif [ "$(( $(( $(( line_len_17884 + 1 )) + piece_len_17886 )) > width_17882 ))" != 0 ]; then
-            local array_205=()
-            printf__128_v0 "${line_17883}""
-" array_205[@]
-            line_17883="${piece_17885}"
-            line_len_17884="${piece_len_17886}"
+        if [ "$([ "_${line_17959}" != "_" ]; echo $?)" != 0 ]; then
+            line_17959="${piece_17961}"
+            line_len_17960="${piece_len_17962}"
+        elif [ "$(( $(( $(( line_len_17960 + 1 )) + piece_len_17962 )) > width_17958 ))" != 0 ]; then
+            local array_209=()
+            printf__128_v0 "${line_17959}""
+" array_209[@]
+            line_17959="${piece_17961}"
+            line_len_17960="${piece_len_17962}"
         else
-            line_17883+=" ""${piece_17885}"
-            line_len_17884="$(( line_len_17884 + $(( 1 + piece_len_17886 )) ))"
+            line_17959+=" ""${piece_17961}"
+            line_len_17960="$(( line_len_17960 + $(( 1 + piece_len_17962 )) ))"
         fi
     done
-    if [ "$([ "_${line_17883}" == "_" ]; echo $?)" != 0 ]; then
-        local array_206=()
-        printf__128_v0 "${line_17883}""
-" array_206[@]
+    if [ "$([ "_${line_17959}" == "_" ]; echo $?)" != 0 ]; then
+        local array_210=()
+        printf__128_v0 "${line_17959}""
+" array_210[@]
     fi
 }
 
@@ -2710,84 +2742,84 @@ _got_xylitol_colors_52=0
 _primary_color_53=(3 207 159 92)
 _secondary_color_54=(3 118 206 94)
 # get_supports_truecolor()
-get_supports_truecolor__1271_v0() {
+get_supports_truecolor__1276_v0() {
     env_var_get__120_v0 "XYLITOL_TRUECOLOR"
     __status=$?
-    local config_17866="${ret_env_var_get120_v0}"
-    _supports_truecolor_51="$(if [ "$([ "_${config_17866}" != "_Yes" ]; echo $?)" != 0 ]; then echo "Yes"; else echo "No"; fi)"
-    ret_get_supports_truecolor1271_v0="$([ "_${_supports_truecolor_51}" != "_Yes" ]; echo $?)"
+    local config_17942="${ret_env_var_get120_v0}"
+    _supports_truecolor_51="$(if [ "$([ "_${config_17942}" != "_Yes" ]; echo $?)" != 0 ]; then echo "Yes"; else echo "No"; fi)"
+    ret_get_supports_truecolor1276_v0="$([ "_${_supports_truecolor_51}" != "_Yes" ]; echo $?)"
     return 0
 }
 
 # colored_rgb(message: Text, r: Int, g: Int, b: Int, fallback: Int)
-colored_rgb__1272_v0() {
-    local message_17861="${1}"
-    local r_17862="${2}"
-    local g_17863="${3}"
-    local b_17864="${4}"
-    local fallback_17865="${5}"
+colored_rgb__1277_v0() {
+    local message_17937="${1}"
+    local r_17938="${2}"
+    local g_17939="${3}"
+    local b_17940="${4}"
+    local fallback_17941="${5}"
     if [ "$([ "_${_supports_truecolor_51}" != "_Yes" ]; echo $?)" != 0 ]; then
-        ret_colored_rgb1272_v0="\\x1b[38;2;${r_17862};${g_17863};${b_17864}m""${message_17861}""\\x1b[0m"
+        ret_colored_rgb1277_v0="\\x1b[38;2;${r_17938};${g_17939};${b_17940}m""${message_17937}""\\x1b[0m"
         return 0
     elif [ "$([ "_${_supports_truecolor_51}" != "_None" ]; echo $?)" != 0 ]; then
-        get_supports_truecolor__1271_v0 
-        local ret_get_supports_truecolor1271_v0__45_17="${ret_get_supports_truecolor1271_v0}"
-        if [ "${ret_get_supports_truecolor1271_v0__45_17}" != 0 ]; then
-            ret_colored_rgb1272_v0="\\x1b[38;2;${r_17862};${g_17863};${b_17864}m""${message_17861}""\\x1b[0m"
+        get_supports_truecolor__1276_v0 
+        local ret_get_supports_truecolor1276_v0__45_17="${ret_get_supports_truecolor1276_v0}"
+        if [ "${ret_get_supports_truecolor1276_v0__45_17}" != 0 ]; then
+            ret_colored_rgb1277_v0="\\x1b[38;2;${r_17938};${g_17939};${b_17940}m""${message_17937}""\\x1b[0m"
             return 0
-        elif [ "$(( fallback_17865 == 0 ))" != 0 ]; then
-            ret_colored_rgb1272_v0="${message_17861}"
+        elif [ "$(( fallback_17941 == 0 ))" != 0 ]; then
+            ret_colored_rgb1277_v0="${message_17937}"
             return 0
         else
-            ret_colored_rgb1272_v0="\\x1b[${fallback_17865}m""${message_17861}""\\x1b[0m"
+            ret_colored_rgb1277_v0="\\x1b[${fallback_17941}m""${message_17937}""\\x1b[0m"
             return 0
         fi
     else
-        if [ "$(( fallback_17865 == 0 ))" != 0 ]; then
-            ret_colored_rgb1272_v0="${message_17861}"
+        if [ "$(( fallback_17941 == 0 ))" != 0 ]; then
+            ret_colored_rgb1277_v0="${message_17937}"
             return 0
         fi
-        ret_colored_rgb1272_v0="\\x1b[${fallback_17865}m""${message_17861}""\\x1b[0m"
+        ret_colored_rgb1277_v0="\\x1b[${fallback_17941}m""${message_17937}""\\x1b[0m"
         return 0
     fi
 }
 
 # inner_get_xylitol_colors()
-inner_get_xylitol_colors__1274_v0() {
+inner_get_xylitol_colors__1279_v0() {
     if [ "$(( ! _got_xylitol_colors_52 ))" != 0 ]; then
         env_var_get__120_v0 "XYLITOL_PRIMARY_COLOR"
         __status=$?
-        local primary_env_17855="${ret_env_var_get120_v0}"
-        if [ "$([ "_${primary_env_17855}" == "_" ]; echo $?)" != 0 ]; then
-            split__4_v0 "${primary_env_17855}" ";"
-            local parts_17856=("${ret_split4_v0[@]}")
-            local __length_210=("${parts_17856[@]}")
-            if [ "$(( ${#__length_210[@]} == 4 ))" != 0 ]; then
-                parse_int__13_v0 "${parts_17856[0]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:110:37)"}"
+        local primary_env_17931="${ret_env_var_get120_v0}"
+        if [ "$([ "_${primary_env_17931}" == "_" ]; echo $?)" != 0 ]; then
+            split__4_v0 "${primary_env_17931}" ";"
+            local parts_17932=("${ret_split4_v0[@]}")
+            local __length_214=("${parts_17932[@]}")
+            if [ "$(( ${#__length_214[@]} == 4 ))" != 0 ]; then
+                parse_int__13_v0 "${parts_17932[0]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:110:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors1274_v0=''
+                    ret_inner_get_xylitol_colors1279_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__110_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_17856[1]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:111:37)"}"
+                parse_int__13_v0 "${parts_17932[1]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:111:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors1274_v0=''
+                    ret_inner_get_xylitol_colors1279_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__111_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_17856[2]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:112:37)"}"
+                parse_int__13_v0 "${parts_17932[2]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:112:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors1274_v0=''
+                    ret_inner_get_xylitol_colors1279_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__112_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_17856[3]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:113:37)"}"
+                parse_int__13_v0 "${parts_17932[3]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:113:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors1274_v0=''
+                    ret_inner_get_xylitol_colors1279_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__113_21="${ret_parse_int13_v0}"
@@ -2796,37 +2828,37 @@ inner_get_xylitol_colors__1274_v0() {
         fi
         env_var_get__120_v0 "XYLITOL_SECONDARY_COLOR"
         __status=$?
-        local secondary_env_17857="${ret_env_var_get120_v0}"
-        if [ "$([ "_${secondary_env_17857}" == "_" ]; echo $?)" != 0 ]; then
-            split__4_v0 "${secondary_env_17857}" ";"
-            local parts_17858=("${ret_split4_v0[@]}")
-            local __length_212=("${parts_17858[@]}")
-            if [ "$(( ${#__length_212[@]} == 4 ))" != 0 ]; then
-                parse_int__13_v0 "${parts_17858[0]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:123:37)"}"
+        local secondary_env_17933="${ret_env_var_get120_v0}"
+        if [ "$([ "_${secondary_env_17933}" == "_" ]; echo $?)" != 0 ]; then
+            split__4_v0 "${secondary_env_17933}" ";"
+            local parts_17934=("${ret_split4_v0[@]}")
+            local __length_216=("${parts_17934[@]}")
+            if [ "$(( ${#__length_216[@]} == 4 ))" != 0 ]; then
+                parse_int__13_v0 "${parts_17934[0]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:123:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors1274_v0=''
+                    ret_inner_get_xylitol_colors1279_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__123_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_17858[1]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:124:37)"}"
+                parse_int__13_v0 "${parts_17934[1]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:124:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors1274_v0=''
+                    ret_inner_get_xylitol_colors1279_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__124_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_17858[2]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:125:37)"}"
+                parse_int__13_v0 "${parts_17934[2]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:125:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors1274_v0=''
+                    ret_inner_get_xylitol_colors1279_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__125_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_17858[3]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:126:37)"}"
+                parse_int__13_v0 "${parts_17934[3]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:126:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors1274_v0=''
+                    ret_inner_get_xylitol_colors1279_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__126_21="${ret_parse_int13_v0}"
@@ -2835,37 +2867,37 @@ inner_get_xylitol_colors__1274_v0() {
         fi
         env_var_get__120_v0 "XYLITOL_ACCENT_COLOR"
         __status=$?
-        local accent_env_17859="${ret_env_var_get120_v0}"
-        if [ "$([ "_${accent_env_17859}" == "_" ]; echo $?)" != 0 ]; then
-            split__4_v0 "${accent_env_17859}" ";"
-            local parts_17860=("${ret_split4_v0[@]}")
-            local __length_214=("${parts_17860[@]}")
-            if [ "$(( ${#__length_214[@]} == 4 ))" != 0 ]; then
-                parse_int__13_v0 "${parts_17860[0]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:136:37)"}"
+        local accent_env_17935="${ret_env_var_get120_v0}"
+        if [ "$([ "_${accent_env_17935}" == "_" ]; echo $?)" != 0 ]; then
+            split__4_v0 "${accent_env_17935}" ";"
+            local parts_17936=("${ret_split4_v0[@]}")
+            local __length_218=("${parts_17936[@]}")
+            if [ "$(( ${#__length_218[@]} == 4 ))" != 0 ]; then
+                parse_int__13_v0 "${parts_17936[0]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:136:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors1274_v0=''
+                    ret_inner_get_xylitol_colors1279_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__136_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_17860[1]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:137:37)"}"
+                parse_int__13_v0 "${parts_17936[1]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:137:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors1274_v0=''
+                    ret_inner_get_xylitol_colors1279_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__137_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_17860[2]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:138:37)"}"
+                parse_int__13_v0 "${parts_17936[2]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:138:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors1274_v0=''
+                    ret_inner_get_xylitol_colors1279_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__138_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_17860[3]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:139:37)"}"
+                parse_int__13_v0 "${parts_17936[3]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:139:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors1274_v0=''
+                    ret_inner_get_xylitol_colors1279_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__139_21="${ret_parse_int13_v0}"
@@ -2876,8 +2908,8 @@ inner_get_xylitol_colors__1274_v0() {
 }
 
 # get_xylitol_colors()
-get_xylitol_colors__1275_v0() {
-    inner_get_xylitol_colors__1274_v0 
+get_xylitol_colors__1280_v0() {
+    inner_get_xylitol_colors__1279_v0 
     __status=$?
     if [ "${__status}" != 0 ]; then
         echo_colored__134_v0 "WARN: Failed to parse Xylitol colors from envs." 33
@@ -2886,24 +2918,24 @@ get_xylitol_colors__1275_v0() {
 }
 
 # colored_primary(message: Text)
-colored_primary__1276_v0() {
-    local message_17854="${1}"
+colored_primary__1281_v0() {
+    local message_17930="${1}"
     if [ "$(( ! _got_xylitol_colors_52 ))" != 0 ]; then
-        get_xylitol_colors__1275_v0 
+        get_xylitol_colors__1280_v0 
     fi
-    colored_rgb__1272_v0 "${message_17854}" "${_primary_color_53[0]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:159:48)"}" "${_primary_color_53[1]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:159:67)"}" "${_primary_color_53[2]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:159:86)"}" "${_primary_color_53[3]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:159:105)"}"
-    ret_colored_primary1276_v0="${ret_colored_rgb1272_v0}"
+    colored_rgb__1277_v0 "${message_17930}" "${_primary_color_53[0]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:159:48)"}" "${_primary_color_53[1]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:159:67)"}" "${_primary_color_53[2]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:159:86)"}" "${_primary_color_53[3]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:159:105)"}"
+    ret_colored_primary1281_v0="${ret_colored_rgb1277_v0}"
     return 0
 }
 
 # colored_secondary(message: Text)
-colored_secondary__1277_v0() {
-    local message_17903="${1}"
+colored_secondary__1282_v0() {
+    local message_17979="${1}"
     if [ "$(( ! _got_xylitol_colors_52 ))" != 0 ]; then
-        get_xylitol_colors__1275_v0 
+        get_xylitol_colors__1280_v0 
     fi
-    colored_rgb__1272_v0 "${message_17903}" "${_secondary_color_54[0]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:166:50)"}" "${_secondary_color_54[1]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:166:71)"}" "${_secondary_color_54[2]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:166:92)"}" "${_secondary_color_54[3]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:166:113)"}"
-    ret_colored_secondary1277_v0="${ret_colored_rgb1272_v0}"
+    colored_rgb__1277_v0 "${message_17979}" "${_secondary_color_54[0]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:166:50)"}" "${_secondary_color_54[1]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:166:71)"}" "${_secondary_color_54[2]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:166:92)"}" "${_secondary_color_54[3]?"Index out of bounds (at src/./choose/../utils/truecolor.ab:166:113)"}"
+    ret_colored_secondary1282_v0="${ret_colored_rgb1277_v0}"
     return 0
 }
 
@@ -2911,398 +2943,398 @@ colored_secondary__1277_v0() {
 # "None" until the first call decides, then "Yes" or "No".
 _perl_state_56="None"
 # perl_available()
-perl_available__1294_v0() {
+perl_available__1299_v0() {
     if [ "$([ "_${_perl_state_56}" != "_None" ]; echo $?)" != 0 ]; then
-        local command_216
-        command_216="$(echo "$XYLITOL_USE_PERL")"
+        local command_220
+        command_220="$(echo "$XYLITOL_USE_PERL")"
         __status=$?
-        local disabled_17981
-        disabled_17981="$([ "_${command_216}" != "_No" ]; echo $?)"
-        local command_217
-        command_217="$(command -v perl > /dev/null && echo 0 || echo 1)"
+        local disabled_18059
+        disabled_18059="$([ "_${command_220}" != "_No" ]; echo $?)"
+        local command_221
+        command_221="$(command -v perl > /dev/null && echo 0 || echo 1)"
         __status=$?
-        local found_17982
-        found_17982="$(( $(( ! disabled_17981 )) && $([ "_${command_217}" != "_0" ]; echo $?) ))"
-        _perl_state_56="$(if [ "${found_17982}" != 0 ]; then echo "Yes"; else echo "No"; fi)"
+        local found_18060
+        found_18060="$(( $(( ! disabled_18059 )) && $([ "_${command_221}" != "_0" ]; echo $?) ))"
+        _perl_state_56="$(if [ "${found_18060}" != 0 ]; then echo "Yes"; else echo "No"; fi)"
     fi
-    ret_perl_available1294_v0="$([ "_${_perl_state_56}" != "_Yes" ]; echo $?)"
+    ret_perl_available1299_v0="$([ "_${_perl_state_56}" != "_Yes" ]; echo $?)"
     return 0
 }
 
 # perl_get_cjk_width(text: Text)
-perl_get_cjk_width__1295_v0() {
-    local text_17980="${1}"
-    perl_available__1294_v0 
-    local ret_perl_available1294_v0__19_12="${ret_perl_available1294_v0}"
-    if [ "$(( ! ret_perl_available1294_v0__19_12 ))" != 0 ]; then
-        ret_perl_get_cjk_width1295_v0=''
+perl_get_cjk_width__1300_v0() {
+    local text_18058="${1}"
+    perl_available__1299_v0 
+    local ret_perl_available1299_v0__19_12="${ret_perl_available1299_v0}"
+    if [ "$(( ! ret_perl_available1299_v0__19_12 ))" != 0 ]; then
+        ret_perl_get_cjk_width1300_v0=''
         return 1
     fi
-    local command_218
-    command_218="$(perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text_17980}" 2>/dev/null)"
+    local command_222
+    command_222="$(perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text_18058}" 2>/dev/null)"
     __status=$?
     if [ "${__status}" != 0 ]; then
-        ret_perl_get_cjk_width1295_v0=''
+        ret_perl_get_cjk_width1300_v0=''
         return "${__status}"
     fi
-    local width_str_17983="${command_218}"
-    parse_int__13_v0 "${width_str_17983}"
+    local width_str_18061="${command_222}"
+    parse_int__13_v0 "${width_str_18061}"
     __status=$?
     if [ "${__status}" != 0 ]; then
-        ret_perl_get_cjk_width1295_v0=''
+        ret_perl_get_cjk_width1300_v0=''
         return "${__status}"
     fi
-    local width_17984="${ret_parse_int13_v0}"
-    ret_perl_get_cjk_width1295_v0="${width_17984}"
+    local width_18062="${ret_parse_int13_v0}"
+    ret_perl_get_cjk_width1300_v0="${width_18062}"
     return 0
 }
 
 # perl_truncate_cjk(text: Text, max_width: Int)
-perl_truncate_cjk__1296_v0() {
-    local text_17991="${1}"
-    local max_width_17992="${2}"
-    perl_available__1294_v0 
-    local ret_perl_available1294_v0__30_12="${ret_perl_available1294_v0}"
-    if [ "$(( ! ret_perl_available1294_v0__30_12 ))" != 0 ]; then
-        ret_perl_truncate_cjk1296_v0=''
+perl_truncate_cjk__1301_v0() {
+    local text_18069="${1}"
+    local max_width_18070="${2}"
+    perl_available__1299_v0 
+    local ret_perl_available1299_v0__30_12="${ret_perl_available1299_v0}"
+    if [ "$(( ! ret_perl_available1299_v0__30_12 ))" != 0 ]; then
+        ret_perl_truncate_cjk1301_v0=''
         return 1
     fi
-    local command_219
-    command_219="$(perl -CSDA -E '$t=shift;$m=shift;$w=0;$r="";$c=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1,($w+$c<=$m?($w+=$c,$r.=$_):last) for split//,$t; print $r' "${text_17991}" ${max_width_17992} 2>/dev/null)"
+    local command_223
+    command_223="$(perl -CSDA -E '$t=shift;$m=shift;$w=0;$r="";$c=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1,($w+$c<=$m?($w+=$c,$r.=$_):last) for split//,$t; print $r' "${text_18069}" ${max_width_18070} 2>/dev/null)"
     __status=$?
     if [ "${__status}" != 0 ]; then
-        ret_perl_truncate_cjk1296_v0=''
+        ret_perl_truncate_cjk1301_v0=''
         return "${__status}"
     fi
-    local result_17993="${command_219}"
-    ret_perl_truncate_cjk1296_v0="${result_17993}"
+    local result_18071="${command_223}"
+    ret_perl_truncate_cjk1301_v0="${result_18071}"
     return 0
 }
 
 # has_ansi_escape(text: Text)
-has_ansi_escape__1300_v0() {
-    local text_17948="${1}"
+has_ansi_escape__1305_v0() {
+    local text_18024="${1}"
     # Check for ESC character (0x1B = 27) or literal \x1b[
-    local command_220
-    command_220="$([[ "${text_17948}" == *$'\x1b'* || "${text_17948}" == *'\x1b['* ]] && echo "1" || echo "0")"
+    local command_224
+    command_224="$([[ "${text_18024}" == *$'\x1b'* || "${text_18024}" == *'\x1b['* ]] && echo "1" || echo "0")"
     __status=$?
-    local has_escape_17949="${command_220}"
-    ret_has_ansi_escape1300_v0="$([ "_${has_escape_17949}" != "_1" ]; echo $?)"
+    local has_escape_18025="${command_224}"
+    ret_has_ansi_escape1305_v0="$([ "_${has_escape_18025}" != "_1" ]; echo $?)"
     return 0
 }
 
 # escape_ansi(text: Text)
-escape_ansi__1301_v0() {
-    local text_17950="${1}"
-    local command_221
-    command_221="$(printf '%s' "${text_17950}" | sed $'s/\x1b/\\x1b/g')"
+escape_ansi__1306_v0() {
+    local text_18026="${1}"
+    local command_225
+    command_225="$(printf '%s' "${text_18026}" | sed $'s/\x1b/\\x1b/g')"
     __status=$?
-    ret_escape_ansi1301_v0="${command_221}"
+    ret_escape_ansi1306_v0="${command_225}"
     return 0
 }
 
 # strip_ansi(text: Text)
-strip_ansi__1302_v0() {
-    local text_17976="${1}"
-    local command_222
-    command_222="$(printf "%s" "${text_17976}" | sed $'s/\x1b\[[0-9;]*m//g' | sed 's/\\x1b\[[0-9;]*m//g')"
+strip_ansi__1307_v0() {
+    local text_18054="${1}"
+    local command_226
+    command_226="$(printf "%s" "${text_18054}" | sed $'s/\x1b\[[0-9;]*m//g' | sed 's/\\x1b\[[0-9;]*m//g')"
     __status=$?
-    ret_strip_ansi1302_v0="${command_222}"
+    ret_strip_ansi1307_v0="${command_226}"
     return 0
 }
 
 # is_all_ascii(text: Text)
-is_all_ascii__1303_v0() {
-    local text_17978="${1}"
-    local command_223
-    command_223="$(printf "%s" "${text_17978}" | LC_ALL=C grep -q '^[ -~]*$' && echo 0 || echo 1)"
+is_all_ascii__1308_v0() {
+    local text_18056="${1}"
+    local command_227
+    command_227="$(printf "%s" "${text_18056}" | LC_ALL=C grep -q '^[ -~]*$' && echo 0 || echo 1)"
     __status=$?
-    local result_17979="${command_223}"
-    ret_is_all_ascii1303_v0="$([ "_${result_17979}" != "_0" ]; echo $?)"
+    local result_18057="${command_227}"
+    ret_is_all_ascii1308_v0="$([ "_${result_18057}" != "_0" ]; echo $?)"
     return 0
 }
 
 # plain_len(text: Text)
-plain_len__1304_v0() {
-    local text_17973="${1}"
-    local command_224
-    command_224="$(LC_ALL=C; __t="${text_17973}"; case "$__t" in (*[!\ -~]*) echo -1;; (*'\x1b['*) echo -1;; (*) echo "${#__t}";; esac)"
+plain_len__1309_v0() {
+    local text_18051="${1}"
+    local command_228
+    command_228="$(LC_ALL=C; __t="${text_18051}"; case "$__t" in (*[!\ -~]*) echo -1;; (*'\x1b['*) echo -1;; (*) echo "${#__t}";; esac)"
     __status=$?
-    local measured_17974="${command_224}"
-    parse_int__13_v0 "${measured_17974}"
+    local measured_18052="${command_228}"
+    parse_int__13_v0 "${measured_18052}"
     __status=$?
-    ret_plain_len1304_v0="${ret_parse_int13_v0}"
+    ret_plain_len1309_v0="${ret_parse_int13_v0}"
     return 0
 }
 
 # get_visible_len(text: Text)
-get_visible_len__1305_v0() {
-    local text_17972="${1}"
-    plain_len__1304_v0 "${text_17972}"
-    local plain_17975="${ret_plain_len1304_v0}"
-    if [ "$(( plain_17975 >= 0 ))" != 0 ]; then
-        ret_get_visible_len1305_v0="${plain_17975}"
+get_visible_len__1310_v0() {
+    local text_18050="${1}"
+    plain_len__1309_v0 "${text_18050}"
+    local plain_18053="${ret_plain_len1309_v0}"
+    if [ "$(( plain_18053 >= 0 ))" != 0 ]; then
+        ret_get_visible_len1310_v0="${plain_18053}"
         return 0
     fi
-    strip_ansi__1302_v0 "${text_17972}"
-    local stripped_17977="${ret_strip_ansi1302_v0}"
-    is_all_ascii__1303_v0 "${stripped_17977}"
-    local ret_is_all_ascii1303_v0__46_12="${ret_is_all_ascii1303_v0}"
-    if [ "$(( ! ret_is_all_ascii1303_v0__46_12 ))" != 0 ]; then
-        perl_get_cjk_width__1295_v0 "${stripped_17977}"
+    strip_ansi__1307_v0 "${text_18050}"
+    local stripped_18055="${ret_strip_ansi1307_v0}"
+    is_all_ascii__1308_v0 "${stripped_18055}"
+    local ret_is_all_ascii1308_v0__46_12="${ret_is_all_ascii1308_v0}"
+    if [ "$(( ! ret_is_all_ascii1308_v0__46_12 ))" != 0 ]; then
+        perl_get_cjk_width__1300_v0 "${stripped_18055}"
         __status=$?
         if [ "${__status}" != 0 ]; then
-            local __length_225="${stripped_17977}"
-            ret_get_visible_len1305_v0="${#__length_225}"
+            local __length_229="${stripped_18055}"
+            ret_get_visible_len1310_v0="${#__length_229}"
             return 0
         fi
-        ret_get_visible_len1305_v0="${ret_perl_get_cjk_width1295_v0}"
+        ret_get_visible_len1310_v0="${ret_perl_get_cjk_width1300_v0}"
         return 0
     fi
-    local __length_226="${stripped_17977}"
-    ret_get_visible_len1305_v0="${#__length_226}"
+    local __length_230="${stripped_18055}"
+    ret_get_visible_len1310_v0="${#__length_230}"
     return 0
 }
 
 # truncate_text(text: Text, max_width: Int)
-truncate_text__1306_v0() {
-    local text_17988="${1}"
-    local max_width_17989="${2}"
-    get_visible_len__1305_v0 "${text_17988}"
-    local visible_len_17990="${ret_get_visible_len1305_v0}"
-    if [ "$(( visible_len_17990 <= max_width_17989 ))" != 0 ]; then
-        ret_truncate_text1306_v0="${text_17988}"
+truncate_text__1311_v0() {
+    local text_18066="${1}"
+    local max_width_18067="${2}"
+    get_visible_len__1310_v0 "${text_18066}"
+    local visible_len_18068="${ret_get_visible_len1310_v0}"
+    if [ "$(( visible_len_18068 <= max_width_18067 ))" != 0 ]; then
+        ret_truncate_text1311_v0="${text_18066}"
         return 0
     fi
-    is_all_ascii__1303_v0 "${text_17988}"
-    local ret_is_all_ascii1303_v0__61_12="${ret_is_all_ascii1303_v0}"
-    if [ "$(( ! ret_is_all_ascii1303_v0__61_12 ))" != 0 ]; then
-        perl_truncate_cjk__1296_v0 "${text_17988}" "${max_width_17989}"
+    is_all_ascii__1308_v0 "${text_18066}"
+    local ret_is_all_ascii1308_v0__61_12="${ret_is_all_ascii1308_v0}"
+    if [ "$(( ! ret_is_all_ascii1308_v0__61_12 ))" != 0 ]; then
+        perl_truncate_cjk__1301_v0 "${text_18066}" "${max_width_18067}"
         __status=$?
         if [ "${__status}" != 0 ]; then
-            printf "%s" "${text_17988}" | cut -c1-${max_width_17989}
+            printf "%s" "${text_18066}" | cut -c1-${max_width_18067}
             __status=$?
         fi
-        ret_truncate_text1306_v0="${ret_perl_truncate_cjk1296_v0}"
+        ret_truncate_text1311_v0="${ret_perl_truncate_cjk1301_v0}"
         return 0
     fi
-    local command_227
-    command_227="$(printf "%s" "${text_17988}" | cut -c1-${max_width_17989})"
+    local command_231
+    command_231="$(printf "%s" "${text_18066}" | cut -c1-${max_width_18067})"
     __status=$?
-    ret_truncate_text1306_v0="${command_227}"
+    ret_truncate_text1311_v0="${command_231}"
     return 0
 }
 
 # truncate_ansi(text: Text, max_width: Int)
-truncate_ansi__1307_v0() {
-    local text_17986="${1}"
-    local max_width_17987="${2}"
-    has_ansi_escape__1300_v0 "${text_17986}"
-    local ret_has_ansi_escape1300_v0__73_12="${ret_has_ansi_escape1300_v0}"
-    if [ "$(( ! ret_has_ansi_escape1300_v0__73_12 ))" != 0 ]; then
-        truncate_text__1306_v0 "${text_17986}" "${max_width_17987}"
-        ret_truncate_ansi1307_v0="${ret_truncate_text1306_v0}"
+truncate_ansi__1312_v0() {
+    local text_18064="${1}"
+    local max_width_18065="${2}"
+    has_ansi_escape__1305_v0 "${text_18064}"
+    local ret_has_ansi_escape1305_v0__73_12="${ret_has_ansi_escape1305_v0}"
+    if [ "$(( ! ret_has_ansi_escape1305_v0__73_12 ))" != 0 ]; then
+        truncate_text__1311_v0 "${text_18064}" "${max_width_18065}"
+        ret_truncate_ansi1312_v0="${ret_truncate_text1311_v0}"
         return 0
     fi
     # Check if text starts with \x1b[
-    local command_228
-    command_228="$([[ "${text_17986}" == '\x1b['* ]] && echo "1" || echo "0")"
+    local command_232
+    command_232="$([[ "${text_18064}" == '\x1b['* ]] && echo "1" || echo "0")"
     __status=$?
-    local starts_with_ansi_17994="${command_228}"
+    local starts_with_ansi_18072="${command_232}"
     # Replace \x1b[ with newline, then split
-    local command_229
-    command_229="$(t="${text_17986}"; printf '%s' "${t//\\x1b[/
+    local command_233
+    command_233="$(t="${text_18064}"; printf '%s' "${t//\\x1b[/
 }")"
     __status=$?
-    local replaced_17995="${command_229}"
-    split__4_v0 "${replaced_17995}" "
+    local replaced_18073="${command_233}"
+    split__4_v0 "${replaced_18073}" "
 "
-    local parts_17996=("${ret_split4_v0[@]}")
-    local result_17997=""
-    local remaining_width_17998="${max_width_17987}"
-    local __range_start_17999=0
-    local __length_230=("${parts_17996[@]}")
-    local __range_end_17999="${#__length_230[@]}"
-    local __dir_17999=$(( ${__range_start_17999} <= ${__range_end_17999} ? 1 : -1 ))
-    for (( idx_17999=${__range_start_17999}; idx_17999 * ${__dir_17999} < ${__range_end_17999} * ${__dir_17999}; idx_17999+=${__dir_17999} )); do
-        local part_18000="${parts_17996[${idx_17999}]?"Index out of bounds (at src/./choose/../utils/text/ansi.ab:88:28)"}"
+    local parts_18074=("${ret_split4_v0[@]}")
+    local result_18075=""
+    local remaining_width_18076="${max_width_18065}"
+    local __range_start_18077=0
+    local __length_234=("${parts_18074[@]}")
+    local __range_end_18077="${#__length_234[@]}"
+    local __dir_18077=$(( ${__range_start_18077} <= ${__range_end_18077} ? 1 : -1 ))
+    for (( idx_18077=${__range_start_18077}; idx_18077 * ${__dir_18077} < ${__range_end_18077} * ${__dir_18077}; idx_18077+=${__dir_18077} )); do
+        local part_18078="${parts_18074[${idx_18077}]?"Index out of bounds (at src/./choose/../utils/text/ansi.ab:88:28)"}"
         # If text starts with ANSI, all parts are "ANSIparams m text" format
         # If not, first part is pure text
-        if [ "$(( $(( idx_17999 == 0 )) && $([ "_${starts_with_ansi_17994}" != "_0" ]; echo $?) ))" != 0 ]; then
+        if [ "$(( $(( idx_18077 == 0 )) && $([ "_${starts_with_ansi_18072}" != "_0" ]; echo $?) ))" != 0 ]; then
             # First part is pure text (before any ANSI)
-            if [ "$(( $([ "_${part_18000}" == "_" ]; echo $?) && $(( remaining_width_17998 > 0 )) ))" != 0 ]; then
-                truncate_text__1306_v0 "${part_18000}" "${remaining_width_17998}"
-                local ret_truncate_text1306_v0__95_35="${ret_truncate_text1306_v0}"
-                local truncated_18001="${ret_truncate_text1306_v0__95_35}"
-                result_17997+="${truncated_18001}"
-                get_visible_len__1305_v0 "${truncated_18001}"
-                local ret_get_visible_len1305_v0__97_36="${ret_get_visible_len1305_v0}"
-                remaining_width_17998="$(( remaining_width_17998 - ret_get_visible_len1305_v0__97_36 ))"
+            if [ "$(( $([ "_${part_18078}" == "_" ]; echo $?) && $(( remaining_width_18076 > 0 )) ))" != 0 ]; then
+                truncate_text__1311_v0 "${part_18078}" "${remaining_width_18076}"
+                local ret_truncate_text1311_v0__95_35="${ret_truncate_text1311_v0}"
+                local truncated_18079="${ret_truncate_text1311_v0__95_35}"
+                result_18075+="${truncated_18079}"
+                get_visible_len__1310_v0 "${truncated_18079}"
+                local ret_get_visible_len1310_v0__97_36="${ret_get_visible_len1310_v0}"
+                remaining_width_18076="$(( remaining_width_18076 - ret_get_visible_len1310_v0__97_36 ))"
             fi
         else
             # Part is "ANSIparams m text" format - find first 'm'
-            local command_231
-            command_231="$(__p="${part_18000}"; for ((i=0; i<${#__p}; i++)); do [[ "${__p:$i:1}" == "m" ]] && echo $i && break; done)"
+            local command_235
+            command_235="$(__p="${part_18078}"; for ((i=0; i<${#__p}; i++)); do [[ "${__p:$i:1}" == "m" ]] && echo $i && break; done)"
             __status=$?
-            local m_idx_18002="${command_231}"
-            if [ "$([ "_${m_idx_18002}" == "_" ]; echo $?)" != 0 ]; then
+            local m_idx_18080="${command_235}"
+            if [ "$([ "_${m_idx_18080}" == "_" ]; echo $?)" != 0 ]; then
                 # Reconstruct ANSI sequence
-                local command_232
-                command_232="$(__p="${part_18000}"; printf "%s" "${__p:0:${m_idx_18002}}")"
+                local command_236
+                command_236="$(__p="${part_18078}"; printf "%s" "${__p:0:${m_idx_18080}}")"
                 __status=$?
-                local ansi_params_18003="${command_232}"
-                result_17997+="\\x1b[""${ansi_params_18003}""m"
+                local ansi_params_18081="${command_236}"
+                result_18075+="\\x1b[""${ansi_params_18081}""m"
                 # Rest is text content
-                parse_int__13_v0 "${m_idx_18002}"
+                parse_int__13_v0 "${m_idx_18080}"
                 __status=$?
                 local ret_parse_int13_v0__108_41="${ret_parse_int13_v0}"
-                local m_idx_num_18004="${ret_parse_int13_v0__108_41}"
-                local text_start_18005="$(( m_idx_num_18004 + 1 ))"
-                local command_233
-                command_233="$(__p="${part_18000}"; printf "%s" "${__p:${text_start_18005}}")"
+                local m_idx_num_18082="${ret_parse_int13_v0__108_41}"
+                local text_start_18083="$(( m_idx_num_18082 + 1 ))"
+                local command_237
+                command_237="$(__p="${part_18078}"; printf "%s" "${__p:${text_start_18083}}")"
                 __status=$?
-                local text_part_18006="${command_233}"
-                if [ "$(( $([ "_${text_part_18006}" == "_" ]; echo $?) && $(( remaining_width_17998 > 0 )) ))" != 0 ]; then
-                    truncate_text__1306_v0 "${text_part_18006}" "${remaining_width_17998}"
-                    local ret_truncate_text1306_v0__112_39="${ret_truncate_text1306_v0}"
-                    local truncated_18007="${ret_truncate_text1306_v0__112_39}"
-                    result_17997+="${truncated_18007}"
-                    get_visible_len__1305_v0 "${truncated_18007}"
-                    local ret_get_visible_len1305_v0__114_40="${ret_get_visible_len1305_v0}"
-                    remaining_width_17998="$(( remaining_width_17998 - ret_get_visible_len1305_v0__114_40 ))"
+                local text_part_18084="${command_237}"
+                if [ "$(( $([ "_${text_part_18084}" == "_" ]; echo $?) && $(( remaining_width_18076 > 0 )) ))" != 0 ]; then
+                    truncate_text__1311_v0 "${text_part_18084}" "${remaining_width_18076}"
+                    local ret_truncate_text1311_v0__112_39="${ret_truncate_text1311_v0}"
+                    local truncated_18085="${ret_truncate_text1311_v0__112_39}"
+                    result_18075+="${truncated_18085}"
+                    get_visible_len__1310_v0 "${truncated_18085}"
+                    local ret_get_visible_len1310_v0__114_40="${ret_get_visible_len1310_v0}"
+                    remaining_width_18076="$(( remaining_width_18076 - ret_get_visible_len1310_v0__114_40 ))"
                 fi
             else
                 # No 'm' found, treat as text
-                if [ "$(( $([ "_${part_18000}" == "_" ]; echo $?) && $(( remaining_width_17998 > 0 )) ))" != 0 ]; then
-                    truncate_text__1306_v0 "${part_18000}" "${remaining_width_17998}"
-                    local ret_truncate_text1306_v0__119_39="${ret_truncate_text1306_v0}"
-                    local truncated_18008="${ret_truncate_text1306_v0__119_39}"
-                    result_17997+="${truncated_18008}"
-                    get_visible_len__1305_v0 "${truncated_18008}"
-                    local ret_get_visible_len1305_v0__121_40="${ret_get_visible_len1305_v0}"
-                    remaining_width_17998="$(( remaining_width_17998 - ret_get_visible_len1305_v0__121_40 ))"
+                if [ "$(( $([ "_${part_18078}" == "_" ]; echo $?) && $(( remaining_width_18076 > 0 )) ))" != 0 ]; then
+                    truncate_text__1311_v0 "${part_18078}" "${remaining_width_18076}"
+                    local ret_truncate_text1311_v0__119_39="${ret_truncate_text1311_v0}"
+                    local truncated_18086="${ret_truncate_text1311_v0__119_39}"
+                    result_18075+="${truncated_18086}"
+                    get_visible_len__1310_v0 "${truncated_18086}"
+                    local ret_get_visible_len1310_v0__121_40="${ret_get_visible_len1310_v0}"
+                    remaining_width_18076="$(( remaining_width_18076 - ret_get_visible_len1310_v0__121_40 ))"
                 fi
             fi
         fi
 done
-    ret_truncate_ansi1307_v0="${result_17997}"
+    ret_truncate_ansi1312_v0="${result_18075}"
     return 0
 }
 
 # cutoff_text(text: Text, max_width: Int)
-cutoff_text__1308_v0() {
-    local text_17970="${1}"
-    local max_width_17971="${2}"
-    get_visible_len__1305_v0 "${text_17970}"
-    local visible_len_17985="${ret_get_visible_len1305_v0}"
-    if [ "$(( visible_len_17985 <= max_width_17971 ))" != 0 ]; then
-        ret_cutoff_text1308_v0="${text_17970}"
+cutoff_text__1313_v0() {
+    local text_18048="${1}"
+    local max_width_18049="${2}"
+    get_visible_len__1310_v0 "${text_18048}"
+    local visible_len_18063="${ret_get_visible_len1310_v0}"
+    if [ "$(( visible_len_18063 <= max_width_18049 ))" != 0 ]; then
+        ret_cutoff_text1313_v0="${text_18048}"
         return 0
     fi
-    truncate_ansi__1307_v0 "${text_17970}" "$(( max_width_17971 - 3 ))"
-    local ret_truncate_ansi1307_v0__137_12="${ret_truncate_ansi1307_v0}"
-    ret_cutoff_text1308_v0="${ret_truncate_ansi1307_v0__137_12}""..."
+    truncate_ansi__1312_v0 "${text_18048}" "$(( max_width_18049 - 3 ))"
+    local ret_truncate_ansi1312_v0__137_12="${ret_truncate_ansi1312_v0}"
+    ret_cutoff_text1313_v0="${ret_truncate_ansi1312_v0__137_12}""..."
     return 0
 }
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
 # eprintf(format: Text, args: [Text])
-eprintf__1329_v0() {
-    local format_18022="${1}"
-    local args_18023=("${!2}")
-    args_18023=("${format_18022}" "${args_18023[@]}")
+eprintf__1334_v0() {
+    local format_18100="${1}"
+    local args_18101=("${!2}")
+    args_18101=("${format_18100}" "${args_18101[@]}")
     __status=$?
-    printf "${args_18023[@]}" >&2
+    printf "${args_18101[@]}" >&2
     __status=$?
 }
 
 # eprintf_colored(message: Text, color: Int)
-eprintf_colored__1330_v0() {
-    local message_18020="${1}"
-    local color_18021="${2}"
+eprintf_colored__1335_v0() {
+    local message_18098="${1}"
+    local color_18099="${2}"
     # Prints an error message with a specified color.
-    local array_234=("${message_18020}")
-    eprintf__1329_v0 "\\x1b[${color_18021}m%s\\x1b[0m" array_234[@]
+    local array_238=("${message_18098}")
+    eprintf__1334_v0 "\\x1b[${color_18099}m%s\\x1b[0m" array_238[@]
 }
 
 # colored(message: Text, color: Int)
-colored__1331_v0() {
-    local message_17937="${1}"
-    local color_17938="${2}"
+colored__1336_v0() {
+    local message_18013="${1}"
+    local color_18014="${2}"
     # Returns a text wrapped in color codes.
-    ret_colored1331_v0="\\x1b[${color_17938}m""${message_17937}""\\x1b[0m"
+    ret_colored1336_v0="\\x1b[${color_18014}m""${message_18013}""\\x1b[0m"
     return 0
 }
 
 # render_tooltip(items: [Text], total_len: Int, term_width: Int)
-render_tooltip__1335_v0() {
-    local items_18014=("${!1}")
-    local total_len_18015="${2}"
-    local term_width_18016="${3}"
-    local separator_18017=" • "
-    local separator_len_18018=3
+render_tooltip__1340_v0() {
+    local items_18092=("${!1}")
+    local total_len_18093="${2}"
+    local term_width_18094="${3}"
+    local separator_18095=" • "
+    local separator_len_18096=3
     # Fast path: no truncation needed
-    if [ "$(( total_len_18015 <= term_width_18016 ))" != 0 ]; then
-        local iter_18019=0
+    if [ "$(( total_len_18093 <= term_width_18094 ))" != 0 ]; then
+        local iter_18097=0
         while :
         do
-            local __length_235=("${items_18014[@]}")
-            if [ "$(( iter_18019 >= ${#__length_235[@]} ))" != 0 ]; then
+            local __length_239=("${items_18092[@]}")
+            if [ "$(( iter_18097 >= ${#__length_239[@]} ))" != 0 ]; then
                 break
-            elif [ "$(( iter_18019 > 0 ))" != 0 ]; then
-                eprintf_colored__1330_v0 "${separator_18017}" 90
+            elif [ "$(( iter_18097 > 0 ))" != 0 ]; then
+                eprintf_colored__1335_v0 "${separator_18095}" 90
             fi
-            colored__1331_v0 "${items_18014[$(( iter_18019 + 1 ))]?"Index out of bounds (at src/./choose/../utils/widget/tooltip.ab:23:55)"}" 2
-            local ret_colored1331_v0__23_41="${ret_colored1331_v0}"
-            local array_236=("")
-            eprintf__1329_v0 "${items_18014[${iter_18019}]?"Index out of bounds (at src/./choose/../utils/widget/tooltip.ab:23:27)"}"" ""${ret_colored1331_v0__23_41}" array_236[@]
-            iter_18019="$(( iter_18019 + 2 ))"
+            colored__1336_v0 "${items_18092[$(( iter_18097 + 1 ))]?"Index out of bounds (at src/./choose/../utils/widget/tooltip.ab:23:55)"}" 2
+            local ret_colored1336_v0__23_41="${ret_colored1336_v0}"
+            local array_240=("")
+            eprintf__1334_v0 "${items_18092[${iter_18097}]?"Index out of bounds (at src/./choose/../utils/widget/tooltip.ab:23:27)"}"" ""${ret_colored1336_v0__23_41}" array_240[@]
+            iter_18097="$(( iter_18097 + 2 ))"
         done
     else
         # Slow path: truncate
-        local current_len_18024=0
-        local first_18025=1
-        local iter_18026=0
+        local current_len_18102=0
+        local first_18103=1
+        local iter_18104=0
         while :
         do
-            local __length_237=("${items_18014[@]}")
-            if [ "$(( iter_18026 >= ${#__length_237[@]} ))" != 0 ]; then
+            local __length_241=("${items_18092[@]}")
+            if [ "$(( iter_18104 >= ${#__length_241[@]} ))" != 0 ]; then
                 break
             fi
-            local key_18027="${items_18014[${iter_18026}]?"Index out of bounds (at src/./choose/../utils/widget/tooltip.ab:35:31)"}"
-            local action_18028="${items_18014[$(( iter_18026 + 1 ))]?"Index out of bounds (at src/./choose/../utils/widget/tooltip.ab:36:34)"}"
-            local __length_238="${key_18027}"
-            local __length_239="${action_18028}"
-            local part_len_18029="$(( $(( ${#__length_238} + 1 )) + ${#__length_239} ))"
-            local needed_18030="${part_len_18029}"
-            if [ "$(( ! first_18025 ))" != 0 ]; then
-                needed_18030="$(( needed_18030 + separator_len_18018 ))"
+            local key_18105="${items_18092[${iter_18104}]?"Index out of bounds (at src/./choose/../utils/widget/tooltip.ab:35:31)"}"
+            local action_18106="${items_18092[$(( iter_18104 + 1 ))]?"Index out of bounds (at src/./choose/../utils/widget/tooltip.ab:36:34)"}"
+            local __length_242="${key_18105}"
+            local __length_243="${action_18106}"
+            local part_len_18107="$(( $(( ${#__length_242} + 1 )) + ${#__length_243} ))"
+            local needed_18108="${part_len_18107}"
+            if [ "$(( ! first_18103 ))" != 0 ]; then
+                needed_18108="$(( needed_18108 + separator_len_18096 ))"
             fi
-            if [ "$(( $(( current_len_18024 + needed_18030 )) > term_width_18016 ))" != 0 ]; then
+            if [ "$(( $(( current_len_18102 + needed_18108 )) > term_width_18094 ))" != 0 ]; then
                 break
             fi
-            if [ "$(( ! first_18025 ))" != 0 ]; then
-                eprintf_colored__1330_v0 "${separator_18017}" 90
+            if [ "$(( ! first_18103 ))" != 0 ]; then
+                eprintf_colored__1335_v0 "${separator_18095}" 90
             fi
-            colored__1331_v0 "${action_18028}" 2
-            local ret_colored1331_v0__51_33="${ret_colored1331_v0}"
-            local array_240=("")
-            eprintf__1329_v0 "${key_18027}"" ""${ret_colored1331_v0__51_33}" array_240[@]
-            current_len_18024="$(( current_len_18024 + needed_18030 ))"
-            first_18025=0
-            iter_18026="$(( iter_18026 + 2 ))"
+            colored__1336_v0 "${action_18106}" 2
+            local ret_colored1336_v0__51_33="${ret_colored1336_v0}"
+            local array_244=("")
+            eprintf__1334_v0 "${key_18105}"" ""${ret_colored1336_v0__51_33}" array_244[@]
+            current_len_18102="$(( current_len_18102 + needed_18108 ))"
+            first_18103=0
+            iter_18104="$(( iter_18104 + 2 ))"
         done
     fi
 }
 
 # eprintf(format: Text, args: [Text])
-eprintf__1345_v0() {
-    local format_18073="${1}"
-    local args_18074=("${!2}")
-    args_18074=("${format_18073}" "${args_18074[@]}")
+eprintf__1350_v0() {
+    local format_18151="${1}"
+    local args_18152=("${!2}")
+    args_18152=("${format_18151}" "${args_18152[@]}")
     __status=$?
-    printf "${args_18074[@]}" >&2
+    printf "${args_18152[@]}" >&2
     __status=$?
 }
 
@@ -3316,101 +3348,101 @@ _term_size_60=(80 24)
 export XYLITOL_RUNTIME_STTY_COUNT=0
 __status=$?
 # store_term_size(size: Text)
-store_term_size__1372_v0() {
-    local size_17916="${1}"
-    if [ "$([ "_${size_17916}" != "_" ]; echo $?)" != 0 ]; then
-        ret_store_term_size1372_v0=0
+store_term_size__1378_v0() {
+    local size_17992="${1}"
+    if [ "$([ "_${size_17992}" != "_" ]; echo $?)" != 0 ]; then
+        ret_store_term_size1378_v0=0
         return 0
     fi
-    split__4_v0 "${size_17916}" " "
-    local parts_17917=("${ret_split4_v0[@]}")
-    local __length_242=("${parts_17917[@]}")
-    if [ "$(( ${#__length_242[@]} != 2 ))" != 0 ]; then
-        ret_store_term_size1372_v0=0
+    split__4_v0 "${size_17992}" " "
+    local parts_17993=("${ret_split4_v0[@]}")
+    local __length_246=("${parts_17993[@]}")
+    if [ "$(( ${#__length_246[@]} != 2 ))" != 0 ]; then
+        ret_store_term_size1378_v0=0
         return 0
     fi
-    parse_int__13_v0 "${parts_17917[1]?"Index out of bounds (at src/./choose/../utils/widget/../term.ab:53:41)"}"
+    parse_int__13_v0 "${parts_17993[1]?"Index out of bounds (at src/./choose/../utils/widget/../term.ab:57:41)"}"
     __status=$?
-    local ret_parse_int13_v0__53_25="${ret_parse_int13_v0}"
-    parse_int__13_v0 "${parts_17917[0]?"Index out of bounds (at src/./choose/../utils/widget/../term.ab:53:68)"}"
+    local ret_parse_int13_v0__57_25="${ret_parse_int13_v0}"
+    parse_int__13_v0 "${parts_17993[0]?"Index out of bounds (at src/./choose/../utils/widget/../term.ab:57:68)"}"
     __status=$?
-    local ret_parse_int13_v0__53_52="${ret_parse_int13_v0}"
-    _term_size_60=("${ret_parse_int13_v0__53_25}" "${ret_parse_int13_v0__53_52}")
-    ret_store_term_size1372_v0=1
+    local ret_parse_int13_v0__57_52="${ret_parse_int13_v0}"
+    _term_size_60=("${ret_parse_int13_v0__57_25}" "${ret_parse_int13_v0__57_52}")
+    ret_store_term_size1378_v0=1
     return 0
 }
 
 # query_term_size()
-query_term_size__1373_v0() {
-    local command_244
-    command_244="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
+query_term_size__1379_v0() {
+    local command_248
+    command_248="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
     __status=$?
-    local size_17919="${command_244}"
-    store_term_size__1372_v0 "${size_17919}"
-    ret_query_term_size1373_v0="${ret_store_term_size1372_v0}"
+    local size_17995="${command_248}"
+    store_term_size__1378_v0 "${size_17995}"
+    ret_query_term_size1379_v0="${ret_store_term_size1378_v0}"
     return 0
 }
 
 # stty_term_size()
-stty_term_size__1374_v0() {
-    local command_245
-    command_245="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
+stty_term_size__1380_v0() {
+    local command_249
+    command_249="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
     __status=$?
-    local size_17915="${command_245}"
-    store_term_size__1372_v0 "${size_17915}"
-    ret_stty_term_size1374_v0="${ret_store_term_size1372_v0}"
+    local size_17991="${command_249}"
+    store_term_size__1378_v0 "${size_17991}"
+    ret_stty_term_size1380_v0="${ret_store_term_size1378_v0}"
     return 0
 }
 
 # get_term_size()
-get_term_size__1375_v0() {
-    stty_term_size__1374_v0 
-    local detected_17918="${ret_stty_term_size1374_v0}"
-    if [ "$(( ! detected_17918 ))" != 0 ]; then
-        query_term_size__1373_v0 
-        detected_17918="${ret_query_term_size1373_v0}"
+get_term_size__1381_v0() {
+    stty_term_size__1380_v0 
+    local detected_17994="${ret_stty_term_size1380_v0}"
+    if [ "$(( ! detected_17994 ))" != 0 ]; then
+        query_term_size__1379_v0 
+        detected_17994="${ret_query_term_size1379_v0}"
     fi
     _got_term_size_59=1
 }
 
 # term_width()
-term_width__1377_v0() {
+term_width__1383_v0() {
     if [ "$(( ! _got_term_size_59 ))" != 0 ]; then
-        get_term_size__1375_v0 
+        get_term_size__1381_v0 
     fi
-    ret_term_width1377_v0="${_term_size_60[0]?"Index out of bounds (at src/./choose/../utils/widget/../term.ab:96:23)"}"
+    ret_term_width1383_v0="${_term_size_60[0]?"Index out of bounds (at src/./choose/../utils/widget/../term.ab:100:23)"}"
     return 0
 }
 
 # // Cursor /////
 # go_up(cnt: Int)
-go_up__1384_v0() {
-    local cnt_18072="${1}"
-    local array_246=("")
-    eprintf__1345_v0 "\\x1b[${cnt_18072}A" array_246[@]
+go_up__1390_v0() {
+    local cnt_18150="${1}"
+    local array_250=("")
+    eprintf__1350_v0 "\\x1b[${cnt_18150}A" array_250[@]
 }
 
 # go_down(cnt: Int)
-go_down__1385_v0() {
-    local cnt_18075="${1}"
-    local array_247=("")
-    eprintf__1345_v0 "\\x1b[${cnt_18075}B" array_247[@]
+go_down__1391_v0() {
+    local cnt_18153="${1}"
+    local array_251=("")
+    eprintf__1350_v0 "\\x1b[${cnt_18153}B" array_251[@]
 }
 
 # move the cursor up or down `cnt` lines.
 # redraw_row(display_count: Int, index: Int, line: Text)
-redraw_row__1392_v0() {
-    local display_count_18069="${1}"
-    local index_18070="${2}"
-    local line_18071="${3}"
-    go_up__1384_v0 "$(( display_count_18069 - index_18070 ))"
-    local array_248=("")
-    eprintf__1329_v0 "\\x1b[G\\x1b[K" array_248[@]
-    local array_249=("")
-    eprintf__1329_v0 "${line_18071}" array_249[@]
-    go_down__1385_v0 "$(( display_count_18069 - index_18070 ))"
-    local array_250=("")
-    eprintf__1329_v0 "\\x1b[G" array_250[@]
+redraw_row__1398_v0() {
+    local display_count_18147="${1}"
+    local index_18148="${2}"
+    local line_18149="${3}"
+    go_up__1390_v0 "$(( display_count_18147 - index_18148 ))"
+    local array_252=("")
+    eprintf__1334_v0 "\\x1b[G\\x1b[K" array_252[@]
+    local array_253=("")
+    eprintf__1334_v0 "${line_18149}" array_253[@]
+    go_down__1391_v0 "$(( display_count_18147 - index_18148 ))"
+    local array_254=("")
+    eprintf__1334_v0 "\\x1b[G" array_254[@]
 }
 
 # Which items of a multi-select widget are ticked.
@@ -3419,192 +3451,192 @@ _count_62=0
 _total_63=0
 _limit_64=-1
 # checked_init(total: Int, limit: Int)
-checked_init__1394_v0() {
-    local total_18009="${1}"
-    local limit_18010="${2}"
+checked_init__1400_v0() {
+    local total_18087="${1}"
+    local limit_18088="${2}"
     _checked_61=()
-    local __range_start_18011=0
-    local __range_end_18011="${total_18009}"
-    local __dir_18011=$(( ${__range_start_18011} <= ${__range_end_18011} ? 1 : -1 ))
-    for (( ____18011=${__range_start_18011}; ____18011 * ${__dir_18011} < ${__range_end_18011} * ${__dir_18011}; ____18011+=${__dir_18011} )); do
-        local array_253=(0)
-        _checked_61+=("${array_253[@]}")
+    local __range_start_18089=0
+    local __range_end_18089="${total_18087}"
+    local __dir_18089=$(( ${__range_start_18089} <= ${__range_end_18089} ? 1 : -1 ))
+    for (( ____18089=${__range_start_18089}; ____18089 * ${__dir_18089} < ${__range_end_18089} * ${__dir_18089}; ____18089+=${__dir_18089} )); do
+        local array_257=(0)
+        _checked_61+=("${array_257[@]}")
 done
     _count_62=0
-    _total_63="${total_18009}"
-    _limit_64="${limit_18010}"
+    _total_63="${total_18087}"
+    _limit_64="${limit_18088}"
 }
 
 # checked_is(index: Int)
-checked_is__1395_v0() {
-    local index_18045="${1}"
-    ret_checked_is1395_v0="${_checked_61[${index_18045}]?"Index out of bounds (at src/./choose/../utils/widget/checked.ab:19:21)"}"
+checked_is__1401_v0() {
+    local index_18123="${1}"
+    ret_checked_is1401_v0="${_checked_61[${index_18123}]?"Index out of bounds (at src/./choose/../utils/widget/checked.ab:19:21)"}"
     return 0
 }
 
 # checked_toggle(index: Int)
-checked_toggle__1397_v0() {
-    local index_18064="${1}"
-    if [ "${_checked_61[${index_18064}]?"Index out of bounds (at src/./choose/../utils/widget/checked.ab:29:17)"}" != 0 ]; then
-        _checked_61["${index_18064}"]=0
+checked_toggle__1403_v0() {
+    local index_18142="${1}"
+    if [ "${_checked_61[${index_18142}]?"Index out of bounds (at src/./choose/../utils/widget/checked.ab:29:17)"}" != 0 ]; then
+        _checked_61["${index_18142}"]=0
         _count_62="$(( _count_62 - 1 ))"
-        ret_checked_toggle1397_v0=1
+        ret_checked_toggle1403_v0=1
         return 0
     fi
     if [ "$(( $(( _limit_64 >= 0 )) && $(( _count_62 >= _limit_64 )) ))" != 0 ]; then
-        ret_checked_toggle1397_v0=0
+        ret_checked_toggle1403_v0=0
         return 0
     fi
-    _checked_61["${index_18064}"]=1
+    _checked_61["${index_18142}"]=1
     _count_62="$(( _count_62 + 1 ))"
-    ret_checked_toggle1397_v0=1
+    ret_checked_toggle1403_v0=1
     return 0
 }
 
 # checked_all()
-checked_all__1398_v0() {
+checked_all__1404_v0() {
     if [ "$(( _limit_64 >= 0 ))" != 0 ]; then
-        ret_checked_all1398_v0=0
+        ret_checked_all1404_v0=0
         return 0
     fi
-    local was_all_18076="$(( _count_62 == _total_63 ))"
-    local __range_start_18077=0
-    local __range_end_18077="${_total_63}"
-    local __dir_18077=$(( ${__range_start_18077} <= ${__range_end_18077} ? 1 : -1 ))
-    for (( i_18077=${__range_start_18077}; i_18077 * ${__dir_18077} < ${__range_end_18077} * ${__dir_18077}; i_18077+=${__dir_18077} )); do
-        _checked_61["${i_18077}"]="$(( ! was_all_18076 ))"
+    local was_all_18154="$(( _count_62 == _total_63 ))"
+    local __range_start_18155=0
+    local __range_end_18155="${_total_63}"
+    local __dir_18155=$(( ${__range_start_18155} <= ${__range_end_18155} ? 1 : -1 ))
+    for (( i_18155=${__range_start_18155}; i_18155 * ${__dir_18155} < ${__range_end_18155} * ${__dir_18155}; i_18155+=${__dir_18155} )); do
+        _checked_61["${i_18155}"]="$(( ! was_all_18154 ))"
 done
-    if [ "${was_all_18076}" != 0 ]; then
+    if [ "${was_all_18154}" != 0 ]; then
         _count_62=0
     else
         _count_62="${_total_63}"
     fi
-    ret_checked_all1398_v0=1
+    ret_checked_all1404_v0=1
     return 0
 }
 
 # print_help_line(pending: Text, line: Text, note_at: Int)
-print_help_line__1410_v0() {
-    local pending_17934="${1}"
-    local line_17935="${2}"
-    local note_at_17936="${3}"
-    if [ "$(( note_at_17936 < 0 ))" != 0 ]; then
-        local array_254=()
-        printf__128_v0 "${pending_17934}""${line_17935}""
-" array_254[@]
+print_help_line__1416_v0() {
+    local pending_18010="${1}"
+    local line_18011="${2}"
+    local note_at_18012="${3}"
+    if [ "$(( note_at_18012 < 0 ))" != 0 ]; then
+        local array_258=()
+        printf__128_v0 "${pending_18010}""${line_18011}""
+" array_258[@]
     # A length of zero means "to the end" in `slice`, so a line that is
     # all note has to be handled on its own.
-    elif [ "$(( note_at_17936 == 0 ))" != 0 ]; then
-        colored__1331_v0 "${line_17935}" 90
-        local ret_colored1331_v0__12_40="${ret_colored1331_v0}"
-        local array_255=()
-        printf__128_v0 "${pending_17934}""${ret_colored1331_v0__12_40}""
-" array_255[@]
+    elif [ "$(( note_at_18012 == 0 ))" != 0 ]; then
+        colored__1336_v0 "${line_18011}" 90
+        local ret_colored1336_v0__12_40="${ret_colored1336_v0}"
+        local array_259=()
+        printf__128_v0 "${pending_18010}""${ret_colored1336_v0__12_40}""
+" array_259[@]
     else
-        slice__24_v0 "${line_17935}" 0 "${note_at_17936}"
+        slice__24_v0 "${line_18011}" 0 "${note_at_18012}"
         local ret_slice24_v0__13_32="${ret_slice24_v0}"
-        slice__24_v0 "${line_17935}" "${note_at_17936}" 0
+        slice__24_v0 "${line_18011}" "${note_at_18012}" 0
         local ret_slice24_v0__13_66="${ret_slice24_v0}"
-        colored__1331_v0 "${ret_slice24_v0__13_66}" 90
-        local ret_colored1331_v0__13_58="${ret_colored1331_v0}"
-        local array_256=()
-        printf__128_v0 "${pending_17934}""${ret_slice24_v0__13_32}""${ret_colored1331_v0__13_58}""
-" array_256[@]
+        colored__1336_v0 "${ret_slice24_v0__13_66}" 90
+        local ret_colored1336_v0__13_58="${ret_colored1336_v0}"
+        local array_260=()
+        printf__128_v0 "${pending_18010}""${ret_slice24_v0__13_32}""${ret_colored1336_v0__13_58}""
+" array_260[@]
     fi
 }
 
 # render_help_entries(names: [Text], texts: [Text], notes: [Text], min_name_width: Int)
-render_help_entries__1411_v0() {
-    local names_17907=("${!1}")
-    local texts_17908=("${!2}")
-    local notes_17909=("${!3}")
-    local min_name_width_17910="${4}"
-    local __length_257=("${names_17907[@]}")
-    local count_17911="${#__length_257[@]}"
-    local name_width_17912="${min_name_width_17910}"
-    local __range_start_17913=0
-    local __range_end_17913="${count_17911}"
-    local __dir_17913=$(( ${__range_start_17913} <= ${__range_end_17913} ? 1 : -1 ))
-    for (( i_17913=${__range_start_17913}; i_17913 * ${__dir_17913} < ${__range_end_17913} * ${__dir_17913}; i_17913+=${__dir_17913} )); do
-        local __length_258="${names_17907[${i_17913}]?"Index out of bounds (at src/./choose/../utils/widget/help.ab:28:33)"}"
-        local width_17914="${#__length_258}"
-        if [ "$(( width_17914 > name_width_17912 ))" != 0 ]; then
-            name_width_17912="${width_17914}"
+render_help_entries__1417_v0() {
+    local names_17983=("${!1}")
+    local texts_17984=("${!2}")
+    local notes_17985=("${!3}")
+    local min_name_width_17986="${4}"
+    local __length_261=("${names_17983[@]}")
+    local count_17987="${#__length_261[@]}"
+    local name_width_17988="${min_name_width_17986}"
+    local __range_start_17989=0
+    local __range_end_17989="${count_17987}"
+    local __dir_17989=$(( ${__range_start_17989} <= ${__range_end_17989} ? 1 : -1 ))
+    for (( i_17989=${__range_start_17989}; i_17989 * ${__dir_17989} < ${__range_end_17989} * ${__dir_17989}; i_17989+=${__dir_17989} )); do
+        local __length_262="${names_17983[${i_17989}]?"Index out of bounds (at src/./choose/../utils/widget/help.ab:28:33)"}"
+        local width_17990="${#__length_262}"
+        if [ "$(( width_17990 > name_width_17988 ))" != 0 ]; then
+            name_width_17988="${width_17990}"
         fi
 done
-    term_width__1377_v0 
-    local width_17920="${ret_term_width1377_v0}"
+    term_width__1383_v0 
+    local width_17996="${ret_term_width1383_v0}"
     # Two spaces of margin, then three between a name and its description.
-    local indent_17921="$(( name_width_17912 + 5 ))"
+    local indent_17997="$(( name_width_17988 + 5 ))"
     # Once the description column gets too narrow to read, stop putting the
     # description beside the name and place it underneath instead.
-    local stacked_17922="$(( $(( width_17920 - indent_17921 )) < 24 ))"
-    if [ "${stacked_17922}" != 0 ]; then
-        indent_17921=6
+    local stacked_17998="$(( $(( width_17996 - indent_17997 )) < 24 ))"
+    if [ "${stacked_17998}" != 0 ]; then
+        indent_17997=6
     fi
-    local avail_17923="$(( width_17920 - indent_17921 ))"
-    rpad__28_v0 "" " " "${indent_17921}"
-    local blank_17924="${ret_rpad28_v0}"
-    local __range_start_17925=0
-    local __range_end_17925="${count_17911}"
-    local __dir_17925=$(( ${__range_start_17925} <= ${__range_end_17925} ? 1 : -1 ))
-    for (( i_17925=${__range_start_17925}; i_17925 * ${__dir_17925} < ${__range_end_17925} * ${__dir_17925}; i_17925+=${__dir_17925} )); do
-        local pending_17926="${blank_17924}"
-        if [ "${stacked_17922}" != 0 ]; then
-            local array_259=()
-            printf__128_v0 "  ""${names_17907[${i_17925}]?"Index out of bounds (at src/./choose/../utils/widget/help.ab:48:33)"}""
-" array_259[@]
+    local avail_17999="$(( width_17996 - indent_17997 ))"
+    rpad__28_v0 "" " " "${indent_17997}"
+    local blank_18000="${ret_rpad28_v0}"
+    local __range_start_18001=0
+    local __range_end_18001="${count_17987}"
+    local __dir_18001=$(( ${__range_start_18001} <= ${__range_end_18001} ? 1 : -1 ))
+    for (( i_18001=${__range_start_18001}; i_18001 * ${__dir_18001} < ${__range_end_18001} * ${__dir_18001}; i_18001+=${__dir_18001} )); do
+        local pending_18002="${blank_18000}"
+        if [ "${stacked_17998}" != 0 ]; then
+            local array_263=()
+            printf__128_v0 "  ""${names_17983[${i_18001}]?"Index out of bounds (at src/./choose/../utils/widget/help.ab:48:33)"}""
+" array_263[@]
         else
-            rpad__28_v0 "  ""${names_17907[${i_17925}]?"Index out of bounds (at src/./choose/../utils/widget/help.ab:50:41)"}" " " "${indent_17921}"
+            rpad__28_v0 "  ""${names_17983[${i_18001}]?"Index out of bounds (at src/./choose/../utils/widget/help.ab:50:41)"}" " " "${indent_17997}"
             local ret_rpad28_v0__50_23="${ret_rpad28_v0}"
-            pending_17926="${ret_rpad28_v0__50_23}"
+            pending_18002="${ret_rpad28_v0__50_23}"
         fi
-        split__4_v0 "${texts_17908[${i_17925}]?"Index out of bounds (at src/./choose/../utils/widget/help.ab:52:33)"}" " "
+        split__4_v0 "${texts_17984[${i_18001}]?"Index out of bounds (at src/./choose/../utils/widget/help.ab:52:33)"}" " "
         local ret_split4_v0__52_21=("${ret_split4_v0[@]}")
-        local words_17927=("${ret_split4_v0__52_21[@]}")
-        local __length_260=("${words_17927[@]}")
-        local note_start_17928="${#__length_260[@]}"
-        if [ "$([ "_${notes_17909[${i_17925}]?"Index out of bounds (at src/./choose/../utils/widget/help.ab:54:18)"}" == "_" ]; echo $?)" != 0 ]; then
+        local words_18003=("${ret_split4_v0__52_21[@]}")
+        local __length_264=("${words_18003[@]}")
+        local note_start_18004="${#__length_264[@]}"
+        if [ "$([ "_${notes_17985[${i_18001}]?"Index out of bounds (at src/./choose/../utils/widget/help.ab:54:18)"}" == "_" ]; echo $?)" != 0 ]; then
             # A note reads badly when split, so it moves between lines whole
             # unless it is too long to ever fit on one.
-            local __length_261="${notes_17909[${i_17925}]?"Index out of bounds (at src/./choose/../utils/widget/help.ab:57:26)"}"
-            if [ "$(( ${#__length_261} > avail_17923 ))" != 0 ]; then
-                split__4_v0 "${notes_17909[${i_17925}]?"Index out of bounds (at src/./choose/../utils/widget/help.ab:58:38)"}" " "
+            local __length_265="${notes_17985[${i_18001}]?"Index out of bounds (at src/./choose/../utils/widget/help.ab:57:26)"}"
+            if [ "$(( ${#__length_265} > avail_17999 ))" != 0 ]; then
+                split__4_v0 "${notes_17985[${i_18001}]?"Index out of bounds (at src/./choose/../utils/widget/help.ab:58:38)"}" " "
                 local ret_split4_v0__58_26=("${ret_split4_v0[@]}")
-                words_17927+=("${ret_split4_v0__58_26[@]}")
+                words_18003+=("${ret_split4_v0__58_26[@]}")
             else
-                local array_262=("${notes_17909[${i_17925}]?"Index out of bounds (at src/./choose/../utils/widget/help.ab:60:33)"}")
-                words_17927+=("${array_262[@]}")
+                local array_266=("${notes_17985[${i_18001}]?"Index out of bounds (at src/./choose/../utils/widget/help.ab:60:33)"}")
+                words_18003+=("${array_266[@]}")
             fi
         fi
-        local line_17929=""
+        local line_18005=""
         # Where the note begins on the line being built, so it can be dimmed
         # after wrapping decides how much of it fits. -1 while there is none.
-        local note_at_17930=-1
-        local __range_start_17931=0
-        local __length_263=("${words_17927[@]}")
-        local __range_end_17931="${#__length_263[@]}"
-        local __dir_17931=$(( ${__range_start_17931} <= ${__range_end_17931} ? 1 : -1 ))
-        for (( j_17931=${__range_start_17931}; j_17931 * ${__dir_17931} < ${__range_end_17931} * ${__dir_17931}; j_17931+=${__dir_17931} )); do
-            local word_17932="${words_17927[${j_17931}]?"Index out of bounds (at src/./choose/../utils/widget/help.ab:70:32)"}"
-            local candidate_17933
-            candidate_17933="$(if [ "$([ "_${line_17929}" != "_" ]; echo $?)" != 0 ]; then echo "${word_17932}"; else echo "${line_17929}"" ""${word_17932}"; fi)"
-            local __length_264="${candidate_17933}"
-            if [ "$(( $(( ${#__length_264} > avail_17923 )) && $([ "_${line_17929}" == "_" ]; echo $?) ))" != 0 ]; then
-                print_help_line__1410_v0 "${pending_17926}" "${line_17929}" "${note_at_17930}"
-                pending_17926="${blank_17924}"
-                line_17929="${word_17932}"
-                note_at_17930="$(if [ "$(( j_17931 >= note_start_17928 ))" != 0 ]; then echo 0; else echo -1; fi)"
+        local note_at_18006=-1
+        local __range_start_18007=0
+        local __length_267=("${words_18003[@]}")
+        local __range_end_18007="${#__length_267[@]}"
+        local __dir_18007=$(( ${__range_start_18007} <= ${__range_end_18007} ? 1 : -1 ))
+        for (( j_18007=${__range_start_18007}; j_18007 * ${__dir_18007} < ${__range_end_18007} * ${__dir_18007}; j_18007+=${__dir_18007} )); do
+            local word_18008="${words_18003[${j_18007}]?"Index out of bounds (at src/./choose/../utils/widget/help.ab:70:32)"}"
+            local candidate_18009
+            candidate_18009="$(if [ "$([ "_${line_18005}" != "_" ]; echo $?)" != 0 ]; then echo "${word_18008}"; else echo "${line_18005}"" ""${word_18008}"; fi)"
+            local __length_268="${candidate_18009}"
+            if [ "$(( $(( ${#__length_268} > avail_17999 )) && $([ "_${line_18005}" == "_" ]; echo $?) ))" != 0 ]; then
+                print_help_line__1416_v0 "${pending_18002}" "${line_18005}" "${note_at_18006}"
+                pending_18002="${blank_18000}"
+                line_18005="${word_18008}"
+                note_at_18006="$(if [ "$(( j_18007 >= note_start_18004 ))" != 0 ]; then echo 0; else echo -1; fi)"
             else
-                if [ "$(( $(( j_17931 >= note_start_17928 )) && $(( note_at_17930 < 0 )) ))" != 0 ]; then
-                    local __length_265="${candidate_17933}"
-                    local __length_266="${word_17932}"
-                    note_at_17930="$(( ${#__length_265} - ${#__length_266} ))"
+                if [ "$(( $(( j_18007 >= note_start_18004 )) && $(( note_at_18006 < 0 )) ))" != 0 ]; then
+                    local __length_269="${candidate_18009}"
+                    local __length_270="${word_18008}"
+                    note_at_18006="$(( ${#__length_269} - ${#__length_270} ))"
                 fi
-                line_17929="${candidate_17933}"
+                line_18005="${candidate_18009}"
             fi
 done
-        print_help_line__1410_v0 "${pending_17926}" "${line_17929}" "${note_at_17930}"
+        print_help_line__1416_v0 "${pending_18002}" "${line_18005}" "${note_at_18006}"
 done
 }
 
@@ -3642,129 +3674,129 @@ _first_render_83=1
 # has handed over that page, so `chooser_set_page` finishes the move.
 _up_paged_84=0
 # render_single_page()
-render_single_page__1568_v0() {
-    local __length_268="${_cursor_76}"
-    local cursor_len_18051="${#__length_268}"
-    local max_option_width_18052="$(( $(( _term_width_79 - cursor_len_18051 )) - 1 ))"
-    local __range_start_18053=0
-    local __range_end_18053="${_page_count_82}"
-    local __dir_18053=$(( ${__range_start_18053} <= ${__range_end_18053} ? 1 : -1 ))
-    for (( i_18053=${__range_start_18053}; i_18053 * ${__dir_18053} < ${__range_end_18053} * ${__dir_18053}; i_18053+=${__dir_18053} )); do
-        cutoff_text__1308_v0 "${_page_81[${i_18053}]?"Index out of bounds (at src/./choose/./engine.ab:44:45)"}" "${max_option_width_18052}"
-        local ret_cutoff_text1308_v0__44_27="${ret_cutoff_text1308_v0}"
-        local truncated_18054="${ret_cutoff_text1308_v0__44_27}"
-        if [ "$(( i_18053 == _selected_75 ))" != 0 ]; then
-            colored_secondary__1277_v0 "${_cursor_76}""${truncated_18054}""
+render_single_page__1574_v0() {
+    local __length_272="${_cursor_76}"
+    local cursor_len_18129="${#__length_272}"
+    local max_option_width_18130="$(( $(( _term_width_79 - cursor_len_18129 )) - 1 ))"
+    local __range_start_18131=0
+    local __range_end_18131="${_page_count_82}"
+    local __dir_18131=$(( ${__range_start_18131} <= ${__range_end_18131} ? 1 : -1 ))
+    for (( i_18131=${__range_start_18131}; i_18131 * ${__dir_18131} < ${__range_end_18131} * ${__dir_18131}; i_18131+=${__dir_18131} )); do
+        cutoff_text__1313_v0 "${_page_81[${i_18131}]?"Index out of bounds (at src/./choose/./engine.ab:44:45)"}" "${max_option_width_18130}"
+        local ret_cutoff_text1313_v0__44_27="${ret_cutoff_text1313_v0}"
+        local truncated_18132="${ret_cutoff_text1313_v0__44_27}"
+        if [ "$(( i_18131 == _selected_75 ))" != 0 ]; then
+            colored_secondary__1282_v0 "${_cursor_76}""${truncated_18132}""
 "
-            local ret_colored_secondary1277_v0__46_21="${ret_colored_secondary1277_v0}"
-            local array_269=("")
-            eprintf__1174_v0 "${ret_colored_secondary1277_v0__46_21}" array_269[@]
+            local ret_colored_secondary1282_v0__46_21="${ret_colored_secondary1282_v0}"
+            local array_273=("")
+            eprintf__1178_v0 "${ret_colored_secondary1282_v0__46_21}" array_273[@]
         else
-            print_blank__1227_v0 "${cursor_len_18051}"
-            local array_270=("")
-            eprintf__1174_v0 "${truncated_18054}""
-" array_270[@]
+            print_blank__1232_v0 "${cursor_len_18129}"
+            local array_274=("")
+            eprintf__1178_v0 "${truncated_18132}""
+" array_274[@]
         fi
 done
-    local remaining_slots_18055="$(( _display_count_72 - _page_count_82 ))"
-    if [ "$(( remaining_slots_18055 > 0 ))" != 0 ]; then
-        local __range_start_18056=0
-        local __range_end_18056="${remaining_slots_18055}"
-        local __dir_18056=$(( ${__range_start_18056} <= ${__range_end_18056} ? 1 : -1 ))
-        for (( ____18056=${__range_start_18056}; ____18056 * ${__dir_18056} < ${__range_end_18056} * ${__dir_18056}; ____18056+=${__dir_18056} )); do
-            local array_271=("")
-            eprintf__1174_v0 "\\x1b[K
-" array_271[@]
+    local remaining_slots_18133="$(( _display_count_72 - _page_count_82 ))"
+    if [ "$(( remaining_slots_18133 > 0 ))" != 0 ]; then
+        local __range_start_18134=0
+        local __range_end_18134="${remaining_slots_18133}"
+        local __dir_18134=$(( ${__range_start_18134} <= ${__range_end_18134} ? 1 : -1 ))
+        for (( ____18134=${__range_start_18134}; ____18134 * ${__dir_18134} < ${__range_end_18134} * ${__dir_18134}; ____18134+=${__dir_18134} )); do
+            local array_275=("")
+            eprintf__1178_v0 "\\x1b[K
+" array_275[@]
 done
     fi
 }
 
 # render_multi_page()
-render_multi_page__1569_v0() {
-    local __length_272="${_cursor_76}"
-    local cursor_len_18040="${#__length_272}"
-    local max_option_width_18041="$(( $(( _term_width_79 - cursor_len_18040 )) - 3 ))"
+render_multi_page__1575_v0() {
+    local __length_276="${_cursor_76}"
+    local cursor_len_18118="${#__length_276}"
+    local max_option_width_18119="$(( $(( _term_width_79 - cursor_len_18118 )) - 3 ))"
     # 2 for check mark
-    chooser_page_start__1574_v0 
-    local page_start_18042="${ret_chooser_page_start1574_v0}"
-    local __range_start_18043=0
-    local __range_end_18043="${_page_count_82}"
-    local __dir_18043=$(( ${__range_start_18043} <= ${__range_end_18043} ? 1 : -1 ))
-    for (( i_18043=${__range_start_18043}; i_18043 * ${__dir_18043} < ${__range_end_18043} * ${__dir_18043}; i_18043+=${__dir_18043} )); do
-        local global_idx_18044="$(( page_start_18042 + i_18043 ))"
-        checked_is__1395_v0 "${global_idx_18044}"
-        local ret_checked_is1395_v0__66_28="${ret_checked_is1395_v0}"
-        local check_mark_18046
-        check_mark_18046="$(if [ "${ret_checked_is1395_v0__66_28}" != 0 ]; then echo "✓ "; else echo "• "; fi)"
-        cutoff_text__1308_v0 "${_page_81[${i_18043}]?"Index out of bounds (at src/./choose/./engine.ab:67:45)"}" "${max_option_width_18041}"
-        local ret_cutoff_text1308_v0__67_27="${ret_cutoff_text1308_v0}"
-        local truncated_18047="${ret_cutoff_text1308_v0__67_27}"
-        checked_is__1395_v0 "${global_idx_18044}"
-        local ret_checked_is1395_v0__70_13="${ret_checked_is1395_v0}"
-        if [ "$(( i_18043 == _selected_75 ))" != 0 ]; then
-            colored_secondary__1277_v0 "${_cursor_76}""${check_mark_18046}""${truncated_18047}""
+    chooser_page_start__1580_v0 
+    local page_start_18120="${ret_chooser_page_start1580_v0}"
+    local __range_start_18121=0
+    local __range_end_18121="${_page_count_82}"
+    local __dir_18121=$(( ${__range_start_18121} <= ${__range_end_18121} ? 1 : -1 ))
+    for (( i_18121=${__range_start_18121}; i_18121 * ${__dir_18121} < ${__range_end_18121} * ${__dir_18121}; i_18121+=${__dir_18121} )); do
+        local global_idx_18122="$(( page_start_18120 + i_18121 ))"
+        checked_is__1401_v0 "${global_idx_18122}"
+        local ret_checked_is1401_v0__66_28="${ret_checked_is1401_v0}"
+        local check_mark_18124
+        check_mark_18124="$(if [ "${ret_checked_is1401_v0__66_28}" != 0 ]; then echo "✓ "; else echo "• "; fi)"
+        cutoff_text__1313_v0 "${_page_81[${i_18121}]?"Index out of bounds (at src/./choose/./engine.ab:67:45)"}" "${max_option_width_18119}"
+        local ret_cutoff_text1313_v0__67_27="${ret_cutoff_text1313_v0}"
+        local truncated_18125="${ret_cutoff_text1313_v0__67_27}"
+        checked_is__1401_v0 "${global_idx_18122}"
+        local ret_checked_is1401_v0__70_13="${ret_checked_is1401_v0}"
+        if [ "$(( i_18121 == _selected_75 ))" != 0 ]; then
+            colored_secondary__1282_v0 "${_cursor_76}""${check_mark_18124}""${truncated_18125}""
 "
-            local ret_colored_secondary1277_v0__69_37="${ret_colored_secondary1277_v0}"
-            local array_273=("")
-            eprintf__1174_v0 "${ret_colored_secondary1277_v0__69_37}" array_273[@]
-        elif [ "${ret_checked_is1395_v0__70_13}" != 0 ]; then
-            print_blank__1227_v0 "${cursor_len_18040}"
-            colored_secondary__1277_v0 "${check_mark_18046}""${truncated_18047}""
+            local ret_colored_secondary1282_v0__69_37="${ret_colored_secondary1282_v0}"
+            local array_277=("")
+            eprintf__1178_v0 "${ret_colored_secondary1282_v0__69_37}" array_277[@]
+        elif [ "${ret_checked_is1401_v0__70_13}" != 0 ]; then
+            print_blank__1232_v0 "${cursor_len_18118}"
+            colored_secondary__1282_v0 "${check_mark_18124}""${truncated_18125}""
 "
-            local ret_colored_secondary1277_v0__72_25="${ret_colored_secondary1277_v0}"
-            local array_274=("")
-            eprintf__1174_v0 "${ret_colored_secondary1277_v0__72_25}" array_274[@]
+            local ret_colored_secondary1282_v0__72_25="${ret_colored_secondary1282_v0}"
+            local array_278=("")
+            eprintf__1178_v0 "${ret_colored_secondary1282_v0__72_25}" array_278[@]
         else
-            print_blank__1227_v0 "${cursor_len_18040}"
-            local array_275=("")
-            eprintf__1174_v0 "${check_mark_18046}""${truncated_18047}""
-" array_275[@]
+            print_blank__1232_v0 "${cursor_len_18118}"
+            local array_279=("")
+            eprintf__1178_v0 "${check_mark_18124}""${truncated_18125}""
+" array_279[@]
         fi
 done
-    local remaining_slots_18049="$(( _display_count_72 - _page_count_82 ))"
-    if [ "$(( remaining_slots_18049 > 0 ))" != 0 ]; then
-        local __range_start_18050=0
-        local __range_end_18050="${remaining_slots_18049}"
-        local __dir_18050=$(( ${__range_start_18050} <= ${__range_end_18050} ? 1 : -1 ))
-        for (( ____18050=${__range_start_18050}; ____18050 * ${__dir_18050} < ${__range_end_18050} * ${__dir_18050}; ____18050+=${__dir_18050} )); do
-            local array_276=("")
-            eprintf__1174_v0 "\\x1b[K
-" array_276[@]
+    local remaining_slots_18127="$(( _display_count_72 - _page_count_82 ))"
+    if [ "$(( remaining_slots_18127 > 0 ))" != 0 ]; then
+        local __range_start_18128=0
+        local __range_end_18128="${remaining_slots_18127}"
+        local __dir_18128=$(( ${__range_start_18128} <= ${__range_end_18128} ? 1 : -1 ))
+        for (( ____18128=${__range_start_18128}; ____18128 * ${__dir_18128} < ${__range_end_18128} * ${__dir_18128}; ____18128+=${__dir_18128} )); do
+            local array_280=("")
+            eprintf__1178_v0 "\\x1b[K
+" array_280[@]
 done
     fi
 }
 
 # render_page()
-render_page__1570_v0() {
+render_page__1576_v0() {
     if [ "${_multi_77}" != 0 ]; then
-        render_multi_page__1569_v0 
+        render_multi_page__1575_v0 
     else
-        render_single_page__1568_v0 
+        render_single_page__1574_v0 
     fi
 }
 
 # render_page_indicator()
-render_page_indicator__1571_v0() {
+render_page_indicator__1577_v0() {
     if [ "$(( _total_pages_73 > 1 ))" != 0 ]; then
-        local array_277=("")
-        eprintf__1174_v0 "\\x1b[G\\x1b[K" array_277[@]
-        eprintf_colored__1175_v0 "Page $(( _current_page_74 + 1 ))/${_total_pages_73}" 90
-        local array_278=("")
-        eprintf__1174_v0 "\\x1b[G" array_278[@]
+        local array_281=("")
+        eprintf__1178_v0 "\\x1b[G\\x1b[K" array_281[@]
+        eprintf_colored__1179_v0 "Page $(( _current_page_74 + 1 ))/${_total_pages_73}" 90
+        local array_282=("")
+        eprintf__1178_v0 "\\x1b[G" array_282[@]
     fi
 }
 
 # render_tooltip_line()
-render_tooltip_line__1572_v0() {
+render_tooltip_line__1578_v0() {
     if [ "$(( ! _multi_77 ))" != 0 ]; then
         # "↑↓ select • enter confirm" = 9 + 3 + 13 = 25
         # "↑↓ select • ←→ page • enter confirm" = 9 + 3 + 8 + 3 + 13 = 36
         if [ "$(( _total_pages_73 > 1 ))" != 0 ]; then
-            local array_279=("↑↓" "select" "←→" "page" "enter" "confirm")
-            render_tooltip__1335_v0 array_279[@] 36 "${_term_width_79}"
+            local array_283=("↑↓" "select" "←→" "page" "enter" "confirm")
+            render_tooltip__1340_v0 array_283[@] 36 "${_term_width_79}"
         else
-            local array_280=("↑↓" "select" "enter" "confirm")
-            render_tooltip__1335_v0 array_280[@] 25 "${_term_width_79}"
+            local array_284=("↑↓" "select" "enter" "confirm")
+            render_tooltip__1340_v0 array_284[@] 25 "${_term_width_79}"
         fi
     else
         # "↑↓ select • x toggle • enter confirm" = 9 + 3 + 8 + 3 + 13 = 36
@@ -3772,208 +3804,208 @@ render_tooltip_line__1572_v0() {
         # "↑↓ select • x toggle • ←→ page • enter confirm" = 36 + 8 + 3 = 47
         # "↑↓ select • x toggle • a all • ←→ page • enter confirm" = 36 + 5 + 3 + 8 + 3 = 55
         if [ "$(( $(( _total_pages_73 > 1 )) && $(( _limit_78 < 0 )) ))" != 0 ]; then
-            local array_281=("↑↓" "select" "x" "toggle" "a" "all" "←→" "page" "enter" "confirm")
-            render_tooltip__1335_v0 array_281[@] 55 "${_term_width_79}"
+            local array_285=("↑↓" "select" "x" "toggle" "a" "all" "←→" "page" "enter" "confirm")
+            render_tooltip__1340_v0 array_285[@] 55 "${_term_width_79}"
         elif [ "$(( _total_pages_73 > 1 ))" != 0 ]; then
-            local array_282=("↑↓" "select" "x" "toggle" "←→" "page" "enter" "confirm")
-            render_tooltip__1335_v0 array_282[@] 47 "${_term_width_79}"
+            local array_286=("↑↓" "select" "x" "toggle" "←→" "page" "enter" "confirm")
+            render_tooltip__1340_v0 array_286[@] 47 "${_term_width_79}"
         elif [ "$(( _limit_78 < 0 ))" != 0 ]; then
-            local array_283=("↑↓" "select" "x" "toggle" "a" "all" "enter" "confirm")
-            render_tooltip__1335_v0 array_283[@] 44 "${_term_width_79}"
+            local array_287=("↑↓" "select" "x" "toggle" "a" "all" "enter" "confirm")
+            render_tooltip__1340_v0 array_287[@] 44 "${_term_width_79}"
         else
-            local array_284=("↑↓" "select" "x" "toggle" "enter" "confirm")
-            render_tooltip__1335_v0 array_284[@] 36 "${_term_width_79}"
+            local array_288=("↑↓" "select" "x" "toggle" "enter" "confirm")
+            render_tooltip__1340_v0 array_288[@] 36 "${_term_width_79}"
         fi
     fi
 }
 
 # chooser_begin(total: Int, page_size: Int, header: Text, cursor: Text, multi: Bool, limit: Int)
-chooser_begin__1573_v0() {
-    local total_17958="${1}"
-    local page_size_17959="${2}"
-    local header_17960="${3}"
-    local cursor_17961="${4}"
-    local multi_17962="${5}"
-    local limit_17963="${6}"
-    _total_70="${total_17958}"
-    _cursor_76="${cursor_17961}"
-    _multi_77="${multi_17962}"
-    _limit_78="${limit_17963}"
+chooser_begin__1579_v0() {
+    local total_18034="${1}"
+    local page_size_18035="${2}"
+    local header_18036="${3}"
+    local cursor_18037="${4}"
+    local multi_18038="${5}"
+    local limit_18039="${6}"
+    _total_70="${total_18034}"
+    _cursor_76="${cursor_18037}"
+    _multi_77="${multi_18038}"
+    _limit_78="${limit_18039}"
     _current_page_74=0
     _selected_75=0
     _first_render_83=1
     _up_paged_84=0
-    _has_header_80="$([ "_${header_17960}" == "_" ]; echo $?)"
-    stty_lock__1215_v0 
-    hide_cursor__1232_v0 
-    term_width__1222_v0 
-    _term_width_79="${ret_term_width1222_v0}"
-    term_height__1223_v0 
-    local term_height_17968="${ret_term_height1223_v0}"
-    local max_page_size_17969
-    max_page_size_17969="$(( term_height_17968 - $(if [ "${_has_header_80}" != 0 ]; then echo 3; else echo 2; fi) ))"
-    _page_size_71="${page_size_17959}"
-    if [ "$(( _page_size_71 > max_page_size_17969 ))" != 0 ]; then
-        _page_size_71="${max_page_size_17969}"
+    _has_header_80="$([ "_${header_18036}" == "_" ]; echo $?)"
+    stty_lock__1220_v0 
+    hide_cursor__1237_v0 
+    term_width__1227_v0 
+    _term_width_79="${ret_term_width1227_v0}"
+    term_height__1228_v0 
+    local term_height_18046="${ret_term_height1228_v0}"
+    local max_page_size_18047
+    max_page_size_18047="$(( term_height_18046 - $(if [ "${_has_header_80}" != 0 ]; then echo 3; else echo 2; fi) ))"
+    _page_size_71="${page_size_18035}"
+    if [ "$(( _page_size_71 > max_page_size_18047 ))" != 0 ]; then
+        _page_size_71="${max_page_size_18047}"
     fi
     if [ "${_has_header_80}" != 0 ]; then
-        cutoff_text__1308_v0 "${header_17960}" "${_term_width_79}"
-        local ret_cutoff_text1308_v0__152_17="${ret_cutoff_text1308_v0}"
-        local array_285=("")
-        eprintf__1174_v0 "${ret_cutoff_text1308_v0__152_17}""
-" array_285[@]
+        cutoff_text__1313_v0 "${header_18036}" "${_term_width_79}"
+        local ret_cutoff_text1313_v0__152_17="${ret_cutoff_text1313_v0}"
+        local array_289=("")
+        eprintf__1178_v0 "${ret_cutoff_text1313_v0__152_17}""
+" array_289[@]
     fi
-    _total_pages_73="$(( $(( $(( total_17958 + _page_size_71 )) - 1 )) / _page_size_71 ))"
+    _total_pages_73="$(( $(( $(( total_18034 + _page_size_71 )) - 1 )) / _page_size_71 ))"
     _display_count_72="${_page_size_71}"
-    if [ "$(( total_17958 < _page_size_71 ))" != 0 ]; then
-        _display_count_72="${total_17958}"
+    if [ "$(( total_18034 < _page_size_71 ))" != 0 ]; then
+        _display_count_72="${total_18034}"
     fi
-    if [ "${multi_17962}" != 0 ]; then
-        checked_init__1394_v0 "${total_17958}" "${limit_17963}"
+    if [ "${multi_18038}" != 0 ]; then
+        checked_init__1400_v0 "${total_18034}" "${limit_18039}"
     fi
-    new_line__1228_v0 "${_display_count_72}"
-    local array_286=("")
-    eprintf__1174_v0 "\\x1b[G" array_286[@]
+    new_line__1233_v0 "${_display_count_72}"
+    local array_290=("")
+    eprintf__1178_v0 "\\x1b[G" array_290[@]
     if [ "$(( _total_pages_73 > 1 ))" != 0 ]; then
-        eprintf_colored__1175_v0 "Page $(( _current_page_74 + 1 ))/${_total_pages_73}" 90
+        eprintf_colored__1179_v0 "Page $(( _current_page_74 + 1 ))/${_total_pages_73}" 90
     fi
-    new_line__1228_v0 1
-    render_tooltip_line__1572_v0 
-    go_up__1229_v0 "$(( _display_count_72 + 1 ))"
-    local array_287=("")
-    eprintf__1174_v0 "\\x1b[G" array_287[@]
+    new_line__1233_v0 1
+    render_tooltip_line__1578_v0 
+    go_up__1234_v0 "$(( _display_count_72 + 1 ))"
+    local array_291=("")
+    eprintf__1178_v0 "\\x1b[G" array_291[@]
 }
 
 # chooser_page_start()
-chooser_page_start__1574_v0() {
-    ret_chooser_page_start1574_v0="$(( _current_page_74 * _page_size_71 ))"
+chooser_page_start__1580_v0() {
+    ret_chooser_page_start1580_v0="$(( _current_page_74 * _page_size_71 ))"
     return 0
 }
 
 # chooser_page_count()
-chooser_page_count__1575_v0() {
-    chooser_page_start__1574_v0 
-    local start_18035="${ret_chooser_page_start1574_v0}"
-    local end_18036="$(( start_18035 + _page_size_71 ))"
-    if [ "$(( end_18036 > _total_70 ))" != 0 ]; then
-        end_18036="${_total_70}"
+chooser_page_count__1581_v0() {
+    chooser_page_start__1580_v0 
+    local start_18113="${ret_chooser_page_start1580_v0}"
+    local end_18114="$(( start_18113 + _page_size_71 ))"
+    if [ "$(( end_18114 > _total_70 ))" != 0 ]; then
+        end_18114="${_total_70}"
     fi
-    ret_chooser_page_count1575_v0="$(( end_18036 - start_18035 ))"
+    ret_chooser_page_count1581_v0="$(( end_18114 - start_18113 ))"
     return 0
 }
 
 # chooser_set_page(page: [Text])
-chooser_set_page__1576_v0() {
-    local page_18039=("${!1}")
-    _page_81=("${page_18039[@]}")
-    local __length_288=("${page_18039[@]}")
-    _page_count_82="${#__length_288[@]}"
+chooser_set_page__1582_v0() {
+    local page_18117=("${!1}")
+    _page_81=("${page_18117[@]}")
+    local __length_292=("${page_18117[@]}")
+    _page_count_82="${#__length_292[@]}"
     if [ "${_first_render_83}" != 0 ]; then
         _first_render_83=0
-        render_page__1570_v0 
+        render_page__1576_v0 
     else
         if [ "${_up_paged_84}" != 0 ]; then
             _selected_75="$(( _page_count_82 - 1 ))"
             _up_paged_84=0
         fi
-        go_up__1229_v0 1
-        remove_line__1225_v0 "$(( _display_count_72 - 1 ))"
-        remove_current_line__1226_v0 
-        local array_289=("")
-        eprintf__1174_v0 "\\x1b[G" array_289[@]
-        render_page__1570_v0 
-        render_page_indicator__1571_v0 
+        go_up__1234_v0 1
+        remove_line__1230_v0 "$(( _display_count_72 - 1 ))"
+        remove_current_line__1231_v0 
+        local array_293=("")
+        eprintf__1178_v0 "\\x1b[G" array_293[@]
+        render_page__1576_v0 
+        render_page_indicator__1577_v0 
     fi
 }
 
 # option_width()
-option_width__1577_v0() {
-    local check_width_18066
-    check_width_18066="$(if [ "${_multi_77}" != 0 ]; then echo 3; else echo 1; fi)"
-    local __length_290="${_cursor_76}"
-    ret_option_width1577_v0="$(( $(( _term_width_79 - ${#__length_290} )) - check_width_18066 ))"
+option_width__1583_v0() {
+    local check_width_18144
+    check_width_18144="$(if [ "${_multi_77}" != 0 ]; then echo 3; else echo 1; fi)"
+    local __length_294="${_cursor_76}"
+    ret_option_width1583_v0="$(( $(( _term_width_79 - ${#__length_294} )) - check_width_18144 ))"
     return 0
 }
 
 # unselected_line(index: Int)
-unselected_line__1578_v0() {
-    local index_18079="${1}"
-    local __length_291="${_cursor_76}"
-    rpad__28_v0 "" " " "${#__length_291}"
-    local blank_18080="${ret_rpad28_v0}"
-    option_width__1577_v0 
-    local ret_option_width1577_v0__223_49="${ret_option_width1577_v0}"
-    cutoff_text__1308_v0 "${_page_81[${index_18079}]?"Index out of bounds (at src/./choose/./engine.ab:223:41)"}" "${ret_option_width1577_v0__223_49}"
-    local truncated_18081="${ret_cutoff_text1308_v0}"
+unselected_line__1584_v0() {
+    local index_18157="${1}"
+    local __length_295="${_cursor_76}"
+    rpad__28_v0 "" " " "${#__length_295}"
+    local blank_18158="${ret_rpad28_v0}"
+    option_width__1583_v0 
+    local ret_option_width1583_v0__223_49="${ret_option_width1583_v0}"
+    cutoff_text__1313_v0 "${_page_81[${index_18157}]?"Index out of bounds (at src/./choose/./engine.ab:223:41)"}" "${ret_option_width1583_v0__223_49}"
+    local truncated_18159="${ret_cutoff_text1313_v0}"
     if [ "$(( ! _multi_77 ))" != 0 ]; then
-        ret_unselected_line1578_v0="${blank_18080}""${truncated_18081}"
+        ret_unselected_line1584_v0="${blank_18158}""${truncated_18159}"
         return 0
     fi
-    chooser_page_start__1574_v0 
-    local ret_chooser_page_start1574_v0__227_19="${ret_chooser_page_start1574_v0}"
-    checked_is__1395_v0 "$(( ret_chooser_page_start1574_v0__227_19 + index_18079 ))"
-    local ret_checked_is1395_v0__227_8="${ret_checked_is1395_v0}"
-    if [ "${ret_checked_is1395_v0__227_8}" != 0 ]; then
-        colored_secondary__1277_v0 "✓ ""${truncated_18081}"
-        local ret_colored_secondary1277_v0__228_24="${ret_colored_secondary1277_v0}"
-        ret_unselected_line1578_v0="${blank_18080}""${ret_colored_secondary1277_v0__228_24}"
+    chooser_page_start__1580_v0 
+    local ret_chooser_page_start1580_v0__227_19="${ret_chooser_page_start1580_v0}"
+    checked_is__1401_v0 "$(( ret_chooser_page_start1580_v0__227_19 + index_18157 ))"
+    local ret_checked_is1401_v0__227_8="${ret_checked_is1401_v0}"
+    if [ "${ret_checked_is1401_v0__227_8}" != 0 ]; then
+        colored_secondary__1282_v0 "✓ ""${truncated_18159}"
+        local ret_colored_secondary1282_v0__228_24="${ret_colored_secondary1282_v0}"
+        ret_unselected_line1584_v0="${blank_18158}""${ret_colored_secondary1282_v0__228_24}"
         return 0
     fi
-    ret_unselected_line1578_v0="${blank_18080}""• ""${truncated_18081}"
+    ret_unselected_line1584_v0="${blank_18158}""• ""${truncated_18159}"
     return 0
 }
 
 # selected_line(index: Int)
-selected_line__1579_v0() {
-    local index_18065="${1}"
-    option_width__1577_v0 
-    local ret_option_width1577_v0__235_49="${ret_option_width1577_v0}"
-    cutoff_text__1308_v0 "${_page_81[${index_18065}]?"Index out of bounds (at src/./choose/./engine.ab:235:41)"}" "${ret_option_width1577_v0__235_49}"
-    local truncated_18067="${ret_cutoff_text1308_v0}"
+selected_line__1585_v0() {
+    local index_18143="${1}"
+    option_width__1583_v0 
+    local ret_option_width1583_v0__235_49="${ret_option_width1583_v0}"
+    cutoff_text__1313_v0 "${_page_81[${index_18143}]?"Index out of bounds (at src/./choose/./engine.ab:235:41)"}" "${ret_option_width1583_v0__235_49}"
+    local truncated_18145="${ret_cutoff_text1313_v0}"
     if [ "$(( ! _multi_77 ))" != 0 ]; then
-        colored_secondary__1277_v0 "${_cursor_76}""${truncated_18067}"
-        ret_selected_line1579_v0="${ret_colored_secondary1277_v0}"
+        colored_secondary__1282_v0 "${_cursor_76}""${truncated_18145}"
+        ret_selected_line1585_v0="${ret_colored_secondary1282_v0}"
         return 0
     fi
-    chooser_page_start__1574_v0 
-    local ret_chooser_page_start1574_v0__239_29="${ret_chooser_page_start1574_v0}"
-    checked_is__1395_v0 "$(( ret_chooser_page_start1574_v0__239_29 + index_18065 ))"
-    local ret_checked_is1395_v0__239_18="${ret_checked_is1395_v0}"
-    local mark_18068
-    mark_18068="$(if [ "${ret_checked_is1395_v0__239_18}" != 0 ]; then echo "✓ "; else echo "• "; fi)"
-    colored_secondary__1277_v0 "${_cursor_76}""${mark_18068}""${truncated_18067}"
-    ret_selected_line1579_v0="${ret_colored_secondary1277_v0}"
+    chooser_page_start__1580_v0 
+    local ret_chooser_page_start1580_v0__239_29="${ret_chooser_page_start1580_v0}"
+    checked_is__1401_v0 "$(( ret_chooser_page_start1580_v0__239_29 + index_18143 ))"
+    local ret_checked_is1401_v0__239_18="${ret_checked_is1401_v0}"
+    local mark_18146
+    mark_18146="$(if [ "${ret_checked_is1401_v0__239_18}" != 0 ]; then echo "✓ "; else echo "• "; fi)"
+    colored_secondary__1282_v0 "${_cursor_76}""${mark_18146}""${truncated_18145}"
+    ret_selected_line1585_v0="${ret_colored_secondary1282_v0}"
     return 0
 }
 
 # redraw_selection(prev_selected: Int)
-redraw_selection__1580_v0() {
-    local prev_selected_18078="${1}"
-    unselected_line__1578_v0 "${prev_selected_18078}"
-    local ret_unselected_line1578_v0__246_47="${ret_unselected_line1578_v0}"
-    redraw_row__1392_v0 "${_display_count_72}" "${prev_selected_18078}" "${ret_unselected_line1578_v0__246_47}"
-    selected_line__1579_v0 "${_selected_75}"
-    local ret_selected_line1579_v0__247_43="${ret_selected_line1579_v0}"
-    redraw_row__1392_v0 "${_display_count_72}" "${_selected_75}" "${ret_selected_line1579_v0__247_43}"
+redraw_selection__1586_v0() {
+    local prev_selected_18156="${1}"
+    unselected_line__1584_v0 "${prev_selected_18156}"
+    local ret_unselected_line1584_v0__246_47="${ret_unselected_line1584_v0}"
+    redraw_row__1398_v0 "${_display_count_72}" "${prev_selected_18156}" "${ret_unselected_line1584_v0__246_47}"
+    selected_line__1585_v0 "${_selected_75}"
+    local ret_selected_line1585_v0__247_43="${ret_selected_line1585_v0}"
+    redraw_row__1398_v0 "${_display_count_72}" "${_selected_75}" "${ret_selected_line1585_v0__247_43}"
 }
 
 # redraw_current_line()
-redraw_current_line__1581_v0() {
-    selected_line__1579_v0 "${_selected_75}"
-    local ret_selected_line1579_v0__252_43="${ret_selected_line1579_v0}"
-    redraw_row__1392_v0 "${_display_count_72}" "${_selected_75}" "${ret_selected_line1579_v0__252_43}"
+redraw_current_line__1587_v0() {
+    selected_line__1585_v0 "${_selected_75}"
+    local ret_selected_line1585_v0__252_43="${ret_selected_line1585_v0}"
+    redraw_row__1398_v0 "${_display_count_72}" "${_selected_75}" "${ret_selected_line1585_v0__252_43}"
 }
 
 # chooser_step()
-chooser_step__1582_v0() {
-    get_key__1172_v0 
-    local key_18060="${ret_get_key1172_v0}"
-    local prev_selected_18061="${_selected_75}"
-    local prev_page_18062="${_current_page_74}"
-    chooser_page_start__1574_v0 
-    local page_start_18063="${ret_chooser_page_start1574_v0}"
+chooser_step__1588_v0() {
+    get_key__1176_v0 
+    local key_18138="${ret_get_key1176_v0}"
+    local prev_selected_18139="${_selected_75}"
+    local prev_page_18140="${_current_page_74}"
+    chooser_page_start__1580_v0 
+    local page_start_18141="${ret_chooser_page_start1580_v0}"
     _up_paged_84=0
-    if [ "$(( $([ "_${key_18060}" != "_UP" ]; echo $?) || $([ "_${key_18060}" != "_k" ]; echo $?) ))" != 0 ]; then
+    if [ "$(( $([ "_${key_18138}" != "_UP" ]; echo $?) || $([ "_${key_18138}" != "_k" ]; echo $?) ))" != 0 ]; then
         if [ "$(( $(( _selected_75 == 0 )) && $(( _total_pages_73 > 1 )) ))" != 0 ]; then
             if [ "$(( _current_page_74 > 0 ))" != 0 ]; then
                 _current_page_74="$(( _current_page_74 - 1 ))"
@@ -3986,7 +4018,7 @@ chooser_step__1582_v0() {
         else
             _selected_75="$(( _selected_75 - 1 ))"
         fi
-    elif [ "$(( $([ "_${key_18060}" != "_DOWN" ]; echo $?) || $([ "_${key_18060}" != "_j" ]; echo $?) ))" != 0 ]; then
+    elif [ "$(( $([ "_${key_18138}" != "_DOWN" ]; echo $?) || $([ "_${key_18138}" != "_j" ]; echo $?) ))" != 0 ]; then
         if [ "$(( _selected_75 == $(( _page_count_82 - 1 )) ))" != 0 ]; then
             if [ "$(( _current_page_74 < $(( _total_pages_73 - 1 )) ))" != 0 ]; then
                 _current_page_74="$(( _current_page_74 + 1 ))"
@@ -3997,487 +4029,496 @@ chooser_step__1582_v0() {
         else
             _selected_75="$(( _selected_75 + 1 ))"
         fi
-    elif [ "$(( $([ "_${key_18060}" != "_LEFT" ]; echo $?) || $([ "_${key_18060}" != "_h" ]; echo $?) ))" != 0 ]; then
+    elif [ "$(( $([ "_${key_18138}" != "_LEFT" ]; echo $?) || $([ "_${key_18138}" != "_h" ]; echo $?) ))" != 0 ]; then
         if [ "$(( _current_page_74 > 0 ))" != 0 ]; then
             _current_page_74="$(( _current_page_74 - 1 ))"
         fi
         _selected_75=0
-    elif [ "$(( $([ "_${key_18060}" != "_RIGHT" ]; echo $?) || $([ "_${key_18060}" != "_l" ]; echo $?) ))" != 0 ]; then
+    elif [ "$(( $([ "_${key_18138}" != "_RIGHT" ]; echo $?) || $([ "_${key_18138}" != "_l" ]; echo $?) ))" != 0 ]; then
         if [ "$(( _current_page_74 < $(( _total_pages_73 - 1 )) ))" != 0 ]; then
             _current_page_74="$(( _current_page_74 + 1 ))"
             _selected_75=0
         else
             _selected_75="$(( _page_count_82 - 1 ))"
         fi
-    elif [ "$(( _multi_77 && $(( $(( $([ "_${key_18060}" != "_x" ]; echo $?) || $([ "_${key_18060}" != "_X" ]; echo $?) )) || $([ "_${key_18060}" != "_TAB" ]; echo $?) )) ))" != 0 ]; then
-        checked_toggle__1397_v0 "$(( page_start_18063 + _selected_75 ))"
-        local ret_checked_toggle1397_v0__309_16="${ret_checked_toggle1397_v0}"
-        if [ "${ret_checked_toggle1397_v0__309_16}" != 0 ]; then
-            redraw_current_line__1581_v0 
+    elif [ "$(( _multi_77 && $(( $(( $([ "_${key_18138}" != "_x" ]; echo $?) || $([ "_${key_18138}" != "_X" ]; echo $?) )) || $([ "_${key_18138}" != "_TAB" ]; echo $?) )) ))" != 0 ]; then
+        checked_toggle__1403_v0 "$(( page_start_18141 + _selected_75 ))"
+        local ret_checked_toggle1403_v0__309_16="${ret_checked_toggle1403_v0}"
+        if [ "${ret_checked_toggle1403_v0__309_16}" != 0 ]; then
+            redraw_current_line__1587_v0 
         fi
-        ret_chooser_step1582_v0="${__CHOOSER_CONTINUE_67}"
+        ret_chooser_step1588_v0="${__CHOOSER_CONTINUE_67}"
         return 0
-    elif [ "$(( $(( _multi_77 && $(( $(( $([ "_${key_18060}" != "_a" ]; echo $?) || $([ "_${key_18060}" != "_A" ]; echo $?) )) || $([ "_${key_18060}" != "_CTRL_A" ]; echo $?) )) )) && $(( _limit_78 < 0 )) ))" != 0 ]; then
-        checked_all__1398_v0 
-        local ret_checked_all1398_v0__315_16="${ret_checked_all1398_v0}"
-        if [ "${ret_checked_all1398_v0__315_16}" != 0 ]; then
-            go_up__1229_v0 "${_display_count_72}"
-            local array_292=("")
-            eprintf__1174_v0 "\\x1b[G" array_292[@]
-            render_page__1570_v0 
+    elif [ "$(( $(( _multi_77 && $(( $(( $([ "_${key_18138}" != "_a" ]; echo $?) || $([ "_${key_18138}" != "_A" ]; echo $?) )) || $([ "_${key_18138}" != "_CTRL_A" ]; echo $?) )) )) && $(( _limit_78 < 0 )) ))" != 0 ]; then
+        checked_all__1404_v0 
+        local ret_checked_all1404_v0__315_16="${ret_checked_all1404_v0}"
+        if [ "${ret_checked_all1404_v0__315_16}" != 0 ]; then
+            go_up__1234_v0 "${_display_count_72}"
+            local array_296=("")
+            eprintf__1178_v0 "\\x1b[G" array_296[@]
+            render_page__1576_v0 
         fi
-        ret_chooser_step1582_v0="${__CHOOSER_CONTINUE_67}"
+        ret_chooser_step1588_v0="${__CHOOSER_CONTINUE_67}"
         return 0
-    elif [ "$(( $([ "_${key_18060}" != "_INPUT" ]; echo $?) || $([ "_${key_18060}" != "_SPACE" ]; echo $?) ))" != 0 ]; then
-        ret_chooser_step1582_v0="${__CHOOSER_DONE_69}"
+    elif [ "$(( $([ "_${key_18138}" != "_INPUT" ]; echo $?) || $([ "_${key_18138}" != "_SPACE" ]; echo $?) ))" != 0 ]; then
+        ret_chooser_step1588_v0="${__CHOOSER_DONE_69}"
         return 0
     else
-        ret_chooser_step1582_v0="${__CHOOSER_CONTINUE_67}"
+        ret_chooser_step1588_v0="${__CHOOSER_CONTINUE_67}"
         return 0
     fi
-    if [ "$(( prev_page_18062 != _current_page_74 ))" != 0 ]; then
-        ret_chooser_step1582_v0="${__CHOOSER_NEED_PAGE_68}"
+    if [ "$(( prev_page_18140 != _current_page_74 ))" != 0 ]; then
+        ret_chooser_step1588_v0="${__CHOOSER_NEED_PAGE_68}"
         return 0
     fi
-    if [ "$(( prev_selected_18061 != _selected_75 ))" != 0 ]; then
-        redraw_selection__1580_v0 "${prev_selected_18061}"
+    if [ "$(( prev_selected_18139 != _selected_75 ))" != 0 ]; then
+        redraw_selection__1586_v0 "${prev_selected_18139}"
     fi
-    ret_chooser_step1582_v0="${__CHOOSER_CONTINUE_67}"
+    ret_chooser_step1588_v0="${__CHOOSER_CONTINUE_67}"
     return 0
 }
 
 # chooser_selected()
-chooser_selected__1583_v0() {
-    chooser_page_start__1574_v0 
-    local ret_chooser_page_start1574_v0__339_12="${ret_chooser_page_start1574_v0}"
-    ret_chooser_selected1583_v0="$(( ret_chooser_page_start1574_v0__339_12 + _selected_75 ))"
+chooser_selected__1589_v0() {
+    chooser_page_start__1580_v0 
+    local ret_chooser_page_start1580_v0__339_12="${ret_chooser_page_start1580_v0}"
+    ret_chooser_selected1589_v0="$(( ret_chooser_page_start1580_v0__339_12 + _selected_75 ))"
     return 0
 }
 
 # chooser_is_checked(index: Int)
-chooser_is_checked__1584_v0() {
-    local index_18088="${1}"
-    checked_is__1395_v0 "${index_18088}"
-    ret_chooser_is_checked1584_v0="${ret_checked_is1395_v0}"
+chooser_is_checked__1590_v0() {
+    local index_18166="${1}"
+    checked_is__1401_v0 "${index_18166}"
+    ret_chooser_is_checked1590_v0="${ret_checked_is1401_v0}"
     return 0
 }
 
 # chooser_end()
-chooser_end__1585_v0() {
-    local total_lines_18083="$(( _display_count_72 + 2 ))"
+chooser_end__1591_v0() {
+    local total_lines_18161="$(( _display_count_72 + 2 ))"
     if [ "${_has_header_80}" != 0 ]; then
-        total_lines_18083="$(( total_lines_18083 + 1 ))"
+        total_lines_18161="$(( total_lines_18161 + 1 ))"
     fi
-    go_down__1230_v0 1
-    remove_line__1225_v0 "$(( total_lines_18083 - 1 ))"
-    remove_current_line__1226_v0 
-    stty_unlock__1216_v0 
-    show_cursor__1233_v0 
+    go_down__1235_v0 1
+    remove_line__1230_v0 "$(( total_lines_18161 - 1 ))"
+    remove_current_line__1231_v0 
+    stty_unlock__1221_v0 
+    show_cursor__1238_v0 
 }
 
 # xyl_choose(options: [Text], cursor: Text, header: Text, page_size: Int)
-xyl_choose__1594_v0() {
-    local options_18092=("${!1}")
-    local cursor_18093="${2}"
-    local header_18094="${3}"
-    local page_size_18095="${4}"
+xyl_choose__1600_v0() {
+    local options_18170=("${!1}")
+    local cursor_18171="${2}"
+    local header_18172="${3}"
+    local page_size_18173="${4}"
     # `len` copies the whole array, so the count is taken once and reused.
-    local __length_293=("${options_18092[@]}")
-    local total_18096="${#__length_293[@]}"
-    if [ "$(( total_18096 == 0 ))" != 0 ]; then
-        eprintf_colored__1175_v0 "ERROR: No options provided.
+    local __length_297=("${options_18170[@]}")
+    local total_18174="${#__length_297[@]}"
+    if [ "$(( total_18174 == 0 ))" != 0 ]; then
+        eprintf_colored__1179_v0 "ERROR: No options provided.
 " 31
         exit 1
     fi
-    chooser_begin__1573_v0 "${total_18096}" "${page_size_18095}" "${header_18094}" "${cursor_18093}" 0 -1
-    local need_page_18097=1
+    chooser_begin__1579_v0 "${total_18174}" "${page_size_18173}" "${header_18172}" "${cursor_18171}" 0 -1
+    local need_page_18175=1
     while :
     do
-        if [ "${need_page_18097}" != 0 ]; then
-            local page_18098=()
-            chooser_page_start__1574_v0 
-            local start_18099="${ret_chooser_page_start1574_v0}"
-            chooser_page_count__1575_v0 
-            local count_18100="${ret_chooser_page_count1575_v0}"
-            local __range_start_18101="${start_18099}"
-            local __range_end_18101="$(( start_18099 + count_18100 ))"
-            local __dir_18101=$(( ${__range_start_18101} <= ${__range_end_18101} ? 1 : -1 ))
-            for (( i_18101=${__range_start_18101}; i_18101 * ${__dir_18101} < ${__range_end_18101} * ${__dir_18101}; i_18101+=${__dir_18101} )); do
-                local array_295=("${options_18092[${i_18101}]?"Index out of bounds (at src/./choose/./mod.ab:33:34)"}")
-                page_18098+=("${array_295[@]}")
+        if [ "${need_page_18175}" != 0 ]; then
+            local page_18176=()
+            chooser_page_start__1580_v0 
+            local start_18177="${ret_chooser_page_start1580_v0}"
+            chooser_page_count__1581_v0 
+            local count_18178="${ret_chooser_page_count1581_v0}"
+            local __range_start_18179="${start_18177}"
+            local __range_end_18179="$(( start_18177 + count_18178 ))"
+            local __dir_18179=$(( ${__range_start_18179} <= ${__range_end_18179} ? 1 : -1 ))
+            for (( i_18179=${__range_start_18179}; i_18179 * ${__dir_18179} < ${__range_end_18179} * ${__dir_18179}; i_18179+=${__dir_18179} )); do
+                local array_299=("${options_18170[${i_18179}]?"Index out of bounds (at src/./choose/./mod.ab:33:34)"}")
+                page_18176+=("${array_299[@]}")
 done
-            chooser_set_page__1576_v0 page_18098[@]
+            chooser_set_page__1582_v0 page_18176[@]
         fi
-        chooser_step__1582_v0 
-        local step_18102="${ret_chooser_step1582_v0}"
-        if [ "$(( step_18102 == __CHOOSER_DONE_69 ))" != 0 ]; then
+        chooser_step__1588_v0 
+        local step_18180="${ret_chooser_step1588_v0}"
+        if [ "$(( step_18180 == __CHOOSER_DONE_69 ))" != 0 ]; then
             break
         fi
-        need_page_18097="$(( step_18102 == __CHOOSER_NEED_PAGE_68 ))"
+        need_page_18175="$(( step_18180 == __CHOOSER_NEED_PAGE_68 ))"
     done
-    chooser_selected__1583_v0 
-    local selected_18103="${ret_chooser_selected1583_v0}"
-    chooser_end__1585_v0 
-    ret_xyl_choose1594_v0="${options_18092[${selected_18103}]?"Index out of bounds (at src/./choose/./mod.ab:46:20)"}"
+    chooser_selected__1589_v0 
+    local selected_18181="${ret_chooser_selected1589_v0}"
+    chooser_end__1591_v0 
+    ret_xyl_choose1600_v0="${options_18170[${selected_18181}]?"Index out of bounds (at src/./choose/./mod.ab:46:20)"}"
     return 0
 }
 
 # xyl_multi_choose(options: [Text], cursor: Text, header: Text, limit: Int, page_size: Int)
-xyl_multi_choose__1595_v0() {
-    local options_17952=("${!1}")
-    local cursor_17953="${2}"
-    local header_17954="${3}"
-    local limit_17955="${4}"
-    local page_size_17956="${5}"
-    local __length_296=("${options_17952[@]}")
-    local total_17957="${#__length_296[@]}"
-    if [ "$(( total_17957 == 0 ))" != 0 ]; then
-        eprintf_colored__1175_v0 "ERROR: No options provided.
+xyl_multi_choose__1601_v0() {
+    local options_18028=("${!1}")
+    local cursor_18029="${2}"
+    local header_18030="${3}"
+    local limit_18031="${4}"
+    local page_size_18032="${5}"
+    local __length_300=("${options_18028[@]}")
+    local total_18033="${#__length_300[@]}"
+    if [ "$(( total_18033 == 0 ))" != 0 ]; then
+        eprintf_colored__1179_v0 "ERROR: No options provided.
 " 31
-        ret_xyl_multi_choose1595_v0=()
+        ret_xyl_multi_choose1601_v0=()
         return 0
     fi
-    chooser_begin__1573_v0 "${total_17957}" "${page_size_17956}" "${header_17954}" "${cursor_17953}" 1 "${limit_17955}"
-    local need_page_18032=1
+    chooser_begin__1579_v0 "${total_18033}" "${page_size_18032}" "${header_18030}" "${cursor_18029}" 1 "${limit_18031}"
+    local need_page_18110=1
     while :
     do
-        if [ "${need_page_18032}" != 0 ]; then
-            local page_18033=()
-            chooser_page_start__1574_v0 
-            local start_18034="${ret_chooser_page_start1574_v0}"
-            chooser_page_count__1575_v0 
-            local count_18037="${ret_chooser_page_count1575_v0}"
-            local __range_start_18038="${start_18034}"
-            local __range_end_18038="$(( start_18034 + count_18037 ))"
-            local __dir_18038=$(( ${__range_start_18038} <= ${__range_end_18038} ? 1 : -1 ))
-            for (( i_18038=${__range_start_18038}; i_18038 * ${__dir_18038} < ${__range_end_18038} * ${__dir_18038}; i_18038+=${__dir_18038} )); do
-                local array_299=("${options_17952[${i_18038}]?"Index out of bounds (at src/./choose/./mod.ab:78:34)"}")
-                page_18033+=("${array_299[@]}")
+        if [ "${need_page_18110}" != 0 ]; then
+            local page_18111=()
+            chooser_page_start__1580_v0 
+            local start_18112="${ret_chooser_page_start1580_v0}"
+            chooser_page_count__1581_v0 
+            local count_18115="${ret_chooser_page_count1581_v0}"
+            local __range_start_18116="${start_18112}"
+            local __range_end_18116="$(( start_18112 + count_18115 ))"
+            local __dir_18116=$(( ${__range_start_18116} <= ${__range_end_18116} ? 1 : -1 ))
+            for (( i_18116=${__range_start_18116}; i_18116 * ${__dir_18116} < ${__range_end_18116} * ${__dir_18116}; i_18116+=${__dir_18116} )); do
+                local array_303=("${options_18028[${i_18116}]?"Index out of bounds (at src/./choose/./mod.ab:78:34)"}")
+                page_18111+=("${array_303[@]}")
 done
-            chooser_set_page__1576_v0 page_18033[@]
+            chooser_set_page__1582_v0 page_18111[@]
         fi
-        chooser_step__1582_v0 
-        local step_18082="${ret_chooser_step1582_v0}"
-        if [ "$(( step_18082 == __CHOOSER_DONE_69 ))" != 0 ]; then
+        chooser_step__1588_v0 
+        local step_18160="${ret_chooser_step1588_v0}"
+        if [ "$(( step_18160 == __CHOOSER_DONE_69 ))" != 0 ]; then
             break
         fi
-        need_page_18032="$(( step_18082 == __CHOOSER_NEED_PAGE_68 ))"
+        need_page_18110="$(( step_18160 == __CHOOSER_NEED_PAGE_68 ))"
     done
-    chooser_end__1585_v0 
-    local result_18086=()
-    local __range_start_18087=0
-    local __range_end_18087="${total_17957}"
-    local __dir_18087=$(( ${__range_start_18087} <= ${__range_end_18087} ? 1 : -1 ))
-    for (( i_18087=${__range_start_18087}; i_18087 * ${__dir_18087} < ${__range_end_18087} * ${__dir_18087}; i_18087+=${__dir_18087} )); do
-        chooser_is_checked__1584_v0 "${i_18087}"
-        local ret_chooser_is_checked1584_v0__93_12="${ret_chooser_is_checked1584_v0}"
-        if [ "${ret_chooser_is_checked1584_v0__93_12}" != 0 ]; then
-            local array_301=("${options_17952[${i_18087}]?"Index out of bounds (at src/./choose/./mod.ab:94:32)"}")
-            result_18086+=("${array_301[@]}")
+    chooser_end__1591_v0 
+    local result_18164=()
+    local __range_start_18165=0
+    local __range_end_18165="${total_18033}"
+    local __dir_18165=$(( ${__range_start_18165} <= ${__range_end_18165} ? 1 : -1 ))
+    for (( i_18165=${__range_start_18165}; i_18165 * ${__dir_18165} < ${__range_end_18165} * ${__dir_18165}; i_18165+=${__dir_18165} )); do
+        chooser_is_checked__1590_v0 "${i_18165}"
+        local ret_chooser_is_checked1590_v0__93_12="${ret_chooser_is_checked1590_v0}"
+        if [ "${ret_chooser_is_checked1590_v0__93_12}" != 0 ]; then
+            local array_305=("${options_18028[${i_18165}]?"Index out of bounds (at src/./choose/./mod.ab:94:32)"}")
+            result_18164+=("${array_305[@]}")
         fi
 done
-    ret_xyl_multi_choose1595_v0=("${result_18086[@]}")
+    ret_xyl_multi_choose1601_v0=("${result_18164[@]}")
     return 0
 }
 
 # print_choose_help()
-print_choose_help__1696_v0() {
-    local usage_17875=("Usage:" "./xylitol.sh" "choose" "[<options>" "...]" "[flags]")
-    print_wrapped__1234_v0 usage_17875[@]
+print_choose_help__1702_v0() {
+    local usage_17951=("Usage:" "./xylitol.sh" "choose" "[<options>" "...]" "[flags]")
+    print_wrapped__1239_v0 usage_17951[@]
     printf '%s\n' ""
-    colored_primary__1276_v0 "choose"
-    local ret_colored_primary1276_v0__8_20="${ret_colored_primary1276_v0}"
-    local title_17902=("${ret_colored_primary1276_v0__8_20}" "-" "Choose" "from" "a" "list" "of" "options.")
-    print_wrapped__1234_v0 title_17902[@]
+    colored_primary__1281_v0 "choose"
+    local ret_colored_primary1281_v0__8_20="${ret_colored_primary1281_v0}"
+    local title_17978=("${ret_colored_primary1281_v0__8_20}" "-" "Choose" "from" "a" "list" "of" "options.")
+    print_wrapped__1239_v0 title_17978[@]
     printf '%s\n' ""
-    colored_secondary__1277_v0 "Arguments:"
-    local ret_colored_secondary1277_v0__11_12="${ret_colored_secondary1277_v0}"
-    local array_304=()
-    printf__128_v0 "${ret_colored_secondary1277_v0__11_12}""
-" array_304[@]
-    local arg_names_17904=("[<options> ...]")
-    local arg_texts_17905=("List of options to choose from")
-    local arg_notes_17906=("")
-    # 20 keeps this section on the same column as Flags below.
-    render_help_entries__1411_v0 arg_names_17904[@] arg_texts_17905[@] arg_notes_17906[@] 20
-    printf '%s\n' ""
-    colored_secondary__1277_v0 "Flags:"
-    local ret_colored_secondary1277_v0__18_12="${ret_colored_secondary1277_v0}"
+    colored_secondary__1282_v0 "Arguments:"
+    local ret_colored_secondary1282_v0__11_12="${ret_colored_secondary1282_v0}"
     local array_308=()
-    printf__128_v0 "${ret_colored_secondary1277_v0__18_12}""
+    printf__128_v0 "${ret_colored_secondary1282_v0__11_12}""
 " array_308[@]
-    local names_17939=("-h, --help" "--limit=<number>" "--no-limit" "--cursor=\"<text>\"" "--header=\"<text>\"" "--page-size=<number>")
-    local texts_17940=("Show this help message" "Enable multi-selection mode with a limit of selections" "Enable multi-selection mode with no limit" "Set the cursor text" "Set a header text to display above the options" "Set the number of options per page")
-    local notes_17941=("" "" "" "(default: '> ')" "(ANSI escape supported)" "(default: 10)")
-    render_help_entries__1411_v0 names_17939[@] texts_17940[@] notes_17941[@] 0
+    local arg_names_17980=("[<options> ...]")
+    local arg_texts_17981=("List of options to choose from")
+    local arg_notes_17982=("")
+    # 20 keeps this section on the same column as Flags below.
+    render_help_entries__1417_v0 arg_names_17980[@] arg_texts_17981[@] arg_notes_17982[@] 20
+    printf '%s\n' ""
+    colored_secondary__1282_v0 "Flags:"
+    local ret_colored_secondary1282_v0__18_12="${ret_colored_secondary1282_v0}"
+    local array_312=()
+    printf__128_v0 "${ret_colored_secondary1282_v0__18_12}""
+" array_312[@]
+    local names_18015=("-h, --help" "--limit=<number>" "--no-limit" "--cursor=\"<text>\"" "--header=\"<text>\"" "--page-size=<number>")
+    local texts_18016=("Show this help message" "Enable multi-selection mode with a limit of selections" "Enable multi-selection mode with no limit" "Set the cursor text" "Set a header text to display above the options" "Set the number of options per page")
+    local notes_18017=("" "" "" "(default: '> ')" "(ANSI escape supported)" "(default: 10)")
+    render_help_entries__1417_v0 names_18015[@] texts_18016[@] notes_18017[@] 0
     printf '%s\n' ""
 }
 
 # read_stdin_options()
-read_stdin_options__1754_v0() {
-    local options_17868=()
-    local command_313
-    command_313="$([ -t 0 ] && echo "true" || echo "false")"
+read_stdin_options__1760_v0() {
+    local options_17944=()
+    local command_317
+    command_317="$([ -t 0 ] && echo "true" || echo "false")"
     __status=$?
-    local is_tty_17869="${command_313}"
-    if [ "$([ "_${is_tty_17869}" != "_false" ]; echo $?)" != 0 ]; then
-        while IFS= read -r line || [[ -n "$line" ]]; do options_17868+=("$line"); done
+    local is_tty_17945="${command_317}"
+    if [ "$([ "_${is_tty_17945}" != "_false" ]; echo $?)" != 0 ]; then
+        while IFS= read -r line || [[ -n "$line" ]]; do options_17944+=("$line"); done
         __status=$?
     fi
-    ret_read_stdin_options1754_v0=("${options_17868[@]}")
+    ret_read_stdin_options1760_v0=("${options_17944[@]}")
     return 0
 }
 
 # execute_choose(parameters: [Text])
-execute_choose__1755_v0() {
-    local parameters_17852=("${!1}")
-    local cursor_17853="> "
-    colored_primary__1276_v0 "Choose: "
-    local ret_colored_primary1276_v0__17_30="${ret_colored_primary1276_v0}"
-    local header_17867="\\x1b[1m""${ret_colored_primary1276_v0__17_30}"
-    read_stdin_options__1754_v0 
-    local options_17870=("${ret_read_stdin_options1754_v0[@]}")
-    local multi_17871=0
-    local limit_17872=-1
-    local page_size_17873=10
-    local __length_317=("${parameters_17852[@]}")
-    local slice_upper_316="${#__length_317[@]}"
-    local slice_offset_318=2
-    local slice_offset_318=$((${slice_offset_318} > 0 ? ${slice_offset_318} : 0))
-    local slice_length_319="$(( slice_upper_316 - slice_offset_318 ))"
-    local slice_length_319=$((${slice_length_319} > 0 ? ${slice_length_319} : 0))
-    for param_17874 in "${parameters_17852[@]:${slice_offset_318}:${slice_length_319}}"; do
-        starts_with__22_v0 "${param_17874}" "--cursor="
+execute_choose__1761_v0() {
+    local parameters_17928=("${!1}")
+    local cursor_17929="> "
+    colored_primary__1281_v0 "Choose: "
+    local ret_colored_primary1281_v0__17_30="${ret_colored_primary1281_v0}"
+    local header_17943="\\x1b[1m""${ret_colored_primary1281_v0__17_30}"
+    read_stdin_options__1760_v0 
+    local options_17946=("${ret_read_stdin_options1760_v0[@]}")
+    local multi_17947=0
+    local limit_17948=-1
+    local page_size_17949=10
+    local __length_321=("${parameters_17928[@]}")
+    local slice_upper_320="${#__length_321[@]}"
+    local slice_offset_322=2
+    local slice_offset_322=$((${slice_offset_322} > 0 ? ${slice_offset_322} : 0))
+    local slice_length_323="$(( slice_upper_320 - slice_offset_322 ))"
+    local slice_length_323=$((${slice_length_323} > 0 ? ${slice_length_323} : 0))
+    for param_17950 in "${parameters_17928[@]:${slice_offset_322}:${slice_length_323}}"; do
+        starts_with__22_v0 "${param_17950}" "--cursor="
         local ret_starts_with22_v0__29_13="${ret_starts_with22_v0}"
-        starts_with__22_v0 "${param_17874}" "--header="
+        starts_with__22_v0 "${param_17950}" "--header="
         local ret_starts_with22_v0__32_13="${ret_starts_with22_v0}"
-        starts_with__22_v0 "${param_17874}" "--limit="
+        starts_with__22_v0 "${param_17950}" "--limit="
         local ret_starts_with22_v0__35_13="${ret_starts_with22_v0}"
-        starts_with__22_v0 "${param_17874}" "--page-size="
+        starts_with__22_v0 "${param_17950}" "--page-size="
         local ret_starts_with22_v0__46_13="${ret_starts_with22_v0}"
-        if [ "$(( $([ "_${param_17874}" != "_-h" ]; echo $?) || $([ "_${param_17874}" != "_--help" ]; echo $?) ))" != 0 ]; then
-            print_choose_help__1696_v0 
+        if [ "$(( $([ "_${param_17950}" != "_-h" ]; echo $?) || $([ "_${param_17950}" != "_--help" ]; echo $?) ))" != 0 ]; then
+            print_choose_help__1702_v0 
             exit 0
         elif [ "${ret_starts_with22_v0__29_13}" != 0 ]; then
-            local __length_320="--cursor="
-            slice__24_v0 "${param_17874}" "${#__length_320}" 0
-            cursor_17853="${ret_slice24_v0}"
+            local __length_324="--cursor="
+            slice__24_v0 "${param_17950}" "${#__length_324}" 0
+            cursor_17929="${ret_slice24_v0}"
         elif [ "${ret_starts_with22_v0__32_13}" != 0 ]; then
-            local __length_321="--header="
-            slice__24_v0 "${param_17874}" "${#__length_321}" 0
-            header_17867="${ret_slice24_v0}"
+            local __length_325="--header="
+            slice__24_v0 "${param_17950}" "${#__length_325}" 0
+            header_17943="${ret_slice24_v0}"
         elif [ "${ret_starts_with22_v0__35_13}" != 0 ]; then
-            local __length_322="--limit="
-            slice__24_v0 "${param_17874}" "${#__length_322}" 0
-            local value_17942="${ret_slice24_v0}"
-            parse_int__13_v0 "${value_17942}"
+            local __length_326="--limit="
+            slice__24_v0 "${param_17950}" "${#__length_326}" 0
+            local value_18018="${ret_slice24_v0}"
+            parse_int__13_v0 "${value_18018}"
             __status=$?
             if [ "${__status}" != 0 ]; then
-                eprintf_colored__1175_v0 "ERROR: Invalid limit value: ""${value_17942}""
+                eprintf_colored__1179_v0 "ERROR: Invalid limit value: ""${value_18018}""
 " 31
                 exit 1
             fi
-            limit_17872="${ret_parse_int13_v0}"
-            multi_17871=1
-        elif [ "$([ "_${param_17874}" != "_--no-limit" ]; echo $?)" != 0 ]; then
-            multi_17871=1
+            limit_17948="${ret_parse_int13_v0}"
+            multi_17947=1
+        elif [ "$([ "_${param_17950}" != "_--no-limit" ]; echo $?)" != 0 ]; then
+            multi_17947=1
         elif [ "${ret_starts_with22_v0__46_13}" != 0 ]; then
-            local __length_323="--page-size="
-            slice__24_v0 "${param_17874}" "${#__length_323}" 0
-            local value_17947="${ret_slice24_v0}"
-            parse_int__13_v0 "${value_17947}"
+            local __length_327="--page-size="
+            slice__24_v0 "${param_17950}" "${#__length_327}" 0
+            local value_18023="${ret_slice24_v0}"
+            parse_int__13_v0 "${value_18023}"
             __status=$?
             if [ "${__status}" != 0 ]; then
-                eprintf_colored__1175_v0 "ERROR: Invalid page-size value: ""${value_17947}""
+                eprintf_colored__1179_v0 "ERROR: Invalid page-size value: ""${value_18023}""
 " 31
                 exit 1
             fi
-            page_size_17873="${ret_parse_int13_v0}"
+            page_size_17949="${ret_parse_int13_v0}"
         else
-            options_17870+=("${param_17874}")
+            options_17946+=("${param_17950}")
         fi
     done
-    has_ansi_escape__1300_v0 "${header_17867}"
-    local ret_has_ansi_escape1300_v0__59_44="${ret_has_ansi_escape1300_v0}"
-    escape_ansi__1301_v0 "${header_17867}"
-    local ret_escape_ansi1301_v0__59_73="${ret_escape_ansi1301_v0}"
-    colored_primary__1276_v0 "${header_17867}"
-    local ret_colored_primary1276_v0__59_111="${ret_colored_primary1276_v0}"
-    local display_header_17951
-    display_header_17951="$(if [ "$(( $([ "_${header_17867}" != "_" ]; echo $?) || ret_has_ansi_escape1300_v0__59_44 ))" != 0 ]; then echo "${ret_escape_ansi1301_v0__59_73}"; else echo "\\x1b[1m""${ret_colored_primary1276_v0__59_111}"; fi)"
-    if [ "${multi_17871}" != 0 ]; then
-        xyl_multi_choose__1595_v0 options_17870[@] "${cursor_17853}" "${display_header_17951}" "${limit_17872}" "${page_size_17873}"
-        local results_18089=("${ret_xyl_multi_choose1595_v0[@]}")
-        join__7_v0 results_18089[@] "
+    has_ansi_escape__1305_v0 "${header_17943}"
+    local ret_has_ansi_escape1305_v0__59_44="${ret_has_ansi_escape1305_v0}"
+    escape_ansi__1306_v0 "${header_17943}"
+    local ret_escape_ansi1306_v0__59_73="${ret_escape_ansi1306_v0}"
+    colored_primary__1281_v0 "${header_17943}"
+    local ret_colored_primary1281_v0__59_111="${ret_colored_primary1281_v0}"
+    local display_header_18027
+    display_header_18027="$(if [ "$(( $([ "_${header_17943}" != "_" ]; echo $?) || ret_has_ansi_escape1305_v0__59_44 ))" != 0 ]; then echo "${ret_escape_ansi1306_v0__59_73}"; else echo "\\x1b[1m""${ret_colored_primary1281_v0__59_111}"; fi)"
+    if [ "${multi_17947}" != 0 ]; then
+        xyl_multi_choose__1601_v0 options_17946[@] "${cursor_17929}" "${display_header_18027}" "${limit_17948}" "${page_size_17949}"
+        local results_18167=("${ret_xyl_multi_choose1601_v0[@]}")
+        join__7_v0 results_18167[@] "
 "
-        ret_execute_choose1755_v0="${ret_join7_v0}"
+        ret_execute_choose1761_v0="${ret_join7_v0}"
         return 0
     fi
-    xyl_choose__1594_v0 options_17870[@] "${cursor_17853}" "${display_header_17951}" "${page_size_17873}"
-    ret_execute_choose1755_v0="${ret_xyl_choose1594_v0}"
+    xyl_choose__1600_v0 options_17946[@] "${cursor_17929}" "${display_header_18027}" "${page_size_17949}"
+    ret_execute_choose1761_v0="${ret_xyl_choose1600_v0}"
     return 0
 }
 
 # get_key()
-get_key__1840_v0() {
-    local command_325
-    command_325="$(IFS= read -rsn1 k < /dev/tty; if [[ "$k" == $'\e' ]]; then IFS= read -rsn2 r < /dev/tty; k+=$r; fi; case "$k" in ($'\e[A') printf UP;; ($'\e[B') printf DOWN;; ($'\e[C') printf RIGHT;; ($'\e[D') printf LEFT;; ($'\177') printf BACKSPACE;; ($'	') printf TAB;; ($'\001') printf CTRL_A;; (' ') printf SPACE;; ('') printf INPUT;; (*) printf '%s' "$k";; esac)"
+get_key__1846_v0() {
+    local command_329
+    command_329="$(IFS= read -rsn1 k < /dev/tty; if [[ "$k" == $'\e' ]]; then IFS= read -rsn2 r < /dev/tty; k+=$r; fi; case "$k" in ($'\e[A') printf UP;; ($'\e[B') printf DOWN;; ($'\e[C') printf RIGHT;; ($'\e[D') printf LEFT;; ($'\177') printf BACKSPACE;; ($'	') printf TAB;; ($'\001') printf CTRL_A;; (' ') printf SPACE;; ('') printf INPUT;; (*) printf '%s' "$k";; esac)"
     __status=$?
-    ret_get_key1840_v0="${command_325}"
+    ret_get_key1846_v0="${command_329}"
     return 0
 }
 
 # eprintf(format: Text, args: [Text])
-eprintf__1842_v0() {
-    local format_27395="${1}"
-    local args_27396=("${!2}")
-    args_27396=("${format_27395}" "${args_27396[@]}")
+eprintf__1848_v0() {
+    local format_27495="${1}"
+    local args_27496=("${!2}")
+    args_27496=("${format_27495}" "${args_27496[@]}")
     __status=$?
-    printf "${args_27396[@]}" >&2
+    printf "${args_27496[@]}" >&2
     __status=$?
 }
 
 # eprintf_colored(message: Text, color: Int)
-eprintf_colored__1843_v0() {
-    local message_27393="${1}"
-    local color_27394="${2}"
+eprintf_colored__1849_v0() {
+    local message_27493="${1}"
+    local color_27494="${2}"
     # Prints an error message with a specified color.
-    local array_326=("${message_27393}")
-    eprintf__1842_v0 "\\x1b[${color_27394}m%s\\x1b[0m" array_326[@]
+    local array_330=("${message_27493}")
+    eprintf__1848_v0 "\\x1b[${color_27494}m%s\\x1b[0m" array_330[@]
 }
 
 # eprintf(format: Text, args: [Text])
-eprintf__1858_v0() {
-    local format_27413="${1}"
-    local args_27414=("${!2}")
-    args_27414=("${format_27413}" "${args_27414[@]}")
+eprintf__1864_v0() {
+    local format_27515="${1}"
+    local args_27516=("${!2}")
+    args_27516=("${format_27515}" "${args_27516[@]}")
     __status=$?
-    printf "${args_27414[@]}" >&2
+    printf "${args_27516[@]}" >&2
     __status=$?
+}
+
+# eprintf_colored(message: Text, color: Int)
+eprintf_colored__1865_v0() {
+    local message_27513="${1}"
+    local color_27514="${2}"
+    # Prints an error message with a specified color.
+    local array_331=("${message_27513}")
+    eprintf__1864_v0 "\\x1b[${color_27514}m%s\\x1b[0m" array_331[@]
 }
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
 _perl_state_90="None"
 # perl_available()
-perl_available__1865_v0() {
+perl_available__1872_v0() {
     if [ "$([ "_${_perl_state_90}" != "_None" ]; echo $?)" != 0 ]; then
-        local command_327
-        command_327="$(echo "$XYLITOL_USE_PERL")"
+        local command_332
+        command_332="$(echo "$XYLITOL_USE_PERL")"
         __status=$?
-        local disabled_27338
-        disabled_27338="$([ "_${command_327}" != "_No" ]; echo $?)"
-        local command_328
-        command_328="$(command -v perl > /dev/null && echo 0 || echo 1)"
+        local disabled_27438
+        disabled_27438="$([ "_${command_332}" != "_No" ]; echo $?)"
+        local command_333
+        command_333="$(command -v perl > /dev/null && echo 0 || echo 1)"
         __status=$?
-        local found_27339
-        found_27339="$(( $(( ! disabled_27338 )) && $([ "_${command_328}" != "_0" ]; echo $?) ))"
-        _perl_state_90="$(if [ "${found_27339}" != 0 ]; then echo "Yes"; else echo "No"; fi)"
+        local found_27439
+        found_27439="$(( $(( ! disabled_27438 )) && $([ "_${command_333}" != "_0" ]; echo $?) ))"
+        _perl_state_90="$(if [ "${found_27439}" != 0 ]; then echo "Yes"; else echo "No"; fi)"
     fi
-    ret_perl_available1865_v0="$([ "_${_perl_state_90}" != "_Yes" ]; echo $?)"
+    ret_perl_available1872_v0="$([ "_${_perl_state_90}" != "_Yes" ]; echo $?)"
     return 0
 }
 
 # perl_get_cjk_width(text: Text)
-perl_get_cjk_width__1866_v0() {
-    local text_27337="${1}"
-    perl_available__1865_v0 
-    local ret_perl_available1865_v0__19_12="${ret_perl_available1865_v0}"
-    if [ "$(( ! ret_perl_available1865_v0__19_12 ))" != 0 ]; then
-        ret_perl_get_cjk_width1866_v0=''
+perl_get_cjk_width__1873_v0() {
+    local text_27437="${1}"
+    perl_available__1872_v0 
+    local ret_perl_available1872_v0__19_12="${ret_perl_available1872_v0}"
+    if [ "$(( ! ret_perl_available1872_v0__19_12 ))" != 0 ]; then
+        ret_perl_get_cjk_width1873_v0=''
         return 1
     fi
-    local command_329
-    command_329="$(perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text_27337}" 2>/dev/null)"
+    local command_334
+    command_334="$(perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text_27437}" 2>/dev/null)"
     __status=$?
     if [ "${__status}" != 0 ]; then
-        ret_perl_get_cjk_width1866_v0=''
+        ret_perl_get_cjk_width1873_v0=''
         return "${__status}"
     fi
-    local width_str_27340="${command_329}"
-    parse_int__13_v0 "${width_str_27340}"
+    local width_str_27440="${command_334}"
+    parse_int__13_v0 "${width_str_27440}"
     __status=$?
     if [ "${__status}" != 0 ]; then
-        ret_perl_get_cjk_width1866_v0=''
+        ret_perl_get_cjk_width1873_v0=''
         return "${__status}"
     fi
-    local width_27341="${ret_parse_int13_v0}"
-    ret_perl_get_cjk_width1866_v0="${width_27341}"
+    local width_27441="${ret_parse_int13_v0}"
+    ret_perl_get_cjk_width1873_v0="${width_27441}"
     return 0
 }
 
 # has_ansi_escape(text: Text)
-has_ansi_escape__1871_v0() {
-    local text_27327="${1}"
+has_ansi_escape__1878_v0() {
+    local text_27427="${1}"
     # Check for ESC character (0x1B = 27) or literal \x1b[
-    local command_330
-    command_330="$([[ "${text_27327}" == *$'\x1b'* || "${text_27327}" == *'\x1b['* ]] && echo "1" || echo "0")"
+    local command_335
+    command_335="$([[ "${text_27427}" == *$'\x1b'* || "${text_27427}" == *'\x1b['* ]] && echo "1" || echo "0")"
     __status=$?
-    local has_escape_27328="${command_330}"
-    ret_has_ansi_escape1871_v0="$([ "_${has_escape_27328}" != "_1" ]; echo $?)"
+    local has_escape_27428="${command_335}"
+    ret_has_ansi_escape1878_v0="$([ "_${has_escape_27428}" != "_1" ]; echo $?)"
     return 0
 }
 
 # strip_ansi(text: Text)
-strip_ansi__1873_v0() {
-    local text_27333="${1}"
-    local command_331
-    command_331="$(printf "%s" "${text_27333}" | sed $'s/\x1b\[[0-9;]*m//g' | sed 's/\\x1b\[[0-9;]*m//g')"
+strip_ansi__1880_v0() {
+    local text_27433="${1}"
+    local command_336
+    command_336="$(printf "%s" "${text_27433}" | sed $'s/\x1b\[[0-9;]*m//g' | sed 's/\\x1b\[[0-9;]*m//g')"
     __status=$?
-    ret_strip_ansi1873_v0="${command_331}"
+    ret_strip_ansi1880_v0="${command_336}"
     return 0
 }
 
 # is_all_ascii(text: Text)
-is_all_ascii__1874_v0() {
-    local text_27335="${1}"
-    local command_332
-    command_332="$(printf "%s" "${text_27335}" | LC_ALL=C grep -q '^[ -~]*$' && echo 0 || echo 1)"
+is_all_ascii__1881_v0() {
+    local text_27435="${1}"
+    local command_337
+    command_337="$(printf "%s" "${text_27435}" | LC_ALL=C grep -q '^[ -~]*$' && echo 0 || echo 1)"
     __status=$?
-    local result_27336="${command_332}"
-    ret_is_all_ascii1874_v0="$([ "_${result_27336}" != "_0" ]; echo $?)"
+    local result_27436="${command_337}"
+    ret_is_all_ascii1881_v0="$([ "_${result_27436}" != "_0" ]; echo $?)"
     return 0
 }
 
 # plain_len(text: Text)
-plain_len__1875_v0() {
-    local text_27330="${1}"
-    local command_333
-    command_333="$(LC_ALL=C; __t="${text_27330}"; case "$__t" in (*[!\ -~]*) echo -1;; (*'\x1b['*) echo -1;; (*) echo "${#__t}";; esac)"
+plain_len__1882_v0() {
+    local text_27430="${1}"
+    local command_338
+    command_338="$(LC_ALL=C; __t="${text_27430}"; case "$__t" in (*[!\ -~]*) echo -1;; (*'\x1b['*) echo -1;; (*) echo "${#__t}";; esac)"
     __status=$?
-    local measured_27331="${command_333}"
-    parse_int__13_v0 "${measured_27331}"
+    local measured_27431="${command_338}"
+    parse_int__13_v0 "${measured_27431}"
     __status=$?
-    ret_plain_len1875_v0="${ret_parse_int13_v0}"
+    ret_plain_len1882_v0="${ret_parse_int13_v0}"
     return 0
 }
 
 # get_visible_len(text: Text)
-get_visible_len__1876_v0() {
-    local text_27329="${1}"
-    plain_len__1875_v0 "${text_27329}"
-    local plain_27332="${ret_plain_len1875_v0}"
-    if [ "$(( plain_27332 >= 0 ))" != 0 ]; then
-        ret_get_visible_len1876_v0="${plain_27332}"
+get_visible_len__1883_v0() {
+    local text_27429="${1}"
+    plain_len__1882_v0 "${text_27429}"
+    local plain_27432="${ret_plain_len1882_v0}"
+    if [ "$(( plain_27432 >= 0 ))" != 0 ]; then
+        ret_get_visible_len1883_v0="${plain_27432}"
         return 0
     fi
-    strip_ansi__1873_v0 "${text_27329}"
-    local stripped_27334="${ret_strip_ansi1873_v0}"
-    is_all_ascii__1874_v0 "${stripped_27334}"
-    local ret_is_all_ascii1874_v0__46_12="${ret_is_all_ascii1874_v0}"
-    if [ "$(( ! ret_is_all_ascii1874_v0__46_12 ))" != 0 ]; then
-        perl_get_cjk_width__1866_v0 "${stripped_27334}"
+    strip_ansi__1880_v0 "${text_27429}"
+    local stripped_27434="${ret_strip_ansi1880_v0}"
+    is_all_ascii__1881_v0 "${stripped_27434}"
+    local ret_is_all_ascii1881_v0__46_12="${ret_is_all_ascii1881_v0}"
+    if [ "$(( ! ret_is_all_ascii1881_v0__46_12 ))" != 0 ]; then
+        perl_get_cjk_width__1873_v0 "${stripped_27434}"
         __status=$?
         if [ "${__status}" != 0 ]; then
-            local __length_334="${stripped_27334}"
-            ret_get_visible_len1876_v0="${#__length_334}"
+            local __length_339="${stripped_27434}"
+            ret_get_visible_len1883_v0="${#__length_339}"
             return 0
         fi
-        ret_get_visible_len1876_v0="${ret_perl_get_cjk_width1866_v0}"
+        ret_get_visible_len1883_v0="${ret_perl_get_cjk_width1873_v0}"
         return 0
     fi
-    local __length_335="${stripped_27334}"
-    ret_get_visible_len1876_v0="${#__length_335}"
+    local __length_340="${stripped_27434}"
+    ret_get_visible_len1883_v0="${#__length_340}"
     return 0
 }
 
@@ -4489,220 +4530,227 @@ _term_size_92=(80 24)
 export XYLITOL_RUNTIME_STTY_COUNT=0
 __status=$?
 # stty_count()
-stty_count__1882_v0() {
-    local command_337
-    command_337="$(c="${XYLITOL_RUNTIME_STTY_COUNT:-0}"; [[ "$c" =~ ^[0-9]+$ ]] && echo "$c" || echo 0)"
+stty_count__1889_v0() {
+    local command_342
+    command_342="$(c="${XYLITOL_RUNTIME_STTY_COUNT:-0}"; [[ "$c" =~ ^[0-9]+$ ]] && echo "$c" || echo 0)"
     __status=$?
-    local count_27411="${command_337}"
-    parse_int__13_v0 "${count_27411}"
+    local count_27511="${command_342}"
+    parse_int__13_v0 "${count_27511}"
     __status=$?
-    ret_stty_count1882_v0="${ret_parse_int13_v0}"
+    ret_stty_count1889_v0="${ret_parse_int13_v0}"
     return 0
 }
 
 # stty_lock()
-stty_lock__1883_v0() {
-    stty_count__1882_v0 
-    local count_num_27412="${ret_stty_count1882_v0}"
-    if [ "$(( count_num_27412 == 0 ))" != 0 ]; then
-        stty -echo -icanon min 1 time 0 < /dev/tty
+stty_lock__1890_v0() {
+    stty_count__1889_v0 
+    local count_num_27512="${ret_stty_count1889_v0}"
+    if [ "$(( count_num_27512 == 0 ))" != 0 ]; then
+        stty -echo -icanon min 1 time 0 2>/dev/null < /dev/tty
         __status=$?
+        if [ "${__status}" != 0 ]; then
+            eprintf_colored__1865_v0 "Error: " 91
+            local array_343=("")
+            eprintf__1864_v0 "xylitol needs a terminal, and /dev/tty is not available here.
+" array_343[@]
+            exit 1
+        fi
     fi
-    count_num_27412="$(( count_num_27412 + 1 ))"
-    export XYLITOL_RUNTIME_STTY_COUNT=${count_num_27412}
+    count_num_27512="$(( count_num_27512 + 1 ))"
+    export XYLITOL_RUNTIME_STTY_COUNT=${count_num_27512}
     __status=$?
 }
 
 # stty_unlock()
-stty_unlock__1884_v0() {
-    stty_count__1882_v0 
-    local count_num_27513="${ret_stty_count1882_v0}"
-    if [ "$(( count_num_27513 > 0 ))" != 0 ]; then
-        count_num_27513="$(( count_num_27513 - 1 ))"
-        export XYLITOL_RUNTIME_STTY_COUNT=${count_num_27513}
+stty_unlock__1891_v0() {
+    stty_count__1889_v0 
+    local count_num_27615="${ret_stty_count1889_v0}"
+    if [ "$(( count_num_27615 > 0 ))" != 0 ]; then
+        count_num_27615="$(( count_num_27615 - 1 ))"
+        export XYLITOL_RUNTIME_STTY_COUNT=${count_num_27615}
         __status=$?
-        if [ "$(( count_num_27513 == 0 ))" != 0 ]; then
-            stty echo icanon < /dev/tty
+        if [ "$(( count_num_27615 == 0 ))" != 0 ]; then
+            stty echo icanon 2>/dev/null < /dev/tty
             __status=$?
         fi
     fi
 }
 
 # store_term_size(size: Text)
-store_term_size__1885_v0() {
-    local size_27318="${1}"
-    if [ "$([ "_${size_27318}" != "_" ]; echo $?)" != 0 ]; then
-        ret_store_term_size1885_v0=0
+store_term_size__1892_v0() {
+    local size_27418="${1}"
+    if [ "$([ "_${size_27418}" != "_" ]; echo $?)" != 0 ]; then
+        ret_store_term_size1892_v0=0
         return 0
     fi
-    split__4_v0 "${size_27318}" " "
-    local parts_27319=("${ret_split4_v0[@]}")
-    local __length_338=("${parts_27319[@]}")
-    if [ "$(( ${#__length_338[@]} != 2 ))" != 0 ]; then
-        ret_store_term_size1885_v0=0
+    split__4_v0 "${size_27418}" " "
+    local parts_27419=("${ret_split4_v0[@]}")
+    local __length_344=("${parts_27419[@]}")
+    if [ "$(( ${#__length_344[@]} != 2 ))" != 0 ]; then
+        ret_store_term_size1892_v0=0
         return 0
     fi
-    parse_int__13_v0 "${parts_27319[1]?"Index out of bounds (at src/./filter/../utils/term.ab:53:41)"}"
+    parse_int__13_v0 "${parts_27419[1]?"Index out of bounds (at src/./filter/../utils/term.ab:57:41)"}"
     __status=$?
-    local ret_parse_int13_v0__53_25="${ret_parse_int13_v0}"
-    parse_int__13_v0 "${parts_27319[0]?"Index out of bounds (at src/./filter/../utils/term.ab:53:68)"}"
+    local ret_parse_int13_v0__57_25="${ret_parse_int13_v0}"
+    parse_int__13_v0 "${parts_27419[0]?"Index out of bounds (at src/./filter/../utils/term.ab:57:68)"}"
     __status=$?
-    local ret_parse_int13_v0__53_52="${ret_parse_int13_v0}"
-    _term_size_92=("${ret_parse_int13_v0__53_25}" "${ret_parse_int13_v0__53_52}")
-    ret_store_term_size1885_v0=1
+    local ret_parse_int13_v0__57_52="${ret_parse_int13_v0}"
+    _term_size_92=("${ret_parse_int13_v0__57_25}" "${ret_parse_int13_v0__57_52}")
+    ret_store_term_size1892_v0=1
     return 0
 }
 
 # query_term_size()
-query_term_size__1886_v0() {
-    local command_340
-    command_340="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
+query_term_size__1893_v0() {
+    local command_346
+    command_346="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
     __status=$?
-    local size_27321="${command_340}"
-    store_term_size__1885_v0 "${size_27321}"
-    ret_query_term_size1886_v0="${ret_store_term_size1885_v0}"
+    local size_27421="${command_346}"
+    store_term_size__1892_v0 "${size_27421}"
+    ret_query_term_size1893_v0="${ret_store_term_size1892_v0}"
     return 0
 }
 
 # stty_term_size()
-stty_term_size__1887_v0() {
-    local command_341
-    command_341="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
+stty_term_size__1894_v0() {
+    local command_347
+    command_347="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
     __status=$?
-    local size_27317="${command_341}"
-    store_term_size__1885_v0 "${size_27317}"
-    ret_stty_term_size1887_v0="${ret_store_term_size1885_v0}"
+    local size_27417="${command_347}"
+    store_term_size__1892_v0 "${size_27417}"
+    ret_stty_term_size1894_v0="${ret_store_term_size1892_v0}"
     return 0
 }
 
 # get_term_size()
-get_term_size__1888_v0() {
-    stty_term_size__1887_v0 
-    local detected_27320="${ret_stty_term_size1887_v0}"
-    if [ "$(( ! detected_27320 ))" != 0 ]; then
-        query_term_size__1886_v0 
-        detected_27320="${ret_query_term_size1886_v0}"
+get_term_size__1895_v0() {
+    stty_term_size__1894_v0 
+    local detected_27420="${ret_stty_term_size1894_v0}"
+    if [ "$(( ! detected_27420 ))" != 0 ]; then
+        query_term_size__1893_v0 
+        detected_27420="${ret_query_term_size1893_v0}"
     fi
     _got_term_size_91=1
 }
 
 # term_width()
-term_width__1890_v0() {
+term_width__1897_v0() {
     if [ "$(( ! _got_term_size_91 ))" != 0 ]; then
-        get_term_size__1888_v0 
+        get_term_size__1895_v0 
     fi
-    ret_term_width1890_v0="${_term_size_92[0]?"Index out of bounds (at src/./filter/../utils/term.ab:96:23)"}"
+    ret_term_width1897_v0="${_term_size_92[0]?"Index out of bounds (at src/./filter/../utils/term.ab:100:23)"}"
     return 0
 }
 
 # term_height()
-term_height__1891_v0() {
+term_height__1898_v0() {
     if [ "$(( ! _got_term_size_91 ))" != 0 ]; then
-        get_term_size__1888_v0 
+        get_term_size__1895_v0 
     fi
-    ret_term_height1891_v0="${_term_size_92[1]?"Index out of bounds (at src/./filter/../utils/term.ab:104:23)"}"
+    ret_term_height1898_v0="${_term_size_92[1]?"Index out of bounds (at src/./filter/../utils/term.ab:108:23)"}"
     return 0
 }
 
 # // Cursor /////
 # remove_line(cnt: Int)
-remove_line__1893_v0() {
-    local cnt_27510="${1}"
-    if [ "$(( cnt_27510 > 0 ))" != 0 ]; then
-        local sequence_27511=""
-        local __range_start_27512=0
-        local __range_end_27512="${cnt_27510}"
-        local __dir_27512=$(( ${__range_start_27512} <= ${__range_end_27512} ? 1 : -1 ))
-        for (( ____27512=${__range_start_27512}; ____27512 * ${__dir_27512} < ${__range_end_27512} * ${__dir_27512}; ____27512+=${__dir_27512} )); do
-            sequence_27511+="\\x1b[2K\\x1b[1A"
+remove_line__1900_v0() {
+    local cnt_27612="${1}"
+    if [ "$(( cnt_27612 > 0 ))" != 0 ]; then
+        local sequence_27613=""
+        local __range_start_27614=0
+        local __range_end_27614="${cnt_27612}"
+        local __dir_27614=$(( ${__range_start_27614} <= ${__range_end_27614} ? 1 : -1 ))
+        for (( ____27614=${__range_start_27614}; ____27614 * ${__dir_27614} < ${__range_end_27614} * ${__dir_27614}; ____27614+=${__dir_27614} )); do
+            sequence_27613+="\\x1b[2K\\x1b[1A"
 done
-        local array_342=("")
-        eprintf__1858_v0 "${sequence_27511}" array_342[@]
+        local array_348=("")
+        eprintf__1864_v0 "${sequence_27613}" array_348[@]
     fi
-    local array_343=("")
-    eprintf__1858_v0 "\\x1b[G" array_343[@]
+    local array_349=("")
+    eprintf__1864_v0 "\\x1b[G" array_349[@]
 }
 
 # remove_current_line()
-remove_current_line__1894_v0() {
-    local array_344=("")
-    eprintf__1858_v0 "\\x1b[2K\\x1b[G" array_344[@]
+remove_current_line__1901_v0() {
+    local array_350=("")
+    eprintf__1864_v0 "\\x1b[2K\\x1b[G" array_350[@]
 }
 
 # new_line(cnt: Int)
-new_line__1896_v0() {
-    local cnt_27459="${1}"
-    local __range_start_27460=0
-    local __range_end_27460="${cnt_27459}"
-    local __dir_27460=$(( ${__range_start_27460} <= ${__range_end_27460} ? 1 : -1 ))
-    for (( ____27460=${__range_start_27460}; ____27460 * ${__dir_27460} < ${__range_end_27460} * ${__dir_27460}; ____27460+=${__dir_27460} )); do
-        local array_345=("")
-        eprintf__1858_v0 "
-" array_345[@]
+new_line__1903_v0() {
+    local cnt_27561="${1}"
+    local __range_start_27562=0
+    local __range_end_27562="${cnt_27561}"
+    local __dir_27562=$(( ${__range_start_27562} <= ${__range_end_27562} ? 1 : -1 ))
+    for (( ____27562=${__range_start_27562}; ____27562 * ${__dir_27562} < ${__range_end_27562} * ${__dir_27562}; ____27562+=${__dir_27562} )); do
+        local array_351=("")
+        eprintf__1864_v0 "
+" array_351[@]
 done
 }
 
 # go_up(cnt: Int)
-go_up__1897_v0() {
-    local cnt_27478="${1}"
-    local array_346=("")
-    eprintf__1858_v0 "\\x1b[${cnt_27478}A" array_346[@]
+go_up__1904_v0() {
+    local cnt_27580="${1}"
+    local array_352=("")
+    eprintf__1864_v0 "\\x1b[${cnt_27580}A" array_352[@]
 }
 
 # go_down(cnt: Int)
-go_down__1898_v0() {
-    local cnt_27492="${1}"
-    local array_347=("")
-    eprintf__1858_v0 "\\x1b[${cnt_27492}B" array_347[@]
+go_down__1905_v0() {
+    local cnt_27594="${1}"
+    local array_353=("")
+    eprintf__1864_v0 "\\x1b[${cnt_27594}B" array_353[@]
 }
 
 # move the cursor up or down `cnt` lines.
 # hide_cursor()
-hide_cursor__1900_v0() {
-    local array_348=("")
-    eprintf__1858_v0 "\\x1b[?25l" array_348[@]
+hide_cursor__1907_v0() {
+    local array_354=("")
+    eprintf__1864_v0 "\\x1b[?25l" array_354[@]
 }
 
 # show_cursor()
-show_cursor__1901_v0() {
-    local array_349=("")
-    eprintf__1858_v0 "\\x1b[?25h" array_349[@]
+show_cursor__1908_v0() {
+    local array_355=("")
+    eprintf__1864_v0 "\\x1b[?25h" array_355[@]
 }
 
 # print_wrapped(pieces: [Text])
-print_wrapped__1902_v0() {
-    local pieces_27316=("${!1}")
-    term_width__1890_v0 
-    local width_27322="${ret_term_width1890_v0}"
-    local line_27323=""
-    local line_len_27324=0
-    for piece_27325 in "${pieces_27316[@]}"; do
-        local __length_352="${piece_27325}"
-        local piece_len_27326="${#__length_352}"
-        has_ansi_escape__1871_v0 "${piece_27325}"
-        local ret_has_ansi_escape1871_v0__186_12="${ret_has_ansi_escape1871_v0}"
-        if [ "${ret_has_ansi_escape1871_v0__186_12}" != 0 ]; then
-            get_visible_len__1876_v0 "${piece_27325}"
-            piece_len_27326="${ret_get_visible_len1876_v0}"
+print_wrapped__1909_v0() {
+    local pieces_27416=("${!1}")
+    term_width__1897_v0 
+    local width_27422="${ret_term_width1897_v0}"
+    local line_27423=""
+    local line_len_27424=0
+    for piece_27425 in "${pieces_27416[@]}"; do
+        local __length_358="${piece_27425}"
+        local piece_len_27426="${#__length_358}"
+        has_ansi_escape__1878_v0 "${piece_27425}"
+        local ret_has_ansi_escape1878_v0__190_12="${ret_has_ansi_escape1878_v0}"
+        if [ "${ret_has_ansi_escape1878_v0__190_12}" != 0 ]; then
+            get_visible_len__1883_v0 "${piece_27425}"
+            piece_len_27426="${ret_get_visible_len1883_v0}"
         fi
-        if [ "$([ "_${line_27323}" != "_" ]; echo $?)" != 0 ]; then
-            line_27323="${piece_27325}"
-            line_len_27324="${piece_len_27326}"
-        elif [ "$(( $(( $(( line_len_27324 + 1 )) + piece_len_27326 )) > width_27322 ))" != 0 ]; then
-            local array_353=()
-            printf__128_v0 "${line_27323}""
-" array_353[@]
-            line_27323="${piece_27325}"
-            line_len_27324="${piece_len_27326}"
+        if [ "$([ "_${line_27423}" != "_" ]; echo $?)" != 0 ]; then
+            line_27423="${piece_27425}"
+            line_len_27424="${piece_len_27426}"
+        elif [ "$(( $(( $(( line_len_27424 + 1 )) + piece_len_27426 )) > width_27422 ))" != 0 ]; then
+            local array_359=()
+            printf__128_v0 "${line_27423}""
+" array_359[@]
+            line_27423="${piece_27425}"
+            line_len_27424="${piece_len_27426}"
         else
-            line_27323+=" ""${piece_27325}"
-            line_len_27324="$(( line_len_27324 + $(( 1 + piece_len_27326 )) ))"
+            line_27423+=" ""${piece_27425}"
+            line_len_27424="$(( line_len_27424 + $(( 1 + piece_len_27426 )) ))"
         fi
     done
-    if [ "$([ "_${line_27323}" == "_" ]; echo $?)" != 0 ]; then
-        local array_354=()
-        printf__128_v0 "${line_27323}""
-" array_354[@]
+    if [ "$([ "_${line_27423}" == "_" ]; echo $?)" != 0 ]; then
+        local array_360=()
+        printf__128_v0 "${line_27423}""
+" array_360[@]
     fi
 }
 
@@ -4718,84 +4766,84 @@ _got_xylitol_colors_96=0
 _primary_color_97=(3 207 159 92)
 _secondary_color_98=(3 118 206 94)
 # get_supports_truecolor()
-get_supports_truecolor__1939_v0() {
+get_supports_truecolor__1946_v0() {
     env_var_get__120_v0 "XYLITOL_TRUECOLOR"
     __status=$?
-    local config_27354="${ret_env_var_get120_v0}"
-    _supports_truecolor_95="$(if [ "$([ "_${config_27354}" != "_Yes" ]; echo $?)" != 0 ]; then echo "Yes"; else echo "No"; fi)"
-    ret_get_supports_truecolor1939_v0="$([ "_${_supports_truecolor_95}" != "_Yes" ]; echo $?)"
+    local config_27454="${ret_env_var_get120_v0}"
+    _supports_truecolor_95="$(if [ "$([ "_${config_27454}" != "_Yes" ]; echo $?)" != 0 ]; then echo "Yes"; else echo "No"; fi)"
+    ret_get_supports_truecolor1946_v0="$([ "_${_supports_truecolor_95}" != "_Yes" ]; echo $?)"
     return 0
 }
 
 # colored_rgb(message: Text, r: Int, g: Int, b: Int, fallback: Int)
-colored_rgb__1940_v0() {
-    local message_27349="${1}"
-    local r_27350="${2}"
-    local g_27351="${3}"
-    local b_27352="${4}"
-    local fallback_27353="${5}"
+colored_rgb__1947_v0() {
+    local message_27449="${1}"
+    local r_27450="${2}"
+    local g_27451="${3}"
+    local b_27452="${4}"
+    local fallback_27453="${5}"
     if [ "$([ "_${_supports_truecolor_95}" != "_Yes" ]; echo $?)" != 0 ]; then
-        ret_colored_rgb1940_v0="\\x1b[38;2;${r_27350};${g_27351};${b_27352}m""${message_27349}""\\x1b[0m"
+        ret_colored_rgb1947_v0="\\x1b[38;2;${r_27450};${g_27451};${b_27452}m""${message_27449}""\\x1b[0m"
         return 0
     elif [ "$([ "_${_supports_truecolor_95}" != "_None" ]; echo $?)" != 0 ]; then
-        get_supports_truecolor__1939_v0 
-        local ret_get_supports_truecolor1939_v0__45_17="${ret_get_supports_truecolor1939_v0}"
-        if [ "${ret_get_supports_truecolor1939_v0__45_17}" != 0 ]; then
-            ret_colored_rgb1940_v0="\\x1b[38;2;${r_27350};${g_27351};${b_27352}m""${message_27349}""\\x1b[0m"
+        get_supports_truecolor__1946_v0 
+        local ret_get_supports_truecolor1946_v0__45_17="${ret_get_supports_truecolor1946_v0}"
+        if [ "${ret_get_supports_truecolor1946_v0__45_17}" != 0 ]; then
+            ret_colored_rgb1947_v0="\\x1b[38;2;${r_27450};${g_27451};${b_27452}m""${message_27449}""\\x1b[0m"
             return 0
-        elif [ "$(( fallback_27353 == 0 ))" != 0 ]; then
-            ret_colored_rgb1940_v0="${message_27349}"
+        elif [ "$(( fallback_27453 == 0 ))" != 0 ]; then
+            ret_colored_rgb1947_v0="${message_27449}"
             return 0
         else
-            ret_colored_rgb1940_v0="\\x1b[${fallback_27353}m""${message_27349}""\\x1b[0m"
+            ret_colored_rgb1947_v0="\\x1b[${fallback_27453}m""${message_27449}""\\x1b[0m"
             return 0
         fi
     else
-        if [ "$(( fallback_27353 == 0 ))" != 0 ]; then
-            ret_colored_rgb1940_v0="${message_27349}"
+        if [ "$(( fallback_27453 == 0 ))" != 0 ]; then
+            ret_colored_rgb1947_v0="${message_27449}"
             return 0
         fi
-        ret_colored_rgb1940_v0="\\x1b[${fallback_27353}m""${message_27349}""\\x1b[0m"
+        ret_colored_rgb1947_v0="\\x1b[${fallback_27453}m""${message_27449}""\\x1b[0m"
         return 0
     fi
 }
 
 # inner_get_xylitol_colors()
-inner_get_xylitol_colors__1942_v0() {
+inner_get_xylitol_colors__1949_v0() {
     if [ "$(( ! _got_xylitol_colors_96 ))" != 0 ]; then
         env_var_get__120_v0 "XYLITOL_PRIMARY_COLOR"
         __status=$?
-        local primary_env_27343="${ret_env_var_get120_v0}"
-        if [ "$([ "_${primary_env_27343}" == "_" ]; echo $?)" != 0 ]; then
-            split__4_v0 "${primary_env_27343}" ";"
-            local parts_27344=("${ret_split4_v0[@]}")
-            local __length_358=("${parts_27344[@]}")
-            if [ "$(( ${#__length_358[@]} == 4 ))" != 0 ]; then
-                parse_int__13_v0 "${parts_27344[0]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:110:37)"}"
+        local primary_env_27443="${ret_env_var_get120_v0}"
+        if [ "$([ "_${primary_env_27443}" == "_" ]; echo $?)" != 0 ]; then
+            split__4_v0 "${primary_env_27443}" ";"
+            local parts_27444=("${ret_split4_v0[@]}")
+            local __length_364=("${parts_27444[@]}")
+            if [ "$(( ${#__length_364[@]} == 4 ))" != 0 ]; then
+                parse_int__13_v0 "${parts_27444[0]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:110:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors1942_v0=''
+                    ret_inner_get_xylitol_colors1949_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__110_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_27344[1]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:111:37)"}"
+                parse_int__13_v0 "${parts_27444[1]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:111:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors1942_v0=''
+                    ret_inner_get_xylitol_colors1949_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__111_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_27344[2]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:112:37)"}"
+                parse_int__13_v0 "${parts_27444[2]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:112:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors1942_v0=''
+                    ret_inner_get_xylitol_colors1949_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__112_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_27344[3]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:113:37)"}"
+                parse_int__13_v0 "${parts_27444[3]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:113:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors1942_v0=''
+                    ret_inner_get_xylitol_colors1949_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__113_21="${ret_parse_int13_v0}"
@@ -4804,37 +4852,37 @@ inner_get_xylitol_colors__1942_v0() {
         fi
         env_var_get__120_v0 "XYLITOL_SECONDARY_COLOR"
         __status=$?
-        local secondary_env_27345="${ret_env_var_get120_v0}"
-        if [ "$([ "_${secondary_env_27345}" == "_" ]; echo $?)" != 0 ]; then
-            split__4_v0 "${secondary_env_27345}" ";"
-            local parts_27346=("${ret_split4_v0[@]}")
-            local __length_360=("${parts_27346[@]}")
-            if [ "$(( ${#__length_360[@]} == 4 ))" != 0 ]; then
-                parse_int__13_v0 "${parts_27346[0]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:123:37)"}"
+        local secondary_env_27445="${ret_env_var_get120_v0}"
+        if [ "$([ "_${secondary_env_27445}" == "_" ]; echo $?)" != 0 ]; then
+            split__4_v0 "${secondary_env_27445}" ";"
+            local parts_27446=("${ret_split4_v0[@]}")
+            local __length_366=("${parts_27446[@]}")
+            if [ "$(( ${#__length_366[@]} == 4 ))" != 0 ]; then
+                parse_int__13_v0 "${parts_27446[0]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:123:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors1942_v0=''
+                    ret_inner_get_xylitol_colors1949_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__123_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_27346[1]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:124:37)"}"
+                parse_int__13_v0 "${parts_27446[1]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:124:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors1942_v0=''
+                    ret_inner_get_xylitol_colors1949_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__124_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_27346[2]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:125:37)"}"
+                parse_int__13_v0 "${parts_27446[2]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:125:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors1942_v0=''
+                    ret_inner_get_xylitol_colors1949_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__125_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_27346[3]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:126:37)"}"
+                parse_int__13_v0 "${parts_27446[3]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:126:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors1942_v0=''
+                    ret_inner_get_xylitol_colors1949_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__126_21="${ret_parse_int13_v0}"
@@ -4843,37 +4891,37 @@ inner_get_xylitol_colors__1942_v0() {
         fi
         env_var_get__120_v0 "XYLITOL_ACCENT_COLOR"
         __status=$?
-        local accent_env_27347="${ret_env_var_get120_v0}"
-        if [ "$([ "_${accent_env_27347}" == "_" ]; echo $?)" != 0 ]; then
-            split__4_v0 "${accent_env_27347}" ";"
-            local parts_27348=("${ret_split4_v0[@]}")
-            local __length_362=("${parts_27348[@]}")
-            if [ "$(( ${#__length_362[@]} == 4 ))" != 0 ]; then
-                parse_int__13_v0 "${parts_27348[0]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:136:37)"}"
+        local accent_env_27447="${ret_env_var_get120_v0}"
+        if [ "$([ "_${accent_env_27447}" == "_" ]; echo $?)" != 0 ]; then
+            split__4_v0 "${accent_env_27447}" ";"
+            local parts_27448=("${ret_split4_v0[@]}")
+            local __length_368=("${parts_27448[@]}")
+            if [ "$(( ${#__length_368[@]} == 4 ))" != 0 ]; then
+                parse_int__13_v0 "${parts_27448[0]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:136:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors1942_v0=''
+                    ret_inner_get_xylitol_colors1949_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__136_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_27348[1]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:137:37)"}"
+                parse_int__13_v0 "${parts_27448[1]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:137:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors1942_v0=''
+                    ret_inner_get_xylitol_colors1949_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__137_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_27348[2]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:138:37)"}"
+                parse_int__13_v0 "${parts_27448[2]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:138:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors1942_v0=''
+                    ret_inner_get_xylitol_colors1949_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__138_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_27348[3]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:139:37)"}"
+                parse_int__13_v0 "${parts_27448[3]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:139:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors1942_v0=''
+                    ret_inner_get_xylitol_colors1949_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__139_21="${ret_parse_int13_v0}"
@@ -4884,8 +4932,8 @@ inner_get_xylitol_colors__1942_v0() {
 }
 
 # get_xylitol_colors()
-get_xylitol_colors__1943_v0() {
-    inner_get_xylitol_colors__1942_v0 
+get_xylitol_colors__1950_v0() {
+    inner_get_xylitol_colors__1949_v0 
     __status=$?
     if [ "${__status}" != 0 ]; then
         echo_colored__134_v0 "WARN: Failed to parse Xylitol colors from envs." 33
@@ -4894,24 +4942,24 @@ get_xylitol_colors__1943_v0() {
 }
 
 # colored_primary(message: Text)
-colored_primary__1944_v0() {
-    local message_27342="${1}"
+colored_primary__1951_v0() {
+    local message_27442="${1}"
     if [ "$(( ! _got_xylitol_colors_96 ))" != 0 ]; then
-        get_xylitol_colors__1943_v0 
+        get_xylitol_colors__1950_v0 
     fi
-    colored_rgb__1940_v0 "${message_27342}" "${_primary_color_97[0]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:159:48)"}" "${_primary_color_97[1]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:159:67)"}" "${_primary_color_97[2]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:159:86)"}" "${_primary_color_97[3]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:159:105)"}"
-    ret_colored_primary1944_v0="${ret_colored_rgb1940_v0}"
+    colored_rgb__1947_v0 "${message_27442}" "${_primary_color_97[0]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:159:48)"}" "${_primary_color_97[1]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:159:67)"}" "${_primary_color_97[2]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:159:86)"}" "${_primary_color_97[3]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:159:105)"}"
+    ret_colored_primary1951_v0="${ret_colored_rgb1947_v0}"
     return 0
 }
 
 # colored_secondary(message: Text)
-colored_secondary__1945_v0() {
-    local message_27356="${1}"
+colored_secondary__1952_v0() {
+    local message_27456="${1}"
     if [ "$(( ! _got_xylitol_colors_96 ))" != 0 ]; then
-        get_xylitol_colors__1943_v0 
+        get_xylitol_colors__1950_v0 
     fi
-    colored_rgb__1940_v0 "${message_27356}" "${_secondary_color_98[0]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:166:50)"}" "${_secondary_color_98[1]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:166:71)"}" "${_secondary_color_98[2]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:166:92)"}" "${_secondary_color_98[3]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:166:113)"}"
-    ret_colored_secondary1945_v0="${ret_colored_rgb1940_v0}"
+    colored_rgb__1947_v0 "${message_27456}" "${_secondary_color_98[0]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:166:50)"}" "${_secondary_color_98[1]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:166:71)"}" "${_secondary_color_98[2]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:166:92)"}" "${_secondary_color_98[3]?"Index out of bounds (at src/./filter/../utils/truecolor.ab:166:113)"}"
+    ret_colored_secondary1952_v0="${ret_colored_rgb1947_v0}"
     return 0
 }
 
@@ -4919,398 +4967,398 @@ colored_secondary__1945_v0() {
 # "None" until the first call decides, then "Yes" or "No".
 _perl_state_100="None"
 # perl_available()
-perl_available__1962_v0() {
+perl_available__1969_v0() {
     if [ "$([ "_${_perl_state_100}" != "_None" ]; echo $?)" != 0 ]; then
-        local command_364
-        command_364="$(echo "$XYLITOL_USE_PERL")"
+        local command_370
+        command_370="$(echo "$XYLITOL_USE_PERL")"
         __status=$?
-        local disabled_27431
-        disabled_27431="$([ "_${command_364}" != "_No" ]; echo $?)"
-        local command_365
-        command_365="$(command -v perl > /dev/null && echo 0 || echo 1)"
+        local disabled_27533
+        disabled_27533="$([ "_${command_370}" != "_No" ]; echo $?)"
+        local command_371
+        command_371="$(command -v perl > /dev/null && echo 0 || echo 1)"
         __status=$?
-        local found_27432
-        found_27432="$(( $(( ! disabled_27431 )) && $([ "_${command_365}" != "_0" ]; echo $?) ))"
-        _perl_state_100="$(if [ "${found_27432}" != 0 ]; then echo "Yes"; else echo "No"; fi)"
+        local found_27534
+        found_27534="$(( $(( ! disabled_27533 )) && $([ "_${command_371}" != "_0" ]; echo $?) ))"
+        _perl_state_100="$(if [ "${found_27534}" != 0 ]; then echo "Yes"; else echo "No"; fi)"
     fi
-    ret_perl_available1962_v0="$([ "_${_perl_state_100}" != "_Yes" ]; echo $?)"
+    ret_perl_available1969_v0="$([ "_${_perl_state_100}" != "_Yes" ]; echo $?)"
     return 0
 }
 
 # perl_get_cjk_width(text: Text)
-perl_get_cjk_width__1963_v0() {
-    local text_27430="${1}"
-    perl_available__1962_v0 
-    local ret_perl_available1962_v0__19_12="${ret_perl_available1962_v0}"
-    if [ "$(( ! ret_perl_available1962_v0__19_12 ))" != 0 ]; then
-        ret_perl_get_cjk_width1963_v0=''
+perl_get_cjk_width__1970_v0() {
+    local text_27532="${1}"
+    perl_available__1969_v0 
+    local ret_perl_available1969_v0__19_12="${ret_perl_available1969_v0}"
+    if [ "$(( ! ret_perl_available1969_v0__19_12 ))" != 0 ]; then
+        ret_perl_get_cjk_width1970_v0=''
         return 1
     fi
-    local command_366
-    command_366="$(perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text_27430}" 2>/dev/null)"
+    local command_372
+    command_372="$(perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text_27532}" 2>/dev/null)"
     __status=$?
     if [ "${__status}" != 0 ]; then
-        ret_perl_get_cjk_width1963_v0=''
+        ret_perl_get_cjk_width1970_v0=''
         return "${__status}"
     fi
-    local width_str_27433="${command_366}"
-    parse_int__13_v0 "${width_str_27433}"
+    local width_str_27535="${command_372}"
+    parse_int__13_v0 "${width_str_27535}"
     __status=$?
     if [ "${__status}" != 0 ]; then
-        ret_perl_get_cjk_width1963_v0=''
+        ret_perl_get_cjk_width1970_v0=''
         return "${__status}"
     fi
-    local width_27434="${ret_parse_int13_v0}"
-    ret_perl_get_cjk_width1963_v0="${width_27434}"
+    local width_27536="${ret_parse_int13_v0}"
+    ret_perl_get_cjk_width1970_v0="${width_27536}"
     return 0
 }
 
 # perl_truncate_cjk(text: Text, max_width: Int)
-perl_truncate_cjk__1964_v0() {
-    local text_27441="${1}"
-    local max_width_27442="${2}"
-    perl_available__1962_v0 
-    local ret_perl_available1962_v0__30_12="${ret_perl_available1962_v0}"
-    if [ "$(( ! ret_perl_available1962_v0__30_12 ))" != 0 ]; then
-        ret_perl_truncate_cjk1964_v0=''
+perl_truncate_cjk__1971_v0() {
+    local text_27543="${1}"
+    local max_width_27544="${2}"
+    perl_available__1969_v0 
+    local ret_perl_available1969_v0__30_12="${ret_perl_available1969_v0}"
+    if [ "$(( ! ret_perl_available1969_v0__30_12 ))" != 0 ]; then
+        ret_perl_truncate_cjk1971_v0=''
         return 1
     fi
-    local command_367
-    command_367="$(perl -CSDA -E '$t=shift;$m=shift;$w=0;$r="";$c=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1,($w+$c<=$m?($w+=$c,$r.=$_):last) for split//,$t; print $r' "${text_27441}" ${max_width_27442} 2>/dev/null)"
+    local command_373
+    command_373="$(perl -CSDA -E '$t=shift;$m=shift;$w=0;$r="";$c=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1,($w+$c<=$m?($w+=$c,$r.=$_):last) for split//,$t; print $r' "${text_27543}" ${max_width_27544} 2>/dev/null)"
     __status=$?
     if [ "${__status}" != 0 ]; then
-        ret_perl_truncate_cjk1964_v0=''
+        ret_perl_truncate_cjk1971_v0=''
         return "${__status}"
     fi
-    local result_27443="${command_367}"
-    ret_perl_truncate_cjk1964_v0="${result_27443}"
+    local result_27545="${command_373}"
+    ret_perl_truncate_cjk1971_v0="${result_27545}"
     return 0
 }
 
 # has_ansi_escape(text: Text)
-has_ansi_escape__1968_v0() {
-    local text_27398="${1}"
+has_ansi_escape__1975_v0() {
+    local text_27498="${1}"
     # Check for ESC character (0x1B = 27) or literal \x1b[
-    local command_368
-    command_368="$([[ "${text_27398}" == *$'\x1b'* || "${text_27398}" == *'\x1b['* ]] && echo "1" || echo "0")"
+    local command_374
+    command_374="$([[ "${text_27498}" == *$'\x1b'* || "${text_27498}" == *'\x1b['* ]] && echo "1" || echo "0")"
     __status=$?
-    local has_escape_27399="${command_368}"
-    ret_has_ansi_escape1968_v0="$([ "_${has_escape_27399}" != "_1" ]; echo $?)"
+    local has_escape_27499="${command_374}"
+    ret_has_ansi_escape1975_v0="$([ "_${has_escape_27499}" != "_1" ]; echo $?)"
     return 0
 }
 
 # escape_ansi(text: Text)
-escape_ansi__1969_v0() {
-    local text_27400="${1}"
-    local command_369
-    command_369="$(printf '%s' "${text_27400}" | sed $'s/\x1b/\\x1b/g')"
+escape_ansi__1976_v0() {
+    local text_27500="${1}"
+    local command_375
+    command_375="$(printf '%s' "${text_27500}" | sed $'s/\x1b/\\x1b/g')"
     __status=$?
-    ret_escape_ansi1969_v0="${command_369}"
+    ret_escape_ansi1976_v0="${command_375}"
     return 0
 }
 
 # strip_ansi(text: Text)
-strip_ansi__1970_v0() {
-    local text_27426="${1}"
-    local command_370
-    command_370="$(printf "%s" "${text_27426}" | sed $'s/\x1b\[[0-9;]*m//g' | sed 's/\\x1b\[[0-9;]*m//g')"
+strip_ansi__1977_v0() {
+    local text_27528="${1}"
+    local command_376
+    command_376="$(printf "%s" "${text_27528}" | sed $'s/\x1b\[[0-9;]*m//g' | sed 's/\\x1b\[[0-9;]*m//g')"
     __status=$?
-    ret_strip_ansi1970_v0="${command_370}"
+    ret_strip_ansi1977_v0="${command_376}"
     return 0
 }
 
 # is_all_ascii(text: Text)
-is_all_ascii__1971_v0() {
-    local text_27428="${1}"
-    local command_371
-    command_371="$(printf "%s" "${text_27428}" | LC_ALL=C grep -q '^[ -~]*$' && echo 0 || echo 1)"
+is_all_ascii__1978_v0() {
+    local text_27530="${1}"
+    local command_377
+    command_377="$(printf "%s" "${text_27530}" | LC_ALL=C grep -q '^[ -~]*$' && echo 0 || echo 1)"
     __status=$?
-    local result_27429="${command_371}"
-    ret_is_all_ascii1971_v0="$([ "_${result_27429}" != "_0" ]; echo $?)"
+    local result_27531="${command_377}"
+    ret_is_all_ascii1978_v0="$([ "_${result_27531}" != "_0" ]; echo $?)"
     return 0
 }
 
 # plain_len(text: Text)
-plain_len__1972_v0() {
-    local text_27423="${1}"
-    local command_372
-    command_372="$(LC_ALL=C; __t="${text_27423}"; case "$__t" in (*[!\ -~]*) echo -1;; (*'\x1b['*) echo -1;; (*) echo "${#__t}";; esac)"
+plain_len__1979_v0() {
+    local text_27525="${1}"
+    local command_378
+    command_378="$(LC_ALL=C; __t="${text_27525}"; case "$__t" in (*[!\ -~]*) echo -1;; (*'\x1b['*) echo -1;; (*) echo "${#__t}";; esac)"
     __status=$?
-    local measured_27424="${command_372}"
-    parse_int__13_v0 "${measured_27424}"
+    local measured_27526="${command_378}"
+    parse_int__13_v0 "${measured_27526}"
     __status=$?
-    ret_plain_len1972_v0="${ret_parse_int13_v0}"
+    ret_plain_len1979_v0="${ret_parse_int13_v0}"
     return 0
 }
 
 # get_visible_len(text: Text)
-get_visible_len__1973_v0() {
-    local text_27422="${1}"
-    plain_len__1972_v0 "${text_27422}"
-    local plain_27425="${ret_plain_len1972_v0}"
-    if [ "$(( plain_27425 >= 0 ))" != 0 ]; then
-        ret_get_visible_len1973_v0="${plain_27425}"
+get_visible_len__1980_v0() {
+    local text_27524="${1}"
+    plain_len__1979_v0 "${text_27524}"
+    local plain_27527="${ret_plain_len1979_v0}"
+    if [ "$(( plain_27527 >= 0 ))" != 0 ]; then
+        ret_get_visible_len1980_v0="${plain_27527}"
         return 0
     fi
-    strip_ansi__1970_v0 "${text_27422}"
-    local stripped_27427="${ret_strip_ansi1970_v0}"
-    is_all_ascii__1971_v0 "${stripped_27427}"
-    local ret_is_all_ascii1971_v0__46_12="${ret_is_all_ascii1971_v0}"
-    if [ "$(( ! ret_is_all_ascii1971_v0__46_12 ))" != 0 ]; then
-        perl_get_cjk_width__1963_v0 "${stripped_27427}"
+    strip_ansi__1977_v0 "${text_27524}"
+    local stripped_27529="${ret_strip_ansi1977_v0}"
+    is_all_ascii__1978_v0 "${stripped_27529}"
+    local ret_is_all_ascii1978_v0__46_12="${ret_is_all_ascii1978_v0}"
+    if [ "$(( ! ret_is_all_ascii1978_v0__46_12 ))" != 0 ]; then
+        perl_get_cjk_width__1970_v0 "${stripped_27529}"
         __status=$?
         if [ "${__status}" != 0 ]; then
-            local __length_373="${stripped_27427}"
-            ret_get_visible_len1973_v0="${#__length_373}"
+            local __length_379="${stripped_27529}"
+            ret_get_visible_len1980_v0="${#__length_379}"
             return 0
         fi
-        ret_get_visible_len1973_v0="${ret_perl_get_cjk_width1963_v0}"
+        ret_get_visible_len1980_v0="${ret_perl_get_cjk_width1970_v0}"
         return 0
     fi
-    local __length_374="${stripped_27427}"
-    ret_get_visible_len1973_v0="${#__length_374}"
+    local __length_380="${stripped_27529}"
+    ret_get_visible_len1980_v0="${#__length_380}"
     return 0
 }
 
 # truncate_text(text: Text, max_width: Int)
-truncate_text__1974_v0() {
-    local text_27438="${1}"
-    local max_width_27439="${2}"
-    get_visible_len__1973_v0 "${text_27438}"
-    local visible_len_27440="${ret_get_visible_len1973_v0}"
-    if [ "$(( visible_len_27440 <= max_width_27439 ))" != 0 ]; then
-        ret_truncate_text1974_v0="${text_27438}"
+truncate_text__1981_v0() {
+    local text_27540="${1}"
+    local max_width_27541="${2}"
+    get_visible_len__1980_v0 "${text_27540}"
+    local visible_len_27542="${ret_get_visible_len1980_v0}"
+    if [ "$(( visible_len_27542 <= max_width_27541 ))" != 0 ]; then
+        ret_truncate_text1981_v0="${text_27540}"
         return 0
     fi
-    is_all_ascii__1971_v0 "${text_27438}"
-    local ret_is_all_ascii1971_v0__61_12="${ret_is_all_ascii1971_v0}"
-    if [ "$(( ! ret_is_all_ascii1971_v0__61_12 ))" != 0 ]; then
-        perl_truncate_cjk__1964_v0 "${text_27438}" "${max_width_27439}"
+    is_all_ascii__1978_v0 "${text_27540}"
+    local ret_is_all_ascii1978_v0__61_12="${ret_is_all_ascii1978_v0}"
+    if [ "$(( ! ret_is_all_ascii1978_v0__61_12 ))" != 0 ]; then
+        perl_truncate_cjk__1971_v0 "${text_27540}" "${max_width_27541}"
         __status=$?
         if [ "${__status}" != 0 ]; then
-            printf "%s" "${text_27438}" | cut -c1-${max_width_27439}
+            printf "%s" "${text_27540}" | cut -c1-${max_width_27541}
             __status=$?
         fi
-        ret_truncate_text1974_v0="${ret_perl_truncate_cjk1964_v0}"
+        ret_truncate_text1981_v0="${ret_perl_truncate_cjk1971_v0}"
         return 0
     fi
-    local command_375
-    command_375="$(printf "%s" "${text_27438}" | cut -c1-${max_width_27439})"
+    local command_381
+    command_381="$(printf "%s" "${text_27540}" | cut -c1-${max_width_27541})"
     __status=$?
-    ret_truncate_text1974_v0="${command_375}"
+    ret_truncate_text1981_v0="${command_381}"
     return 0
 }
 
 # truncate_ansi(text: Text, max_width: Int)
-truncate_ansi__1975_v0() {
-    local text_27436="${1}"
-    local max_width_27437="${2}"
-    has_ansi_escape__1968_v0 "${text_27436}"
-    local ret_has_ansi_escape1968_v0__73_12="${ret_has_ansi_escape1968_v0}"
-    if [ "$(( ! ret_has_ansi_escape1968_v0__73_12 ))" != 0 ]; then
-        truncate_text__1974_v0 "${text_27436}" "${max_width_27437}"
-        ret_truncate_ansi1975_v0="${ret_truncate_text1974_v0}"
+truncate_ansi__1982_v0() {
+    local text_27538="${1}"
+    local max_width_27539="${2}"
+    has_ansi_escape__1975_v0 "${text_27538}"
+    local ret_has_ansi_escape1975_v0__73_12="${ret_has_ansi_escape1975_v0}"
+    if [ "$(( ! ret_has_ansi_escape1975_v0__73_12 ))" != 0 ]; then
+        truncate_text__1981_v0 "${text_27538}" "${max_width_27539}"
+        ret_truncate_ansi1982_v0="${ret_truncate_text1981_v0}"
         return 0
     fi
     # Check if text starts with \x1b[
-    local command_376
-    command_376="$([[ "${text_27436}" == '\x1b['* ]] && echo "1" || echo "0")"
+    local command_382
+    command_382="$([[ "${text_27538}" == '\x1b['* ]] && echo "1" || echo "0")"
     __status=$?
-    local starts_with_ansi_27444="${command_376}"
+    local starts_with_ansi_27546="${command_382}"
     # Replace \x1b[ with newline, then split
-    local command_377
-    command_377="$(t="${text_27436}"; printf '%s' "${t//\\x1b[/
+    local command_383
+    command_383="$(t="${text_27538}"; printf '%s' "${t//\\x1b[/
 }")"
     __status=$?
-    local replaced_27445="${command_377}"
-    split__4_v0 "${replaced_27445}" "
+    local replaced_27547="${command_383}"
+    split__4_v0 "${replaced_27547}" "
 "
-    local parts_27446=("${ret_split4_v0[@]}")
-    local result_27447=""
-    local remaining_width_27448="${max_width_27437}"
-    local __range_start_27449=0
-    local __length_378=("${parts_27446[@]}")
-    local __range_end_27449="${#__length_378[@]}"
-    local __dir_27449=$(( ${__range_start_27449} <= ${__range_end_27449} ? 1 : -1 ))
-    for (( idx_27449=${__range_start_27449}; idx_27449 * ${__dir_27449} < ${__range_end_27449} * ${__dir_27449}; idx_27449+=${__dir_27449} )); do
-        local part_27450="${parts_27446[${idx_27449}]?"Index out of bounds (at src/./filter/../utils/text/ansi.ab:88:28)"}"
+    local parts_27548=("${ret_split4_v0[@]}")
+    local result_27549=""
+    local remaining_width_27550="${max_width_27539}"
+    local __range_start_27551=0
+    local __length_384=("${parts_27548[@]}")
+    local __range_end_27551="${#__length_384[@]}"
+    local __dir_27551=$(( ${__range_start_27551} <= ${__range_end_27551} ? 1 : -1 ))
+    for (( idx_27551=${__range_start_27551}; idx_27551 * ${__dir_27551} < ${__range_end_27551} * ${__dir_27551}; idx_27551+=${__dir_27551} )); do
+        local part_27552="${parts_27548[${idx_27551}]?"Index out of bounds (at src/./filter/../utils/text/ansi.ab:88:28)"}"
         # If text starts with ANSI, all parts are "ANSIparams m text" format
         # If not, first part is pure text
-        if [ "$(( $(( idx_27449 == 0 )) && $([ "_${starts_with_ansi_27444}" != "_0" ]; echo $?) ))" != 0 ]; then
+        if [ "$(( $(( idx_27551 == 0 )) && $([ "_${starts_with_ansi_27546}" != "_0" ]; echo $?) ))" != 0 ]; then
             # First part is pure text (before any ANSI)
-            if [ "$(( $([ "_${part_27450}" == "_" ]; echo $?) && $(( remaining_width_27448 > 0 )) ))" != 0 ]; then
-                truncate_text__1974_v0 "${part_27450}" "${remaining_width_27448}"
-                local ret_truncate_text1974_v0__95_35="${ret_truncate_text1974_v0}"
-                local truncated_27451="${ret_truncate_text1974_v0__95_35}"
-                result_27447+="${truncated_27451}"
-                get_visible_len__1973_v0 "${truncated_27451}"
-                local ret_get_visible_len1973_v0__97_36="${ret_get_visible_len1973_v0}"
-                remaining_width_27448="$(( remaining_width_27448 - ret_get_visible_len1973_v0__97_36 ))"
+            if [ "$(( $([ "_${part_27552}" == "_" ]; echo $?) && $(( remaining_width_27550 > 0 )) ))" != 0 ]; then
+                truncate_text__1981_v0 "${part_27552}" "${remaining_width_27550}"
+                local ret_truncate_text1981_v0__95_35="${ret_truncate_text1981_v0}"
+                local truncated_27553="${ret_truncate_text1981_v0__95_35}"
+                result_27549+="${truncated_27553}"
+                get_visible_len__1980_v0 "${truncated_27553}"
+                local ret_get_visible_len1980_v0__97_36="${ret_get_visible_len1980_v0}"
+                remaining_width_27550="$(( remaining_width_27550 - ret_get_visible_len1980_v0__97_36 ))"
             fi
         else
             # Part is "ANSIparams m text" format - find first 'm'
-            local command_379
-            command_379="$(__p="${part_27450}"; for ((i=0; i<${#__p}; i++)); do [[ "${__p:$i:1}" == "m" ]] && echo $i && break; done)"
+            local command_385
+            command_385="$(__p="${part_27552}"; for ((i=0; i<${#__p}; i++)); do [[ "${__p:$i:1}" == "m" ]] && echo $i && break; done)"
             __status=$?
-            local m_idx_27452="${command_379}"
-            if [ "$([ "_${m_idx_27452}" == "_" ]; echo $?)" != 0 ]; then
+            local m_idx_27554="${command_385}"
+            if [ "$([ "_${m_idx_27554}" == "_" ]; echo $?)" != 0 ]; then
                 # Reconstruct ANSI sequence
-                local command_380
-                command_380="$(__p="${part_27450}"; printf "%s" "${__p:0:${m_idx_27452}}")"
+                local command_386
+                command_386="$(__p="${part_27552}"; printf "%s" "${__p:0:${m_idx_27554}}")"
                 __status=$?
-                local ansi_params_27453="${command_380}"
-                result_27447+="\\x1b[""${ansi_params_27453}""m"
+                local ansi_params_27555="${command_386}"
+                result_27549+="\\x1b[""${ansi_params_27555}""m"
                 # Rest is text content
-                parse_int__13_v0 "${m_idx_27452}"
+                parse_int__13_v0 "${m_idx_27554}"
                 __status=$?
                 local ret_parse_int13_v0__108_41="${ret_parse_int13_v0}"
-                local m_idx_num_27454="${ret_parse_int13_v0__108_41}"
-                local text_start_27455="$(( m_idx_num_27454 + 1 ))"
-                local command_381
-                command_381="$(__p="${part_27450}"; printf "%s" "${__p:${text_start_27455}}")"
+                local m_idx_num_27556="${ret_parse_int13_v0__108_41}"
+                local text_start_27557="$(( m_idx_num_27556 + 1 ))"
+                local command_387
+                command_387="$(__p="${part_27552}"; printf "%s" "${__p:${text_start_27557}}")"
                 __status=$?
-                local text_part_27456="${command_381}"
-                if [ "$(( $([ "_${text_part_27456}" == "_" ]; echo $?) && $(( remaining_width_27448 > 0 )) ))" != 0 ]; then
-                    truncate_text__1974_v0 "${text_part_27456}" "${remaining_width_27448}"
-                    local ret_truncate_text1974_v0__112_39="${ret_truncate_text1974_v0}"
-                    local truncated_27457="${ret_truncate_text1974_v0__112_39}"
-                    result_27447+="${truncated_27457}"
-                    get_visible_len__1973_v0 "${truncated_27457}"
-                    local ret_get_visible_len1973_v0__114_40="${ret_get_visible_len1973_v0}"
-                    remaining_width_27448="$(( remaining_width_27448 - ret_get_visible_len1973_v0__114_40 ))"
+                local text_part_27558="${command_387}"
+                if [ "$(( $([ "_${text_part_27558}" == "_" ]; echo $?) && $(( remaining_width_27550 > 0 )) ))" != 0 ]; then
+                    truncate_text__1981_v0 "${text_part_27558}" "${remaining_width_27550}"
+                    local ret_truncate_text1981_v0__112_39="${ret_truncate_text1981_v0}"
+                    local truncated_27559="${ret_truncate_text1981_v0__112_39}"
+                    result_27549+="${truncated_27559}"
+                    get_visible_len__1980_v0 "${truncated_27559}"
+                    local ret_get_visible_len1980_v0__114_40="${ret_get_visible_len1980_v0}"
+                    remaining_width_27550="$(( remaining_width_27550 - ret_get_visible_len1980_v0__114_40 ))"
                 fi
             else
                 # No 'm' found, treat as text
-                if [ "$(( $([ "_${part_27450}" == "_" ]; echo $?) && $(( remaining_width_27448 > 0 )) ))" != 0 ]; then
-                    truncate_text__1974_v0 "${part_27450}" "${remaining_width_27448}"
-                    local ret_truncate_text1974_v0__119_39="${ret_truncate_text1974_v0}"
-                    local truncated_27458="${ret_truncate_text1974_v0__119_39}"
-                    result_27447+="${truncated_27458}"
-                    get_visible_len__1973_v0 "${truncated_27458}"
-                    local ret_get_visible_len1973_v0__121_40="${ret_get_visible_len1973_v0}"
-                    remaining_width_27448="$(( remaining_width_27448 - ret_get_visible_len1973_v0__121_40 ))"
+                if [ "$(( $([ "_${part_27552}" == "_" ]; echo $?) && $(( remaining_width_27550 > 0 )) ))" != 0 ]; then
+                    truncate_text__1981_v0 "${part_27552}" "${remaining_width_27550}"
+                    local ret_truncate_text1981_v0__119_39="${ret_truncate_text1981_v0}"
+                    local truncated_27560="${ret_truncate_text1981_v0__119_39}"
+                    result_27549+="${truncated_27560}"
+                    get_visible_len__1980_v0 "${truncated_27560}"
+                    local ret_get_visible_len1980_v0__121_40="${ret_get_visible_len1980_v0}"
+                    remaining_width_27550="$(( remaining_width_27550 - ret_get_visible_len1980_v0__121_40 ))"
                 fi
             fi
         fi
 done
-    ret_truncate_ansi1975_v0="${result_27447}"
+    ret_truncate_ansi1982_v0="${result_27549}"
     return 0
 }
 
 # cutoff_text(text: Text, max_width: Int)
-cutoff_text__1976_v0() {
-    local text_27420="${1}"
-    local max_width_27421="${2}"
-    get_visible_len__1973_v0 "${text_27420}"
-    local visible_len_27435="${ret_get_visible_len1973_v0}"
-    if [ "$(( visible_len_27435 <= max_width_27421 ))" != 0 ]; then
-        ret_cutoff_text1976_v0="${text_27420}"
+cutoff_text__1983_v0() {
+    local text_27522="${1}"
+    local max_width_27523="${2}"
+    get_visible_len__1980_v0 "${text_27522}"
+    local visible_len_27537="${ret_get_visible_len1980_v0}"
+    if [ "$(( visible_len_27537 <= max_width_27523 ))" != 0 ]; then
+        ret_cutoff_text1983_v0="${text_27522}"
         return 0
     fi
-    truncate_ansi__1975_v0 "${text_27420}" "$(( max_width_27421 - 3 ))"
-    local ret_truncate_ansi1975_v0__137_12="${ret_truncate_ansi1975_v0}"
-    ret_cutoff_text1976_v0="${ret_truncate_ansi1975_v0__137_12}""..."
+    truncate_ansi__1982_v0 "${text_27522}" "$(( max_width_27523 - 3 ))"
+    local ret_truncate_ansi1982_v0__137_12="${ret_truncate_ansi1982_v0}"
+    ret_cutoff_text1983_v0="${ret_truncate_ansi1982_v0__137_12}""..."
     return 0
 }
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
 # eprintf(format: Text, args: [Text])
-eprintf__1997_v0() {
-    local format_27469="${1}"
-    local args_27470=("${!2}")
-    args_27470=("${format_27469}" "${args_27470[@]}")
+eprintf__2004_v0() {
+    local format_27571="${1}"
+    local args_27572=("${!2}")
+    args_27572=("${format_27571}" "${args_27572[@]}")
     __status=$?
-    printf "${args_27470[@]}" >&2
+    printf "${args_27572[@]}" >&2
     __status=$?
 }
 
 # eprintf_colored(message: Text, color: Int)
-eprintf_colored__1998_v0() {
-    local message_27467="${1}"
-    local color_27468="${2}"
+eprintf_colored__2005_v0() {
+    local message_27569="${1}"
+    local color_27570="${2}"
     # Prints an error message with a specified color.
-    local array_382=("${message_27467}")
-    eprintf__1997_v0 "\\x1b[${color_27468}m%s\\x1b[0m" array_382[@]
+    local array_388=("${message_27569}")
+    eprintf__2004_v0 "\\x1b[${color_27570}m%s\\x1b[0m" array_388[@]
 }
 
 # colored(message: Text, color: Int)
-colored__1999_v0() {
-    local message_27387="${1}"
-    local color_27388="${2}"
+colored__2006_v0() {
+    local message_27487="${1}"
+    local color_27488="${2}"
     # Returns a text wrapped in color codes.
-    ret_colored1999_v0="\\x1b[${color_27388}m""${message_27387}""\\x1b[0m"
+    ret_colored2006_v0="\\x1b[${color_27488}m""${message_27487}""\\x1b[0m"
     return 0
 }
 
 # render_tooltip(items: [Text], total_len: Int, term_width: Int)
-render_tooltip__2003_v0() {
-    local items_27461=("${!1}")
-    local total_len_27462="${2}"
-    local term_width_27463="${3}"
-    local separator_27464=" • "
-    local separator_len_27465=3
+render_tooltip__2010_v0() {
+    local items_27563=("${!1}")
+    local total_len_27564="${2}"
+    local term_width_27565="${3}"
+    local separator_27566=" • "
+    local separator_len_27567=3
     # Fast path: no truncation needed
-    if [ "$(( total_len_27462 <= term_width_27463 ))" != 0 ]; then
-        local iter_27466=0
+    if [ "$(( total_len_27564 <= term_width_27565 ))" != 0 ]; then
+        local iter_27568=0
         while :
         do
-            local __length_383=("${items_27461[@]}")
-            if [ "$(( iter_27466 >= ${#__length_383[@]} ))" != 0 ]; then
+            local __length_389=("${items_27563[@]}")
+            if [ "$(( iter_27568 >= ${#__length_389[@]} ))" != 0 ]; then
                 break
-            elif [ "$(( iter_27466 > 0 ))" != 0 ]; then
-                eprintf_colored__1998_v0 "${separator_27464}" 90
+            elif [ "$(( iter_27568 > 0 ))" != 0 ]; then
+                eprintf_colored__2005_v0 "${separator_27566}" 90
             fi
-            colored__1999_v0 "${items_27461[$(( iter_27466 + 1 ))]?"Index out of bounds (at src/./filter/../utils/widget/tooltip.ab:23:55)"}" 2
-            local ret_colored1999_v0__23_41="${ret_colored1999_v0}"
-            local array_384=("")
-            eprintf__1997_v0 "${items_27461[${iter_27466}]?"Index out of bounds (at src/./filter/../utils/widget/tooltip.ab:23:27)"}"" ""${ret_colored1999_v0__23_41}" array_384[@]
-            iter_27466="$(( iter_27466 + 2 ))"
+            colored__2006_v0 "${items_27563[$(( iter_27568 + 1 ))]?"Index out of bounds (at src/./filter/../utils/widget/tooltip.ab:23:55)"}" 2
+            local ret_colored2006_v0__23_41="${ret_colored2006_v0}"
+            local array_390=("")
+            eprintf__2004_v0 "${items_27563[${iter_27568}]?"Index out of bounds (at src/./filter/../utils/widget/tooltip.ab:23:27)"}"" ""${ret_colored2006_v0__23_41}" array_390[@]
+            iter_27568="$(( iter_27568 + 2 ))"
         done
     else
         # Slow path: truncate
-        local current_len_27471=0
-        local first_27472=1
-        local iter_27473=0
+        local current_len_27573=0
+        local first_27574=1
+        local iter_27575=0
         while :
         do
-            local __length_385=("${items_27461[@]}")
-            if [ "$(( iter_27473 >= ${#__length_385[@]} ))" != 0 ]; then
+            local __length_391=("${items_27563[@]}")
+            if [ "$(( iter_27575 >= ${#__length_391[@]} ))" != 0 ]; then
                 break
             fi
-            local key_27474="${items_27461[${iter_27473}]?"Index out of bounds (at src/./filter/../utils/widget/tooltip.ab:35:31)"}"
-            local action_27475="${items_27461[$(( iter_27473 + 1 ))]?"Index out of bounds (at src/./filter/../utils/widget/tooltip.ab:36:34)"}"
-            local __length_386="${key_27474}"
-            local __length_387="${action_27475}"
-            local part_len_27476="$(( $(( ${#__length_386} + 1 )) + ${#__length_387} ))"
-            local needed_27477="${part_len_27476}"
-            if [ "$(( ! first_27472 ))" != 0 ]; then
-                needed_27477="$(( needed_27477 + separator_len_27465 ))"
+            local key_27576="${items_27563[${iter_27575}]?"Index out of bounds (at src/./filter/../utils/widget/tooltip.ab:35:31)"}"
+            local action_27577="${items_27563[$(( iter_27575 + 1 ))]?"Index out of bounds (at src/./filter/../utils/widget/tooltip.ab:36:34)"}"
+            local __length_392="${key_27576}"
+            local __length_393="${action_27577}"
+            local part_len_27578="$(( $(( ${#__length_392} + 1 )) + ${#__length_393} ))"
+            local needed_27579="${part_len_27578}"
+            if [ "$(( ! first_27574 ))" != 0 ]; then
+                needed_27579="$(( needed_27579 + separator_len_27567 ))"
             fi
-            if [ "$(( $(( current_len_27471 + needed_27477 )) > term_width_27463 ))" != 0 ]; then
+            if [ "$(( $(( current_len_27573 + needed_27579 )) > term_width_27565 ))" != 0 ]; then
                 break
             fi
-            if [ "$(( ! first_27472 ))" != 0 ]; then
-                eprintf_colored__1998_v0 "${separator_27464}" 90
+            if [ "$(( ! first_27574 ))" != 0 ]; then
+                eprintf_colored__2005_v0 "${separator_27566}" 90
             fi
-            colored__1999_v0 "${action_27475}" 2
-            local ret_colored1999_v0__51_33="${ret_colored1999_v0}"
-            local array_388=("")
-            eprintf__1997_v0 "${key_27474}"" ""${ret_colored1999_v0__51_33}" array_388[@]
-            current_len_27471="$(( current_len_27471 + needed_27477 ))"
-            first_27472=0
-            iter_27473="$(( iter_27473 + 2 ))"
+            colored__2006_v0 "${action_27577}" 2
+            local ret_colored2006_v0__51_33="${ret_colored2006_v0}"
+            local array_394=("")
+            eprintf__2004_v0 "${key_27576}"" ""${ret_colored2006_v0__51_33}" array_394[@]
+            current_len_27573="$(( current_len_27573 + needed_27579 ))"
+            first_27574=0
+            iter_27575="$(( iter_27575 + 2 ))"
         done
     fi
 }
 
 # eprintf(format: Text, args: [Text])
-eprintf__2013_v0() {
-    local format_27502="${1}"
-    local args_27503=("${!2}")
-    args_27503=("${format_27502}" "${args_27503[@]}")
+eprintf__2020_v0() {
+    local format_27604="${1}"
+    local args_27605=("${!2}")
+    args_27605=("${format_27604}" "${args_27605[@]}")
     __status=$?
-    printf "${args_27503[@]}" >&2
+    printf "${args_27605[@]}" >&2
     __status=$?
 }
 
@@ -5324,101 +5372,101 @@ _term_size_104=(80 24)
 export XYLITOL_RUNTIME_STTY_COUNT=0
 __status=$?
 # store_term_size(size: Text)
-store_term_size__2040_v0() {
-    local size_27366="${1}"
-    if [ "$([ "_${size_27366}" != "_" ]; echo $?)" != 0 ]; then
-        ret_store_term_size2040_v0=0
+store_term_size__2048_v0() {
+    local size_27466="${1}"
+    if [ "$([ "_${size_27466}" != "_" ]; echo $?)" != 0 ]; then
+        ret_store_term_size2048_v0=0
         return 0
     fi
-    split__4_v0 "${size_27366}" " "
-    local parts_27367=("${ret_split4_v0[@]}")
-    local __length_390=("${parts_27367[@]}")
-    if [ "$(( ${#__length_390[@]} != 2 ))" != 0 ]; then
-        ret_store_term_size2040_v0=0
+    split__4_v0 "${size_27466}" " "
+    local parts_27467=("${ret_split4_v0[@]}")
+    local __length_396=("${parts_27467[@]}")
+    if [ "$(( ${#__length_396[@]} != 2 ))" != 0 ]; then
+        ret_store_term_size2048_v0=0
         return 0
     fi
-    parse_int__13_v0 "${parts_27367[1]?"Index out of bounds (at src/./filter/../utils/widget/../term.ab:53:41)"}"
+    parse_int__13_v0 "${parts_27467[1]?"Index out of bounds (at src/./filter/../utils/widget/../term.ab:57:41)"}"
     __status=$?
-    local ret_parse_int13_v0__53_25="${ret_parse_int13_v0}"
-    parse_int__13_v0 "${parts_27367[0]?"Index out of bounds (at src/./filter/../utils/widget/../term.ab:53:68)"}"
+    local ret_parse_int13_v0__57_25="${ret_parse_int13_v0}"
+    parse_int__13_v0 "${parts_27467[0]?"Index out of bounds (at src/./filter/../utils/widget/../term.ab:57:68)"}"
     __status=$?
-    local ret_parse_int13_v0__53_52="${ret_parse_int13_v0}"
-    _term_size_104=("${ret_parse_int13_v0__53_25}" "${ret_parse_int13_v0__53_52}")
-    ret_store_term_size2040_v0=1
+    local ret_parse_int13_v0__57_52="${ret_parse_int13_v0}"
+    _term_size_104=("${ret_parse_int13_v0__57_25}" "${ret_parse_int13_v0__57_52}")
+    ret_store_term_size2048_v0=1
     return 0
 }
 
 # query_term_size()
-query_term_size__2041_v0() {
-    local command_392
-    command_392="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
+query_term_size__2049_v0() {
+    local command_398
+    command_398="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
     __status=$?
-    local size_27369="${command_392}"
-    store_term_size__2040_v0 "${size_27369}"
-    ret_query_term_size2041_v0="${ret_store_term_size2040_v0}"
+    local size_27469="${command_398}"
+    store_term_size__2048_v0 "${size_27469}"
+    ret_query_term_size2049_v0="${ret_store_term_size2048_v0}"
     return 0
 }
 
 # stty_term_size()
-stty_term_size__2042_v0() {
-    local command_393
-    command_393="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
+stty_term_size__2050_v0() {
+    local command_399
+    command_399="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
     __status=$?
-    local size_27365="${command_393}"
-    store_term_size__2040_v0 "${size_27365}"
-    ret_stty_term_size2042_v0="${ret_store_term_size2040_v0}"
+    local size_27465="${command_399}"
+    store_term_size__2048_v0 "${size_27465}"
+    ret_stty_term_size2050_v0="${ret_store_term_size2048_v0}"
     return 0
 }
 
 # get_term_size()
-get_term_size__2043_v0() {
-    stty_term_size__2042_v0 
-    local detected_27368="${ret_stty_term_size2042_v0}"
-    if [ "$(( ! detected_27368 ))" != 0 ]; then
-        query_term_size__2041_v0 
-        detected_27368="${ret_query_term_size2041_v0}"
+get_term_size__2051_v0() {
+    stty_term_size__2050_v0 
+    local detected_27468="${ret_stty_term_size2050_v0}"
+    if [ "$(( ! detected_27468 ))" != 0 ]; then
+        query_term_size__2049_v0 
+        detected_27468="${ret_query_term_size2049_v0}"
     fi
     _got_term_size_103=1
 }
 
 # term_width()
-term_width__2045_v0() {
+term_width__2053_v0() {
     if [ "$(( ! _got_term_size_103 ))" != 0 ]; then
-        get_term_size__2043_v0 
+        get_term_size__2051_v0 
     fi
-    ret_term_width2045_v0="${_term_size_104[0]?"Index out of bounds (at src/./filter/../utils/widget/../term.ab:96:23)"}"
+    ret_term_width2053_v0="${_term_size_104[0]?"Index out of bounds (at src/./filter/../utils/widget/../term.ab:100:23)"}"
     return 0
 }
 
 # // Cursor /////
 # go_up(cnt: Int)
-go_up__2052_v0() {
-    local cnt_27501="${1}"
-    local array_394=("")
-    eprintf__2013_v0 "\\x1b[${cnt_27501}A" array_394[@]
+go_up__2060_v0() {
+    local cnt_27603="${1}"
+    local array_400=("")
+    eprintf__2020_v0 "\\x1b[${cnt_27603}A" array_400[@]
 }
 
 # go_down(cnt: Int)
-go_down__2053_v0() {
-    local cnt_27504="${1}"
-    local array_395=("")
-    eprintf__2013_v0 "\\x1b[${cnt_27504}B" array_395[@]
+go_down__2061_v0() {
+    local cnt_27606="${1}"
+    local array_401=("")
+    eprintf__2020_v0 "\\x1b[${cnt_27606}B" array_401[@]
 }
 
 # move the cursor up or down `cnt` lines.
 # redraw_row(display_count: Int, index: Int, line: Text)
-redraw_row__2060_v0() {
-    local display_count_27498="${1}"
-    local index_27499="${2}"
-    local line_27500="${3}"
-    go_up__2052_v0 "$(( display_count_27498 - index_27499 ))"
-    local array_396=("")
-    eprintf__1997_v0 "\\x1b[G\\x1b[K" array_396[@]
-    local array_397=("")
-    eprintf__1997_v0 "${line_27500}" array_397[@]
-    go_down__2053_v0 "$(( display_count_27498 - index_27499 ))"
-    local array_398=("")
-    eprintf__1997_v0 "\\x1b[G" array_398[@]
+redraw_row__2068_v0() {
+    local display_count_27600="${1}"
+    local index_27601="${2}"
+    local line_27602="${3}"
+    go_up__2060_v0 "$(( display_count_27600 - index_27601 ))"
+    local array_402=("")
+    eprintf__2004_v0 "\\x1b[G\\x1b[K" array_402[@]
+    local array_403=("")
+    eprintf__2004_v0 "${line_27602}" array_403[@]
+    go_down__2061_v0 "$(( display_count_27600 - index_27601 ))"
+    local array_404=("")
+    eprintf__2004_v0 "\\x1b[G" array_404[@]
 }
 
 # Which items of a multi-select widget are ticked.
@@ -5427,198 +5475,198 @@ _count_106=0
 _total_107=0
 _limit_108=-1
 # checked_init(total: Int, limit: Int)
-checked_init__2062_v0() {
-    local total_27416="${1}"
-    local limit_27417="${2}"
+checked_init__2070_v0() {
+    local total_27518="${1}"
+    local limit_27519="${2}"
     _checked_105=()
-    local __range_start_27418=0
-    local __range_end_27418="${total_27416}"
-    local __dir_27418=$(( ${__range_start_27418} <= ${__range_end_27418} ? 1 : -1 ))
-    for (( ____27418=${__range_start_27418}; ____27418 * ${__dir_27418} < ${__range_end_27418} * ${__dir_27418}; ____27418+=${__dir_27418} )); do
-        local array_401=(0)
-        _checked_105+=("${array_401[@]}")
+    local __range_start_27520=0
+    local __range_end_27520="${total_27518}"
+    local __dir_27520=$(( ${__range_start_27520} <= ${__range_end_27520} ? 1 : -1 ))
+    for (( ____27520=${__range_start_27520}; ____27520 * ${__dir_27520} < ${__range_end_27520} * ${__dir_27520}; ____27520+=${__dir_27520} )); do
+        local array_407=(0)
+        _checked_105+=("${array_407[@]}")
 done
     _count_106=0
-    _total_107="${total_27416}"
-    _limit_108="${limit_27417}"
+    _total_107="${total_27518}"
+    _limit_108="${limit_27519}"
 }
 
 # checked_is(index: Int)
-checked_is__2063_v0() {
-    local index_27488="${1}"
-    ret_checked_is2063_v0="${_checked_105[${index_27488}]?"Index out of bounds (at src/./filter/../utils/widget/checked.ab:19:21)"}"
+checked_is__2071_v0() {
+    local index_27590="${1}"
+    ret_checked_is2071_v0="${_checked_105[${index_27590}]?"Index out of bounds (at src/./filter/../utils/widget/checked.ab:19:21)"}"
     return 0
 }
 
 # checked_count()
-checked_count__2064_v0() {
-    ret_checked_count2064_v0="${_count_106}"
+checked_count__2072_v0() {
+    ret_checked_count2072_v0="${_count_106}"
     return 0
 }
 
 # checked_toggle(index: Int)
-checked_toggle__2065_v0() {
-    local index_27505="${1}"
-    if [ "${_checked_105[${index_27505}]?"Index out of bounds (at src/./filter/../utils/widget/checked.ab:29:17)"}" != 0 ]; then
-        _checked_105["${index_27505}"]=0
+checked_toggle__2073_v0() {
+    local index_27607="${1}"
+    if [ "${_checked_105[${index_27607}]?"Index out of bounds (at src/./filter/../utils/widget/checked.ab:29:17)"}" != 0 ]; then
+        _checked_105["${index_27607}"]=0
         _count_106="$(( _count_106 - 1 ))"
-        ret_checked_toggle2065_v0=1
+        ret_checked_toggle2073_v0=1
         return 0
     fi
     if [ "$(( $(( _limit_108 >= 0 )) && $(( _count_106 >= _limit_108 )) ))" != 0 ]; then
-        ret_checked_toggle2065_v0=0
+        ret_checked_toggle2073_v0=0
         return 0
     fi
-    _checked_105["${index_27505}"]=1
+    _checked_105["${index_27607}"]=1
     _count_106="$(( _count_106 + 1 ))"
-    ret_checked_toggle2065_v0=1
+    ret_checked_toggle2073_v0=1
     return 0
 }
 
 # checked_all()
-checked_all__2066_v0() {
+checked_all__2074_v0() {
     if [ "$(( _limit_108 >= 0 ))" != 0 ]; then
-        ret_checked_all2066_v0=0
+        ret_checked_all2074_v0=0
         return 0
     fi
-    local was_all_27506="$(( _count_106 == _total_107 ))"
-    local __range_start_27507=0
-    local __range_end_27507="${_total_107}"
-    local __dir_27507=$(( ${__range_start_27507} <= ${__range_end_27507} ? 1 : -1 ))
-    for (( i_27507=${__range_start_27507}; i_27507 * ${__dir_27507} < ${__range_end_27507} * ${__dir_27507}; i_27507+=${__dir_27507} )); do
-        _checked_105["${i_27507}"]="$(( ! was_all_27506 ))"
+    local was_all_27608="$(( _count_106 == _total_107 ))"
+    local __range_start_27609=0
+    local __range_end_27609="${_total_107}"
+    local __dir_27609=$(( ${__range_start_27609} <= ${__range_end_27609} ? 1 : -1 ))
+    for (( i_27609=${__range_start_27609}; i_27609 * ${__dir_27609} < ${__range_end_27609} * ${__dir_27609}; i_27609+=${__dir_27609} )); do
+        _checked_105["${i_27609}"]="$(( ! was_all_27608 ))"
 done
-    if [ "${was_all_27506}" != 0 ]; then
+    if [ "${was_all_27608}" != 0 ]; then
         _count_106=0
     else
         _count_106="${_total_107}"
     fi
-    ret_checked_all2066_v0=1
+    ret_checked_all2074_v0=1
     return 0
 }
 
 # print_help_line(pending: Text, line: Text, note_at: Int)
-print_help_line__2078_v0() {
-    local pending_27384="${1}"
-    local line_27385="${2}"
-    local note_at_27386="${3}"
-    if [ "$(( note_at_27386 < 0 ))" != 0 ]; then
-        local array_402=()
-        printf__128_v0 "${pending_27384}""${line_27385}""
-" array_402[@]
+print_help_line__2086_v0() {
+    local pending_27484="${1}"
+    local line_27485="${2}"
+    local note_at_27486="${3}"
+    if [ "$(( note_at_27486 < 0 ))" != 0 ]; then
+        local array_408=()
+        printf__128_v0 "${pending_27484}""${line_27485}""
+" array_408[@]
     # A length of zero means "to the end" in `slice`, so a line that is
     # all note has to be handled on its own.
-    elif [ "$(( note_at_27386 == 0 ))" != 0 ]; then
-        colored__1999_v0 "${line_27385}" 90
-        local ret_colored1999_v0__12_40="${ret_colored1999_v0}"
-        local array_403=()
-        printf__128_v0 "${pending_27384}""${ret_colored1999_v0__12_40}""
-" array_403[@]
+    elif [ "$(( note_at_27486 == 0 ))" != 0 ]; then
+        colored__2006_v0 "${line_27485}" 90
+        local ret_colored2006_v0__12_40="${ret_colored2006_v0}"
+        local array_409=()
+        printf__128_v0 "${pending_27484}""${ret_colored2006_v0__12_40}""
+" array_409[@]
     else
-        slice__24_v0 "${line_27385}" 0 "${note_at_27386}"
+        slice__24_v0 "${line_27485}" 0 "${note_at_27486}"
         local ret_slice24_v0__13_32="${ret_slice24_v0}"
-        slice__24_v0 "${line_27385}" "${note_at_27386}" 0
+        slice__24_v0 "${line_27485}" "${note_at_27486}" 0
         local ret_slice24_v0__13_66="${ret_slice24_v0}"
-        colored__1999_v0 "${ret_slice24_v0__13_66}" 90
-        local ret_colored1999_v0__13_58="${ret_colored1999_v0}"
-        local array_404=()
-        printf__128_v0 "${pending_27384}""${ret_slice24_v0__13_32}""${ret_colored1999_v0__13_58}""
-" array_404[@]
+        colored__2006_v0 "${ret_slice24_v0__13_66}" 90
+        local ret_colored2006_v0__13_58="${ret_colored2006_v0}"
+        local array_410=()
+        printf__128_v0 "${pending_27484}""${ret_slice24_v0__13_32}""${ret_colored2006_v0__13_58}""
+" array_410[@]
     fi
 }
 
 # render_help_entries(names: [Text], texts: [Text], notes: [Text], min_name_width: Int)
-render_help_entries__2079_v0() {
-    local names_27357=("${!1}")
-    local texts_27358=("${!2}")
-    local notes_27359=("${!3}")
-    local min_name_width_27360="${4}"
-    local __length_405=("${names_27357[@]}")
-    local count_27361="${#__length_405[@]}"
-    local name_width_27362="${min_name_width_27360}"
-    local __range_start_27363=0
-    local __range_end_27363="${count_27361}"
-    local __dir_27363=$(( ${__range_start_27363} <= ${__range_end_27363} ? 1 : -1 ))
-    for (( i_27363=${__range_start_27363}; i_27363 * ${__dir_27363} < ${__range_end_27363} * ${__dir_27363}; i_27363+=${__dir_27363} )); do
-        local __length_406="${names_27357[${i_27363}]?"Index out of bounds (at src/./filter/../utils/widget/help.ab:28:33)"}"
-        local width_27364="${#__length_406}"
-        if [ "$(( width_27364 > name_width_27362 ))" != 0 ]; then
-            name_width_27362="${width_27364}"
+render_help_entries__2087_v0() {
+    local names_27457=("${!1}")
+    local texts_27458=("${!2}")
+    local notes_27459=("${!3}")
+    local min_name_width_27460="${4}"
+    local __length_411=("${names_27457[@]}")
+    local count_27461="${#__length_411[@]}"
+    local name_width_27462="${min_name_width_27460}"
+    local __range_start_27463=0
+    local __range_end_27463="${count_27461}"
+    local __dir_27463=$(( ${__range_start_27463} <= ${__range_end_27463} ? 1 : -1 ))
+    for (( i_27463=${__range_start_27463}; i_27463 * ${__dir_27463} < ${__range_end_27463} * ${__dir_27463}; i_27463+=${__dir_27463} )); do
+        local __length_412="${names_27457[${i_27463}]?"Index out of bounds (at src/./filter/../utils/widget/help.ab:28:33)"}"
+        local width_27464="${#__length_412}"
+        if [ "$(( width_27464 > name_width_27462 ))" != 0 ]; then
+            name_width_27462="${width_27464}"
         fi
 done
-    term_width__2045_v0 
-    local width_27370="${ret_term_width2045_v0}"
+    term_width__2053_v0 
+    local width_27470="${ret_term_width2053_v0}"
     # Two spaces of margin, then three between a name and its description.
-    local indent_27371="$(( name_width_27362 + 5 ))"
+    local indent_27471="$(( name_width_27462 + 5 ))"
     # Once the description column gets too narrow to read, stop putting the
     # description beside the name and place it underneath instead.
-    local stacked_27372="$(( $(( width_27370 - indent_27371 )) < 24 ))"
-    if [ "${stacked_27372}" != 0 ]; then
-        indent_27371=6
+    local stacked_27472="$(( $(( width_27470 - indent_27471 )) < 24 ))"
+    if [ "${stacked_27472}" != 0 ]; then
+        indent_27471=6
     fi
-    local avail_27373="$(( width_27370 - indent_27371 ))"
-    rpad__28_v0 "" " " "${indent_27371}"
-    local blank_27374="${ret_rpad28_v0}"
-    local __range_start_27375=0
-    local __range_end_27375="${count_27361}"
-    local __dir_27375=$(( ${__range_start_27375} <= ${__range_end_27375} ? 1 : -1 ))
-    for (( i_27375=${__range_start_27375}; i_27375 * ${__dir_27375} < ${__range_end_27375} * ${__dir_27375}; i_27375+=${__dir_27375} )); do
-        local pending_27376="${blank_27374}"
-        if [ "${stacked_27372}" != 0 ]; then
-            local array_407=()
-            printf__128_v0 "  ""${names_27357[${i_27375}]?"Index out of bounds (at src/./filter/../utils/widget/help.ab:48:33)"}""
-" array_407[@]
+    local avail_27473="$(( width_27470 - indent_27471 ))"
+    rpad__28_v0 "" " " "${indent_27471}"
+    local blank_27474="${ret_rpad28_v0}"
+    local __range_start_27475=0
+    local __range_end_27475="${count_27461}"
+    local __dir_27475=$(( ${__range_start_27475} <= ${__range_end_27475} ? 1 : -1 ))
+    for (( i_27475=${__range_start_27475}; i_27475 * ${__dir_27475} < ${__range_end_27475} * ${__dir_27475}; i_27475+=${__dir_27475} )); do
+        local pending_27476="${blank_27474}"
+        if [ "${stacked_27472}" != 0 ]; then
+            local array_413=()
+            printf__128_v0 "  ""${names_27457[${i_27475}]?"Index out of bounds (at src/./filter/../utils/widget/help.ab:48:33)"}""
+" array_413[@]
         else
-            rpad__28_v0 "  ""${names_27357[${i_27375}]?"Index out of bounds (at src/./filter/../utils/widget/help.ab:50:41)"}" " " "${indent_27371}"
+            rpad__28_v0 "  ""${names_27457[${i_27475}]?"Index out of bounds (at src/./filter/../utils/widget/help.ab:50:41)"}" " " "${indent_27471}"
             local ret_rpad28_v0__50_23="${ret_rpad28_v0}"
-            pending_27376="${ret_rpad28_v0__50_23}"
+            pending_27476="${ret_rpad28_v0__50_23}"
         fi
-        split__4_v0 "${texts_27358[${i_27375}]?"Index out of bounds (at src/./filter/../utils/widget/help.ab:52:33)"}" " "
+        split__4_v0 "${texts_27458[${i_27475}]?"Index out of bounds (at src/./filter/../utils/widget/help.ab:52:33)"}" " "
         local ret_split4_v0__52_21=("${ret_split4_v0[@]}")
-        local words_27377=("${ret_split4_v0__52_21[@]}")
-        local __length_408=("${words_27377[@]}")
-        local note_start_27378="${#__length_408[@]}"
-        if [ "$([ "_${notes_27359[${i_27375}]?"Index out of bounds (at src/./filter/../utils/widget/help.ab:54:18)"}" == "_" ]; echo $?)" != 0 ]; then
+        local words_27477=("${ret_split4_v0__52_21[@]}")
+        local __length_414=("${words_27477[@]}")
+        local note_start_27478="${#__length_414[@]}"
+        if [ "$([ "_${notes_27459[${i_27475}]?"Index out of bounds (at src/./filter/../utils/widget/help.ab:54:18)"}" == "_" ]; echo $?)" != 0 ]; then
             # A note reads badly when split, so it moves between lines whole
             # unless it is too long to ever fit on one.
-            local __length_409="${notes_27359[${i_27375}]?"Index out of bounds (at src/./filter/../utils/widget/help.ab:57:26)"}"
-            if [ "$(( ${#__length_409} > avail_27373 ))" != 0 ]; then
-                split__4_v0 "${notes_27359[${i_27375}]?"Index out of bounds (at src/./filter/../utils/widget/help.ab:58:38)"}" " "
+            local __length_415="${notes_27459[${i_27475}]?"Index out of bounds (at src/./filter/../utils/widget/help.ab:57:26)"}"
+            if [ "$(( ${#__length_415} > avail_27473 ))" != 0 ]; then
+                split__4_v0 "${notes_27459[${i_27475}]?"Index out of bounds (at src/./filter/../utils/widget/help.ab:58:38)"}" " "
                 local ret_split4_v0__58_26=("${ret_split4_v0[@]}")
-                words_27377+=("${ret_split4_v0__58_26[@]}")
+                words_27477+=("${ret_split4_v0__58_26[@]}")
             else
-                local array_410=("${notes_27359[${i_27375}]?"Index out of bounds (at src/./filter/../utils/widget/help.ab:60:33)"}")
-                words_27377+=("${array_410[@]}")
+                local array_416=("${notes_27459[${i_27475}]?"Index out of bounds (at src/./filter/../utils/widget/help.ab:60:33)"}")
+                words_27477+=("${array_416[@]}")
             fi
         fi
-        local line_27379=""
+        local line_27479=""
         # Where the note begins on the line being built, so it can be dimmed
         # after wrapping decides how much of it fits. -1 while there is none.
-        local note_at_27380=-1
-        local __range_start_27381=0
-        local __length_411=("${words_27377[@]}")
-        local __range_end_27381="${#__length_411[@]}"
-        local __dir_27381=$(( ${__range_start_27381} <= ${__range_end_27381} ? 1 : -1 ))
-        for (( j_27381=${__range_start_27381}; j_27381 * ${__dir_27381} < ${__range_end_27381} * ${__dir_27381}; j_27381+=${__dir_27381} )); do
-            local word_27382="${words_27377[${j_27381}]?"Index out of bounds (at src/./filter/../utils/widget/help.ab:70:32)"}"
-            local candidate_27383
-            candidate_27383="$(if [ "$([ "_${line_27379}" != "_" ]; echo $?)" != 0 ]; then echo "${word_27382}"; else echo "${line_27379}"" ""${word_27382}"; fi)"
-            local __length_412="${candidate_27383}"
-            if [ "$(( $(( ${#__length_412} > avail_27373 )) && $([ "_${line_27379}" == "_" ]; echo $?) ))" != 0 ]; then
-                print_help_line__2078_v0 "${pending_27376}" "${line_27379}" "${note_at_27380}"
-                pending_27376="${blank_27374}"
-                line_27379="${word_27382}"
-                note_at_27380="$(if [ "$(( j_27381 >= note_start_27378 ))" != 0 ]; then echo 0; else echo -1; fi)"
+        local note_at_27480=-1
+        local __range_start_27481=0
+        local __length_417=("${words_27477[@]}")
+        local __range_end_27481="${#__length_417[@]}"
+        local __dir_27481=$(( ${__range_start_27481} <= ${__range_end_27481} ? 1 : -1 ))
+        for (( j_27481=${__range_start_27481}; j_27481 * ${__dir_27481} < ${__range_end_27481} * ${__dir_27481}; j_27481+=${__dir_27481} )); do
+            local word_27482="${words_27477[${j_27481}]?"Index out of bounds (at src/./filter/../utils/widget/help.ab:70:32)"}"
+            local candidate_27483
+            candidate_27483="$(if [ "$([ "_${line_27479}" != "_" ]; echo $?)" != 0 ]; then echo "${word_27482}"; else echo "${line_27479}"" ""${word_27482}"; fi)"
+            local __length_418="${candidate_27483}"
+            if [ "$(( $(( ${#__length_418} > avail_27473 )) && $([ "_${line_27479}" == "_" ]; echo $?) ))" != 0 ]; then
+                print_help_line__2086_v0 "${pending_27476}" "${line_27479}" "${note_at_27480}"
+                pending_27476="${blank_27474}"
+                line_27479="${word_27482}"
+                note_at_27480="$(if [ "$(( j_27481 >= note_start_27478 ))" != 0 ]; then echo 0; else echo -1; fi)"
             else
-                if [ "$(( $(( j_27381 >= note_start_27378 )) && $(( note_at_27380 < 0 )) ))" != 0 ]; then
-                    local __length_413="${candidate_27383}"
-                    local __length_414="${word_27382}"
-                    note_at_27380="$(( ${#__length_413} - ${#__length_414} ))"
+                if [ "$(( $(( j_27481 >= note_start_27478 )) && $(( note_at_27480 < 0 )) ))" != 0 ]; then
+                    local __length_419="${candidate_27483}"
+                    local __length_420="${word_27482}"
+                    note_at_27480="$(( ${#__length_419} - ${#__length_420} ))"
                 fi
-                line_27379="${candidate_27383}"
+                line_27479="${candidate_27483}"
             fi
 done
-        print_help_line__2078_v0 "${pending_27376}" "${line_27379}" "${note_at_27380}"
+        print_help_line__2086_v0 "${pending_27476}" "${line_27479}" "${note_at_27480}"
 done
 }
 
@@ -5642,687 +5690,696 @@ _multi_121=0
 _has_header_122=0
 _term_width_123=80
 # refresh_matches()
-refresh_matches__2137_v0() {
-    local command_417
-    command_417="$(shopt -s nocasematch; __e=""; __p=""; __s=""; __i=0; for __it in "${_options_110[@]}"; do case "$__it" in ("${_query_114}") __e="$__e $__i";; ("${_query_114}"*) __p="$__p $__i";; (*"${_query_114}"*) __s="$__s $__i";; esac; __i=$((__i+1)); done; __a="$__e$__p$__s"; printf '%s' "${__a# }")"
+refresh_matches__2145_v0() {
+    local command_423
+    command_423="$(shopt -s nocasematch; __e=""; __p=""; __s=""; __i=0; for __it in "${_options_110[@]}"; do case "$__it" in ("${_query_114}") __e="$__e $__i";; ("${_query_114}"*) __p="$__p $__i";; (*"${_query_114}"*) __s="$__s $__i";; esac; __i=$((__i+1)); done; __a="$__e$__p$__s"; printf '%s' "${__a# }")"
     __status=$?
-    local raw_27419="${command_417}"
-    if [ "$([ "_${raw_27419}" != "_" ]; echo $?)" != 0 ]; then
+    local raw_27521="${command_423}"
+    if [ "$([ "_${raw_27521}" != "_" ]; echo $?)" != 0 ]; then
         _matches_112=()
     else
-        split__4_v0 "${raw_27419}" " "
+        split__4_v0 "${raw_27521}" " "
         _matches_112=("${ret_split4_v0[@]}")
     fi
-    local __length_419=("${_matches_112[@]}")
-    _match_count_113="${#__length_419[@]}"
+    local __length_425=("${_matches_112[@]}")
+    _match_count_113="${#__length_425[@]}"
     _offset_119=0
     _sel_120=0
 }
 
 # visible_count()
-visible_count__2138_v0() {
-    local count_27479="$(( _match_count_113 - _offset_119 ))"
-    if [ "$(( count_27479 > _height_118 ))" != 0 ]; then
-        count_27479="${_height_118}"
+visible_count__2146_v0() {
+    local count_27581="$(( _match_count_113 - _offset_119 ))"
+    if [ "$(( count_27581 > _height_118 ))" != 0 ]; then
+        count_27581="${_height_118}"
     fi
-    if [ "$(( count_27479 < 0 ))" != 0 ]; then
-        count_27479=0
+    if [ "$(( count_27581 < 0 ))" != 0 ]; then
+        count_27581=0
     fi
-    ret_visible_count2138_v0="${count_27479}"
+    ret_visible_count2146_v0="${count_27581}"
     return 0
 }
 
 # option_index(row: Int)
-option_index__2139_v0() {
-    local row_27484="${1}"
-    parse_int__13_v0 "${_matches_112[$(( _offset_119 + row_27484 ))]?"Index out of bounds (at src/./filter/./mod.ab:52:37)"}"
+option_index__2147_v0() {
+    local row_27586="${1}"
+    parse_int__13_v0 "${_matches_112[$(( _offset_119 + row_27586 ))]?"Index out of bounds (at src/./filter/./mod.ab:52:37)"}"
     __status=$?
-    ret_option_index2139_v0="${ret_parse_int13_v0}"
+    ret_option_index2147_v0="${ret_parse_int13_v0}"
     return 0
 }
 
 # option_width()
-option_width__2140_v0() {
-    local check_width_27485
-    check_width_27485="$(if [ "${_multi_121}" != 0 ]; then echo 3; else echo 1; fi)"
-    local __length_420="${_cursor_117}"
-    ret_option_width2140_v0="$(( $(( _term_width_123 - ${#__length_420} )) - check_width_27485 ))"
+option_width__2148_v0() {
+    local check_width_27587
+    check_width_27587="$(if [ "${_multi_121}" != 0 ]; then echo 3; else echo 1; fi)"
+    local __length_426="${_cursor_117}"
+    ret_option_width2148_v0="$(( $(( _term_width_123 - ${#__length_426} )) - check_width_27587 ))"
     return 0
 }
 
 # row_line(row: Int, highlighted: Bool)
-row_line__2141_v0() {
-    local row_27482="${1}"
-    local highlighted_27483="${2}"
-    option_index__2139_v0 "${row_27482}"
-    local ret_option_index2139_v0__61_44="${ret_option_index2139_v0}"
-    option_width__2140_v0 
-    local ret_option_width2140_v0__61_64="${ret_option_width2140_v0}"
-    cutoff_text__1976_v0 "${_options_110[${ret_option_index2139_v0__61_44}]?"Index out of bounds (at src/./filter/./mod.ab:61:44)"}" "${ret_option_width2140_v0__61_64}"
-    local truncated_27486="${ret_cutoff_text1976_v0}"
-    local __length_421="${_cursor_117}"
-    rpad__28_v0 "" " " "${#__length_421}"
-    local blank_27487="${ret_rpad28_v0}"
+row_line__2149_v0() {
+    local row_27584="${1}"
+    local highlighted_27585="${2}"
+    option_index__2147_v0 "${row_27584}"
+    local ret_option_index2147_v0__61_44="${ret_option_index2147_v0}"
+    option_width__2148_v0 
+    local ret_option_width2148_v0__61_64="${ret_option_width2148_v0}"
+    cutoff_text__1983_v0 "${_options_110[${ret_option_index2147_v0__61_44}]?"Index out of bounds (at src/./filter/./mod.ab:61:44)"}" "${ret_option_width2148_v0__61_64}"
+    local truncated_27588="${ret_cutoff_text1983_v0}"
+    local __length_427="${_cursor_117}"
+    rpad__28_v0 "" " " "${#__length_427}"
+    local blank_27589="${ret_rpad28_v0}"
     if [ "$(( ! _multi_121 ))" != 0 ]; then
-        if [ "${highlighted_27483}" != 0 ]; then
-            colored_secondary__1945_v0 "${_cursor_117}""${truncated_27486}"
-            ret_row_line2141_v0="${ret_colored_secondary1945_v0}"
+        if [ "${highlighted_27585}" != 0 ]; then
+            colored_secondary__1952_v0 "${_cursor_117}""${truncated_27588}"
+            ret_row_line2149_v0="${ret_colored_secondary1952_v0}"
             return 0
         fi
-        ret_row_line2141_v0="${blank_27487}""${truncated_27486}"
+        ret_row_line2149_v0="${blank_27589}""${truncated_27588}"
         return 0
     fi
-    option_index__2139_v0 "${row_27482}"
-    local ret_option_index2139_v0__69_31="${ret_option_index2139_v0}"
-    checked_is__2063_v0 "${ret_option_index2139_v0__69_31}"
-    local ticked_27489="${ret_checked_is2063_v0}"
-    local mark_27490
-    mark_27490="$(if [ "${ticked_27489}" != 0 ]; then echo "✓ "; else echo "• "; fi)"
-    if [ "${highlighted_27483}" != 0 ]; then
-        colored_secondary__1945_v0 "${_cursor_117}""${mark_27490}""${truncated_27486}"
-        ret_row_line2141_v0="${ret_colored_secondary1945_v0}"
+    option_index__2147_v0 "${row_27584}"
+    local ret_option_index2147_v0__69_31="${ret_option_index2147_v0}"
+    checked_is__2071_v0 "${ret_option_index2147_v0__69_31}"
+    local ticked_27591="${ret_checked_is2071_v0}"
+    local mark_27592
+    mark_27592="$(if [ "${ticked_27591}" != 0 ]; then echo "✓ "; else echo "• "; fi)"
+    if [ "${highlighted_27585}" != 0 ]; then
+        colored_secondary__1952_v0 "${_cursor_117}""${mark_27592}""${truncated_27588}"
+        ret_row_line2149_v0="${ret_colored_secondary1952_v0}"
         return 0
     fi
-    if [ "${ticked_27489}" != 0 ]; then
-        colored_secondary__1945_v0 "${mark_27490}""${truncated_27486}"
-        local ret_colored_secondary1945_v0__75_24="${ret_colored_secondary1945_v0}"
-        ret_row_line2141_v0="${blank_27487}""${ret_colored_secondary1945_v0__75_24}"
+    if [ "${ticked_27591}" != 0 ]; then
+        colored_secondary__1952_v0 "${mark_27592}""${truncated_27588}"
+        local ret_colored_secondary1952_v0__75_24="${ret_colored_secondary1952_v0}"
+        ret_row_line2149_v0="${blank_27589}""${ret_colored_secondary1952_v0__75_24}"
         return 0
     fi
-    ret_row_line2141_v0="${blank_27487}""${mark_27490}""${truncated_27486}"
+    ret_row_line2149_v0="${blank_27589}""${mark_27592}""${truncated_27588}"
     return 0
 }
 
 # render_rows()
-render_rows__2142_v0() {
-    visible_count__2138_v0 
-    local count_27480="${ret_visible_count2138_v0}"
-    go_up__1897_v0 "${_height_118}"
-    local array_422=("")
-    eprintf__1842_v0 "\\x1b[G" array_422[@]
-    local __range_start_27481=0
-    local __range_end_27481="${count_27480}"
-    local __dir_27481=$(( ${__range_start_27481} <= ${__range_end_27481} ? 1 : -1 ))
-    for (( row_27481=${__range_start_27481}; row_27481 * ${__dir_27481} < ${__range_end_27481} * ${__dir_27481}; row_27481+=${__dir_27481} )); do
-        row_line__2141_v0 "${row_27481}" "$(( row_27481 == _sel_120 ))"
-        local ret_row_line2141_v0__86_28="${ret_row_line2141_v0}"
-        local array_423=("")
-        eprintf__1842_v0 "\\x1b[K""${ret_row_line2141_v0__86_28}""
-" array_423[@]
+render_rows__2150_v0() {
+    visible_count__2146_v0 
+    local count_27582="${ret_visible_count2146_v0}"
+    go_up__1904_v0 "${_height_118}"
+    local array_428=("")
+    eprintf__1848_v0 "\\x1b[G" array_428[@]
+    local __range_start_27583=0
+    local __range_end_27583="${count_27582}"
+    local __dir_27583=$(( ${__range_start_27583} <= ${__range_end_27583} ? 1 : -1 ))
+    for (( row_27583=${__range_start_27583}; row_27583 * ${__dir_27583} < ${__range_end_27583} * ${__dir_27583}; row_27583+=${__dir_27583} )); do
+        row_line__2149_v0 "${row_27583}" "$(( row_27583 == _sel_120 ))"
+        local ret_row_line2149_v0__86_28="${ret_row_line2149_v0}"
+        local array_429=("")
+        eprintf__1848_v0 "\\x1b[K""${ret_row_line2149_v0__86_28}""
+" array_429[@]
 done
-    local __range_start_27491="${count_27480}"
-    local __range_end_27491="${_height_118}"
-    local __dir_27491=$(( ${__range_start_27491} <= ${__range_end_27491} ? 1 : -1 ))
-    for (( ____27491=${__range_start_27491}; ____27491 * ${__dir_27491} < ${__range_end_27491} * ${__dir_27491}; ____27491+=${__dir_27491} )); do
-        local array_424=("")
-        eprintf__1842_v0 "\\x1b[K
-" array_424[@]
+    local __range_start_27593="${count_27582}"
+    local __range_end_27593="${_height_118}"
+    local __dir_27593=$(( ${__range_start_27593} <= ${__range_end_27593} ? 1 : -1 ))
+    for (( ____27593=${__range_start_27593}; ____27593 * ${__dir_27593} < ${__range_end_27593} * ${__dir_27593}; ____27593+=${__dir_27593} )); do
+        local array_430=("")
+        eprintf__1848_v0 "\\x1b[K
+" array_430[@]
 done
-    local array_425=("")
-    eprintf__1842_v0 "\\x1b[G" array_425[@]
+    local array_431=("")
+    eprintf__1848_v0 "\\x1b[G" array_431[@]
 }
 
 # render_query()
-render_query__2143_v0() {
-    go_up__1897_v0 "$(( _height_118 + 1 ))"
-    local array_426=("")
-    eprintf__1842_v0 "\\x1b[G\\x1b[K" array_426[@]
-    colored_primary__1944_v0 "${_prompt_116}"
-    local ret_colored_primary1944_v0__97_13="${ret_colored_primary1944_v0}"
-    local array_427=("")
-    eprintf__1842_v0 "${ret_colored_primary1944_v0__97_13}" array_427[@]
+render_query__2151_v0() {
+    go_up__1904_v0 "$(( _height_118 + 1 ))"
+    local array_432=("")
+    eprintf__1848_v0 "\\x1b[G\\x1b[K" array_432[@]
+    colored_primary__1951_v0 "${_prompt_116}"
+    local ret_colored_primary1951_v0__97_13="${ret_colored_primary1951_v0}"
+    local array_433=("")
+    eprintf__1848_v0 "${ret_colored_primary1951_v0__97_13}" array_433[@]
     if [ "$([ "_${_query_114}" != "_" ]; echo $?)" != 0 ]; then
-        eprintf_colored__1843_v0 "${_placeholder_115}" 90
+        eprintf_colored__1849_v0 "${_placeholder_115}" 90
     else
-        local __length_428="${_prompt_116}"
-        cutoff_text__1976_v0 "${_query_114}" "$(( _term_width_123 - ${#__length_428} ))"
-        local ret_cutoff_text1976_v0__101_17="${ret_cutoff_text1976_v0}"
-        local array_429=("")
-        eprintf__1842_v0 "${ret_cutoff_text1976_v0__101_17}" array_429[@]
+        local __length_434="${_prompt_116}"
+        cutoff_text__1983_v0 "${_query_114}" "$(( _term_width_123 - ${#__length_434} ))"
+        local ret_cutoff_text1983_v0__101_17="${ret_cutoff_text1983_v0}"
+        local array_435=("")
+        eprintf__1848_v0 "${ret_cutoff_text1983_v0__101_17}" array_435[@]
     fi
-    go_down__1898_v0 "$(( _height_118 + 1 ))"
-    local array_430=("")
-    eprintf__1842_v0 "\\x1b[G" array_430[@]
+    go_down__1905_v0 "$(( _height_118 + 1 ))"
+    local array_436=("")
+    eprintf__1848_v0 "\\x1b[G" array_436[@]
 }
 
 # render_count()
-render_count__2144_v0() {
-    local array_431=("")
-    eprintf__1842_v0 "\\x1b[G\\x1b[K" array_431[@]
-    eprintf_colored__1843_v0 "${_match_count_113}/${_option_count_111}" 90
-    local array_432=("")
-    eprintf__1842_v0 "\\x1b[G" array_432[@]
+render_count__2152_v0() {
+    local array_437=("")
+    eprintf__1848_v0 "\\x1b[G\\x1b[K" array_437[@]
+    eprintf_colored__1849_v0 "${_match_count_113}/${_option_count_111}" 90
+    local array_438=("")
+    eprintf__1848_v0 "\\x1b[G" array_438[@]
 }
 
 # render_tooltip_line()
-render_tooltip_line__2145_v0() {
+render_tooltip_line__2153_v0() {
     if [ "${_multi_121}" != 0 ]; then
-        local array_433=("↑↓" "select" "tab" "toggle" "ctrl-a" "all" "enter" "confirm")
-        render_tooltip__2003_v0 array_433[@] 51 "${_term_width_123}"
+        local array_439=("↑↓" "select" "tab" "toggle" "ctrl-a" "all" "enter" "confirm")
+        render_tooltip__2010_v0 array_439[@] 51 "${_term_width_123}"
     else
-        local array_434=("↑↓" "select" "enter" "confirm")
-        render_tooltip__2003_v0 array_434[@] 25 "${_term_width_123}"
+        local array_440=("↑↓" "select" "enter" "confirm")
+        render_tooltip__2010_v0 array_440[@] 25 "${_term_width_123}"
     fi
 }
 
 # move_selection(step: Int)
-move_selection__2146_v0() {
-    local step_27494="${1}"
-    visible_count__2138_v0 
-    local count_27495="${ret_visible_count2138_v0}"
-    if [ "$(( count_27495 == 0 ))" != 0 ]; then
-        ret_move_selection2146_v0=0
+move_selection__2154_v0() {
+    local step_27596="${1}"
+    visible_count__2146_v0 
+    local count_27597="${ret_visible_count2146_v0}"
+    if [ "$(( count_27597 == 0 ))" != 0 ]; then
+        ret_move_selection2154_v0=0
         return 0
     fi
-    local next_27496="$(( _sel_120 + step_27494 ))"
-    if [ "$(( $(( next_27496 >= 0 )) && $(( next_27496 < count_27495 )) ))" != 0 ]; then
-        local prev_27497="${_sel_120}"
-        _sel_120="${next_27496}"
-        row_line__2141_v0 "${prev_27497}" 0
-        local ret_row_line2141_v0__132_35="${ret_row_line2141_v0}"
-        redraw_row__2060_v0 "${_height_118}" "${prev_27497}" "${ret_row_line2141_v0__132_35}"
-        row_line__2141_v0 "${_sel_120}" 1
-        local ret_row_line2141_v0__133_35="${ret_row_line2141_v0}"
-        redraw_row__2060_v0 "${_height_118}" "${_sel_120}" "${ret_row_line2141_v0__133_35}"
-        ret_move_selection2146_v0=0
+    local next_27598="$(( _sel_120 + step_27596 ))"
+    if [ "$(( $(( next_27598 >= 0 )) && $(( next_27598 < count_27597 )) ))" != 0 ]; then
+        local prev_27599="${_sel_120}"
+        _sel_120="${next_27598}"
+        row_line__2149_v0 "${prev_27599}" 0
+        local ret_row_line2149_v0__132_35="${ret_row_line2149_v0}"
+        redraw_row__2068_v0 "${_height_118}" "${prev_27599}" "${ret_row_line2149_v0__132_35}"
+        row_line__2149_v0 "${_sel_120}" 1
+        local ret_row_line2149_v0__133_35="${ret_row_line2149_v0}"
+        redraw_row__2068_v0 "${_height_118}" "${_sel_120}" "${ret_row_line2149_v0__133_35}"
+        ret_move_selection2154_v0=0
         return 0
     fi
-    if [ "$(( $(( next_27496 < 0 )) && $(( _offset_119 > 0 )) ))" != 0 ]; then
+    if [ "$(( $(( next_27598 < 0 )) && $(( _offset_119 > 0 )) ))" != 0 ]; then
         _offset_119="$(( _offset_119 - 1 ))"
-        ret_move_selection2146_v0=1
+        ret_move_selection2154_v0=1
         return 0
     fi
-    if [ "$(( $(( next_27496 >= count_27495 )) && $(( $(( _offset_119 + _height_118 )) < _match_count_113 )) ))" != 0 ]; then
+    if [ "$(( $(( next_27598 >= count_27597 )) && $(( $(( _offset_119 + _height_118 )) < _match_count_113 )) ))" != 0 ]; then
         _offset_119="$(( _offset_119 + 1 ))"
-        ret_move_selection2146_v0=1
+        ret_move_selection2154_v0=1
         return 0
     fi
-    ret_move_selection2146_v0=0
+    ret_move_selection2154_v0=0
     return 0
 }
 
 # xyl_filter(options: [Text], prompt: Text, placeholder: Text, header: Text, cursor: Text, multi: Bool, limit: Int, height: Int)
-xyl_filter__2147_v0() {
-    local options_27402=("${!1}")
-    local prompt_27403="${2}"
-    local placeholder_27404="${3}"
-    local header_27405="${4}"
-    local cursor_27406="${5}"
-    local multi_27407="${6}"
-    local limit_27408="${7}"
-    local height_27409="${8}"
-    local __length_435=("${options_27402[@]}")
-    local total_27410="${#__length_435[@]}"
-    if [ "$(( total_27410 == 0 ))" != 0 ]; then
-        eprintf_colored__1843_v0 "ERROR: No options provided.
+xyl_filter__2155_v0() {
+    local options_27502=("${!1}")
+    local prompt_27503="${2}"
+    local placeholder_27504="${3}"
+    local header_27505="${4}"
+    local cursor_27506="${5}"
+    local multi_27507="${6}"
+    local limit_27508="${7}"
+    local height_27509="${8}"
+    local __length_441=("${options_27502[@]}")
+    local total_27510="${#__length_441[@]}"
+    if [ "$(( total_27510 == 0 ))" != 0 ]; then
+        eprintf_colored__1849_v0 "ERROR: No options provided.
 " 31
         exit 1
     fi
-    _options_110=("${options_27402[@]}")
-    _option_count_111="${total_27410}"
+    _options_110=("${options_27502[@]}")
+    _option_count_111="${total_27510}"
     _query_114=""
-    _prompt_116="${prompt_27403}"
-    _placeholder_115="${placeholder_27404}"
-    _cursor_117="${cursor_27406}"
-    _multi_121="${multi_27407}"
-    _has_header_122="$([ "_${header_27405}" == "_" ]; echo $?)"
+    _prompt_116="${prompt_27503}"
+    _placeholder_115="${placeholder_27504}"
+    _cursor_117="${cursor_27506}"
+    _multi_121="${multi_27507}"
+    _has_header_122="$([ "_${header_27505}" == "_" ]; echo $?)"
     _offset_119=0
     _sel_120=0
-    stty_lock__1883_v0 
-    hide_cursor__1900_v0 
-    term_width__1890_v0 
-    _term_width_123="${ret_term_width1890_v0}"
-    term_height__1891_v0 
-    local ret_term_height1891_v0__189_24="${ret_term_height1891_v0}"
-    local max_height_27415
-    max_height_27415="$(( ret_term_height1891_v0__189_24 - $(if [ "${_has_header_122}" != 0 ]; then echo 4; else echo 3; fi) ))"
-    _height_118="${height_27409}"
-    if [ "$(( _height_118 > max_height_27415 ))" != 0 ]; then
-        _height_118="${max_height_27415}"
+    stty_lock__1890_v0 
+    hide_cursor__1907_v0 
+    term_width__1897_v0 
+    _term_width_123="${ret_term_width1897_v0}"
+    term_height__1898_v0 
+    local ret_term_height1898_v0__189_24="${ret_term_height1898_v0}"
+    local max_height_27517
+    max_height_27517="$(( ret_term_height1898_v0__189_24 - $(if [ "${_has_header_122}" != 0 ]; then echo 4; else echo 3; fi) ))"
+    _height_118="${height_27509}"
+    if [ "$(( _height_118 > max_height_27517 ))" != 0 ]; then
+        _height_118="${max_height_27517}"
     fi
     if [ "$(( _height_118 < 1 ))" != 0 ]; then
         _height_118=1
     fi
-    if [ "${multi_27407}" != 0 ]; then
-        checked_init__2062_v0 "${total_27410}" "${limit_27408}"
+    if [ "${multi_27507}" != 0 ]; then
+        checked_init__2070_v0 "${total_27510}" "${limit_27508}"
     fi
-    refresh_matches__2137_v0 
+    refresh_matches__2145_v0 
     if [ "${_has_header_122}" != 0 ]; then
-        cutoff_text__1976_v0 "${header_27405}" "${_term_width_123}"
-        local ret_cutoff_text1976_v0__204_17="${ret_cutoff_text1976_v0}"
-        local array_436=("")
-        eprintf__1842_v0 "${ret_cutoff_text1976_v0__204_17}""
-" array_436[@]
+        cutoff_text__1983_v0 "${header_27505}" "${_term_width_123}"
+        local ret_cutoff_text1983_v0__204_17="${ret_cutoff_text1983_v0}"
+        local array_442=("")
+        eprintf__1848_v0 "${ret_cutoff_text1983_v0__204_17}""
+" array_442[@]
     fi
-    new_line__1896_v0 1
-    new_line__1896_v0 "${_height_118}"
-    render_count__2144_v0 
-    new_line__1896_v0 1
-    render_tooltip_line__2145_v0 
-    go_up__1897_v0 1
-    local array_437=("")
-    eprintf__1842_v0 "\\x1b[G" array_437[@]
-    render_rows__2142_v0 
-    render_query__2143_v0 
+    new_line__1903_v0 1
+    new_line__1903_v0 "${_height_118}"
+    render_count__2152_v0 
+    new_line__1903_v0 1
+    render_tooltip_line__2153_v0 
+    go_up__1904_v0 1
+    local array_443=("")
+    eprintf__1848_v0 "\\x1b[G" array_443[@]
+    render_rows__2150_v0 
+    render_query__2151_v0 
     while :
     do
-        get_key__1840_v0 
-        local key_27493="${ret_get_key1840_v0}"
-        if [ "$([ "_${key_27493}" != "_INPUT" ]; echo $?)" != 0 ]; then
-            visible_count__2138_v0 
-            local ret_visible_count2138_v0__221_20="${ret_visible_count2138_v0}"
-            if [ "$(( ret_visible_count2138_v0__221_20 > 0 ))" != 0 ]; then
+        get_key__1846_v0 
+        local key_27595="${ret_get_key1846_v0}"
+        if [ "$([ "_${key_27595}" != "_INPUT" ]; echo $?)" != 0 ]; then
+            visible_count__2146_v0 
+            local ret_visible_count2146_v0__221_20="${ret_visible_count2146_v0}"
+            if [ "$(( ret_visible_count2146_v0__221_20 > 0 ))" != 0 ]; then
                 break
             fi
             if [ "${_multi_121}" != 0 ]; then
-                checked_count__2064_v0 
-                local ret_checked_count2064_v0__225_24="${ret_checked_count2064_v0}"
-                if [ "$(( ret_checked_count2064_v0__225_24 > 0 ))" != 0 ]; then
+                checked_count__2072_v0 
+                local ret_checked_count2072_v0__225_24="${ret_checked_count2072_v0}"
+                if [ "$(( ret_checked_count2072_v0__225_24 > 0 ))" != 0 ]; then
                     break
                 fi
             fi
-        elif [ "$([ "_${key_27493}" != "_UP" ]; echo $?)" != 0 ]; then
-            move_selection__2146_v0 -1
-            local ret_move_selection2146_v0__231_20="${ret_move_selection2146_v0}"
-            if [ "${ret_move_selection2146_v0__231_20}" != 0 ]; then
-                render_rows__2142_v0 
+        elif [ "$([ "_${key_27595}" != "_UP" ]; echo $?)" != 0 ]; then
+            move_selection__2154_v0 -1
+            local ret_move_selection2154_v0__231_20="${ret_move_selection2154_v0}"
+            if [ "${ret_move_selection2154_v0__231_20}" != 0 ]; then
+                render_rows__2150_v0 
             fi
-        elif [ "$([ "_${key_27493}" != "_DOWN" ]; echo $?)" != 0 ]; then
-            move_selection__2146_v0 1
-            local ret_move_selection2146_v0__236_20="${ret_move_selection2146_v0}"
-            if [ "${ret_move_selection2146_v0__236_20}" != 0 ]; then
-                render_rows__2142_v0 
+        elif [ "$([ "_${key_27595}" != "_DOWN" ]; echo $?)" != 0 ]; then
+            move_selection__2154_v0 1
+            local ret_move_selection2154_v0__236_20="${ret_move_selection2154_v0}"
+            if [ "${ret_move_selection2154_v0__236_20}" != 0 ]; then
+                render_rows__2150_v0 
             fi
-        elif [ "$(( _multi_121 && $([ "_${key_27493}" != "_TAB" ]; echo $?) ))" != 0 ]; then
-            visible_count__2138_v0 
-            local ret_visible_count2138_v0__241_20="${ret_visible_count2138_v0}"
-            if [ "$(( ret_visible_count2138_v0__241_20 > 0 ))" != 0 ]; then
-                option_index__2139_v0 "${_sel_120}"
-                local ret_option_index2139_v0__242_39="${ret_option_index2139_v0}"
-                checked_toggle__2065_v0 "${ret_option_index2139_v0__242_39}"
-                local ret_checked_toggle2065_v0__242_24="${ret_checked_toggle2065_v0}"
-                if [ "${ret_checked_toggle2065_v0__242_24}" != 0 ]; then
-                    row_line__2141_v0 "${_sel_120}" 1
-                    local ret_row_line2141_v0__243_51="${ret_row_line2141_v0}"
-                    redraw_row__2060_v0 "${_height_118}" "${_sel_120}" "${ret_row_line2141_v0__243_51}"
+        elif [ "$(( _multi_121 && $([ "_${key_27595}" != "_TAB" ]; echo $?) ))" != 0 ]; then
+            visible_count__2146_v0 
+            local ret_visible_count2146_v0__241_20="${ret_visible_count2146_v0}"
+            if [ "$(( ret_visible_count2146_v0__241_20 > 0 ))" != 0 ]; then
+                option_index__2147_v0 "${_sel_120}"
+                local ret_option_index2147_v0__242_39="${ret_option_index2147_v0}"
+                checked_toggle__2073_v0 "${ret_option_index2147_v0__242_39}"
+                local ret_checked_toggle2073_v0__242_24="${ret_checked_toggle2073_v0}"
+                if [ "${ret_checked_toggle2073_v0__242_24}" != 0 ]; then
+                    row_line__2149_v0 "${_sel_120}" 1
+                    local ret_row_line2149_v0__243_51="${ret_row_line2149_v0}"
+                    redraw_row__2068_v0 "${_height_118}" "${_sel_120}" "${ret_row_line2149_v0__243_51}"
                 fi
             fi
-        elif [ "$(( _multi_121 && $([ "_${key_27493}" != "_CTRL_A" ]; echo $?) ))" != 0 ]; then
-            checked_all__2066_v0 
-            local ret_checked_all2066_v0__248_20="${ret_checked_all2066_v0}"
-            if [ "${ret_checked_all2066_v0__248_20}" != 0 ]; then
-                render_rows__2142_v0 
+        elif [ "$(( _multi_121 && $([ "_${key_27595}" != "_CTRL_A" ]; echo $?) ))" != 0 ]; then
+            checked_all__2074_v0 
+            local ret_checked_all2074_v0__248_20="${ret_checked_all2074_v0}"
+            if [ "${ret_checked_all2074_v0__248_20}" != 0 ]; then
+                render_rows__2150_v0 
             fi
-        elif [ "$([ "_${key_27493}" != "_BACKSPACE" ]; echo $?)" != 0 ]; then
+        elif [ "$([ "_${key_27595}" != "_BACKSPACE" ]; echo $?)" != 0 ]; then
             if [ "$([ "_${_query_114}" == "_" ]; echo $?)" != 0 ]; then
-                local __length_438="${_query_114}"
-                if [ "$(( ${#__length_438} == 1 ))" != 0 ]; then
+                local __length_444="${_query_114}"
+                if [ "$(( ${#__length_444} == 1 ))" != 0 ]; then
                     _query_114=""
                 else
-                    local __length_439="${_query_114}"
-                    slice__24_v0 "${_query_114}" 0 "$(( ${#__length_439} - 1 ))"
+                    local __length_445="${_query_114}"
+                    slice__24_v0 "${_query_114}" 0 "$(( ${#__length_445} - 1 ))"
                     _query_114="${ret_slice24_v0}"
                 fi
-                refresh_matches__2137_v0 
-                render_rows__2142_v0 
-                render_query__2143_v0 
-                render_count__2144_v0 
+                refresh_matches__2145_v0 
+                render_rows__2150_v0 
+                render_query__2151_v0 
+                render_count__2152_v0 
             fi
         else
-            local typed_27508="${key_27493}"
-            if [ "$([ "_${key_27493}" != "_SPACE" ]; echo $?)" != 0 ]; then
-                typed_27508=" "
+            local typed_27610="${key_27595}"
+            if [ "$([ "_${key_27595}" != "_SPACE" ]; echo $?)" != 0 ]; then
+                typed_27610=" "
             fi
-            local __length_440="${typed_27508}"
-            if [ "$(( ${#__length_440} == 1 ))" != 0 ]; then
-                _query_114+="${typed_27508}"
-                refresh_matches__2137_v0 
-                render_rows__2142_v0 
-                render_query__2143_v0 
-                render_count__2144_v0 
+            local __length_446="${typed_27610}"
+            if [ "$(( ${#__length_446} == 1 ))" != 0 ]; then
+                _query_114+="${typed_27610}"
+                refresh_matches__2145_v0 
+                render_rows__2150_v0 
+                render_query__2151_v0 
+                render_count__2152_v0 
             fi
         fi
     done
-    local total_lines_27509="$(( _height_118 + 3 ))"
+    local total_lines_27611="$(( _height_118 + 3 ))"
     if [ "${_has_header_122}" != 0 ]; then
-        total_lines_27509="$(( total_lines_27509 + 1 ))"
+        total_lines_27611="$(( total_lines_27611 + 1 ))"
     fi
-    go_down__1898_v0 1
-    remove_line__1893_v0 "$(( total_lines_27509 - 1 ))"
-    remove_current_line__1894_v0 
-    stty_unlock__1884_v0 
-    show_cursor__1901_v0 
-    local result_27514=()
+    go_down__1905_v0 1
+    remove_line__1900_v0 "$(( total_lines_27611 - 1 ))"
+    remove_current_line__1901_v0 
+    stty_unlock__1891_v0 
+    show_cursor__1908_v0 
+    local result_27616=()
     if [ "${_multi_121}" != 0 ]; then
-        local __range_start_27515=0
-        local __range_end_27515="${total_27410}"
-        local __dir_27515=$(( ${__range_start_27515} <= ${__range_end_27515} ? 1 : -1 ))
-        for (( i_27515=${__range_start_27515}; i_27515 * ${__dir_27515} < ${__range_end_27515} * ${__dir_27515}; i_27515+=${__dir_27515} )); do
-            checked_is__2063_v0 "${i_27515}"
-            local ret_checked_is2063_v0__294_16="${ret_checked_is2063_v0}"
-            if [ "${ret_checked_is2063_v0__294_16}" != 0 ]; then
-                local array_442=("${_options_110[${i_27515}]?"Index out of bounds (at src/./filter/./mod.ab:295:37)"}")
-                result_27514+=("${array_442[@]}")
+        local __range_start_27617=0
+        local __range_end_27617="${total_27510}"
+        local __dir_27617=$(( ${__range_start_27617} <= ${__range_end_27617} ? 1 : -1 ))
+        for (( i_27617=${__range_start_27617}; i_27617 * ${__dir_27617} < ${__range_end_27617} * ${__dir_27617}; i_27617+=${__dir_27617} )); do
+            checked_is__2071_v0 "${i_27617}"
+            local ret_checked_is2071_v0__294_16="${ret_checked_is2071_v0}"
+            if [ "${ret_checked_is2071_v0__294_16}" != 0 ]; then
+                local array_448=("${_options_110[${i_27617}]?"Index out of bounds (at src/./filter/./mod.ab:295:37)"}")
+                result_27616+=("${array_448[@]}")
             fi
 done
-        ret_xyl_filter2147_v0=("${result_27514[@]}")
+        ret_xyl_filter2155_v0=("${result_27616[@]}")
         return 0
     fi
-    visible_count__2138_v0 
-    local ret_visible_count2138_v0__300_8="${ret_visible_count2138_v0}"
-    if [ "$(( ret_visible_count2138_v0__300_8 > 0 ))" != 0 ]; then
-        option_index__2139_v0 "${_sel_120}"
-        local ret_option_index2139_v0__301_29="${ret_option_index2139_v0}"
-        result_27514+=("${_options_110[${ret_option_index2139_v0__301_29}]?"Index out of bounds (at src/./filter/./mod.ab:301:29)"}")
+    visible_count__2146_v0 
+    local ret_visible_count2146_v0__300_8="${ret_visible_count2146_v0}"
+    if [ "$(( ret_visible_count2146_v0__300_8 > 0 ))" != 0 ]; then
+        option_index__2147_v0 "${_sel_120}"
+        local ret_option_index2147_v0__301_29="${ret_option_index2147_v0}"
+        result_27616+=("${_options_110[${ret_option_index2147_v0__301_29}]?"Index out of bounds (at src/./filter/./mod.ab:301:29)"}")
     fi
-    ret_xyl_filter2147_v0=("${result_27514[@]}")
+    ret_xyl_filter2155_v0=("${result_27616[@]}")
     return 0
 }
 
 # print_filter_help()
-print_filter_help__2247_v0() {
-    local usage_27315=("Usage:" "./xylitol.sh" "filter" "[<options>" "...]" "[flags]")
-    print_wrapped__1902_v0 usage_27315[@]
+print_filter_help__2255_v0() {
+    local usage_27415=("Usage:" "./xylitol.sh" "filter" "[<options>" "...]" "[flags]")
+    print_wrapped__1909_v0 usage_27415[@]
     printf '%s\n' ""
-    colored_primary__1944_v0 "filter"
-    local ret_colored_primary1944_v0__8_20="${ret_colored_primary1944_v0}"
-    local title_27355=("${ret_colored_primary1944_v0__8_20}" "-" "Pick" "from" "a" "list" "narrowed" "by" "typing.")
-    print_wrapped__1902_v0 title_27355[@]
+    colored_primary__1951_v0 "filter"
+    local ret_colored_primary1951_v0__8_20="${ret_colored_primary1951_v0}"
+    local title_27455=("${ret_colored_primary1951_v0__8_20}" "-" "Pick" "from" "a" "list" "narrowed" "by" "typing.")
+    print_wrapped__1909_v0 title_27455[@]
     printf '%s\n' ""
-    colored_secondary__1945_v0 "Arguments:"
-    local ret_colored_secondary1945_v0__11_12="${ret_colored_secondary1945_v0}"
-    local array_446=()
-    printf__128_v0 "${ret_colored_secondary1945_v0__11_12}""
-" array_446[@]
-    local array_447=("[<options> ...]")
-    local array_448=("List of options to pick from")
-    local array_449=("")
-    render_help_entries__2079_v0 array_447[@] array_448[@] array_449[@] 20
+    colored_secondary__1952_v0 "Arguments:"
+    local ret_colored_secondary1952_v0__11_12="${ret_colored_secondary1952_v0}"
+    local array_452=()
+    printf__128_v0 "${ret_colored_secondary1952_v0__11_12}""
+" array_452[@]
+    local array_453=("[<options> ...]")
+    local array_454=("List of options to pick from")
+    local array_455=("")
+    render_help_entries__2087_v0 array_453[@] array_454[@] array_455[@] 20
     printf '%s\n' ""
-    colored_secondary__1945_v0 "Flags:"
-    local ret_colored_secondary1945_v0__14_12="${ret_colored_secondary1945_v0}"
-    local array_450=()
-    printf__128_v0 "${ret_colored_secondary1945_v0__14_12}""
-" array_450[@]
-    local names_27389=("-h, --help" "--limit=<number>" "--no-limit" "--prompt=\"<text>\"" "--placeholder=\"<text>\"" "--cursor=\"<text>\"" "--header=\"<text>\"" "--height=<number>")
-    local texts_27390=("Show this help message" "Enable multi-selection mode with a limit of selections" "Enable multi-selection mode with no limit" "Set the text shown in front of the query" "Set the text shown while the query is empty" "Set the cursor text" "Set a header text to display above the query" "Set the number of options shown at once")
-    local notes_27391=("" "" "" "(default: '/ ')" "(default: 'Filter...')" "(default: '> ')" "(ANSI escape supported)" "(default: 10)")
-    render_help_entries__2079_v0 names_27389[@] texts_27390[@] notes_27391[@] 0
+    colored_secondary__1952_v0 "Flags:"
+    local ret_colored_secondary1952_v0__14_12="${ret_colored_secondary1952_v0}"
+    local array_456=()
+    printf__128_v0 "${ret_colored_secondary1952_v0__14_12}""
+" array_456[@]
+    local names_27489=("-h, --help" "--limit=<number>" "--no-limit" "--prompt=\"<text>\"" "--placeholder=\"<text>\"" "--cursor=\"<text>\"" "--header=\"<text>\"" "--height=<number>")
+    local texts_27490=("Show this help message" "Enable multi-selection mode with a limit of selections" "Enable multi-selection mode with no limit" "Set the text shown in front of the query" "Set the text shown while the query is empty" "Set the cursor text" "Set a header text to display above the query" "Set the number of options shown at once")
+    local notes_27491=("" "" "" "(default: '/ ')" "(default: 'Filter...')" "(default: '> ')" "(ANSI escape supported)" "(default: 10)")
+    render_help_entries__2087_v0 names_27489[@] texts_27490[@] notes_27491[@] 0
     printf '%s\n' ""
 }
 
 # read_stdin_options()
-read_stdin_options__2305_v0() {
-    local options_27308=()
-    local command_455
-    command_455="$([ -t 0 ] && echo "true" || echo "false")"
+read_stdin_options__2313_v0() {
+    local options_27408=()
+    local command_461
+    command_461="$([ -t 0 ] && echo "true" || echo "false")"
     __status=$?
-    local is_tty_27309="${command_455}"
-    if [ "$([ "_${is_tty_27309}" != "_false" ]; echo $?)" != 0 ]; then
-        while IFS= read -r line || [[ -n "$line" ]]; do options_27308+=("$line"); done
+    local is_tty_27409="${command_461}"
+    if [ "$([ "_${is_tty_27409}" != "_false" ]; echo $?)" != 0 ]; then
+        while IFS= read -r line || [[ -n "$line" ]]; do options_27408+=("$line"); done
         __status=$?
     fi
-    ret_read_stdin_options2305_v0=("${options_27308[@]}")
+    ret_read_stdin_options2313_v0=("${options_27408[@]}")
     return 0
 }
 
 # execute_filter(parameters: [Text])
-execute_filter__2306_v0() {
-    local parameters_27303=("${!1}")
-    local cursor_27304="> "
-    local prompt_27305="/ "
-    local placeholder_27306="Filter..."
-    local header_27307=""
-    read_stdin_options__2305_v0 
-    local options_27310=("${ret_read_stdin_options2305_v0[@]}")
-    local multi_27311=0
-    local limit_27312=-1
-    local height_27313=10
-    local __length_459=("${parameters_27303[@]}")
-    local slice_upper_458="${#__length_459[@]}"
-    local slice_offset_460=2
-    local slice_offset_460=$((${slice_offset_460} > 0 ? ${slice_offset_460} : 0))
-    local slice_length_461="$(( slice_upper_458 - slice_offset_460 ))"
-    local slice_length_461=$((${slice_length_461} > 0 ? ${slice_length_461} : 0))
-    for param_27314 in "${parameters_27303[@]:${slice_offset_460}:${slice_length_461}}"; do
-        starts_with__22_v0 "${param_27314}" "--cursor="
+execute_filter__2314_v0() {
+    local parameters_27403=("${!1}")
+    local cursor_27404="> "
+    local prompt_27405="/ "
+    local placeholder_27406="Filter..."
+    local header_27407=""
+    read_stdin_options__2313_v0 
+    local options_27410=("${ret_read_stdin_options2313_v0[@]}")
+    local multi_27411=0
+    local limit_27412=-1
+    local height_27413=10
+    local __length_465=("${parameters_27403[@]}")
+    local slice_upper_464="${#__length_465[@]}"
+    local slice_offset_466=2
+    local slice_offset_466=$((${slice_offset_466} > 0 ? ${slice_offset_466} : 0))
+    local slice_length_467="$(( slice_upper_464 - slice_offset_466 ))"
+    local slice_length_467=$((${slice_length_467} > 0 ? ${slice_length_467} : 0))
+    for param_27414 in "${parameters_27403[@]:${slice_offset_466}:${slice_length_467}}"; do
+        starts_with__22_v0 "${param_27414}" "--cursor="
         local ret_starts_with22_v0__31_13="${ret_starts_with22_v0}"
-        starts_with__22_v0 "${param_27314}" "--prompt="
+        starts_with__22_v0 "${param_27414}" "--prompt="
         local ret_starts_with22_v0__34_13="${ret_starts_with22_v0}"
-        starts_with__22_v0 "${param_27314}" "--placeholder="
+        starts_with__22_v0 "${param_27414}" "--placeholder="
         local ret_starts_with22_v0__37_13="${ret_starts_with22_v0}"
-        starts_with__22_v0 "${param_27314}" "--header="
+        starts_with__22_v0 "${param_27414}" "--header="
         local ret_starts_with22_v0__40_13="${ret_starts_with22_v0}"
-        starts_with__22_v0 "${param_27314}" "--limit="
+        starts_with__22_v0 "${param_27414}" "--limit="
         local ret_starts_with22_v0__43_13="${ret_starts_with22_v0}"
-        starts_with__22_v0 "${param_27314}" "--height="
+        starts_with__22_v0 "${param_27414}" "--height="
         local ret_starts_with22_v0__54_13="${ret_starts_with22_v0}"
-        if [ "$(( $([ "_${param_27314}" != "_-h" ]; echo $?) || $([ "_${param_27314}" != "_--help" ]; echo $?) ))" != 0 ]; then
-            print_filter_help__2247_v0 
+        if [ "$(( $([ "_${param_27414}" != "_-h" ]; echo $?) || $([ "_${param_27414}" != "_--help" ]; echo $?) ))" != 0 ]; then
+            print_filter_help__2255_v0 
             exit 0
         elif [ "${ret_starts_with22_v0__31_13}" != 0 ]; then
-            local __length_462="--cursor="
-            slice__24_v0 "${param_27314}" "${#__length_462}" 0
-            cursor_27304="${ret_slice24_v0}"
+            local __length_468="--cursor="
+            slice__24_v0 "${param_27414}" "${#__length_468}" 0
+            cursor_27404="${ret_slice24_v0}"
         elif [ "${ret_starts_with22_v0__34_13}" != 0 ]; then
-            local __length_463="--prompt="
-            slice__24_v0 "${param_27314}" "${#__length_463}" 0
-            prompt_27305="${ret_slice24_v0}"
+            local __length_469="--prompt="
+            slice__24_v0 "${param_27414}" "${#__length_469}" 0
+            prompt_27405="${ret_slice24_v0}"
         elif [ "${ret_starts_with22_v0__37_13}" != 0 ]; then
-            local __length_464="--placeholder="
-            slice__24_v0 "${param_27314}" "${#__length_464}" 0
-            placeholder_27306="${ret_slice24_v0}"
+            local __length_470="--placeholder="
+            slice__24_v0 "${param_27414}" "${#__length_470}" 0
+            placeholder_27406="${ret_slice24_v0}"
         elif [ "${ret_starts_with22_v0__40_13}" != 0 ]; then
-            local __length_465="--header="
-            slice__24_v0 "${param_27314}" "${#__length_465}" 0
-            header_27307="${ret_slice24_v0}"
+            local __length_471="--header="
+            slice__24_v0 "${param_27414}" "${#__length_471}" 0
+            header_27407="${ret_slice24_v0}"
         elif [ "${ret_starts_with22_v0__43_13}" != 0 ]; then
-            local __length_466="--limit="
-            slice__24_v0 "${param_27314}" "${#__length_466}" 0
-            local value_27392="${ret_slice24_v0}"
-            parse_int__13_v0 "${value_27392}"
+            local __length_472="--limit="
+            slice__24_v0 "${param_27414}" "${#__length_472}" 0
+            local value_27492="${ret_slice24_v0}"
+            parse_int__13_v0 "${value_27492}"
             __status=$?
             if [ "${__status}" != 0 ]; then
-                eprintf_colored__1843_v0 "ERROR: Invalid limit value: ""${value_27392}""
+                eprintf_colored__1849_v0 "ERROR: Invalid limit value: ""${value_27492}""
 " 31
                 exit 1
             fi
-            limit_27312="${ret_parse_int13_v0}"
-            multi_27311=1
-        elif [ "$([ "_${param_27314}" != "_--no-limit" ]; echo $?)" != 0 ]; then
-            multi_27311=1
+            limit_27412="${ret_parse_int13_v0}"
+            multi_27411=1
+        elif [ "$([ "_${param_27414}" != "_--no-limit" ]; echo $?)" != 0 ]; then
+            multi_27411=1
         elif [ "${ret_starts_with22_v0__54_13}" != 0 ]; then
-            local __length_467="--height="
-            slice__24_v0 "${param_27314}" "${#__length_467}" 0
-            local value_27397="${ret_slice24_v0}"
-            parse_int__13_v0 "${value_27397}"
+            local __length_473="--height="
+            slice__24_v0 "${param_27414}" "${#__length_473}" 0
+            local value_27497="${ret_slice24_v0}"
+            parse_int__13_v0 "${value_27497}"
             __status=$?
             if [ "${__status}" != 0 ]; then
-                eprintf_colored__1843_v0 "ERROR: Invalid height value: ""${value_27397}""
+                eprintf_colored__1849_v0 "ERROR: Invalid height value: ""${value_27497}""
 " 31
                 exit 1
             fi
-            height_27313="${ret_parse_int13_v0}"
+            height_27413="${ret_parse_int13_v0}"
         else
-            options_27310+=("${param_27314}")
+            options_27410+=("${param_27414}")
         fi
     done
-    has_ansi_escape__1968_v0 "${header_27307}"
-    local ret_has_ansi_escape1968_v0__67_44="${ret_has_ansi_escape1968_v0}"
-    escape_ansi__1969_v0 "${header_27307}"
-    local ret_escape_ansi1969_v0__67_73="${ret_escape_ansi1969_v0}"
-    colored_primary__1944_v0 "${header_27307}"
-    local ret_colored_primary1944_v0__67_111="${ret_colored_primary1944_v0}"
-    local display_header_27401
-    display_header_27401="$(if [ "$(( $([ "_${header_27307}" != "_" ]; echo $?) || ret_has_ansi_escape1968_v0__67_44 ))" != 0 ]; then echo "${ret_escape_ansi1969_v0__67_73}"; else echo "\\x1b[1m""${ret_colored_primary1944_v0__67_111}"; fi)"
-    xyl_filter__2147_v0 options_27310[@] "${prompt_27305}" "${placeholder_27306}" "${display_header_27401}" "${cursor_27304}" "${multi_27311}" "${limit_27312}" "${height_27313}"
-    local results_27516=("${ret_xyl_filter2147_v0[@]}")
-    join__7_v0 results_27516[@] "
+    has_ansi_escape__1975_v0 "${header_27407}"
+    local ret_has_ansi_escape1975_v0__67_44="${ret_has_ansi_escape1975_v0}"
+    escape_ansi__1976_v0 "${header_27407}"
+    local ret_escape_ansi1976_v0__67_73="${ret_escape_ansi1976_v0}"
+    colored_primary__1951_v0 "${header_27407}"
+    local ret_colored_primary1951_v0__67_111="${ret_colored_primary1951_v0}"
+    local display_header_27501
+    display_header_27501="$(if [ "$(( $([ "_${header_27407}" != "_" ]; echo $?) || ret_has_ansi_escape1975_v0__67_44 ))" != 0 ]; then echo "${ret_escape_ansi1976_v0__67_73}"; else echo "\\x1b[1m""${ret_colored_primary1951_v0__67_111}"; fi)"
+    xyl_filter__2155_v0 options_27410[@] "${prompt_27405}" "${placeholder_27406}" "${display_header_27501}" "${cursor_27404}" "${multi_27411}" "${limit_27412}" "${height_27413}"
+    local results_27618=("${ret_xyl_filter2155_v0[@]}")
+    join__7_v0 results_27618[@] "
 "
-    ret_execute_filter2306_v0="${ret_join7_v0}"
+    ret_execute_filter2314_v0="${ret_join7_v0}"
     return 0
 }
 
 # get_key()
-get_key__2430_v0() {
-    local command_469
-    command_469="$(IFS= read -rsn1 k < /dev/tty; if [[ "$k" == $'\e' ]]; then IFS= read -rsn2 r < /dev/tty; k+=$r; fi; case "$k" in ($'\e[A') printf UP;; ($'\e[B') printf DOWN;; ($'\e[C') printf RIGHT;; ($'\e[D') printf LEFT;; ($'\177') printf BACKSPACE;; ($'	') printf TAB;; ($'\001') printf CTRL_A;; (' ') printf SPACE;; ('') printf INPUT;; (*) printf '%s' "$k";; esac)"
+get_key__2438_v0() {
+    local command_475
+    command_475="$(IFS= read -rsn1 k < /dev/tty; if [[ "$k" == $'\e' ]]; then IFS= read -rsn2 r < /dev/tty; k+=$r; fi; case "$k" in ($'\e[A') printf UP;; ($'\e[B') printf DOWN;; ($'\e[C') printf RIGHT;; ($'\e[D') printf LEFT;; ($'\177') printf BACKSPACE;; ($'	') printf TAB;; ($'\001') printf CTRL_A;; (' ') printf SPACE;; ('') printf INPUT;; (*) printf '%s' "$k";; esac)"
     __status=$?
-    ret_get_key2430_v0="${command_469}"
+    ret_get_key2438_v0="${command_475}"
     return 0
 }
 
 # eprintf(format: Text, args: [Text])
-eprintf__2432_v0() {
-    local format_29571="${1}"
-    local args_29572=("${!2}")
-    args_29572=("${format_29571}" "${args_29572[@]}")
+eprintf__2440_v0() {
+    local format_29695="${1}"
+    local args_29696=("${!2}")
+    args_29696=("${format_29695}" "${args_29696[@]}")
     __status=$?
-    printf "${args_29572[@]}" >&2
+    printf "${args_29696[@]}" >&2
     __status=$?
 }
 
 # eprintf_colored(message: Text, color: Int)
-eprintf_colored__2433_v0() {
-    local message_29569="${1}"
-    local color_29570="${2}"
+eprintf_colored__2441_v0() {
+    local message_29693="${1}"
+    local color_29694="${2}"
     # Prints an error message with a specified color.
-    local array_470=("${message_29569}")
-    eprintf__2432_v0 "\\x1b[${color_29570}m%s\\x1b[0m" array_470[@]
+    local array_476=("${message_29693}")
+    eprintf__2440_v0 "\\x1b[${color_29694}m%s\\x1b[0m" array_476[@]
 }
 
 # eprintf(format: Text, args: [Text])
-eprintf__2448_v0() {
-    local format_29581="${1}"
-    local args_29582=("${!2}")
-    args_29582=("${format_29581}" "${args_29582[@]}")
+eprintf__2456_v0() {
+    local format_29707="${1}"
+    local args_29708=("${!2}")
+    args_29708=("${format_29707}" "${args_29708[@]}")
     __status=$?
-    printf "${args_29582[@]}" >&2
+    printf "${args_29708[@]}" >&2
     __status=$?
+}
+
+# eprintf_colored(message: Text, color: Int)
+eprintf_colored__2457_v0() {
+    local message_29705="${1}"
+    local color_29706="${2}"
+    # Prints an error message with a specified color.
+    local array_477=("${message_29705}")
+    eprintf__2456_v0 "\\x1b[${color_29706}m%s\\x1b[0m" array_477[@]
 }
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
 _perl_state_126="None"
 # perl_available()
-perl_available__2455_v0() {
+perl_available__2464_v0() {
     if [ "$([ "_${_perl_state_126}" != "_None" ]; echo $?)" != 0 ]; then
-        local command_471
-        command_471="$(echo "$XYLITOL_USE_PERL")"
+        local command_478
+        command_478="$(echo "$XYLITOL_USE_PERL")"
         __status=$?
-        local disabled_29527
-        disabled_29527="$([ "_${command_471}" != "_No" ]; echo $?)"
-        local command_472
-        command_472="$(command -v perl > /dev/null && echo 0 || echo 1)"
+        local disabled_29651
+        disabled_29651="$([ "_${command_478}" != "_No" ]; echo $?)"
+        local command_479
+        command_479="$(command -v perl > /dev/null && echo 0 || echo 1)"
         __status=$?
-        local found_29528
-        found_29528="$(( $(( ! disabled_29527 )) && $([ "_${command_472}" != "_0" ]; echo $?) ))"
-        _perl_state_126="$(if [ "${found_29528}" != 0 ]; then echo "Yes"; else echo "No"; fi)"
+        local found_29652
+        found_29652="$(( $(( ! disabled_29651 )) && $([ "_${command_479}" != "_0" ]; echo $?) ))"
+        _perl_state_126="$(if [ "${found_29652}" != 0 ]; then echo "Yes"; else echo "No"; fi)"
     fi
-    ret_perl_available2455_v0="$([ "_${_perl_state_126}" != "_Yes" ]; echo $?)"
+    ret_perl_available2464_v0="$([ "_${_perl_state_126}" != "_Yes" ]; echo $?)"
     return 0
 }
 
 # perl_get_cjk_width(text: Text)
-perl_get_cjk_width__2456_v0() {
-    local text_29526="${1}"
-    perl_available__2455_v0 
-    local ret_perl_available2455_v0__19_12="${ret_perl_available2455_v0}"
-    if [ "$(( ! ret_perl_available2455_v0__19_12 ))" != 0 ]; then
-        ret_perl_get_cjk_width2456_v0=''
+perl_get_cjk_width__2465_v0() {
+    local text_29650="${1}"
+    perl_available__2464_v0 
+    local ret_perl_available2464_v0__19_12="${ret_perl_available2464_v0}"
+    if [ "$(( ! ret_perl_available2464_v0__19_12 ))" != 0 ]; then
+        ret_perl_get_cjk_width2465_v0=''
         return 1
     fi
-    local command_473
-    command_473="$(perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text_29526}" 2>/dev/null)"
+    local command_480
+    command_480="$(perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text_29650}" 2>/dev/null)"
     __status=$?
     if [ "${__status}" != 0 ]; then
-        ret_perl_get_cjk_width2456_v0=''
+        ret_perl_get_cjk_width2465_v0=''
         return "${__status}"
     fi
-    local width_str_29529="${command_473}"
-    parse_int__13_v0 "${width_str_29529}"
+    local width_str_29653="${command_480}"
+    parse_int__13_v0 "${width_str_29653}"
     __status=$?
     if [ "${__status}" != 0 ]; then
-        ret_perl_get_cjk_width2456_v0=''
+        ret_perl_get_cjk_width2465_v0=''
         return "${__status}"
     fi
-    local width_29530="${ret_parse_int13_v0}"
-    ret_perl_get_cjk_width2456_v0="${width_29530}"
+    local width_29654="${ret_parse_int13_v0}"
+    ret_perl_get_cjk_width2465_v0="${width_29654}"
     return 0
 }
 
 # has_ansi_escape(text: Text)
-has_ansi_escape__2461_v0() {
-    local text_29516="${1}"
+has_ansi_escape__2470_v0() {
+    local text_29640="${1}"
     # Check for ESC character (0x1B = 27) or literal \x1b[
-    local command_474
-    command_474="$([[ "${text_29516}" == *$'\x1b'* || "${text_29516}" == *'\x1b['* ]] && echo "1" || echo "0")"
+    local command_481
+    command_481="$([[ "${text_29640}" == *$'\x1b'* || "${text_29640}" == *'\x1b['* ]] && echo "1" || echo "0")"
     __status=$?
-    local has_escape_29517="${command_474}"
-    ret_has_ansi_escape2461_v0="$([ "_${has_escape_29517}" != "_1" ]; echo $?)"
+    local has_escape_29641="${command_481}"
+    ret_has_ansi_escape2470_v0="$([ "_${has_escape_29641}" != "_1" ]; echo $?)"
     return 0
 }
 
 # strip_ansi(text: Text)
-strip_ansi__2463_v0() {
-    local text_29522="${1}"
-    local command_475
-    command_475="$(printf "%s" "${text_29522}" | sed $'s/\x1b\[[0-9;]*m//g' | sed 's/\\x1b\[[0-9;]*m//g')"
+strip_ansi__2472_v0() {
+    local text_29646="${1}"
+    local command_482
+    command_482="$(printf "%s" "${text_29646}" | sed $'s/\x1b\[[0-9;]*m//g' | sed 's/\\x1b\[[0-9;]*m//g')"
     __status=$?
-    ret_strip_ansi2463_v0="${command_475}"
+    ret_strip_ansi2472_v0="${command_482}"
     return 0
 }
 
 # is_all_ascii(text: Text)
-is_all_ascii__2464_v0() {
-    local text_29524="${1}"
-    local command_476
-    command_476="$(printf "%s" "${text_29524}" | LC_ALL=C grep -q '^[ -~]*$' && echo 0 || echo 1)"
+is_all_ascii__2473_v0() {
+    local text_29648="${1}"
+    local command_483
+    command_483="$(printf "%s" "${text_29648}" | LC_ALL=C grep -q '^[ -~]*$' && echo 0 || echo 1)"
     __status=$?
-    local result_29525="${command_476}"
-    ret_is_all_ascii2464_v0="$([ "_${result_29525}" != "_0" ]; echo $?)"
+    local result_29649="${command_483}"
+    ret_is_all_ascii2473_v0="$([ "_${result_29649}" != "_0" ]; echo $?)"
     return 0
 }
 
 # plain_len(text: Text)
-plain_len__2465_v0() {
-    local text_29519="${1}"
-    local command_477
-    command_477="$(LC_ALL=C; __t="${text_29519}"; case "$__t" in (*[!\ -~]*) echo -1;; (*'\x1b['*) echo -1;; (*) echo "${#__t}";; esac)"
+plain_len__2474_v0() {
+    local text_29643="${1}"
+    local command_484
+    command_484="$(LC_ALL=C; __t="${text_29643}"; case "$__t" in (*[!\ -~]*) echo -1;; (*'\x1b['*) echo -1;; (*) echo "${#__t}";; esac)"
     __status=$?
-    local measured_29520="${command_477}"
-    parse_int__13_v0 "${measured_29520}"
+    local measured_29644="${command_484}"
+    parse_int__13_v0 "${measured_29644}"
     __status=$?
-    ret_plain_len2465_v0="${ret_parse_int13_v0}"
+    ret_plain_len2474_v0="${ret_parse_int13_v0}"
     return 0
 }
 
 # get_visible_len(text: Text)
-get_visible_len__2466_v0() {
-    local text_29518="${1}"
-    plain_len__2465_v0 "${text_29518}"
-    local plain_29521="${ret_plain_len2465_v0}"
-    if [ "$(( plain_29521 >= 0 ))" != 0 ]; then
-        ret_get_visible_len2466_v0="${plain_29521}"
+get_visible_len__2475_v0() {
+    local text_29642="${1}"
+    plain_len__2474_v0 "${text_29642}"
+    local plain_29645="${ret_plain_len2474_v0}"
+    if [ "$(( plain_29645 >= 0 ))" != 0 ]; then
+        ret_get_visible_len2475_v0="${plain_29645}"
         return 0
     fi
-    strip_ansi__2463_v0 "${text_29518}"
-    local stripped_29523="${ret_strip_ansi2463_v0}"
-    is_all_ascii__2464_v0 "${stripped_29523}"
-    local ret_is_all_ascii2464_v0__46_12="${ret_is_all_ascii2464_v0}"
-    if [ "$(( ! ret_is_all_ascii2464_v0__46_12 ))" != 0 ]; then
-        perl_get_cjk_width__2456_v0 "${stripped_29523}"
+    strip_ansi__2472_v0 "${text_29642}"
+    local stripped_29647="${ret_strip_ansi2472_v0}"
+    is_all_ascii__2473_v0 "${stripped_29647}"
+    local ret_is_all_ascii2473_v0__46_12="${ret_is_all_ascii2473_v0}"
+    if [ "$(( ! ret_is_all_ascii2473_v0__46_12 ))" != 0 ]; then
+        perl_get_cjk_width__2465_v0 "${stripped_29647}"
         __status=$?
         if [ "${__status}" != 0 ]; then
-            local __length_478="${stripped_29523}"
-            ret_get_visible_len2466_v0="${#__length_478}"
+            local __length_485="${stripped_29647}"
+            ret_get_visible_len2475_v0="${#__length_485}"
             return 0
         fi
-        ret_get_visible_len2466_v0="${ret_perl_get_cjk_width2456_v0}"
+        ret_get_visible_len2475_v0="${ret_perl_get_cjk_width2465_v0}"
         return 0
     fi
-    local __length_479="${stripped_29523}"
-    ret_get_visible_len2466_v0="${#__length_479}"
+    local __length_486="${stripped_29647}"
+    ret_get_visible_len2475_v0="${#__length_486}"
     return 0
 }
 
@@ -6334,198 +6391,205 @@ _term_size_128=(80 24)
 export XYLITOL_RUNTIME_STTY_COUNT=0
 __status=$?
 # stty_count()
-stty_count__2472_v0() {
-    local command_481
-    command_481="$(c="${XYLITOL_RUNTIME_STTY_COUNT:-0}"; [[ "$c" =~ ^[0-9]+$ ]] && echo "$c" || echo 0)"
+stty_count__2481_v0() {
+    local command_488
+    command_488="$(c="${XYLITOL_RUNTIME_STTY_COUNT:-0}"; [[ "$c" =~ ^[0-9]+$ ]] && echo "$c" || echo 0)"
     __status=$?
-    local count_29579="${command_481}"
-    parse_int__13_v0 "${count_29579}"
+    local count_29703="${command_488}"
+    parse_int__13_v0 "${count_29703}"
     __status=$?
-    ret_stty_count2472_v0="${ret_parse_int13_v0}"
+    ret_stty_count2481_v0="${ret_parse_int13_v0}"
     return 0
 }
 
 # stty_lock()
-stty_lock__2473_v0() {
-    stty_count__2472_v0 
-    local count_num_29580="${ret_stty_count2472_v0}"
-    if [ "$(( count_num_29580 == 0 ))" != 0 ]; then
-        stty -echo -icanon min 1 time 0 < /dev/tty
+stty_lock__2482_v0() {
+    stty_count__2481_v0 
+    local count_num_29704="${ret_stty_count2481_v0}"
+    if [ "$(( count_num_29704 == 0 ))" != 0 ]; then
+        stty -echo -icanon min 1 time 0 2>/dev/null < /dev/tty
         __status=$?
+        if [ "${__status}" != 0 ]; then
+            eprintf_colored__2457_v0 "Error: " 91
+            local array_489=("")
+            eprintf__2456_v0 "xylitol needs a terminal, and /dev/tty is not available here.
+" array_489[@]
+            exit 1
+        fi
     fi
-    count_num_29580="$(( count_num_29580 + 1 ))"
-    export XYLITOL_RUNTIME_STTY_COUNT=${count_num_29580}
+    count_num_29704="$(( count_num_29704 + 1 ))"
+    export XYLITOL_RUNTIME_STTY_COUNT=${count_num_29704}
     __status=$?
 }
 
 # stty_unlock()
-stty_unlock__2474_v0() {
-    stty_count__2472_v0 
-    local count_num_29674="${ret_stty_count2472_v0}"
-    if [ "$(( count_num_29674 > 0 ))" != 0 ]; then
-        count_num_29674="$(( count_num_29674 - 1 ))"
-        export XYLITOL_RUNTIME_STTY_COUNT=${count_num_29674}
+stty_unlock__2483_v0() {
+    stty_count__2481_v0 
+    local count_num_29800="${ret_stty_count2481_v0}"
+    if [ "$(( count_num_29800 > 0 ))" != 0 ]; then
+        count_num_29800="$(( count_num_29800 - 1 ))"
+        export XYLITOL_RUNTIME_STTY_COUNT=${count_num_29800}
         __status=$?
-        if [ "$(( count_num_29674 == 0 ))" != 0 ]; then
-            stty echo icanon < /dev/tty
+        if [ "$(( count_num_29800 == 0 ))" != 0 ]; then
+            stty echo icanon 2>/dev/null < /dev/tty
             __status=$?
         fi
     fi
 }
 
 # store_term_size(size: Text)
-store_term_size__2475_v0() {
-    local size_29507="${1}"
-    if [ "$([ "_${size_29507}" != "_" ]; echo $?)" != 0 ]; then
-        ret_store_term_size2475_v0=0
+store_term_size__2484_v0() {
+    local size_29631="${1}"
+    if [ "$([ "_${size_29631}" != "_" ]; echo $?)" != 0 ]; then
+        ret_store_term_size2484_v0=0
         return 0
     fi
-    split__4_v0 "${size_29507}" " "
-    local parts_29508=("${ret_split4_v0[@]}")
-    local __length_482=("${parts_29508[@]}")
-    if [ "$(( ${#__length_482[@]} != 2 ))" != 0 ]; then
-        ret_store_term_size2475_v0=0
+    split__4_v0 "${size_29631}" " "
+    local parts_29632=("${ret_split4_v0[@]}")
+    local __length_490=("${parts_29632[@]}")
+    if [ "$(( ${#__length_490[@]} != 2 ))" != 0 ]; then
+        ret_store_term_size2484_v0=0
         return 0
     fi
-    parse_int__13_v0 "${parts_29508[1]?"Index out of bounds (at src/./confirm/../utils/term.ab:53:41)"}"
+    parse_int__13_v0 "${parts_29632[1]?"Index out of bounds (at src/./confirm/../utils/term.ab:57:41)"}"
     __status=$?
-    local ret_parse_int13_v0__53_25="${ret_parse_int13_v0}"
-    parse_int__13_v0 "${parts_29508[0]?"Index out of bounds (at src/./confirm/../utils/term.ab:53:68)"}"
+    local ret_parse_int13_v0__57_25="${ret_parse_int13_v0}"
+    parse_int__13_v0 "${parts_29632[0]?"Index out of bounds (at src/./confirm/../utils/term.ab:57:68)"}"
     __status=$?
-    local ret_parse_int13_v0__53_52="${ret_parse_int13_v0}"
-    _term_size_128=("${ret_parse_int13_v0__53_25}" "${ret_parse_int13_v0__53_52}")
-    ret_store_term_size2475_v0=1
+    local ret_parse_int13_v0__57_52="${ret_parse_int13_v0}"
+    _term_size_128=("${ret_parse_int13_v0__57_25}" "${ret_parse_int13_v0__57_52}")
+    ret_store_term_size2484_v0=1
     return 0
 }
 
 # query_term_size()
-query_term_size__2476_v0() {
-    local command_484
-    command_484="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
+query_term_size__2485_v0() {
+    local command_492
+    command_492="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
     __status=$?
-    local size_29510="${command_484}"
-    store_term_size__2475_v0 "${size_29510}"
-    ret_query_term_size2476_v0="${ret_store_term_size2475_v0}"
+    local size_29634="${command_492}"
+    store_term_size__2484_v0 "${size_29634}"
+    ret_query_term_size2485_v0="${ret_store_term_size2484_v0}"
     return 0
 }
 
 # stty_term_size()
-stty_term_size__2477_v0() {
-    local command_485
-    command_485="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
+stty_term_size__2486_v0() {
+    local command_493
+    command_493="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
     __status=$?
-    local size_29506="${command_485}"
-    store_term_size__2475_v0 "${size_29506}"
-    ret_stty_term_size2477_v0="${ret_store_term_size2475_v0}"
+    local size_29630="${command_493}"
+    store_term_size__2484_v0 "${size_29630}"
+    ret_stty_term_size2486_v0="${ret_store_term_size2484_v0}"
     return 0
 }
 
 # get_term_size()
-get_term_size__2478_v0() {
-    stty_term_size__2477_v0 
-    local detected_29509="${ret_stty_term_size2477_v0}"
-    if [ "$(( ! detected_29509 ))" != 0 ]; then
-        query_term_size__2476_v0 
-        detected_29509="${ret_query_term_size2476_v0}"
+get_term_size__2487_v0() {
+    stty_term_size__2486_v0 
+    local detected_29633="${ret_stty_term_size2486_v0}"
+    if [ "$(( ! detected_29633 ))" != 0 ]; then
+        query_term_size__2485_v0 
+        detected_29633="${ret_query_term_size2485_v0}"
     fi
     _got_term_size_127=1
 }
 
 # term_width()
-term_width__2480_v0() {
+term_width__2489_v0() {
     if [ "$(( ! _got_term_size_127 ))" != 0 ]; then
-        get_term_size__2478_v0 
+        get_term_size__2487_v0 
     fi
-    ret_term_width2480_v0="${_term_size_128[0]?"Index out of bounds (at src/./confirm/../utils/term.ab:96:23)"}"
+    ret_term_width2489_v0="${_term_size_128[0]?"Index out of bounds (at src/./confirm/../utils/term.ab:100:23)"}"
     return 0
 }
 
 # // Cursor /////
 # remove_line(cnt: Int)
-remove_line__2483_v0() {
-    local cnt_29671="${1}"
-    if [ "$(( cnt_29671 > 0 ))" != 0 ]; then
-        local sequence_29672=""
-        local __range_start_29673=0
-        local __range_end_29673="${cnt_29671}"
-        local __dir_29673=$(( ${__range_start_29673} <= ${__range_end_29673} ? 1 : -1 ))
-        for (( ____29673=${__range_start_29673}; ____29673 * ${__dir_29673} < ${__range_end_29673} * ${__dir_29673}; ____29673+=${__dir_29673} )); do
-            sequence_29672+="\\x1b[2K\\x1b[1A"
+remove_line__2492_v0() {
+    local cnt_29797="${1}"
+    if [ "$(( cnt_29797 > 0 ))" != 0 ]; then
+        local sequence_29798=""
+        local __range_start_29799=0
+        local __range_end_29799="${cnt_29797}"
+        local __dir_29799=$(( ${__range_start_29799} <= ${__range_end_29799} ? 1 : -1 ))
+        for (( ____29799=${__range_start_29799}; ____29799 * ${__dir_29799} < ${__range_end_29799} * ${__dir_29799}; ____29799+=${__dir_29799} )); do
+            sequence_29798+="\\x1b[2K\\x1b[1A"
 done
-        local array_486=("")
-        eprintf__2448_v0 "${sequence_29672}" array_486[@]
+        local array_494=("")
+        eprintf__2456_v0 "${sequence_29798}" array_494[@]
     fi
-    local array_487=("")
-    eprintf__2448_v0 "\\x1b[G" array_487[@]
+    local array_495=("")
+    eprintf__2456_v0 "\\x1b[G" array_495[@]
 }
 
 # remove_current_line()
-remove_current_line__2484_v0() {
-    local array_488=("")
-    eprintf__2448_v0 "\\x1b[2K\\x1b[G" array_488[@]
+remove_current_line__2493_v0() {
+    local array_496=("")
+    eprintf__2456_v0 "\\x1b[2K\\x1b[G" array_496[@]
 }
 
 # go_up(cnt: Int)
-go_up__2487_v0() {
-    local cnt_29667="${1}"
-    local array_489=("")
-    eprintf__2448_v0 "\\x1b[${cnt_29667}A" array_489[@]
+go_up__2496_v0() {
+    local cnt_29793="${1}"
+    local array_497=("")
+    eprintf__2456_v0 "\\x1b[${cnt_29793}A" array_497[@]
 }
 
 # go_down(cnt: Int)
-go_down__2488_v0() {
-    local cnt_29670="${1}"
-    local array_490=("")
-    eprintf__2448_v0 "\\x1b[${cnt_29670}B" array_490[@]
+go_down__2497_v0() {
+    local cnt_29796="${1}"
+    local array_498=("")
+    eprintf__2456_v0 "\\x1b[${cnt_29796}B" array_498[@]
 }
 
 # move the cursor up or down `cnt` lines.
 # hide_cursor()
-hide_cursor__2490_v0() {
-    local array_491=("")
-    eprintf__2448_v0 "\\x1b[?25l" array_491[@]
+hide_cursor__2499_v0() {
+    local array_499=("")
+    eprintf__2456_v0 "\\x1b[?25l" array_499[@]
 }
 
 # show_cursor()
-show_cursor__2491_v0() {
-    local array_492=("")
-    eprintf__2448_v0 "\\x1b[?25h" array_492[@]
+show_cursor__2500_v0() {
+    local array_500=("")
+    eprintf__2456_v0 "\\x1b[?25h" array_500[@]
 }
 
 # print_wrapped(pieces: [Text])
-print_wrapped__2492_v0() {
-    local pieces_29505=("${!1}")
-    term_width__2480_v0 
-    local width_29511="${ret_term_width2480_v0}"
-    local line_29512=""
-    local line_len_29513=0
-    for piece_29514 in "${pieces_29505[@]}"; do
-        local __length_495="${piece_29514}"
-        local piece_len_29515="${#__length_495}"
-        has_ansi_escape__2461_v0 "${piece_29514}"
-        local ret_has_ansi_escape2461_v0__186_12="${ret_has_ansi_escape2461_v0}"
-        if [ "${ret_has_ansi_escape2461_v0__186_12}" != 0 ]; then
-            get_visible_len__2466_v0 "${piece_29514}"
-            piece_len_29515="${ret_get_visible_len2466_v0}"
+print_wrapped__2501_v0() {
+    local pieces_29629=("${!1}")
+    term_width__2489_v0 
+    local width_29635="${ret_term_width2489_v0}"
+    local line_29636=""
+    local line_len_29637=0
+    for piece_29638 in "${pieces_29629[@]}"; do
+        local __length_503="${piece_29638}"
+        local piece_len_29639="${#__length_503}"
+        has_ansi_escape__2470_v0 "${piece_29638}"
+        local ret_has_ansi_escape2470_v0__190_12="${ret_has_ansi_escape2470_v0}"
+        if [ "${ret_has_ansi_escape2470_v0__190_12}" != 0 ]; then
+            get_visible_len__2475_v0 "${piece_29638}"
+            piece_len_29639="${ret_get_visible_len2475_v0}"
         fi
-        if [ "$([ "_${line_29512}" != "_" ]; echo $?)" != 0 ]; then
-            line_29512="${piece_29514}"
-            line_len_29513="${piece_len_29515}"
-        elif [ "$(( $(( $(( line_len_29513 + 1 )) + piece_len_29515 )) > width_29511 ))" != 0 ]; then
-            local array_496=()
-            printf__128_v0 "${line_29512}""
-" array_496[@]
-            line_29512="${piece_29514}"
-            line_len_29513="${piece_len_29515}"
+        if [ "$([ "_${line_29636}" != "_" ]; echo $?)" != 0 ]; then
+            line_29636="${piece_29638}"
+            line_len_29637="${piece_len_29639}"
+        elif [ "$(( $(( $(( line_len_29637 + 1 )) + piece_len_29639 )) > width_29635 ))" != 0 ]; then
+            local array_504=()
+            printf__128_v0 "${line_29636}""
+" array_504[@]
+            line_29636="${piece_29638}"
+            line_len_29637="${piece_len_29639}"
         else
-            line_29512+=" ""${piece_29514}"
-            line_len_29513="$(( line_len_29513 + $(( 1 + piece_len_29515 )) ))"
+            line_29636+=" ""${piece_29638}"
+            line_len_29637="$(( line_len_29637 + $(( 1 + piece_len_29639 )) ))"
         fi
     done
-    if [ "$([ "_${line_29512}" == "_" ]; echo $?)" != 0 ]; then
-        local array_497=()
-        printf__128_v0 "${line_29512}""
-" array_497[@]
+    if [ "$([ "_${line_29636}" == "_" ]; echo $?)" != 0 ]; then
+        local array_505=()
+        printf__128_v0 "${line_29636}""
+" array_505[@]
     fi
 }
 
@@ -6541,126 +6605,126 @@ _got_xylitol_colors_132=0
 _primary_color_133=(3 207 159 92)
 _secondary_color_134=(3 118 206 94)
 # get_supports_truecolor()
-get_supports_truecolor__2529_v0() {
+get_supports_truecolor__2538_v0() {
     env_var_get__120_v0 "XYLITOL_TRUECOLOR"
     __status=$?
-    local config_29500="${ret_env_var_get120_v0}"
-    _supports_truecolor_131="$(if [ "$([ "_${config_29500}" != "_Yes" ]; echo $?)" != 0 ]; then echo "Yes"; else echo "No"; fi)"
-    ret_get_supports_truecolor2529_v0="$([ "_${_supports_truecolor_131}" != "_Yes" ]; echo $?)"
+    local config_29624="${ret_env_var_get120_v0}"
+    _supports_truecolor_131="$(if [ "$([ "_${config_29624}" != "_Yes" ]; echo $?)" != 0 ]; then echo "Yes"; else echo "No"; fi)"
+    ret_get_supports_truecolor2538_v0="$([ "_${_supports_truecolor_131}" != "_Yes" ]; echo $?)"
     return 0
 }
 
 # colored_rgb(message: Text, r: Int, g: Int, b: Int, fallback: Int)
-colored_rgb__2530_v0() {
-    local message_29495="${1}"
-    local r_29496="${2}"
-    local g_29497="${3}"
-    local b_29498="${4}"
-    local fallback_29499="${5}"
+colored_rgb__2539_v0() {
+    local message_29619="${1}"
+    local r_29620="${2}"
+    local g_29621="${3}"
+    local b_29622="${4}"
+    local fallback_29623="${5}"
     if [ "$([ "_${_supports_truecolor_131}" != "_Yes" ]; echo $?)" != 0 ]; then
-        ret_colored_rgb2530_v0="\\x1b[38;2;${r_29496};${g_29497};${b_29498}m""${message_29495}""\\x1b[0m"
+        ret_colored_rgb2539_v0="\\x1b[38;2;${r_29620};${g_29621};${b_29622}m""${message_29619}""\\x1b[0m"
         return 0
     elif [ "$([ "_${_supports_truecolor_131}" != "_None" ]; echo $?)" != 0 ]; then
-        get_supports_truecolor__2529_v0 
-        local ret_get_supports_truecolor2529_v0__45_17="${ret_get_supports_truecolor2529_v0}"
-        if [ "${ret_get_supports_truecolor2529_v0__45_17}" != 0 ]; then
-            ret_colored_rgb2530_v0="\\x1b[38;2;${r_29496};${g_29497};${b_29498}m""${message_29495}""\\x1b[0m"
+        get_supports_truecolor__2538_v0 
+        local ret_get_supports_truecolor2538_v0__45_17="${ret_get_supports_truecolor2538_v0}"
+        if [ "${ret_get_supports_truecolor2538_v0__45_17}" != 0 ]; then
+            ret_colored_rgb2539_v0="\\x1b[38;2;${r_29620};${g_29621};${b_29622}m""${message_29619}""\\x1b[0m"
             return 0
-        elif [ "$(( fallback_29499 == 0 ))" != 0 ]; then
-            ret_colored_rgb2530_v0="${message_29495}"
+        elif [ "$(( fallback_29623 == 0 ))" != 0 ]; then
+            ret_colored_rgb2539_v0="${message_29619}"
             return 0
         else
-            ret_colored_rgb2530_v0="\\x1b[${fallback_29499}m""${message_29495}""\\x1b[0m"
+            ret_colored_rgb2539_v0="\\x1b[${fallback_29623}m""${message_29619}""\\x1b[0m"
             return 0
         fi
     else
-        if [ "$(( fallback_29499 == 0 ))" != 0 ]; then
-            ret_colored_rgb2530_v0="${message_29495}"
+        if [ "$(( fallback_29623 == 0 ))" != 0 ]; then
+            ret_colored_rgb2539_v0="${message_29619}"
             return 0
         fi
-        ret_colored_rgb2530_v0="\\x1b[${fallback_29499}m""${message_29495}""\\x1b[0m"
+        ret_colored_rgb2539_v0="\\x1b[${fallback_29623}m""${message_29619}""\\x1b[0m"
         return 0
     fi
 }
 
 # background_rgb(message: Text, r: Int, g: Int, b: Int, fallback: Int)
-background_rgb__2531_v0() {
-    local message_29644="${1}"
-    local r_29645="${2}"
-    local g_29646="${3}"
-    local b_29647="${4}"
-    local fallback_29648="${5}"
+background_rgb__2540_v0() {
+    local message_29770="${1}"
+    local r_29771="${2}"
+    local g_29772="${3}"
+    local b_29773="${4}"
+    local fallback_29774="${5}"
     # Convert foreground color code to background color code
     # 30-37 -> 40-47, 90-97 -> 100-107
-    local bg_fallback_29649="${fallback_29648}"
-    if [ "$(( $(( fallback_29648 >= 30 )) && $(( fallback_29648 <= 37 )) ))" != 0 ]; then
-        bg_fallback_29649="$(( fallback_29648 + 10 ))"
+    local bg_fallback_29775="${fallback_29774}"
+    if [ "$(( $(( fallback_29774 >= 30 )) && $(( fallback_29774 <= 37 )) ))" != 0 ]; then
+        bg_fallback_29775="$(( fallback_29774 + 10 ))"
     fi
-    if [ "$(( $(( fallback_29648 >= 90 )) && $(( fallback_29648 <= 97 )) ))" != 0 ]; then
-        bg_fallback_29649="$(( fallback_29648 + 10 ))"
+    if [ "$(( $(( fallback_29774 >= 90 )) && $(( fallback_29774 <= 97 )) ))" != 0 ]; then
+        bg_fallback_29775="$(( fallback_29774 + 10 ))"
     fi
     if [ "$([ "_${_supports_truecolor_131}" != "_Yes" ]; echo $?)" != 0 ]; then
-        ret_background_rgb2531_v0="\\x1b[48;2;${r_29645};${g_29646};${b_29647}m""${message_29644}""\\x1b[0m"
+        ret_background_rgb2540_v0="\\x1b[48;2;${r_29771};${g_29772};${b_29773}m""${message_29770}""\\x1b[0m"
         return 0
     elif [ "$([ "_${_supports_truecolor_131}" != "_None" ]; echo $?)" != 0 ]; then
-        get_supports_truecolor__2529_v0 
-        local ret_get_supports_truecolor2529_v0__87_17="${ret_get_supports_truecolor2529_v0}"
-        if [ "${ret_get_supports_truecolor2529_v0__87_17}" != 0 ]; then
-            ret_background_rgb2531_v0="\\x1b[48;2;${r_29645};${g_29646};${b_29647}m""${message_29644}""\\x1b[0m"
+        get_supports_truecolor__2538_v0 
+        local ret_get_supports_truecolor2538_v0__87_17="${ret_get_supports_truecolor2538_v0}"
+        if [ "${ret_get_supports_truecolor2538_v0__87_17}" != 0 ]; then
+            ret_background_rgb2540_v0="\\x1b[48;2;${r_29771};${g_29772};${b_29773}m""${message_29770}""\\x1b[0m"
             return 0
-        elif [ "$(( bg_fallback_29649 == 0 ))" != 0 ]; then
-            ret_background_rgb2531_v0="${message_29644}"
+        elif [ "$(( bg_fallback_29775 == 0 ))" != 0 ]; then
+            ret_background_rgb2540_v0="${message_29770}"
             return 0
         else
-            ret_background_rgb2531_v0="\\x1b[${bg_fallback_29649}m""${message_29644}""\\x1b[0m"
+            ret_background_rgb2540_v0="\\x1b[${bg_fallback_29775}m""${message_29770}""\\x1b[0m"
             return 0
         fi
     else
-        if [ "$(( bg_fallback_29649 == 0 ))" != 0 ]; then
-            ret_background_rgb2531_v0="${message_29644}"
+        if [ "$(( bg_fallback_29775 == 0 ))" != 0 ]; then
+            ret_background_rgb2540_v0="${message_29770}"
             return 0
         fi
-        ret_background_rgb2531_v0="\\x1b[${bg_fallback_29649}m""${message_29644}""\\x1b[0m"
+        ret_background_rgb2540_v0="\\x1b[${bg_fallback_29775}m""${message_29770}""\\x1b[0m"
         return 0
     fi
 }
 
 # inner_get_xylitol_colors()
-inner_get_xylitol_colors__2532_v0() {
+inner_get_xylitol_colors__2541_v0() {
     if [ "$(( ! _got_xylitol_colors_132 ))" != 0 ]; then
         env_var_get__120_v0 "XYLITOL_PRIMARY_COLOR"
         __status=$?
-        local primary_env_29489="${ret_env_var_get120_v0}"
-        if [ "$([ "_${primary_env_29489}" == "_" ]; echo $?)" != 0 ]; then
-            split__4_v0 "${primary_env_29489}" ";"
-            local parts_29490=("${ret_split4_v0[@]}")
-            local __length_501=("${parts_29490[@]}")
-            if [ "$(( ${#__length_501[@]} == 4 ))" != 0 ]; then
-                parse_int__13_v0 "${parts_29490[0]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:110:37)"}"
+        local primary_env_29613="${ret_env_var_get120_v0}"
+        if [ "$([ "_${primary_env_29613}" == "_" ]; echo $?)" != 0 ]; then
+            split__4_v0 "${primary_env_29613}" ";"
+            local parts_29614=("${ret_split4_v0[@]}")
+            local __length_509=("${parts_29614[@]}")
+            if [ "$(( ${#__length_509[@]} == 4 ))" != 0 ]; then
+                parse_int__13_v0 "${parts_29614[0]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:110:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors2532_v0=''
+                    ret_inner_get_xylitol_colors2541_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__110_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_29490[1]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:111:37)"}"
+                parse_int__13_v0 "${parts_29614[1]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:111:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors2532_v0=''
+                    ret_inner_get_xylitol_colors2541_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__111_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_29490[2]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:112:37)"}"
+                parse_int__13_v0 "${parts_29614[2]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:112:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors2532_v0=''
+                    ret_inner_get_xylitol_colors2541_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__112_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_29490[3]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:113:37)"}"
+                parse_int__13_v0 "${parts_29614[3]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:113:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors2532_v0=''
+                    ret_inner_get_xylitol_colors2541_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__113_21="${ret_parse_int13_v0}"
@@ -6669,37 +6733,37 @@ inner_get_xylitol_colors__2532_v0() {
         fi
         env_var_get__120_v0 "XYLITOL_SECONDARY_COLOR"
         __status=$?
-        local secondary_env_29491="${ret_env_var_get120_v0}"
-        if [ "$([ "_${secondary_env_29491}" == "_" ]; echo $?)" != 0 ]; then
-            split__4_v0 "${secondary_env_29491}" ";"
-            local parts_29492=("${ret_split4_v0[@]}")
-            local __length_503=("${parts_29492[@]}")
-            if [ "$(( ${#__length_503[@]} == 4 ))" != 0 ]; then
-                parse_int__13_v0 "${parts_29492[0]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:123:37)"}"
+        local secondary_env_29615="${ret_env_var_get120_v0}"
+        if [ "$([ "_${secondary_env_29615}" == "_" ]; echo $?)" != 0 ]; then
+            split__4_v0 "${secondary_env_29615}" ";"
+            local parts_29616=("${ret_split4_v0[@]}")
+            local __length_511=("${parts_29616[@]}")
+            if [ "$(( ${#__length_511[@]} == 4 ))" != 0 ]; then
+                parse_int__13_v0 "${parts_29616[0]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:123:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors2532_v0=''
+                    ret_inner_get_xylitol_colors2541_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__123_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_29492[1]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:124:37)"}"
+                parse_int__13_v0 "${parts_29616[1]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:124:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors2532_v0=''
+                    ret_inner_get_xylitol_colors2541_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__124_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_29492[2]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:125:37)"}"
+                parse_int__13_v0 "${parts_29616[2]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:125:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors2532_v0=''
+                    ret_inner_get_xylitol_colors2541_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__125_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_29492[3]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:126:37)"}"
+                parse_int__13_v0 "${parts_29616[3]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:126:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors2532_v0=''
+                    ret_inner_get_xylitol_colors2541_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__126_21="${ret_parse_int13_v0}"
@@ -6708,37 +6772,37 @@ inner_get_xylitol_colors__2532_v0() {
         fi
         env_var_get__120_v0 "XYLITOL_ACCENT_COLOR"
         __status=$?
-        local accent_env_29493="${ret_env_var_get120_v0}"
-        if [ "$([ "_${accent_env_29493}" == "_" ]; echo $?)" != 0 ]; then
-            split__4_v0 "${accent_env_29493}" ";"
-            local parts_29494=("${ret_split4_v0[@]}")
-            local __length_505=("${parts_29494[@]}")
-            if [ "$(( ${#__length_505[@]} == 4 ))" != 0 ]; then
-                parse_int__13_v0 "${parts_29494[0]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:136:37)"}"
+        local accent_env_29617="${ret_env_var_get120_v0}"
+        if [ "$([ "_${accent_env_29617}" == "_" ]; echo $?)" != 0 ]; then
+            split__4_v0 "${accent_env_29617}" ";"
+            local parts_29618=("${ret_split4_v0[@]}")
+            local __length_513=("${parts_29618[@]}")
+            if [ "$(( ${#__length_513[@]} == 4 ))" != 0 ]; then
+                parse_int__13_v0 "${parts_29618[0]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:136:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors2532_v0=''
+                    ret_inner_get_xylitol_colors2541_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__136_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_29494[1]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:137:37)"}"
+                parse_int__13_v0 "${parts_29618[1]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:137:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors2532_v0=''
+                    ret_inner_get_xylitol_colors2541_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__137_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_29494[2]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:138:37)"}"
+                parse_int__13_v0 "${parts_29618[2]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:138:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors2532_v0=''
+                    ret_inner_get_xylitol_colors2541_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__138_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_29494[3]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:139:37)"}"
+                parse_int__13_v0 "${parts_29618[3]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:139:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors2532_v0=''
+                    ret_inner_get_xylitol_colors2541_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__139_21="${ret_parse_int13_v0}"
@@ -6749,8 +6813,8 @@ inner_get_xylitol_colors__2532_v0() {
 }
 
 # get_xylitol_colors()
-get_xylitol_colors__2533_v0() {
-    inner_get_xylitol_colors__2532_v0 
+get_xylitol_colors__2542_v0() {
+    inner_get_xylitol_colors__2541_v0 
     __status=$?
     if [ "${__status}" != 0 ]; then
         echo_colored__134_v0 "WARN: Failed to parse Xylitol colors from envs." 33
@@ -6759,35 +6823,35 @@ get_xylitol_colors__2533_v0() {
 }
 
 # colored_primary(message: Text)
-colored_primary__2534_v0() {
-    local message_29488="${1}"
+colored_primary__2543_v0() {
+    local message_29612="${1}"
     if [ "$(( ! _got_xylitol_colors_132 ))" != 0 ]; then
-        get_xylitol_colors__2533_v0 
+        get_xylitol_colors__2542_v0 
     fi
-    colored_rgb__2530_v0 "${message_29488}" "${_primary_color_133[0]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:159:48)"}" "${_primary_color_133[1]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:159:67)"}" "${_primary_color_133[2]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:159:86)"}" "${_primary_color_133[3]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:159:105)"}"
-    ret_colored_primary2534_v0="${ret_colored_rgb2530_v0}"
+    colored_rgb__2539_v0 "${message_29612}" "${_primary_color_133[0]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:159:48)"}" "${_primary_color_133[1]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:159:67)"}" "${_primary_color_133[2]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:159:86)"}" "${_primary_color_133[3]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:159:105)"}"
+    ret_colored_primary2543_v0="${ret_colored_rgb2539_v0}"
     return 0
 }
 
 # colored_secondary(message: Text)
-colored_secondary__2535_v0() {
-    local message_29532="${1}"
+colored_secondary__2544_v0() {
+    local message_29656="${1}"
     if [ "$(( ! _got_xylitol_colors_132 ))" != 0 ]; then
-        get_xylitol_colors__2533_v0 
+        get_xylitol_colors__2542_v0 
     fi
-    colored_rgb__2530_v0 "${message_29532}" "${_secondary_color_134[0]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:166:50)"}" "${_secondary_color_134[1]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:166:71)"}" "${_secondary_color_134[2]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:166:92)"}" "${_secondary_color_134[3]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:166:113)"}"
-    ret_colored_secondary2535_v0="${ret_colored_rgb2530_v0}"
+    colored_rgb__2539_v0 "${message_29656}" "${_secondary_color_134[0]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:166:50)"}" "${_secondary_color_134[1]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:166:71)"}" "${_secondary_color_134[2]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:166:92)"}" "${_secondary_color_134[3]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:166:113)"}"
+    ret_colored_secondary2544_v0="${ret_colored_rgb2539_v0}"
     return 0
 }
 
 # background_secondary(message: Text)
-background_secondary__2538_v0() {
-    local message_29643="${1}"
+background_secondary__2547_v0() {
+    local message_29769="${1}"
     if [ "$(( ! _got_xylitol_colors_132 ))" != 0 ]; then
-        get_xylitol_colors__2533_v0 
+        get_xylitol_colors__2542_v0 
     fi
-    background_rgb__2531_v0 "${message_29643}" "${_secondary_color_134[0]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:187:53)"}" "${_secondary_color_134[1]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:187:74)"}" "${_secondary_color_134[2]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:187:95)"}" "${_secondary_color_134[3]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:187:116)"}"
-    ret_background_secondary2538_v0="${ret_background_rgb2531_v0}"
+    background_rgb__2540_v0 "${message_29769}" "${_secondary_color_134[0]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:187:53)"}" "${_secondary_color_134[1]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:187:74)"}" "${_secondary_color_134[2]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:187:95)"}" "${_secondary_color_134[3]?"Index out of bounds (at src/./confirm/../utils/truecolor.ab:187:116)"}"
+    ret_background_secondary2547_v0="${ret_background_rgb2540_v0}"
     return 0
 }
 
@@ -6795,387 +6859,387 @@ background_secondary__2538_v0() {
 # "None" until the first call decides, then "Yes" or "No".
 _perl_state_136="None"
 # perl_available()
-perl_available__2552_v0() {
+perl_available__2561_v0() {
     if [ "$([ "_${_perl_state_136}" != "_None" ]; echo $?)" != 0 ]; then
-        local command_507
-        command_507="$(echo "$XYLITOL_USE_PERL")"
+        local command_515
+        command_515="$(echo "$XYLITOL_USE_PERL")"
         __status=$?
-        local disabled_29595
-        disabled_29595="$([ "_${command_507}" != "_No" ]; echo $?)"
-        local command_508
-        command_508="$(command -v perl > /dev/null && echo 0 || echo 1)"
+        local disabled_29721
+        disabled_29721="$([ "_${command_515}" != "_No" ]; echo $?)"
+        local command_516
+        command_516="$(command -v perl > /dev/null && echo 0 || echo 1)"
         __status=$?
-        local found_29596
-        found_29596="$(( $(( ! disabled_29595 )) && $([ "_${command_508}" != "_0" ]; echo $?) ))"
-        _perl_state_136="$(if [ "${found_29596}" != 0 ]; then echo "Yes"; else echo "No"; fi)"
+        local found_29722
+        found_29722="$(( $(( ! disabled_29721 )) && $([ "_${command_516}" != "_0" ]; echo $?) ))"
+        _perl_state_136="$(if [ "${found_29722}" != 0 ]; then echo "Yes"; else echo "No"; fi)"
     fi
-    ret_perl_available2552_v0="$([ "_${_perl_state_136}" != "_Yes" ]; echo $?)"
+    ret_perl_available2561_v0="$([ "_${_perl_state_136}" != "_Yes" ]; echo $?)"
     return 0
 }
 
 # perl_get_cjk_width(text: Text)
-perl_get_cjk_width__2553_v0() {
-    local text_29594="${1}"
-    perl_available__2552_v0 
-    local ret_perl_available2552_v0__19_12="${ret_perl_available2552_v0}"
-    if [ "$(( ! ret_perl_available2552_v0__19_12 ))" != 0 ]; then
-        ret_perl_get_cjk_width2553_v0=''
+perl_get_cjk_width__2562_v0() {
+    local text_29720="${1}"
+    perl_available__2561_v0 
+    local ret_perl_available2561_v0__19_12="${ret_perl_available2561_v0}"
+    if [ "$(( ! ret_perl_available2561_v0__19_12 ))" != 0 ]; then
+        ret_perl_get_cjk_width2562_v0=''
         return 1
     fi
-    local command_509
-    command_509="$(perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text_29594}" 2>/dev/null)"
+    local command_517
+    command_517="$(perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text_29720}" 2>/dev/null)"
     __status=$?
     if [ "${__status}" != 0 ]; then
-        ret_perl_get_cjk_width2553_v0=''
+        ret_perl_get_cjk_width2562_v0=''
         return "${__status}"
     fi
-    local width_str_29597="${command_509}"
-    parse_int__13_v0 "${width_str_29597}"
+    local width_str_29723="${command_517}"
+    parse_int__13_v0 "${width_str_29723}"
     __status=$?
     if [ "${__status}" != 0 ]; then
-        ret_perl_get_cjk_width2553_v0=''
+        ret_perl_get_cjk_width2562_v0=''
         return "${__status}"
     fi
-    local width_29598="${ret_parse_int13_v0}"
-    ret_perl_get_cjk_width2553_v0="${width_29598}"
+    local width_29724="${ret_parse_int13_v0}"
+    ret_perl_get_cjk_width2562_v0="${width_29724}"
     return 0
 }
 
 # perl_truncate_cjk(text: Text, max_width: Int)
-perl_truncate_cjk__2554_v0() {
-    local text_29605="${1}"
-    local max_width_29606="${2}"
-    perl_available__2552_v0 
-    local ret_perl_available2552_v0__30_12="${ret_perl_available2552_v0}"
-    if [ "$(( ! ret_perl_available2552_v0__30_12 ))" != 0 ]; then
-        ret_perl_truncate_cjk2554_v0=''
+perl_truncate_cjk__2563_v0() {
+    local text_29731="${1}"
+    local max_width_29732="${2}"
+    perl_available__2561_v0 
+    local ret_perl_available2561_v0__30_12="${ret_perl_available2561_v0}"
+    if [ "$(( ! ret_perl_available2561_v0__30_12 ))" != 0 ]; then
+        ret_perl_truncate_cjk2563_v0=''
         return 1
     fi
-    local command_510
-    command_510="$(perl -CSDA -E '$t=shift;$m=shift;$w=0;$r="";$c=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1,($w+$c<=$m?($w+=$c,$r.=$_):last) for split//,$t; print $r' "${text_29605}" ${max_width_29606} 2>/dev/null)"
+    local command_518
+    command_518="$(perl -CSDA -E '$t=shift;$m=shift;$w=0;$r="";$c=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1,($w+$c<=$m?($w+=$c,$r.=$_):last) for split//,$t; print $r' "${text_29731}" ${max_width_29732} 2>/dev/null)"
     __status=$?
     if [ "${__status}" != 0 ]; then
-        ret_perl_truncate_cjk2554_v0=''
+        ret_perl_truncate_cjk2563_v0=''
         return "${__status}"
     fi
-    local result_29607="${command_510}"
-    ret_perl_truncate_cjk2554_v0="${result_29607}"
+    local result_29733="${command_518}"
+    ret_perl_truncate_cjk2563_v0="${result_29733}"
     return 0
 }
 
 # has_ansi_escape(text: Text)
-has_ansi_escape__2558_v0() {
-    local text_29573="${1}"
+has_ansi_escape__2567_v0() {
+    local text_29697="${1}"
     # Check for ESC character (0x1B = 27) or literal \x1b[
-    local command_511
-    command_511="$([[ "${text_29573}" == *$'\x1b'* || "${text_29573}" == *'\x1b['* ]] && echo "1" || echo "0")"
+    local command_519
+    command_519="$([[ "${text_29697}" == *$'\x1b'* || "${text_29697}" == *'\x1b['* ]] && echo "1" || echo "0")"
     __status=$?
-    local has_escape_29574="${command_511}"
-    ret_has_ansi_escape2558_v0="$([ "_${has_escape_29574}" != "_1" ]; echo $?)"
+    local has_escape_29698="${command_519}"
+    ret_has_ansi_escape2567_v0="$([ "_${has_escape_29698}" != "_1" ]; echo $?)"
     return 0
 }
 
 # escape_ansi(text: Text)
-escape_ansi__2559_v0() {
-    local text_29575="${1}"
-    local command_512
-    command_512="$(printf '%s' "${text_29575}" | sed $'s/\x1b/\\x1b/g')"
+escape_ansi__2568_v0() {
+    local text_29699="${1}"
+    local command_520
+    command_520="$(printf '%s' "${text_29699}" | sed $'s/\x1b/\\x1b/g')"
     __status=$?
-    ret_escape_ansi2559_v0="${command_512}"
+    ret_escape_ansi2568_v0="${command_520}"
     return 0
 }
 
 # strip_ansi(text: Text)
-strip_ansi__2560_v0() {
-    local text_29590="${1}"
-    local command_513
-    command_513="$(printf "%s" "${text_29590}" | sed $'s/\x1b\[[0-9;]*m//g' | sed 's/\\x1b\[[0-9;]*m//g')"
+strip_ansi__2569_v0() {
+    local text_29716="${1}"
+    local command_521
+    command_521="$(printf "%s" "${text_29716}" | sed $'s/\x1b\[[0-9;]*m//g' | sed 's/\\x1b\[[0-9;]*m//g')"
     __status=$?
-    ret_strip_ansi2560_v0="${command_513}"
+    ret_strip_ansi2569_v0="${command_521}"
     return 0
 }
 
 # is_all_ascii(text: Text)
-is_all_ascii__2561_v0() {
-    local text_29592="${1}"
-    local command_514
-    command_514="$(printf "%s" "${text_29592}" | LC_ALL=C grep -q '^[ -~]*$' && echo 0 || echo 1)"
+is_all_ascii__2570_v0() {
+    local text_29718="${1}"
+    local command_522
+    command_522="$(printf "%s" "${text_29718}" | LC_ALL=C grep -q '^[ -~]*$' && echo 0 || echo 1)"
     __status=$?
-    local result_29593="${command_514}"
-    ret_is_all_ascii2561_v0="$([ "_${result_29593}" != "_0" ]; echo $?)"
+    local result_29719="${command_522}"
+    ret_is_all_ascii2570_v0="$([ "_${result_29719}" != "_0" ]; echo $?)"
     return 0
 }
 
 # plain_len(text: Text)
-plain_len__2562_v0() {
-    local text_29587="${1}"
-    local command_515
-    command_515="$(LC_ALL=C; __t="${text_29587}"; case "$__t" in (*[!\ -~]*) echo -1;; (*'\x1b['*) echo -1;; (*) echo "${#__t}";; esac)"
+plain_len__2571_v0() {
+    local text_29713="${1}"
+    local command_523
+    command_523="$(LC_ALL=C; __t="${text_29713}"; case "$__t" in (*[!\ -~]*) echo -1;; (*'\x1b['*) echo -1;; (*) echo "${#__t}";; esac)"
     __status=$?
-    local measured_29588="${command_515}"
-    parse_int__13_v0 "${measured_29588}"
+    local measured_29714="${command_523}"
+    parse_int__13_v0 "${measured_29714}"
     __status=$?
-    ret_plain_len2562_v0="${ret_parse_int13_v0}"
+    ret_plain_len2571_v0="${ret_parse_int13_v0}"
     return 0
 }
 
 # get_visible_len(text: Text)
-get_visible_len__2563_v0() {
-    local text_29586="${1}"
-    plain_len__2562_v0 "${text_29586}"
-    local plain_29589="${ret_plain_len2562_v0}"
-    if [ "$(( plain_29589 >= 0 ))" != 0 ]; then
-        ret_get_visible_len2563_v0="${plain_29589}"
+get_visible_len__2572_v0() {
+    local text_29712="${1}"
+    plain_len__2571_v0 "${text_29712}"
+    local plain_29715="${ret_plain_len2571_v0}"
+    if [ "$(( plain_29715 >= 0 ))" != 0 ]; then
+        ret_get_visible_len2572_v0="${plain_29715}"
         return 0
     fi
-    strip_ansi__2560_v0 "${text_29586}"
-    local stripped_29591="${ret_strip_ansi2560_v0}"
-    is_all_ascii__2561_v0 "${stripped_29591}"
-    local ret_is_all_ascii2561_v0__46_12="${ret_is_all_ascii2561_v0}"
-    if [ "$(( ! ret_is_all_ascii2561_v0__46_12 ))" != 0 ]; then
-        perl_get_cjk_width__2553_v0 "${stripped_29591}"
+    strip_ansi__2569_v0 "${text_29712}"
+    local stripped_29717="${ret_strip_ansi2569_v0}"
+    is_all_ascii__2570_v0 "${stripped_29717}"
+    local ret_is_all_ascii2570_v0__46_12="${ret_is_all_ascii2570_v0}"
+    if [ "$(( ! ret_is_all_ascii2570_v0__46_12 ))" != 0 ]; then
+        perl_get_cjk_width__2562_v0 "${stripped_29717}"
         __status=$?
         if [ "${__status}" != 0 ]; then
-            local __length_516="${stripped_29591}"
-            ret_get_visible_len2563_v0="${#__length_516}"
+            local __length_524="${stripped_29717}"
+            ret_get_visible_len2572_v0="${#__length_524}"
             return 0
         fi
-        ret_get_visible_len2563_v0="${ret_perl_get_cjk_width2553_v0}"
+        ret_get_visible_len2572_v0="${ret_perl_get_cjk_width2562_v0}"
         return 0
     fi
-    local __length_517="${stripped_29591}"
-    ret_get_visible_len2563_v0="${#__length_517}"
+    local __length_525="${stripped_29717}"
+    ret_get_visible_len2572_v0="${#__length_525}"
     return 0
 }
 
 # truncate_text(text: Text, max_width: Int)
-truncate_text__2564_v0() {
-    local text_29602="${1}"
-    local max_width_29603="${2}"
-    get_visible_len__2563_v0 "${text_29602}"
-    local visible_len_29604="${ret_get_visible_len2563_v0}"
-    if [ "$(( visible_len_29604 <= max_width_29603 ))" != 0 ]; then
-        ret_truncate_text2564_v0="${text_29602}"
+truncate_text__2573_v0() {
+    local text_29728="${1}"
+    local max_width_29729="${2}"
+    get_visible_len__2572_v0 "${text_29728}"
+    local visible_len_29730="${ret_get_visible_len2572_v0}"
+    if [ "$(( visible_len_29730 <= max_width_29729 ))" != 0 ]; then
+        ret_truncate_text2573_v0="${text_29728}"
         return 0
     fi
-    is_all_ascii__2561_v0 "${text_29602}"
-    local ret_is_all_ascii2561_v0__61_12="${ret_is_all_ascii2561_v0}"
-    if [ "$(( ! ret_is_all_ascii2561_v0__61_12 ))" != 0 ]; then
-        perl_truncate_cjk__2554_v0 "${text_29602}" "${max_width_29603}"
+    is_all_ascii__2570_v0 "${text_29728}"
+    local ret_is_all_ascii2570_v0__61_12="${ret_is_all_ascii2570_v0}"
+    if [ "$(( ! ret_is_all_ascii2570_v0__61_12 ))" != 0 ]; then
+        perl_truncate_cjk__2563_v0 "${text_29728}" "${max_width_29729}"
         __status=$?
         if [ "${__status}" != 0 ]; then
-            printf "%s" "${text_29602}" | cut -c1-${max_width_29603}
+            printf "%s" "${text_29728}" | cut -c1-${max_width_29729}
             __status=$?
         fi
-        ret_truncate_text2564_v0="${ret_perl_truncate_cjk2554_v0}"
+        ret_truncate_text2573_v0="${ret_perl_truncate_cjk2563_v0}"
         return 0
     fi
-    local command_518
-    command_518="$(printf "%s" "${text_29602}" | cut -c1-${max_width_29603})"
+    local command_526
+    command_526="$(printf "%s" "${text_29728}" | cut -c1-${max_width_29729})"
     __status=$?
-    ret_truncate_text2564_v0="${command_518}"
+    ret_truncate_text2573_v0="${command_526}"
     return 0
 }
 
 # truncate_ansi(text: Text, max_width: Int)
-truncate_ansi__2565_v0() {
-    local text_29600="${1}"
-    local max_width_29601="${2}"
-    has_ansi_escape__2558_v0 "${text_29600}"
-    local ret_has_ansi_escape2558_v0__73_12="${ret_has_ansi_escape2558_v0}"
-    if [ "$(( ! ret_has_ansi_escape2558_v0__73_12 ))" != 0 ]; then
-        truncate_text__2564_v0 "${text_29600}" "${max_width_29601}"
-        ret_truncate_ansi2565_v0="${ret_truncate_text2564_v0}"
+truncate_ansi__2574_v0() {
+    local text_29726="${1}"
+    local max_width_29727="${2}"
+    has_ansi_escape__2567_v0 "${text_29726}"
+    local ret_has_ansi_escape2567_v0__73_12="${ret_has_ansi_escape2567_v0}"
+    if [ "$(( ! ret_has_ansi_escape2567_v0__73_12 ))" != 0 ]; then
+        truncate_text__2573_v0 "${text_29726}" "${max_width_29727}"
+        ret_truncate_ansi2574_v0="${ret_truncate_text2573_v0}"
         return 0
     fi
     # Check if text starts with \x1b[
-    local command_519
-    command_519="$([[ "${text_29600}" == '\x1b['* ]] && echo "1" || echo "0")"
+    local command_527
+    command_527="$([[ "${text_29726}" == '\x1b['* ]] && echo "1" || echo "0")"
     __status=$?
-    local starts_with_ansi_29608="${command_519}"
+    local starts_with_ansi_29734="${command_527}"
     # Replace \x1b[ with newline, then split
-    local command_520
-    command_520="$(t="${text_29600}"; printf '%s' "${t//\\x1b[/
+    local command_528
+    command_528="$(t="${text_29726}"; printf '%s' "${t//\\x1b[/
 }")"
     __status=$?
-    local replaced_29609="${command_520}"
-    split__4_v0 "${replaced_29609}" "
+    local replaced_29735="${command_528}"
+    split__4_v0 "${replaced_29735}" "
 "
-    local parts_29610=("${ret_split4_v0[@]}")
-    local result_29611=""
-    local remaining_width_29612="${max_width_29601}"
-    local __range_start_29613=0
-    local __length_521=("${parts_29610[@]}")
-    local __range_end_29613="${#__length_521[@]}"
-    local __dir_29613=$(( ${__range_start_29613} <= ${__range_end_29613} ? 1 : -1 ))
-    for (( idx_29613=${__range_start_29613}; idx_29613 * ${__dir_29613} < ${__range_end_29613} * ${__dir_29613}; idx_29613+=${__dir_29613} )); do
-        local part_29614="${parts_29610[${idx_29613}]?"Index out of bounds (at src/./confirm/../utils/text/ansi.ab:88:28)"}"
+    local parts_29736=("${ret_split4_v0[@]}")
+    local result_29737=""
+    local remaining_width_29738="${max_width_29727}"
+    local __range_start_29739=0
+    local __length_529=("${parts_29736[@]}")
+    local __range_end_29739="${#__length_529[@]}"
+    local __dir_29739=$(( ${__range_start_29739} <= ${__range_end_29739} ? 1 : -1 ))
+    for (( idx_29739=${__range_start_29739}; idx_29739 * ${__dir_29739} < ${__range_end_29739} * ${__dir_29739}; idx_29739+=${__dir_29739} )); do
+        local part_29740="${parts_29736[${idx_29739}]?"Index out of bounds (at src/./confirm/../utils/text/ansi.ab:88:28)"}"
         # If text starts with ANSI, all parts are "ANSIparams m text" format
         # If not, first part is pure text
-        if [ "$(( $(( idx_29613 == 0 )) && $([ "_${starts_with_ansi_29608}" != "_0" ]; echo $?) ))" != 0 ]; then
+        if [ "$(( $(( idx_29739 == 0 )) && $([ "_${starts_with_ansi_29734}" != "_0" ]; echo $?) ))" != 0 ]; then
             # First part is pure text (before any ANSI)
-            if [ "$(( $([ "_${part_29614}" == "_" ]; echo $?) && $(( remaining_width_29612 > 0 )) ))" != 0 ]; then
-                truncate_text__2564_v0 "${part_29614}" "${remaining_width_29612}"
-                local ret_truncate_text2564_v0__95_35="${ret_truncate_text2564_v0}"
-                local truncated_29615="${ret_truncate_text2564_v0__95_35}"
-                result_29611+="${truncated_29615}"
-                get_visible_len__2563_v0 "${truncated_29615}"
-                local ret_get_visible_len2563_v0__97_36="${ret_get_visible_len2563_v0}"
-                remaining_width_29612="$(( remaining_width_29612 - ret_get_visible_len2563_v0__97_36 ))"
+            if [ "$(( $([ "_${part_29740}" == "_" ]; echo $?) && $(( remaining_width_29738 > 0 )) ))" != 0 ]; then
+                truncate_text__2573_v0 "${part_29740}" "${remaining_width_29738}"
+                local ret_truncate_text2573_v0__95_35="${ret_truncate_text2573_v0}"
+                local truncated_29741="${ret_truncate_text2573_v0__95_35}"
+                result_29737+="${truncated_29741}"
+                get_visible_len__2572_v0 "${truncated_29741}"
+                local ret_get_visible_len2572_v0__97_36="${ret_get_visible_len2572_v0}"
+                remaining_width_29738="$(( remaining_width_29738 - ret_get_visible_len2572_v0__97_36 ))"
             fi
         else
             # Part is "ANSIparams m text" format - find first 'm'
-            local command_522
-            command_522="$(__p="${part_29614}"; for ((i=0; i<${#__p}; i++)); do [[ "${__p:$i:1}" == "m" ]] && echo $i && break; done)"
+            local command_530
+            command_530="$(__p="${part_29740}"; for ((i=0; i<${#__p}; i++)); do [[ "${__p:$i:1}" == "m" ]] && echo $i && break; done)"
             __status=$?
-            local m_idx_29616="${command_522}"
-            if [ "$([ "_${m_idx_29616}" == "_" ]; echo $?)" != 0 ]; then
+            local m_idx_29742="${command_530}"
+            if [ "$([ "_${m_idx_29742}" == "_" ]; echo $?)" != 0 ]; then
                 # Reconstruct ANSI sequence
-                local command_523
-                command_523="$(__p="${part_29614}"; printf "%s" "${__p:0:${m_idx_29616}}")"
+                local command_531
+                command_531="$(__p="${part_29740}"; printf "%s" "${__p:0:${m_idx_29742}}")"
                 __status=$?
-                local ansi_params_29617="${command_523}"
-                result_29611+="\\x1b[""${ansi_params_29617}""m"
+                local ansi_params_29743="${command_531}"
+                result_29737+="\\x1b[""${ansi_params_29743}""m"
                 # Rest is text content
-                parse_int__13_v0 "${m_idx_29616}"
+                parse_int__13_v0 "${m_idx_29742}"
                 __status=$?
                 local ret_parse_int13_v0__108_41="${ret_parse_int13_v0}"
-                local m_idx_num_29618="${ret_parse_int13_v0__108_41}"
-                local text_start_29619="$(( m_idx_num_29618 + 1 ))"
-                local command_524
-                command_524="$(__p="${part_29614}"; printf "%s" "${__p:${text_start_29619}}")"
+                local m_idx_num_29744="${ret_parse_int13_v0__108_41}"
+                local text_start_29745="$(( m_idx_num_29744 + 1 ))"
+                local command_532
+                command_532="$(__p="${part_29740}"; printf "%s" "${__p:${text_start_29745}}")"
                 __status=$?
-                local text_part_29620="${command_524}"
-                if [ "$(( $([ "_${text_part_29620}" == "_" ]; echo $?) && $(( remaining_width_29612 > 0 )) ))" != 0 ]; then
-                    truncate_text__2564_v0 "${text_part_29620}" "${remaining_width_29612}"
-                    local ret_truncate_text2564_v0__112_39="${ret_truncate_text2564_v0}"
-                    local truncated_29621="${ret_truncate_text2564_v0__112_39}"
-                    result_29611+="${truncated_29621}"
-                    get_visible_len__2563_v0 "${truncated_29621}"
-                    local ret_get_visible_len2563_v0__114_40="${ret_get_visible_len2563_v0}"
-                    remaining_width_29612="$(( remaining_width_29612 - ret_get_visible_len2563_v0__114_40 ))"
+                local text_part_29746="${command_532}"
+                if [ "$(( $([ "_${text_part_29746}" == "_" ]; echo $?) && $(( remaining_width_29738 > 0 )) ))" != 0 ]; then
+                    truncate_text__2573_v0 "${text_part_29746}" "${remaining_width_29738}"
+                    local ret_truncate_text2573_v0__112_39="${ret_truncate_text2573_v0}"
+                    local truncated_29747="${ret_truncate_text2573_v0__112_39}"
+                    result_29737+="${truncated_29747}"
+                    get_visible_len__2572_v0 "${truncated_29747}"
+                    local ret_get_visible_len2572_v0__114_40="${ret_get_visible_len2572_v0}"
+                    remaining_width_29738="$(( remaining_width_29738 - ret_get_visible_len2572_v0__114_40 ))"
                 fi
             else
                 # No 'm' found, treat as text
-                if [ "$(( $([ "_${part_29614}" == "_" ]; echo $?) && $(( remaining_width_29612 > 0 )) ))" != 0 ]; then
-                    truncate_text__2564_v0 "${part_29614}" "${remaining_width_29612}"
-                    local ret_truncate_text2564_v0__119_39="${ret_truncate_text2564_v0}"
-                    local truncated_29622="${ret_truncate_text2564_v0__119_39}"
-                    result_29611+="${truncated_29622}"
-                    get_visible_len__2563_v0 "${truncated_29622}"
-                    local ret_get_visible_len2563_v0__121_40="${ret_get_visible_len2563_v0}"
-                    remaining_width_29612="$(( remaining_width_29612 - ret_get_visible_len2563_v0__121_40 ))"
+                if [ "$(( $([ "_${part_29740}" == "_" ]; echo $?) && $(( remaining_width_29738 > 0 )) ))" != 0 ]; then
+                    truncate_text__2573_v0 "${part_29740}" "${remaining_width_29738}"
+                    local ret_truncate_text2573_v0__119_39="${ret_truncate_text2573_v0}"
+                    local truncated_29748="${ret_truncate_text2573_v0__119_39}"
+                    result_29737+="${truncated_29748}"
+                    get_visible_len__2572_v0 "${truncated_29748}"
+                    local ret_get_visible_len2572_v0__121_40="${ret_get_visible_len2572_v0}"
+                    remaining_width_29738="$(( remaining_width_29738 - ret_get_visible_len2572_v0__121_40 ))"
                 fi
             fi
         fi
 done
-    ret_truncate_ansi2565_v0="${result_29611}"
+    ret_truncate_ansi2574_v0="${result_29737}"
     return 0
 }
 
 # cutoff_text(text: Text, max_width: Int)
-cutoff_text__2566_v0() {
-    local text_29584="${1}"
-    local max_width_29585="${2}"
-    get_visible_len__2563_v0 "${text_29584}"
-    local visible_len_29599="${ret_get_visible_len2563_v0}"
-    if [ "$(( visible_len_29599 <= max_width_29585 ))" != 0 ]; then
-        ret_cutoff_text2566_v0="${text_29584}"
+cutoff_text__2575_v0() {
+    local text_29710="${1}"
+    local max_width_29711="${2}"
+    get_visible_len__2572_v0 "${text_29710}"
+    local visible_len_29725="${ret_get_visible_len2572_v0}"
+    if [ "$(( visible_len_29725 <= max_width_29711 ))" != 0 ]; then
+        ret_cutoff_text2575_v0="${text_29710}"
         return 0
     fi
-    truncate_ansi__2565_v0 "${text_29584}" "$(( max_width_29585 - 3 ))"
-    local ret_truncate_ansi2565_v0__137_12="${ret_truncate_ansi2565_v0}"
-    ret_cutoff_text2566_v0="${ret_truncate_ansi2565_v0__137_12}""..."
+    truncate_ansi__2574_v0 "${text_29710}" "$(( max_width_29711 - 3 ))"
+    local ret_truncate_ansi2574_v0__137_12="${ret_truncate_ansi2574_v0}"
+    ret_cutoff_text2575_v0="${ret_truncate_ansi2574_v0__137_12}""..."
     return 0
 }
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
 # eprintf(format: Text, args: [Text])
-eprintf__2587_v0() {
-    local format_29658="${1}"
-    local args_29659=("${!2}")
-    args_29659=("${format_29658}" "${args_29659[@]}")
+eprintf__2596_v0() {
+    local format_29784="${1}"
+    local args_29785=("${!2}")
+    args_29785=("${format_29784}" "${args_29785[@]}")
     __status=$?
-    printf "${args_29659[@]}" >&2
+    printf "${args_29785[@]}" >&2
     __status=$?
 }
 
 # eprintf_colored(message: Text, color: Int)
-eprintf_colored__2588_v0() {
-    local message_29656="${1}"
-    local color_29657="${2}"
+eprintf_colored__2597_v0() {
+    local message_29782="${1}"
+    local color_29783="${2}"
     # Prints an error message with a specified color.
-    local array_525=("${message_29656}")
-    eprintf__2587_v0 "\\x1b[${color_29657}m%s\\x1b[0m" array_525[@]
+    local array_533=("${message_29782}")
+    eprintf__2596_v0 "\\x1b[${color_29783}m%s\\x1b[0m" array_533[@]
 }
 
 # colored(message: Text, color: Int)
-colored__2589_v0() {
-    local message_29566="${1}"
-    local color_29567="${2}"
+colored__2598_v0() {
+    local message_29690="${1}"
+    local color_29691="${2}"
     # Returns a text wrapped in color codes.
-    ret_colored2589_v0="\\x1b[${color_29567}m""${message_29566}""\\x1b[0m"
+    ret_colored2598_v0="\\x1b[${color_29691}m""${message_29690}""\\x1b[0m"
     return 0
 }
 
 # render_tooltip(items: [Text], total_len: Int, term_width: Int)
-render_tooltip__2593_v0() {
-    local items_29650=("${!1}")
-    local total_len_29651="${2}"
-    local term_width_29652="${3}"
-    local separator_29653=" • "
-    local separator_len_29654=3
+render_tooltip__2602_v0() {
+    local items_29776=("${!1}")
+    local total_len_29777="${2}"
+    local term_width_29778="${3}"
+    local separator_29779=" • "
+    local separator_len_29780=3
     # Fast path: no truncation needed
-    if [ "$(( total_len_29651 <= term_width_29652 ))" != 0 ]; then
-        local iter_29655=0
+    if [ "$(( total_len_29777 <= term_width_29778 ))" != 0 ]; then
+        local iter_29781=0
         while :
         do
-            local __length_526=("${items_29650[@]}")
-            if [ "$(( iter_29655 >= ${#__length_526[@]} ))" != 0 ]; then
+            local __length_534=("${items_29776[@]}")
+            if [ "$(( iter_29781 >= ${#__length_534[@]} ))" != 0 ]; then
                 break
-            elif [ "$(( iter_29655 > 0 ))" != 0 ]; then
-                eprintf_colored__2588_v0 "${separator_29653}" 90
+            elif [ "$(( iter_29781 > 0 ))" != 0 ]; then
+                eprintf_colored__2597_v0 "${separator_29779}" 90
             fi
-            colored__2589_v0 "${items_29650[$(( iter_29655 + 1 ))]?"Index out of bounds (at src/./confirm/../utils/widget/tooltip.ab:23:55)"}" 2
-            local ret_colored2589_v0__23_41="${ret_colored2589_v0}"
-            local array_527=("")
-            eprintf__2587_v0 "${items_29650[${iter_29655}]?"Index out of bounds (at src/./confirm/../utils/widget/tooltip.ab:23:27)"}"" ""${ret_colored2589_v0__23_41}" array_527[@]
-            iter_29655="$(( iter_29655 + 2 ))"
+            colored__2598_v0 "${items_29776[$(( iter_29781 + 1 ))]?"Index out of bounds (at src/./confirm/../utils/widget/tooltip.ab:23:55)"}" 2
+            local ret_colored2598_v0__23_41="${ret_colored2598_v0}"
+            local array_535=("")
+            eprintf__2596_v0 "${items_29776[${iter_29781}]?"Index out of bounds (at src/./confirm/../utils/widget/tooltip.ab:23:27)"}"" ""${ret_colored2598_v0__23_41}" array_535[@]
+            iter_29781="$(( iter_29781 + 2 ))"
         done
     else
         # Slow path: truncate
-        local current_len_29660=0
-        local first_29661=1
-        local iter_29662=0
+        local current_len_29786=0
+        local first_29787=1
+        local iter_29788=0
         while :
         do
-            local __length_528=("${items_29650[@]}")
-            if [ "$(( iter_29662 >= ${#__length_528[@]} ))" != 0 ]; then
+            local __length_536=("${items_29776[@]}")
+            if [ "$(( iter_29788 >= ${#__length_536[@]} ))" != 0 ]; then
                 break
             fi
-            local key_29663="${items_29650[${iter_29662}]?"Index out of bounds (at src/./confirm/../utils/widget/tooltip.ab:35:31)"}"
-            local action_29664="${items_29650[$(( iter_29662 + 1 ))]?"Index out of bounds (at src/./confirm/../utils/widget/tooltip.ab:36:34)"}"
-            local __length_529="${key_29663}"
-            local __length_530="${action_29664}"
-            local part_len_29665="$(( $(( ${#__length_529} + 1 )) + ${#__length_530} ))"
-            local needed_29666="${part_len_29665}"
-            if [ "$(( ! first_29661 ))" != 0 ]; then
-                needed_29666="$(( needed_29666 + separator_len_29654 ))"
+            local key_29789="${items_29776[${iter_29788}]?"Index out of bounds (at src/./confirm/../utils/widget/tooltip.ab:35:31)"}"
+            local action_29790="${items_29776[$(( iter_29788 + 1 ))]?"Index out of bounds (at src/./confirm/../utils/widget/tooltip.ab:36:34)"}"
+            local __length_537="${key_29789}"
+            local __length_538="${action_29790}"
+            local part_len_29791="$(( $(( ${#__length_537} + 1 )) + ${#__length_538} ))"
+            local needed_29792="${part_len_29791}"
+            if [ "$(( ! first_29787 ))" != 0 ]; then
+                needed_29792="$(( needed_29792 + separator_len_29780 ))"
             fi
-            if [ "$(( $(( current_len_29660 + needed_29666 )) > term_width_29652 ))" != 0 ]; then
+            if [ "$(( $(( current_len_29786 + needed_29792 )) > term_width_29778 ))" != 0 ]; then
                 break
             fi
-            if [ "$(( ! first_29661 ))" != 0 ]; then
-                eprintf_colored__2588_v0 "${separator_29653}" 90
+            if [ "$(( ! first_29787 ))" != 0 ]; then
+                eprintf_colored__2597_v0 "${separator_29779}" 90
             fi
-            colored__2589_v0 "${action_29664}" 2
-            local ret_colored2589_v0__51_33="${ret_colored2589_v0}"
-            local array_531=("")
-            eprintf__2587_v0 "${key_29663}"" ""${ret_colored2589_v0__51_33}" array_531[@]
-            current_len_29660="$(( current_len_29660 + needed_29666 ))"
-            first_29661=0
-            iter_29662="$(( iter_29662 + 2 ))"
+            colored__2598_v0 "${action_29790}" 2
+            local ret_colored2598_v0__51_33="${ret_colored2598_v0}"
+            local array_539=("")
+            eprintf__2596_v0 "${key_29789}"" ""${ret_colored2598_v0__51_33}" array_539[@]
+            current_len_29786="$(( current_len_29786 + needed_29792 ))"
+            first_29787=0
+            iter_29788="$(( iter_29788 + 2 ))"
         done
     fi
 }
@@ -7190,69 +7254,69 @@ _term_size_140=(80 24)
 export XYLITOL_RUNTIME_STTY_COUNT=0
 __status=$?
 # store_term_size(size: Text)
-store_term_size__2630_v0() {
-    local size_29545="${1}"
-    if [ "$([ "_${size_29545}" != "_" ]; echo $?)" != 0 ]; then
-        ret_store_term_size2630_v0=0
+store_term_size__2640_v0() {
+    local size_29669="${1}"
+    if [ "$([ "_${size_29669}" != "_" ]; echo $?)" != 0 ]; then
+        ret_store_term_size2640_v0=0
         return 0
     fi
-    split__4_v0 "${size_29545}" " "
-    local parts_29546=("${ret_split4_v0[@]}")
-    local __length_533=("${parts_29546[@]}")
-    if [ "$(( ${#__length_533[@]} != 2 ))" != 0 ]; then
-        ret_store_term_size2630_v0=0
+    split__4_v0 "${size_29669}" " "
+    local parts_29670=("${ret_split4_v0[@]}")
+    local __length_541=("${parts_29670[@]}")
+    if [ "$(( ${#__length_541[@]} != 2 ))" != 0 ]; then
+        ret_store_term_size2640_v0=0
         return 0
     fi
-    parse_int__13_v0 "${parts_29546[1]?"Index out of bounds (at src/./confirm/../utils/widget/../term.ab:53:41)"}"
+    parse_int__13_v0 "${parts_29670[1]?"Index out of bounds (at src/./confirm/../utils/widget/../term.ab:57:41)"}"
     __status=$?
-    local ret_parse_int13_v0__53_25="${ret_parse_int13_v0}"
-    parse_int__13_v0 "${parts_29546[0]?"Index out of bounds (at src/./confirm/../utils/widget/../term.ab:53:68)"}"
+    local ret_parse_int13_v0__57_25="${ret_parse_int13_v0}"
+    parse_int__13_v0 "${parts_29670[0]?"Index out of bounds (at src/./confirm/../utils/widget/../term.ab:57:68)"}"
     __status=$?
-    local ret_parse_int13_v0__53_52="${ret_parse_int13_v0}"
-    _term_size_140=("${ret_parse_int13_v0__53_25}" "${ret_parse_int13_v0__53_52}")
-    ret_store_term_size2630_v0=1
+    local ret_parse_int13_v0__57_52="${ret_parse_int13_v0}"
+    _term_size_140=("${ret_parse_int13_v0__57_25}" "${ret_parse_int13_v0__57_52}")
+    ret_store_term_size2640_v0=1
     return 0
 }
 
 # query_term_size()
-query_term_size__2631_v0() {
-    local command_535
-    command_535="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
+query_term_size__2641_v0() {
+    local command_543
+    command_543="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
     __status=$?
-    local size_29548="${command_535}"
-    store_term_size__2630_v0 "${size_29548}"
-    ret_query_term_size2631_v0="${ret_store_term_size2630_v0}"
+    local size_29672="${command_543}"
+    store_term_size__2640_v0 "${size_29672}"
+    ret_query_term_size2641_v0="${ret_store_term_size2640_v0}"
     return 0
 }
 
 # stty_term_size()
-stty_term_size__2632_v0() {
-    local command_536
-    command_536="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
+stty_term_size__2642_v0() {
+    local command_544
+    command_544="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
     __status=$?
-    local size_29544="${command_536}"
-    store_term_size__2630_v0 "${size_29544}"
-    ret_stty_term_size2632_v0="${ret_store_term_size2630_v0}"
+    local size_29668="${command_544}"
+    store_term_size__2640_v0 "${size_29668}"
+    ret_stty_term_size2642_v0="${ret_store_term_size2640_v0}"
     return 0
 }
 
 # get_term_size()
-get_term_size__2633_v0() {
-    stty_term_size__2632_v0 
-    local detected_29547="${ret_stty_term_size2632_v0}"
-    if [ "$(( ! detected_29547 ))" != 0 ]; then
-        query_term_size__2631_v0 
-        detected_29547="${ret_query_term_size2631_v0}"
+get_term_size__2643_v0() {
+    stty_term_size__2642_v0 
+    local detected_29671="${ret_stty_term_size2642_v0}"
+    if [ "$(( ! detected_29671 ))" != 0 ]; then
+        query_term_size__2641_v0 
+        detected_29671="${ret_query_term_size2641_v0}"
     fi
     _got_term_size_139=1
 }
 
 # term_width()
-term_width__2635_v0() {
+term_width__2645_v0() {
     if [ "$(( ! _got_term_size_139 ))" != 0 ]; then
-        get_term_size__2633_v0 
+        get_term_size__2643_v0 
     fi
-    ret_term_width2635_v0="${_term_size_140[0]?"Index out of bounds (at src/./confirm/../utils/widget/../term.ab:96:23)"}"
+    ret_term_width2645_v0="${_term_size_140[0]?"Index out of bounds (at src/./confirm/../utils/widget/../term.ab:100:23)"}"
     return 0
 }
 
@@ -7260,458 +7324,467 @@ term_width__2635_v0() {
 # move the cursor up or down `cnt` lines.
 # Which items of a multi-select widget are ticked.
 # print_help_line(pending: Text, line: Text, note_at: Int)
-print_help_line__2668_v0() {
-    local pending_29563="${1}"
-    local line_29564="${2}"
-    local note_at_29565="${3}"
-    if [ "$(( note_at_29565 < 0 ))" != 0 ]; then
-        local array_538=()
-        printf__128_v0 "${pending_29563}""${line_29564}""
-" array_538[@]
+print_help_line__2678_v0() {
+    local pending_29687="${1}"
+    local line_29688="${2}"
+    local note_at_29689="${3}"
+    if [ "$(( note_at_29689 < 0 ))" != 0 ]; then
+        local array_546=()
+        printf__128_v0 "${pending_29687}""${line_29688}""
+" array_546[@]
     # A length of zero means "to the end" in `slice`, so a line that is
     # all note has to be handled on its own.
-    elif [ "$(( note_at_29565 == 0 ))" != 0 ]; then
-        colored__2589_v0 "${line_29564}" 90
-        local ret_colored2589_v0__12_40="${ret_colored2589_v0}"
-        local array_539=()
-        printf__128_v0 "${pending_29563}""${ret_colored2589_v0__12_40}""
-" array_539[@]
+    elif [ "$(( note_at_29689 == 0 ))" != 0 ]; then
+        colored__2598_v0 "${line_29688}" 90
+        local ret_colored2598_v0__12_40="${ret_colored2598_v0}"
+        local array_547=()
+        printf__128_v0 "${pending_29687}""${ret_colored2598_v0__12_40}""
+" array_547[@]
     else
-        slice__24_v0 "${line_29564}" 0 "${note_at_29565}"
+        slice__24_v0 "${line_29688}" 0 "${note_at_29689}"
         local ret_slice24_v0__13_32="${ret_slice24_v0}"
-        slice__24_v0 "${line_29564}" "${note_at_29565}" 0
+        slice__24_v0 "${line_29688}" "${note_at_29689}" 0
         local ret_slice24_v0__13_66="${ret_slice24_v0}"
-        colored__2589_v0 "${ret_slice24_v0__13_66}" 90
-        local ret_colored2589_v0__13_58="${ret_colored2589_v0}"
-        local array_540=()
-        printf__128_v0 "${pending_29563}""${ret_slice24_v0__13_32}""${ret_colored2589_v0__13_58}""
-" array_540[@]
+        colored__2598_v0 "${ret_slice24_v0__13_66}" 90
+        local ret_colored2598_v0__13_58="${ret_colored2598_v0}"
+        local array_548=()
+        printf__128_v0 "${pending_29687}""${ret_slice24_v0__13_32}""${ret_colored2598_v0__13_58}""
+" array_548[@]
     fi
 }
 
 # render_help_entries(names: [Text], texts: [Text], notes: [Text], min_name_width: Int)
-render_help_entries__2669_v0() {
-    local names_29536=("${!1}")
-    local texts_29537=("${!2}")
-    local notes_29538=("${!3}")
-    local min_name_width_29539="${4}"
-    local __length_541=("${names_29536[@]}")
-    local count_29540="${#__length_541[@]}"
-    local name_width_29541="${min_name_width_29539}"
-    local __range_start_29542=0
-    local __range_end_29542="${count_29540}"
-    local __dir_29542=$(( ${__range_start_29542} <= ${__range_end_29542} ? 1 : -1 ))
-    for (( i_29542=${__range_start_29542}; i_29542 * ${__dir_29542} < ${__range_end_29542} * ${__dir_29542}; i_29542+=${__dir_29542} )); do
-        local __length_542="${names_29536[${i_29542}]?"Index out of bounds (at src/./confirm/../utils/widget/help.ab:28:33)"}"
-        local width_29543="${#__length_542}"
-        if [ "$(( width_29543 > name_width_29541 ))" != 0 ]; then
-            name_width_29541="${width_29543}"
+render_help_entries__2679_v0() {
+    local names_29660=("${!1}")
+    local texts_29661=("${!2}")
+    local notes_29662=("${!3}")
+    local min_name_width_29663="${4}"
+    local __length_549=("${names_29660[@]}")
+    local count_29664="${#__length_549[@]}"
+    local name_width_29665="${min_name_width_29663}"
+    local __range_start_29666=0
+    local __range_end_29666="${count_29664}"
+    local __dir_29666=$(( ${__range_start_29666} <= ${__range_end_29666} ? 1 : -1 ))
+    for (( i_29666=${__range_start_29666}; i_29666 * ${__dir_29666} < ${__range_end_29666} * ${__dir_29666}; i_29666+=${__dir_29666} )); do
+        local __length_550="${names_29660[${i_29666}]?"Index out of bounds (at src/./confirm/../utils/widget/help.ab:28:33)"}"
+        local width_29667="${#__length_550}"
+        if [ "$(( width_29667 > name_width_29665 ))" != 0 ]; then
+            name_width_29665="${width_29667}"
         fi
 done
-    term_width__2635_v0 
-    local width_29549="${ret_term_width2635_v0}"
+    term_width__2645_v0 
+    local width_29673="${ret_term_width2645_v0}"
     # Two spaces of margin, then three between a name and its description.
-    local indent_29550="$(( name_width_29541 + 5 ))"
+    local indent_29674="$(( name_width_29665 + 5 ))"
     # Once the description column gets too narrow to read, stop putting the
     # description beside the name and place it underneath instead.
-    local stacked_29551="$(( $(( width_29549 - indent_29550 )) < 24 ))"
-    if [ "${stacked_29551}" != 0 ]; then
-        indent_29550=6
+    local stacked_29675="$(( $(( width_29673 - indent_29674 )) < 24 ))"
+    if [ "${stacked_29675}" != 0 ]; then
+        indent_29674=6
     fi
-    local avail_29552="$(( width_29549 - indent_29550 ))"
-    rpad__28_v0 "" " " "${indent_29550}"
-    local blank_29553="${ret_rpad28_v0}"
-    local __range_start_29554=0
-    local __range_end_29554="${count_29540}"
-    local __dir_29554=$(( ${__range_start_29554} <= ${__range_end_29554} ? 1 : -1 ))
-    for (( i_29554=${__range_start_29554}; i_29554 * ${__dir_29554} < ${__range_end_29554} * ${__dir_29554}; i_29554+=${__dir_29554} )); do
-        local pending_29555="${blank_29553}"
-        if [ "${stacked_29551}" != 0 ]; then
-            local array_543=()
-            printf__128_v0 "  ""${names_29536[${i_29554}]?"Index out of bounds (at src/./confirm/../utils/widget/help.ab:48:33)"}""
-" array_543[@]
+    local avail_29676="$(( width_29673 - indent_29674 ))"
+    rpad__28_v0 "" " " "${indent_29674}"
+    local blank_29677="${ret_rpad28_v0}"
+    local __range_start_29678=0
+    local __range_end_29678="${count_29664}"
+    local __dir_29678=$(( ${__range_start_29678} <= ${__range_end_29678} ? 1 : -1 ))
+    for (( i_29678=${__range_start_29678}; i_29678 * ${__dir_29678} < ${__range_end_29678} * ${__dir_29678}; i_29678+=${__dir_29678} )); do
+        local pending_29679="${blank_29677}"
+        if [ "${stacked_29675}" != 0 ]; then
+            local array_551=()
+            printf__128_v0 "  ""${names_29660[${i_29678}]?"Index out of bounds (at src/./confirm/../utils/widget/help.ab:48:33)"}""
+" array_551[@]
         else
-            rpad__28_v0 "  ""${names_29536[${i_29554}]?"Index out of bounds (at src/./confirm/../utils/widget/help.ab:50:41)"}" " " "${indent_29550}"
+            rpad__28_v0 "  ""${names_29660[${i_29678}]?"Index out of bounds (at src/./confirm/../utils/widget/help.ab:50:41)"}" " " "${indent_29674}"
             local ret_rpad28_v0__50_23="${ret_rpad28_v0}"
-            pending_29555="${ret_rpad28_v0__50_23}"
+            pending_29679="${ret_rpad28_v0__50_23}"
         fi
-        split__4_v0 "${texts_29537[${i_29554}]?"Index out of bounds (at src/./confirm/../utils/widget/help.ab:52:33)"}" " "
+        split__4_v0 "${texts_29661[${i_29678}]?"Index out of bounds (at src/./confirm/../utils/widget/help.ab:52:33)"}" " "
         local ret_split4_v0__52_21=("${ret_split4_v0[@]}")
-        local words_29556=("${ret_split4_v0__52_21[@]}")
-        local __length_544=("${words_29556[@]}")
-        local note_start_29557="${#__length_544[@]}"
-        if [ "$([ "_${notes_29538[${i_29554}]?"Index out of bounds (at src/./confirm/../utils/widget/help.ab:54:18)"}" == "_" ]; echo $?)" != 0 ]; then
+        local words_29680=("${ret_split4_v0__52_21[@]}")
+        local __length_552=("${words_29680[@]}")
+        local note_start_29681="${#__length_552[@]}"
+        if [ "$([ "_${notes_29662[${i_29678}]?"Index out of bounds (at src/./confirm/../utils/widget/help.ab:54:18)"}" == "_" ]; echo $?)" != 0 ]; then
             # A note reads badly when split, so it moves between lines whole
             # unless it is too long to ever fit on one.
-            local __length_545="${notes_29538[${i_29554}]?"Index out of bounds (at src/./confirm/../utils/widget/help.ab:57:26)"}"
-            if [ "$(( ${#__length_545} > avail_29552 ))" != 0 ]; then
-                split__4_v0 "${notes_29538[${i_29554}]?"Index out of bounds (at src/./confirm/../utils/widget/help.ab:58:38)"}" " "
+            local __length_553="${notes_29662[${i_29678}]?"Index out of bounds (at src/./confirm/../utils/widget/help.ab:57:26)"}"
+            if [ "$(( ${#__length_553} > avail_29676 ))" != 0 ]; then
+                split__4_v0 "${notes_29662[${i_29678}]?"Index out of bounds (at src/./confirm/../utils/widget/help.ab:58:38)"}" " "
                 local ret_split4_v0__58_26=("${ret_split4_v0[@]}")
-                words_29556+=("${ret_split4_v0__58_26[@]}")
+                words_29680+=("${ret_split4_v0__58_26[@]}")
             else
-                local array_546=("${notes_29538[${i_29554}]?"Index out of bounds (at src/./confirm/../utils/widget/help.ab:60:33)"}")
-                words_29556+=("${array_546[@]}")
+                local array_554=("${notes_29662[${i_29678}]?"Index out of bounds (at src/./confirm/../utils/widget/help.ab:60:33)"}")
+                words_29680+=("${array_554[@]}")
             fi
         fi
-        local line_29558=""
+        local line_29682=""
         # Where the note begins on the line being built, so it can be dimmed
         # after wrapping decides how much of it fits. -1 while there is none.
-        local note_at_29559=-1
-        local __range_start_29560=0
-        local __length_547=("${words_29556[@]}")
-        local __range_end_29560="${#__length_547[@]}"
-        local __dir_29560=$(( ${__range_start_29560} <= ${__range_end_29560} ? 1 : -1 ))
-        for (( j_29560=${__range_start_29560}; j_29560 * ${__dir_29560} < ${__range_end_29560} * ${__dir_29560}; j_29560+=${__dir_29560} )); do
-            local word_29561="${words_29556[${j_29560}]?"Index out of bounds (at src/./confirm/../utils/widget/help.ab:70:32)"}"
-            local candidate_29562
-            candidate_29562="$(if [ "$([ "_${line_29558}" != "_" ]; echo $?)" != 0 ]; then echo "${word_29561}"; else echo "${line_29558}"" ""${word_29561}"; fi)"
-            local __length_548="${candidate_29562}"
-            if [ "$(( $(( ${#__length_548} > avail_29552 )) && $([ "_${line_29558}" == "_" ]; echo $?) ))" != 0 ]; then
-                print_help_line__2668_v0 "${pending_29555}" "${line_29558}" "${note_at_29559}"
-                pending_29555="${blank_29553}"
-                line_29558="${word_29561}"
-                note_at_29559="$(if [ "$(( j_29560 >= note_start_29557 ))" != 0 ]; then echo 0; else echo -1; fi)"
+        local note_at_29683=-1
+        local __range_start_29684=0
+        local __length_555=("${words_29680[@]}")
+        local __range_end_29684="${#__length_555[@]}"
+        local __dir_29684=$(( ${__range_start_29684} <= ${__range_end_29684} ? 1 : -1 ))
+        for (( j_29684=${__range_start_29684}; j_29684 * ${__dir_29684} < ${__range_end_29684} * ${__dir_29684}; j_29684+=${__dir_29684} )); do
+            local word_29685="${words_29680[${j_29684}]?"Index out of bounds (at src/./confirm/../utils/widget/help.ab:70:32)"}"
+            local candidate_29686
+            candidate_29686="$(if [ "$([ "_${line_29682}" != "_" ]; echo $?)" != 0 ]; then echo "${word_29685}"; else echo "${line_29682}"" ""${word_29685}"; fi)"
+            local __length_556="${candidate_29686}"
+            if [ "$(( $(( ${#__length_556} > avail_29676 )) && $([ "_${line_29682}" == "_" ]; echo $?) ))" != 0 ]; then
+                print_help_line__2678_v0 "${pending_29679}" "${line_29682}" "${note_at_29683}"
+                pending_29679="${blank_29677}"
+                line_29682="${word_29685}"
+                note_at_29683="$(if [ "$(( j_29684 >= note_start_29681 ))" != 0 ]; then echo 0; else echo -1; fi)"
             else
-                if [ "$(( $(( j_29560 >= note_start_29557 )) && $(( note_at_29559 < 0 )) ))" != 0 ]; then
-                    local __length_549="${candidate_29562}"
-                    local __length_550="${word_29561}"
-                    note_at_29559="$(( ${#__length_549} - ${#__length_550} ))"
+                if [ "$(( $(( j_29684 >= note_start_29681 )) && $(( note_at_29683 < 0 )) ))" != 0 ]; then
+                    local __length_557="${candidate_29686}"
+                    local __length_558="${word_29685}"
+                    note_at_29683="$(( ${#__length_557} - ${#__length_558} ))"
                 fi
-                line_29558="${candidate_29562}"
+                line_29682="${candidate_29686}"
             fi
 done
-        print_help_line__2668_v0 "${pending_29555}" "${line_29558}" "${note_at_29559}"
+        print_help_line__2678_v0 "${pending_29679}" "${line_29682}" "${note_at_29683}"
 done
 }
 
 # Facade over the helper modules, so every caller keeps importing one path.
 # render_confirm_options(selected: Bool, term_width: Int)
-render_confirm_options__2727_v0() {
-    local selected_29624="${1}"
-    local term_width_29625="${2}"
-    local small_29626="$(( term_width_29625 < 30 ))"
-    cpad__29_v0 "Yes" " " "$(if [ "${small_29626}" != 0 ]; then echo 5; else echo 11; fi)"
-    local yes_label_29640="${ret_cpad29_v0}"
-    cpad__29_v0 "No" " " "$(if [ "${small_29626}" != 0 ]; then echo 4; else echo 10; fi)"
-    local no_label_29641="${ret_cpad29_v0}"
-    local gap_29642
-    gap_29642="$(if [ "${small_29626}" != 0 ]; then echo " "; else echo "  "; fi)"
-    local array_551=("")
-    eprintf__2432_v0 " " array_551[@]
-    if [ "${selected_29624}" != 0 ]; then
+render_confirm_options__2737_v0() {
+    local selected_29750="${1}"
+    local term_width_29751="${2}"
+    local small_29752="$(( term_width_29751 < 30 ))"
+    cpad__29_v0 "Yes" " " "$(if [ "${small_29752}" != 0 ]; then echo 5; else echo 11; fi)"
+    local yes_label_29766="${ret_cpad29_v0}"
+    cpad__29_v0 "No" " " "$(if [ "${small_29752}" != 0 ]; then echo 4; else echo 10; fi)"
+    local no_label_29767="${ret_cpad29_v0}"
+    local gap_29768
+    gap_29768="$(if [ "${small_29752}" != 0 ]; then echo " "; else echo "  "; fi)"
+    local array_559=("")
+    eprintf__2440_v0 " " array_559[@]
+    if [ "${selected_29750}" != 0 ]; then
         # Yes selected
-        background_secondary__2538_v0 "${yes_label_29640}"
-        local ret_background_secondary2538_v0__16_30="${ret_background_secondary2538_v0}"
-        local array_552=("")
-        eprintf__2432_v0 "\\x1b[97m""${ret_background_secondary2538_v0__16_30}" array_552[@]
-        local array_553=("")
-        eprintf__2432_v0 "${gap_29642}" array_553[@]
+        background_secondary__2547_v0 "${yes_label_29766}"
+        local ret_background_secondary2547_v0__16_30="${ret_background_secondary2547_v0}"
+        local array_560=("")
+        eprintf__2440_v0 "\\x1b[97m""${ret_background_secondary2547_v0__16_30}" array_560[@]
+        local array_561=("")
+        eprintf__2440_v0 "${gap_29768}" array_561[@]
         # No not selected (dim)
-        local array_554=("")
-        eprintf__2432_v0 "\\x1b[49;37m""${no_label_29641}""\\x1b[0m" array_554[@]
+        local array_562=("")
+        eprintf__2440_v0 "\\x1b[49;37m""${no_label_29767}""\\x1b[0m" array_562[@]
     else
         # No selected
-        local array_555=("")
-        eprintf__2432_v0 "\\x1b[49;37m""${yes_label_29640}""\\x1b[0m" array_555[@]
-        local array_556=("")
-        eprintf__2432_v0 "${gap_29642}" array_556[@]
-        background_secondary__2538_v0 "${no_label_29641}"
-        local ret_background_secondary2538_v0__24_30="${ret_background_secondary2538_v0}"
-        local array_557=("")
-        eprintf__2432_v0 "\\x1b[97m""${ret_background_secondary2538_v0__24_30}" array_557[@]
+        local array_563=("")
+        eprintf__2440_v0 "\\x1b[49;37m""${yes_label_29766}""\\x1b[0m" array_563[@]
+        local array_564=("")
+        eprintf__2440_v0 "${gap_29768}" array_564[@]
+        background_secondary__2547_v0 "${no_label_29767}"
+        local ret_background_secondary2547_v0__24_30="${ret_background_secondary2547_v0}"
+        local array_565=("")
+        eprintf__2440_v0 "\\x1b[97m""${ret_background_secondary2547_v0__24_30}" array_565[@]
     fi
 }
 
 # xyl_confirm(header: Text, default_yes: Bool)
-xyl_confirm__2728_v0() {
-    local header_29577="${1}"
-    local default_yes_29578="${2}"
-    stty_lock__2473_v0 
-    hide_cursor__2490_v0 
-    term_width__2480_v0 
-    local term_width_29583="${ret_term_width2480_v0}"
-    if [ "$([ "_${header_29577}" == "_" ]; echo $?)" != 0 ]; then
-        cutoff_text__2566_v0 "${header_29577}" "${term_width_29583}"
-        local ret_cutoff_text2566_v0__46_17="${ret_cutoff_text2566_v0}"
-        local array_558=("")
-        eprintf__2432_v0 "${ret_cutoff_text2566_v0__46_17}""
+xyl_confirm__2738_v0() {
+    local header_29701="${1}"
+    local default_yes_29702="${2}"
+    stty_lock__2482_v0 
+    hide_cursor__2499_v0 
+    term_width__2489_v0 
+    local term_width_29709="${ret_term_width2489_v0}"
+    if [ "$([ "_${header_29701}" == "_" ]; echo $?)" != 0 ]; then
+        cutoff_text__2575_v0 "${header_29701}" "${term_width_29709}"
+        local ret_cutoff_text2575_v0__46_17="${ret_cutoff_text2575_v0}"
+        local array_566=("")
+        eprintf__2440_v0 "${ret_cutoff_text2575_v0__46_17}""
 
-" array_558[@]
+" array_566[@]
     fi
-    local selected_29623="${default_yes_29578}"
+    local selected_29749="${default_yes_29702}"
     # Render initial options
-    render_confirm_options__2727_v0 "${selected_29623}" "${term_width_29583}"
-    local array_559=("")
-    eprintf__2432_v0 "
+    render_confirm_options__2737_v0 "${selected_29749}" "${term_width_29709}"
+    local array_567=("")
+    eprintf__2440_v0 "
 
-" array_559[@]
+" array_567[@]
     # "←→ select • enter confirm • y yes • n no" = 9 + 3 + 13 + 3 + 5 + 3 + 4 = 40
-    local array_560=("←→" "select" "enter" "confirm" "y" "yes" "n" "no")
-    render_tooltip__2593_v0 array_560[@] 40 "${term_width_29583}"
-    go_up__2487_v0 2
+    local array_568=("←→" "select" "enter" "confirm" "y" "yes" "n" "no")
+    render_tooltip__2602_v0 array_568[@] 40 "${term_width_29709}"
+    go_up__2496_v0 2
     while :
     do
-        get_key__2430_v0 
-        local key_29668="${ret_get_key2430_v0}"
-        if [ "$(( $(( $(( $([ "_${key_29668}" != "_LEFT" ]; echo $?) || $([ "_${key_29668}" != "_h" ]; echo $?) )) || $([ "_${key_29668}" != "_RIGHT" ]; echo $?) )) || $([ "_${key_29668}" != "_l" ]; echo $?) ))" != 0 ]; then
-            if [ "${selected_29623}" != 0 ]; then
-                selected_29623=0
-                local array_561=("")
-                eprintf__2432_v0 "\\x1b[G\\x1b[K" array_561[@]
-                render_confirm_options__2727_v0 "${selected_29623}" "${term_width_29583}"
-            elif [ "$(( ! selected_29623 ))" != 0 ]; then
-                selected_29623=1
-                local array_562=("")
-                eprintf__2432_v0 "\\x1b[G\\x1b[K" array_562[@]
-                render_confirm_options__2727_v0 "${selected_29623}" "${term_width_29583}"
+        get_key__2438_v0 
+        local key_29794="${ret_get_key2438_v0}"
+        if [ "$(( $(( $(( $([ "_${key_29794}" != "_LEFT" ]; echo $?) || $([ "_${key_29794}" != "_h" ]; echo $?) )) || $([ "_${key_29794}" != "_RIGHT" ]; echo $?) )) || $([ "_${key_29794}" != "_l" ]; echo $?) ))" != 0 ]; then
+            if [ "${selected_29749}" != 0 ]; then
+                selected_29749=0
+                local array_569=("")
+                eprintf__2440_v0 "\\x1b[G\\x1b[K" array_569[@]
+                render_confirm_options__2737_v0 "${selected_29749}" "${term_width_29709}"
+            elif [ "$(( ! selected_29749 ))" != 0 ]; then
+                selected_29749=1
+                local array_570=("")
+                eprintf__2440_v0 "\\x1b[G\\x1b[K" array_570[@]
+                render_confirm_options__2737_v0 "${selected_29749}" "${term_width_29709}"
             fi
-        elif [ "$(( $([ "_${key_29668}" != "_y" ]; echo $?) || $([ "_${key_29668}" != "_Y" ]; echo $?) ))" != 0 ]; then
-            selected_29623=1
+        elif [ "$(( $([ "_${key_29794}" != "_y" ]; echo $?) || $([ "_${key_29794}" != "_Y" ]; echo $?) ))" != 0 ]; then
+            selected_29749=1
             break
-        elif [ "$(( $([ "_${key_29668}" != "_n" ]; echo $?) || $([ "_${key_29668}" != "_N" ]; echo $?) ))" != 0 ]; then
-            selected_29623=0
+        elif [ "$(( $([ "_${key_29794}" != "_n" ]; echo $?) || $([ "_${key_29794}" != "_N" ]; echo $?) ))" != 0 ]; then
+            selected_29749=0
             break
-        elif [ "$(( $([ "_${key_29668}" != "_INPUT" ]; echo $?) || $([ "_${key_29668}" != "_SPACE" ]; echo $?) ))" != 0 ]; then
+        elif [ "$(( $([ "_${key_29794}" != "_INPUT" ]; echo $?) || $([ "_${key_29794}" != "_SPACE" ]; echo $?) ))" != 0 ]; then
             break
         else
             continue
         fi
     done
     # Clean up: remove options line and hint line
-    local total_lines_29669=4
-    if [ "$([ "_${header_29577}" == "_" ]; echo $?)" != 0 ]; then
-        total_lines_29669="$(( total_lines_29669 + 1 ))"
+    local total_lines_29795=4
+    if [ "$([ "_${header_29701}" == "_" ]; echo $?)" != 0 ]; then
+        total_lines_29795="$(( total_lines_29795 + 1 ))"
     fi
-    go_down__2488_v0 2
-    remove_line__2483_v0 "$(( total_lines_29669 - 1 ))"
-    remove_current_line__2484_v0 
-    stty_unlock__2474_v0 
-    show_cursor__2491_v0 
-    ret_xyl_confirm2728_v0="${selected_29623}"
+    go_down__2497_v0 2
+    remove_line__2492_v0 "$(( total_lines_29795 - 1 ))"
+    remove_current_line__2493_v0 
+    stty_unlock__2483_v0 
+    show_cursor__2500_v0 
+    ret_xyl_confirm2738_v0="${selected_29749}"
     return 0
 }
 
 # print_confirm_help()
-print_confirm_help__2828_v0() {
-    local usage_29504=("Usage:" "./xylitol.sh" "confirm" "[flags]")
-    print_wrapped__2492_v0 usage_29504[@]
+print_confirm_help__2838_v0() {
+    local usage_29628=("Usage:" "./xylitol.sh" "confirm" "[flags]")
+    print_wrapped__2501_v0 usage_29628[@]
     printf '%s\n' ""
-    colored_primary__2534_v0 "confirm"
-    local ret_colored_primary2534_v0__8_20="${ret_colored_primary2534_v0}"
-    local title_29531=("${ret_colored_primary2534_v0__8_20}" "-" "Display" "a" "Yes/No" "confirmation" "dialog.")
-    print_wrapped__2492_v0 title_29531[@]
+    colored_primary__2543_v0 "confirm"
+    local ret_colored_primary2543_v0__8_20="${ret_colored_primary2543_v0}"
+    local title_29655=("${ret_colored_primary2543_v0__8_20}" "-" "Display" "a" "Yes/No" "confirmation" "dialog.")
+    print_wrapped__2501_v0 title_29655[@]
     printf '%s\n' ""
-    colored_secondary__2535_v0 "Flags:"
-    local ret_colored_secondary2535_v0__11_12="${ret_colored_secondary2535_v0}"
-    local array_565=()
-    printf__128_v0 "${ret_colored_secondary2535_v0__11_12}""
-" array_565[@]
-    local names_29533=("-h, --help" "--header=\"<text>\"" "--default=<yes|no>")
-    local texts_29534=("Show this help message" "Set a header text to display above the options" "Set the default selection")
-    local notes_29535=("" "(ANSI escape supported)" "(default: yes)")
-    render_help_entries__2669_v0 names_29533[@] texts_29534[@] notes_29535[@] 0
+    colored_secondary__2544_v0 "Flags:"
+    local ret_colored_secondary2544_v0__11_12="${ret_colored_secondary2544_v0}"
+    local array_573=()
+    printf__128_v0 "${ret_colored_secondary2544_v0__11_12}""
+" array_573[@]
+    local names_29657=("-h, --help" "--header=\"<text>\"" "--default=<yes|no>")
+    local texts_29658=("Show this help message" "Set a header text to display above the options" "Set the default selection")
+    local notes_29659=("" "(ANSI escape supported)" "(default: yes)")
+    render_help_entries__2679_v0 names_29657[@] texts_29658[@] notes_29659[@] 0
     printf '%s\n' ""
 }
 
 # execute_confirm(parameters: [Text])
-execute_confirm__2886_v0() {
-    local parameters_29487=("${!1}")
-    colored_primary__2534_v0 "Are you sure?"
-    local ret_colored_primary2534_v0__9_30="${ret_colored_primary2534_v0}"
-    local header_29501="\\x1b[1m""${ret_colored_primary2534_v0__9_30}"
-    local default_yes_29502=1
-    for param_29503 in "${parameters_29487[@]}"; do
-        starts_with__22_v0 "${param_29503}" "--header="
+execute_confirm__2896_v0() {
+    local parameters_29611=("${!1}")
+    colored_primary__2543_v0 "Are you sure?"
+    local ret_colored_primary2543_v0__9_30="${ret_colored_primary2543_v0}"
+    local header_29625="\\x1b[1m""${ret_colored_primary2543_v0__9_30}"
+    local default_yes_29626=1
+    for param_29627 in "${parameters_29611[@]}"; do
+        starts_with__22_v0 "${param_29627}" "--header="
         local ret_starts_with22_v0__18_13="${ret_starts_with22_v0}"
-        starts_with__22_v0 "${param_29503}" "--default="
+        starts_with__22_v0 "${param_29627}" "--default="
         local ret_starts_with22_v0__21_13="${ret_starts_with22_v0}"
-        if [ "$(( $([ "_${param_29503}" != "_-h" ]; echo $?) || $([ "_${param_29503}" != "_--help" ]; echo $?) ))" != 0 ]; then
-            print_confirm_help__2828_v0 
+        if [ "$(( $([ "_${param_29627}" != "_-h" ]; echo $?) || $([ "_${param_29627}" != "_--help" ]; echo $?) ))" != 0 ]; then
+            print_confirm_help__2838_v0 
             exit 0
         elif [ "${ret_starts_with22_v0__18_13}" != 0 ]; then
-            local __length_571="--header="
-            slice__24_v0 "${param_29503}" "${#__length_571}" 0
-            header_29501="${ret_slice24_v0}"
+            local __length_579="--header="
+            slice__24_v0 "${param_29627}" "${#__length_579}" 0
+            header_29625="${ret_slice24_v0}"
         elif [ "${ret_starts_with22_v0__21_13}" != 0 ]; then
-            local __length_572="--default="
-            slice__24_v0 "${param_29503}" "${#__length_572}" 0
-            local value_29568="${ret_slice24_v0}"
-            if [ "$(( $([ "_${value_29568}" != "_yes" ]; echo $?) || $([ "_${value_29568}" != "_y" ]; echo $?) ))" != 0 ]; then
-                default_yes_29502=1
-            elif [ "$(( $([ "_${value_29568}" != "_no" ]; echo $?) || $([ "_${value_29568}" != "_n" ]; echo $?) ))" != 0 ]; then
-                default_yes_29502=0
+            local __length_580="--default="
+            slice__24_v0 "${param_29627}" "${#__length_580}" 0
+            local value_29692="${ret_slice24_v0}"
+            if [ "$(( $([ "_${value_29692}" != "_yes" ]; echo $?) || $([ "_${value_29692}" != "_y" ]; echo $?) ))" != 0 ]; then
+                default_yes_29626=1
+            elif [ "$(( $([ "_${value_29692}" != "_no" ]; echo $?) || $([ "_${value_29692}" != "_n" ]; echo $?) ))" != 0 ]; then
+                default_yes_29626=0
             else
-                eprintf_colored__2433_v0 "ERROR: Invalid default value: ""${value_29568}"". Use 'yes' or 'no'.
+                eprintf_colored__2441_v0 "ERROR: Invalid default value: ""${value_29692}"". Use 'yes' or 'no'.
 " 31
                 exit 1
             fi
         fi
     done
-    has_ansi_escape__2558_v0 "${header_29501}"
-    local ret_has_ansi_escape2558_v0__35_44="${ret_has_ansi_escape2558_v0}"
-    escape_ansi__2559_v0 "${header_29501}"
-    local ret_escape_ansi2559_v0__35_73="${ret_escape_ansi2559_v0}"
-    colored_primary__2534_v0 "${header_29501}"
-    local ret_colored_primary2534_v0__35_111="${ret_colored_primary2534_v0}"
-    local display_header_29576
-    display_header_29576="$(if [ "$(( $([ "_${header_29501}" != "_" ]; echo $?) || ret_has_ansi_escape2558_v0__35_44 ))" != 0 ]; then echo "${ret_escape_ansi2559_v0__35_73}"; else echo "\\x1b[1m""${ret_colored_primary2534_v0__35_111}"; fi)"
-    xyl_confirm__2728_v0 "${display_header_29576}" "${default_yes_29502}"
-    local result_29675="${ret_xyl_confirm2728_v0}"
-    ret_execute_confirm2886_v0="$(if [ "${result_29675}" != 0 ]; then echo "yes"; else echo "no"; fi)"
+    has_ansi_escape__2567_v0 "${header_29625}"
+    local ret_has_ansi_escape2567_v0__35_44="${ret_has_ansi_escape2567_v0}"
+    escape_ansi__2568_v0 "${header_29625}"
+    local ret_escape_ansi2568_v0__35_73="${ret_escape_ansi2568_v0}"
+    colored_primary__2543_v0 "${header_29625}"
+    local ret_colored_primary2543_v0__35_111="${ret_colored_primary2543_v0}"
+    local display_header_29700
+    display_header_29700="$(if [ "$(( $([ "_${header_29625}" != "_" ]; echo $?) || ret_has_ansi_escape2567_v0__35_44 ))" != 0 ]; then echo "${ret_escape_ansi2568_v0__35_73}"; else echo "\\x1b[1m""${ret_colored_primary2543_v0__35_111}"; fi)"
+    xyl_confirm__2738_v0 "${display_header_29700}" "${default_yes_29626}"
+    local result_29801="${ret_xyl_confirm2738_v0}"
+    ret_execute_confirm2896_v0="$(if [ "${result_29801}" != 0 ]; then echo "yes"; else echo "no"; fi)"
     return 0
 }
 
 # eprintf(format: Text, args: [Text])
-eprintf__3004_v0() {
-    local format_40093="${1}"
-    local args_40094=("${!2}")
-    args_40094=("${format_40093}" "${args_40094[@]}")
+eprintf__3014_v0() {
+    local format_40269="${1}"
+    local args_40270=("${!2}")
+    args_40270=("${format_40269}" "${args_40270[@]}")
     __status=$?
-    printf "${args_40094[@]}" >&2
+    printf "${args_40270[@]}" >&2
     __status=$?
 }
 
 # eprintf_colored(message: Text, color: Int)
-eprintf_colored__3005_v0() {
-    local message_40091="${1}"
-    local color_40092="${2}"
+eprintf_colored__3015_v0() {
+    local message_40267="${1}"
+    local color_40268="${2}"
     # Prints an error message with a specified color.
-    local array_573=("${message_40091}")
-    eprintf__3004_v0 "\\x1b[${color_40092}m%s\\x1b[0m" array_573[@]
+    local array_581=("${message_40267}")
+    eprintf__3014_v0 "\\x1b[${color_40268}m%s\\x1b[0m" array_581[@]
 }
 
 # eprintf(format: Text, args: [Text])
-eprintf__3020_v0() {
-    local format_40123="${1}"
-    local args_40124=("${!2}")
-    args_40124=("${format_40123}" "${args_40124[@]}")
+eprintf__3030_v0() {
+    local format_40279="${1}"
+    local args_40280=("${!2}")
+    args_40280=("${format_40279}" "${args_40280[@]}")
     __status=$?
-    printf "${args_40124[@]}" >&2
+    printf "${args_40280[@]}" >&2
     __status=$?
+}
+
+# eprintf_colored(message: Text, color: Int)
+eprintf_colored__3031_v0() {
+    local message_40277="${1}"
+    local color_40278="${2}"
+    # Prints an error message with a specified color.
+    local array_582=("${message_40277}")
+    eprintf__3030_v0 "\\x1b[${color_40278}m%s\\x1b[0m" array_582[@]
 }
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
 _perl_state_148="None"
 # perl_available()
-perl_available__3027_v0() {
+perl_available__3038_v0() {
     if [ "$([ "_${_perl_state_148}" != "_None" ]; echo $?)" != 0 ]; then
-        local command_574
-        command_574="$(echo "$XYLITOL_USE_PERL")"
+        local command_583
+        command_583="$(echo "$XYLITOL_USE_PERL")"
         __status=$?
-        local disabled_40033
-        disabled_40033="$([ "_${command_574}" != "_No" ]; echo $?)"
-        local command_575
-        command_575="$(command -v perl > /dev/null && echo 0 || echo 1)"
+        local disabled_40209
+        disabled_40209="$([ "_${command_583}" != "_No" ]; echo $?)"
+        local command_584
+        command_584="$(command -v perl > /dev/null && echo 0 || echo 1)"
         __status=$?
-        local found_40034
-        found_40034="$(( $(( ! disabled_40033 )) && $([ "_${command_575}" != "_0" ]; echo $?) ))"
-        _perl_state_148="$(if [ "${found_40034}" != 0 ]; then echo "Yes"; else echo "No"; fi)"
+        local found_40210
+        found_40210="$(( $(( ! disabled_40209 )) && $([ "_${command_584}" != "_0" ]; echo $?) ))"
+        _perl_state_148="$(if [ "${found_40210}" != 0 ]; then echo "Yes"; else echo "No"; fi)"
     fi
-    ret_perl_available3027_v0="$([ "_${_perl_state_148}" != "_Yes" ]; echo $?)"
+    ret_perl_available3038_v0="$([ "_${_perl_state_148}" != "_Yes" ]; echo $?)"
     return 0
 }
 
 # perl_get_cjk_width(text: Text)
-perl_get_cjk_width__3028_v0() {
-    local text_40032="${1}"
-    perl_available__3027_v0 
-    local ret_perl_available3027_v0__19_12="${ret_perl_available3027_v0}"
-    if [ "$(( ! ret_perl_available3027_v0__19_12 ))" != 0 ]; then
-        ret_perl_get_cjk_width3028_v0=''
+perl_get_cjk_width__3039_v0() {
+    local text_40208="${1}"
+    perl_available__3038_v0 
+    local ret_perl_available3038_v0__19_12="${ret_perl_available3038_v0}"
+    if [ "$(( ! ret_perl_available3038_v0__19_12 ))" != 0 ]; then
+        ret_perl_get_cjk_width3039_v0=''
         return 1
     fi
-    local command_576
-    command_576="$(perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text_40032}" 2>/dev/null)"
+    local command_585
+    command_585="$(perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text_40208}" 2>/dev/null)"
     __status=$?
     if [ "${__status}" != 0 ]; then
-        ret_perl_get_cjk_width3028_v0=''
+        ret_perl_get_cjk_width3039_v0=''
         return "${__status}"
     fi
-    local width_str_40035="${command_576}"
-    parse_int__13_v0 "${width_str_40035}"
+    local width_str_40211="${command_585}"
+    parse_int__13_v0 "${width_str_40211}"
     __status=$?
     if [ "${__status}" != 0 ]; then
-        ret_perl_get_cjk_width3028_v0=''
+        ret_perl_get_cjk_width3039_v0=''
         return "${__status}"
     fi
-    local width_40036="${ret_parse_int13_v0}"
-    ret_perl_get_cjk_width3028_v0="${width_40036}"
+    local width_40212="${ret_parse_int13_v0}"
+    ret_perl_get_cjk_width3039_v0="${width_40212}"
     return 0
 }
 
 # has_ansi_escape(text: Text)
-has_ansi_escape__3033_v0() {
-    local text_40022="${1}"
+has_ansi_escape__3044_v0() {
+    local text_40198="${1}"
     # Check for ESC character (0x1B = 27) or literal \x1b[
-    local command_577
-    command_577="$([[ "${text_40022}" == *$'\x1b'* || "${text_40022}" == *'\x1b['* ]] && echo "1" || echo "0")"
+    local command_586
+    command_586="$([[ "${text_40198}" == *$'\x1b'* || "${text_40198}" == *'\x1b['* ]] && echo "1" || echo "0")"
     __status=$?
-    local has_escape_40023="${command_577}"
-    ret_has_ansi_escape3033_v0="$([ "_${has_escape_40023}" != "_1" ]; echo $?)"
+    local has_escape_40199="${command_586}"
+    ret_has_ansi_escape3044_v0="$([ "_${has_escape_40199}" != "_1" ]; echo $?)"
     return 0
 }
 
 # strip_ansi(text: Text)
-strip_ansi__3035_v0() {
-    local text_40028="${1}"
-    local command_578
-    command_578="$(printf "%s" "${text_40028}" | sed $'s/\x1b\[[0-9;]*m//g' | sed 's/\\x1b\[[0-9;]*m//g')"
+strip_ansi__3046_v0() {
+    local text_40204="${1}"
+    local command_587
+    command_587="$(printf "%s" "${text_40204}" | sed $'s/\x1b\[[0-9;]*m//g' | sed 's/\\x1b\[[0-9;]*m//g')"
     __status=$?
-    ret_strip_ansi3035_v0="${command_578}"
+    ret_strip_ansi3046_v0="${command_587}"
     return 0
 }
 
 # is_all_ascii(text: Text)
-is_all_ascii__3036_v0() {
-    local text_40030="${1}"
-    local command_579
-    command_579="$(printf "%s" "${text_40030}" | LC_ALL=C grep -q '^[ -~]*$' && echo 0 || echo 1)"
+is_all_ascii__3047_v0() {
+    local text_40206="${1}"
+    local command_588
+    command_588="$(printf "%s" "${text_40206}" | LC_ALL=C grep -q '^[ -~]*$' && echo 0 || echo 1)"
     __status=$?
-    local result_40031="${command_579}"
-    ret_is_all_ascii3036_v0="$([ "_${result_40031}" != "_0" ]; echo $?)"
+    local result_40207="${command_588}"
+    ret_is_all_ascii3047_v0="$([ "_${result_40207}" != "_0" ]; echo $?)"
     return 0
 }
 
 # plain_len(text: Text)
-plain_len__3037_v0() {
-    local text_40025="${1}"
-    local command_580
-    command_580="$(LC_ALL=C; __t="${text_40025}"; case "$__t" in (*[!\ -~]*) echo -1;; (*'\x1b['*) echo -1;; (*) echo "${#__t}";; esac)"
+plain_len__3048_v0() {
+    local text_40201="${1}"
+    local command_589
+    command_589="$(LC_ALL=C; __t="${text_40201}"; case "$__t" in (*[!\ -~]*) echo -1;; (*'\x1b['*) echo -1;; (*) echo "${#__t}";; esac)"
     __status=$?
-    local measured_40026="${command_580}"
-    parse_int__13_v0 "${measured_40026}"
+    local measured_40202="${command_589}"
+    parse_int__13_v0 "${measured_40202}"
     __status=$?
-    ret_plain_len3037_v0="${ret_parse_int13_v0}"
+    ret_plain_len3048_v0="${ret_parse_int13_v0}"
     return 0
 }
 
 # get_visible_len(text: Text)
-get_visible_len__3038_v0() {
-    local text_40024="${1}"
-    plain_len__3037_v0 "${text_40024}"
-    local plain_40027="${ret_plain_len3037_v0}"
-    if [ "$(( plain_40027 >= 0 ))" != 0 ]; then
-        ret_get_visible_len3038_v0="${plain_40027}"
+get_visible_len__3049_v0() {
+    local text_40200="${1}"
+    plain_len__3048_v0 "${text_40200}"
+    local plain_40203="${ret_plain_len3048_v0}"
+    if [ "$(( plain_40203 >= 0 ))" != 0 ]; then
+        ret_get_visible_len3049_v0="${plain_40203}"
         return 0
     fi
-    strip_ansi__3035_v0 "${text_40024}"
-    local stripped_40029="${ret_strip_ansi3035_v0}"
-    is_all_ascii__3036_v0 "${stripped_40029}"
-    local ret_is_all_ascii3036_v0__46_12="${ret_is_all_ascii3036_v0}"
-    if [ "$(( ! ret_is_all_ascii3036_v0__46_12 ))" != 0 ]; then
-        perl_get_cjk_width__3028_v0 "${stripped_40029}"
+    strip_ansi__3046_v0 "${text_40200}"
+    local stripped_40205="${ret_strip_ansi3046_v0}"
+    is_all_ascii__3047_v0 "${stripped_40205}"
+    local ret_is_all_ascii3047_v0__46_12="${ret_is_all_ascii3047_v0}"
+    if [ "$(( ! ret_is_all_ascii3047_v0__46_12 ))" != 0 ]; then
+        perl_get_cjk_width__3039_v0 "${stripped_40205}"
         __status=$?
         if [ "${__status}" != 0 ]; then
-            local __length_581="${stripped_40029}"
-            ret_get_visible_len3038_v0="${#__length_581}"
+            local __length_590="${stripped_40205}"
+            ret_get_visible_len3049_v0="${#__length_590}"
             return 0
         fi
-        ret_get_visible_len3038_v0="${ret_perl_get_cjk_width3028_v0}"
+        ret_get_visible_len3049_v0="${ret_perl_get_cjk_width3039_v0}"
         return 0
     fi
-    local __length_582="${stripped_40029}"
-    ret_get_visible_len3038_v0="${#__length_582}"
+    local __length_591="${stripped_40205}"
+    ret_get_visible_len3049_v0="${#__length_591}"
     return 0
 }
 
@@ -7723,252 +7796,259 @@ _term_size_150=(80 24)
 export XYLITOL_RUNTIME_STTY_COUNT=0
 __status=$?
 # stty_count()
-stty_count__3044_v0() {
-    local command_584
-    command_584="$(c="${XYLITOL_RUNTIME_STTY_COUNT:-0}"; [[ "$c" =~ ^[0-9]+$ ]] && echo "$c" || echo 0)"
+stty_count__3055_v0() {
+    local command_593
+    command_593="$(c="${XYLITOL_RUNTIME_STTY_COUNT:-0}"; [[ "$c" =~ ^[0-9]+$ ]] && echo "$c" || echo 0)"
     __status=$?
-    local count_40099="${command_584}"
-    parse_int__13_v0 "${count_40099}"
+    local count_40275="${command_593}"
+    parse_int__13_v0 "${count_40275}"
     __status=$?
-    ret_stty_count3044_v0="${ret_parse_int13_v0}"
+    ret_stty_count3055_v0="${ret_parse_int13_v0}"
     return 0
 }
 
 # stty_lock()
-stty_lock__3045_v0() {
-    stty_count__3044_v0 
-    local count_num_40100="${ret_stty_count3044_v0}"
-    if [ "$(( count_num_40100 == 0 ))" != 0 ]; then
-        stty -echo -icanon min 1 time 0 < /dev/tty
+stty_lock__3056_v0() {
+    stty_count__3055_v0 
+    local count_num_40276="${ret_stty_count3055_v0}"
+    if [ "$(( count_num_40276 == 0 ))" != 0 ]; then
+        stty -echo -icanon min 1 time 0 2>/dev/null < /dev/tty
         __status=$?
+        if [ "${__status}" != 0 ]; then
+            eprintf_colored__3031_v0 "Error: " 91
+            local array_594=("")
+            eprintf__3030_v0 "xylitol needs a terminal, and /dev/tty is not available here.
+" array_594[@]
+            exit 1
+        fi
     fi
-    count_num_40100="$(( count_num_40100 + 1 ))"
-    export XYLITOL_RUNTIME_STTY_COUNT=${count_num_40100}
+    count_num_40276="$(( count_num_40276 + 1 ))"
+    export XYLITOL_RUNTIME_STTY_COUNT=${count_num_40276}
     __status=$?
 }
 
 # stty_unlock()
-stty_unlock__3046_v0() {
-    stty_count__3044_v0 
-    local count_num_40121="${ret_stty_count3044_v0}"
-    if [ "$(( count_num_40121 > 0 ))" != 0 ]; then
-        count_num_40121="$(( count_num_40121 - 1 ))"
-        export XYLITOL_RUNTIME_STTY_COUNT=${count_num_40121}
+stty_unlock__3057_v0() {
+    stty_count__3055_v0 
+    local count_num_40301="${ret_stty_count3055_v0}"
+    if [ "$(( count_num_40301 > 0 ))" != 0 ]; then
+        count_num_40301="$(( count_num_40301 - 1 ))"
+        export XYLITOL_RUNTIME_STTY_COUNT=${count_num_40301}
         __status=$?
-        if [ "$(( count_num_40121 == 0 ))" != 0 ]; then
-            stty echo icanon < /dev/tty
+        if [ "$(( count_num_40301 == 0 ))" != 0 ]; then
+            stty echo icanon 2>/dev/null < /dev/tty
             __status=$?
         fi
     fi
 }
 
 # store_term_size(size: Text)
-store_term_size__3047_v0() {
-    local size_40013="${1}"
-    if [ "$([ "_${size_40013}" != "_" ]; echo $?)" != 0 ]; then
-        ret_store_term_size3047_v0=0
+store_term_size__3058_v0() {
+    local size_40189="${1}"
+    if [ "$([ "_${size_40189}" != "_" ]; echo $?)" != 0 ]; then
+        ret_store_term_size3058_v0=0
         return 0
     fi
-    split__4_v0 "${size_40013}" " "
-    local parts_40014=("${ret_split4_v0[@]}")
-    local __length_585=("${parts_40014[@]}")
-    if [ "$(( ${#__length_585[@]} != 2 ))" != 0 ]; then
-        ret_store_term_size3047_v0=0
+    split__4_v0 "${size_40189}" " "
+    local parts_40190=("${ret_split4_v0[@]}")
+    local __length_595=("${parts_40190[@]}")
+    if [ "$(( ${#__length_595[@]} != 2 ))" != 0 ]; then
+        ret_store_term_size3058_v0=0
         return 0
     fi
-    parse_int__13_v0 "${parts_40014[1]?"Index out of bounds (at src/./file/../utils/term.ab:53:41)"}"
+    parse_int__13_v0 "${parts_40190[1]?"Index out of bounds (at src/./file/../utils/term.ab:57:41)"}"
     __status=$?
-    local ret_parse_int13_v0__53_25="${ret_parse_int13_v0}"
-    parse_int__13_v0 "${parts_40014[0]?"Index out of bounds (at src/./file/../utils/term.ab:53:68)"}"
+    local ret_parse_int13_v0__57_25="${ret_parse_int13_v0}"
+    parse_int__13_v0 "${parts_40190[0]?"Index out of bounds (at src/./file/../utils/term.ab:57:68)"}"
     __status=$?
-    local ret_parse_int13_v0__53_52="${ret_parse_int13_v0}"
-    _term_size_150=("${ret_parse_int13_v0__53_25}" "${ret_parse_int13_v0__53_52}")
-    ret_store_term_size3047_v0=1
+    local ret_parse_int13_v0__57_52="${ret_parse_int13_v0}"
+    _term_size_150=("${ret_parse_int13_v0__57_25}" "${ret_parse_int13_v0__57_52}")
+    ret_store_term_size3058_v0=1
     return 0
 }
 
 # query_term_size()
-query_term_size__3048_v0() {
-    local command_587
-    command_587="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
+query_term_size__3059_v0() {
+    local command_597
+    command_597="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
     __status=$?
-    local size_40016="${command_587}"
-    store_term_size__3047_v0 "${size_40016}"
-    ret_query_term_size3048_v0="${ret_store_term_size3047_v0}"
+    local size_40192="${command_597}"
+    store_term_size__3058_v0 "${size_40192}"
+    ret_query_term_size3059_v0="${ret_store_term_size3058_v0}"
     return 0
 }
 
 # stty_term_size()
-stty_term_size__3049_v0() {
-    local command_588
-    command_588="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
+stty_term_size__3060_v0() {
+    local command_598
+    command_598="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
     __status=$?
-    local size_40012="${command_588}"
-    store_term_size__3047_v0 "${size_40012}"
-    ret_stty_term_size3049_v0="${ret_store_term_size3047_v0}"
+    local size_40188="${command_598}"
+    store_term_size__3058_v0 "${size_40188}"
+    ret_stty_term_size3060_v0="${ret_store_term_size3058_v0}"
     return 0
 }
 
 # get_term_size()
-get_term_size__3050_v0() {
-    stty_term_size__3049_v0 
-    local detected_40015="${ret_stty_term_size3049_v0}"
-    if [ "$(( ! detected_40015 ))" != 0 ]; then
-        query_term_size__3048_v0 
-        detected_40015="${ret_query_term_size3048_v0}"
+get_term_size__3061_v0() {
+    stty_term_size__3060_v0 
+    local detected_40191="${ret_stty_term_size3060_v0}"
+    if [ "$(( ! detected_40191 ))" != 0 ]; then
+        query_term_size__3059_v0 
+        detected_40191="${ret_query_term_size3059_v0}"
     fi
     _got_term_size_149=1
 }
 
 # term_width()
-term_width__3052_v0() {
+term_width__3063_v0() {
     if [ "$(( ! _got_term_size_149 ))" != 0 ]; then
-        get_term_size__3050_v0 
+        get_term_size__3061_v0 
     fi
-    ret_term_width3052_v0="${_term_size_150[0]?"Index out of bounds (at src/./file/../utils/term.ab:96:23)"}"
+    ret_term_width3063_v0="${_term_size_150[0]?"Index out of bounds (at src/./file/../utils/term.ab:100:23)"}"
     return 0
 }
 
 # // Cursor /////
 # remove_current_line()
-remove_current_line__3056_v0() {
-    local array_589=("")
-    eprintf__3020_v0 "\\x1b[2K\\x1b[G" array_589[@]
+remove_current_line__3067_v0() {
+    local array_599=("")
+    eprintf__3030_v0 "\\x1b[2K\\x1b[G" array_599[@]
 }
 
 # move the cursor up or down `cnt` lines.
 # print_wrapped(pieces: [Text])
-print_wrapped__3064_v0() {
-    local pieces_40011=("${!1}")
-    term_width__3052_v0 
-    local width_40017="${ret_term_width3052_v0}"
-    local line_40018=""
-    local line_len_40019=0
-    for piece_40020 in "${pieces_40011[@]}"; do
-        local __length_592="${piece_40020}"
-        local piece_len_40021="${#__length_592}"
-        has_ansi_escape__3033_v0 "${piece_40020}"
-        local ret_has_ansi_escape3033_v0__186_12="${ret_has_ansi_escape3033_v0}"
-        if [ "${ret_has_ansi_escape3033_v0__186_12}" != 0 ]; then
-            get_visible_len__3038_v0 "${piece_40020}"
-            piece_len_40021="${ret_get_visible_len3038_v0}"
+print_wrapped__3075_v0() {
+    local pieces_40187=("${!1}")
+    term_width__3063_v0 
+    local width_40193="${ret_term_width3063_v0}"
+    local line_40194=""
+    local line_len_40195=0
+    for piece_40196 in "${pieces_40187[@]}"; do
+        local __length_602="${piece_40196}"
+        local piece_len_40197="${#__length_602}"
+        has_ansi_escape__3044_v0 "${piece_40196}"
+        local ret_has_ansi_escape3044_v0__190_12="${ret_has_ansi_escape3044_v0}"
+        if [ "${ret_has_ansi_escape3044_v0__190_12}" != 0 ]; then
+            get_visible_len__3049_v0 "${piece_40196}"
+            piece_len_40197="${ret_get_visible_len3049_v0}"
         fi
-        if [ "$([ "_${line_40018}" != "_" ]; echo $?)" != 0 ]; then
-            line_40018="${piece_40020}"
-            line_len_40019="${piece_len_40021}"
-        elif [ "$(( $(( $(( line_len_40019 + 1 )) + piece_len_40021 )) > width_40017 ))" != 0 ]; then
-            local array_593=()
-            printf__128_v0 "${line_40018}""
-" array_593[@]
-            line_40018="${piece_40020}"
-            line_len_40019="${piece_len_40021}"
+        if [ "$([ "_${line_40194}" != "_" ]; echo $?)" != 0 ]; then
+            line_40194="${piece_40196}"
+            line_len_40195="${piece_len_40197}"
+        elif [ "$(( $(( $(( line_len_40195 + 1 )) + piece_len_40197 )) > width_40193 ))" != 0 ]; then
+            local array_603=()
+            printf__128_v0 "${line_40194}""
+" array_603[@]
+            line_40194="${piece_40196}"
+            line_len_40195="${piece_len_40197}"
         else
-            line_40018+=" ""${piece_40020}"
-            line_len_40019="$(( line_len_40019 + $(( 1 + piece_len_40021 )) ))"
+            line_40194+=" ""${piece_40196}"
+            line_len_40195="$(( line_len_40195 + $(( 1 + piece_len_40197 )) ))"
         fi
     done
-    if [ "$([ "_${line_40018}" == "_" ]; echo $?)" != 0 ]; then
-        local array_594=()
-        printf__128_v0 "${line_40018}""
-" array_594[@]
+    if [ "$([ "_${line_40194}" == "_" ]; echo $?)" != 0 ]; then
+        local array_604=()
+        printf__128_v0 "${line_40194}""
+" array_604[@]
     fi
 }
 
 # How many elements one entry takes up in `get_directory_entries`.
 __ENTRY_STRIDE_151=3
 # get_directory_entries(path: Text)
-get_directory_entries__3086_v0() {
-    local path_40104="${1}"
-    local __ls_path_595="${path_40104}"
-    __ls_path_595="${__ls_path_595//\\/\\\\}"
-    (( 1 )) && __ls_all_595="-A" || __ls_all_595=""
-    (( 0 )) && __ls_rec_595="-R" || __ls_rec_595=""
-    local __ls_595=()
-    LC_ALL=C IFS=$'\n' read -rd '' -a __ls_595 < <(IFS=$'\n'; LC_ALL=C ls -1 ${__ls_all_595} ${__ls_rec_595} ${__ls_path_595}
+get_directory_entries__3097_v0() {
+    local path_40284="${1}"
+    local __ls_path_605="${path_40284}"
+    __ls_path_605="${__ls_path_605//\\/\\\\}"
+    (( 1 )) && __ls_all_605="-A" || __ls_all_605=""
+    (( 0 )) && __ls_rec_605="-R" || __ls_rec_605=""
+    local __ls_605=()
+    LC_ALL=C IFS=$'\n' read -rd '' -a __ls_605 < <(IFS=$'\n'; LC_ALL=C ls -1 ${__ls_all_605} ${__ls_rec_605} ${__ls_path_605}
     __status=$?
     );
-    local names_40105=("${__ls_595[@]}")
-    local command_596
-    command_596="$(LC_ALL=C ls -lA "${path_40104}" 2>/dev/null | tail -n +2 | sed 's/^\(.\).*/\1/')"
+    local names_40285=("${__ls_605[@]}")
+    local command_606
+    command_606="$(LC_ALL=C ls -lA "${path_40284}" 2>/dev/null | tail -n +2 | sed 's/^\(.\).*/\1/')"
     __status=$?
-    local types_output_40106="${command_596}"
+    local types_output_40286="${command_606}"
     # The blanking expression runs first, otherwise it would also match the
     # already rewritten target of a symbolic link. Every line is then given a
     # leading ":" because `split` treats newlines as whitespace and would
     # collapse the empty lines that non-link entries produce.
-    local command_597
-    command_597="$(LC_ALL=C ls -lA "${path_40104}" 2>/dev/null | tail -n +2 | sed -e '/^l/!s/.*//' -e '/^l/s/.* -> //' -e 's/^/:/')"
+    local command_607
+    command_607="$(LC_ALL=C ls -lA "${path_40284}" 2>/dev/null | tail -n +2 | sed -e '/^l/!s/.*//' -e '/^l/s/.* -> //' -e 's/^/:/')"
     __status=$?
-    local targets_output_40107="${command_597}"
-    split__4_v0 "${types_output_40106}" "
+    local targets_output_40287="${command_607}"
+    split__4_v0 "${types_output_40286}" "
 "
-    local types_40108=("${ret_split4_v0[@]}")
-    split__4_v0 "${targets_output_40107}" "
+    local types_40288=("${ret_split4_v0[@]}")
+    split__4_v0 "${targets_output_40287}" "
 "
-    local targets_40109=("${ret_split4_v0[@]}")
-    local entries_40110=()
-    local __range_start_40111=0
-    local __length_599=("${names_40105[@]}")
-    local __range_end_40111="${#__length_599[@]}"
-    local __dir_40111=$(( ${__range_start_40111} <= ${__range_end_40111} ? 1 : -1 ))
-    for (( i_40111=${__range_start_40111}; i_40111 * ${__dir_40111} < ${__range_end_40111} * ${__dir_40111}; i_40111+=${__dir_40111} )); do
-        local array_600=("${names_40105[${i_40111}]?"Index out of bounds (at src/./file/../utils/fs.ab:29:27)"}")
-        entries_40110+=("${array_600[@]}")
-        local array_601=("${types_40108[${i_40111}]?"Index out of bounds (at src/./file/../utils/fs.ab:30:27)"}")
-        entries_40110+=("${array_601[@]}")
-        slice__24_v0 "${targets_40109[${i_40111}]?"Index out of bounds (at src/./file/../utils/fs.ab:31:35)"}" 1 0
+    local targets_40289=("${ret_split4_v0[@]}")
+    local entries_40290=()
+    local __range_start_40291=0
+    local __length_609=("${names_40285[@]}")
+    local __range_end_40291="${#__length_609[@]}"
+    local __dir_40291=$(( ${__range_start_40291} <= ${__range_end_40291} ? 1 : -1 ))
+    for (( i_40291=${__range_start_40291}; i_40291 * ${__dir_40291} < ${__range_end_40291} * ${__dir_40291}; i_40291+=${__dir_40291} )); do
+        local array_610=("${names_40285[${i_40291}]?"Index out of bounds (at src/./file/../utils/fs.ab:29:27)"}")
+        entries_40290+=("${array_610[@]}")
+        local array_611=("${types_40288[${i_40291}]?"Index out of bounds (at src/./file/../utils/fs.ab:30:27)"}")
+        entries_40290+=("${array_611[@]}")
+        slice__24_v0 "${targets_40289[${i_40291}]?"Index out of bounds (at src/./file/../utils/fs.ab:31:35)"}" 1 0
         local ret_slice24_v0__31_21="${ret_slice24_v0}"
-        local array_602=("${ret_slice24_v0__31_21}")
-        entries_40110+=("${array_602[@]}")
+        local array_612=("${ret_slice24_v0__31_21}")
+        entries_40290+=("${array_612[@]}")
 done
-    ret_get_directory_entries3086_v0=("${entries_40110[@]}")
+    ret_get_directory_entries3097_v0=("${entries_40290[@]}")
     return 0
 }
 
 # get_cwd()
-get_cwd__3087_v0() {
-    local command_603
-    command_603="$(pwd)"
+get_cwd__3098_v0() {
+    local command_613
+    command_613="$(pwd)"
     __status=$?
-    ret_get_cwd3087_v0="${command_603}"
+    ret_get_cwd3098_v0="${command_613}"
     return 0
 }
 
 # normalize_path(path: Text)
-normalize_path__3088_v0() {
-    local path_40102="${1}"
-    local command_604
-    command_604="$(cd "${path_40102}" 2>/dev/null && pwd)"
+normalize_path__3099_v0() {
+    local path_40282="${1}"
+    local command_614
+    command_614="$(cd "${path_40282}" 2>/dev/null && pwd)"
     __status=$?
-    local normalized_40103="${command_604}"
-    if [ "$([ "_${normalized_40103}" != "_" ]; echo $?)" != 0 ]; then
-        ret_normalize_path3088_v0="${path_40102}"
+    local normalized_40283="${command_614}"
+    if [ "$([ "_${normalized_40283}" != "_" ]; echo $?)" != 0 ]; then
+        ret_normalize_path3099_v0="${path_40282}"
         return 0
     fi
-    ret_normalize_path3088_v0="${normalized_40103}"
+    ret_normalize_path3099_v0="${normalized_40283}"
     return 0
 }
 
 # path_join(base: Text, child: Text)
-path_join__3089_v0() {
-    local base_40288="${1}"
-    local child_40289="${2}"
-    if [ "$([ "_${base_40288}" != "_/" ]; echo $?)" != 0 ]; then
-        ret_path_join3089_v0="/""${child_40289}"
+path_join__3100_v0() {
+    local base_40468="${1}"
+    local child_40469="${2}"
+    if [ "$([ "_${base_40468}" != "_/" ]; echo $?)" != 0 ]; then
+        ret_path_join3100_v0="/""${child_40469}"
         return 0
     fi
-    ret_path_join3089_v0="${base_40288}""/""${child_40289}"
+    ret_path_join3100_v0="${base_40468}""/""${child_40469}"
     return 0
 }
 
 # get_parent_dir(path: Text)
-get_parent_dir__3090_v0() {
-    local path_40286="${1}"
-    local command_605
-    command_605="$(dirname "${path_40286}")"
+get_parent_dir__3101_v0() {
+    local path_40466="${1}"
+    local command_615
+    command_615="$(dirname "${path_40466}")"
     __status=$?
-    local parent_40287="${command_605}"
-    ret_get_parent_dir3090_v0="${parent_40287}"
+    local parent_40467="${command_615}"
+    ret_get_parent_dir3101_v0="${parent_40467}"
     return 0
 }
 
@@ -7984,84 +8064,84 @@ _primary_color_155=(3 207 159 92)
 _secondary_color_156=(3 118 206 94)
 _accent_color_157=(234 72 121 95)
 # get_supports_truecolor()
-get_supports_truecolor__3101_v0() {
+get_supports_truecolor__3112_v0() {
     env_var_get__120_v0 "XYLITOL_TRUECOLOR"
     __status=$?
-    local config_40049="${ret_env_var_get120_v0}"
-    _supports_truecolor_153="$(if [ "$([ "_${config_40049}" != "_Yes" ]; echo $?)" != 0 ]; then echo "Yes"; else echo "No"; fi)"
-    ret_get_supports_truecolor3101_v0="$([ "_${_supports_truecolor_153}" != "_Yes" ]; echo $?)"
+    local config_40225="${ret_env_var_get120_v0}"
+    _supports_truecolor_153="$(if [ "$([ "_${config_40225}" != "_Yes" ]; echo $?)" != 0 ]; then echo "Yes"; else echo "No"; fi)"
+    ret_get_supports_truecolor3112_v0="$([ "_${_supports_truecolor_153}" != "_Yes" ]; echo $?)"
     return 0
 }
 
 # colored_rgb(message: Text, r: Int, g: Int, b: Int, fallback: Int)
-colored_rgb__3102_v0() {
-    local message_40044="${1}"
-    local r_40045="${2}"
-    local g_40046="${3}"
-    local b_40047="${4}"
-    local fallback_40048="${5}"
+colored_rgb__3113_v0() {
+    local message_40220="${1}"
+    local r_40221="${2}"
+    local g_40222="${3}"
+    local b_40223="${4}"
+    local fallback_40224="${5}"
     if [ "$([ "_${_supports_truecolor_153}" != "_Yes" ]; echo $?)" != 0 ]; then
-        ret_colored_rgb3102_v0="\\x1b[38;2;${r_40045};${g_40046};${b_40047}m""${message_40044}""\\x1b[0m"
+        ret_colored_rgb3113_v0="\\x1b[38;2;${r_40221};${g_40222};${b_40223}m""${message_40220}""\\x1b[0m"
         return 0
     elif [ "$([ "_${_supports_truecolor_153}" != "_None" ]; echo $?)" != 0 ]; then
-        get_supports_truecolor__3101_v0 
-        local ret_get_supports_truecolor3101_v0__45_17="${ret_get_supports_truecolor3101_v0}"
-        if [ "${ret_get_supports_truecolor3101_v0__45_17}" != 0 ]; then
-            ret_colored_rgb3102_v0="\\x1b[38;2;${r_40045};${g_40046};${b_40047}m""${message_40044}""\\x1b[0m"
+        get_supports_truecolor__3112_v0 
+        local ret_get_supports_truecolor3112_v0__45_17="${ret_get_supports_truecolor3112_v0}"
+        if [ "${ret_get_supports_truecolor3112_v0__45_17}" != 0 ]; then
+            ret_colored_rgb3113_v0="\\x1b[38;2;${r_40221};${g_40222};${b_40223}m""${message_40220}""\\x1b[0m"
             return 0
-        elif [ "$(( fallback_40048 == 0 ))" != 0 ]; then
-            ret_colored_rgb3102_v0="${message_40044}"
+        elif [ "$(( fallback_40224 == 0 ))" != 0 ]; then
+            ret_colored_rgb3113_v0="${message_40220}"
             return 0
         else
-            ret_colored_rgb3102_v0="\\x1b[${fallback_40048}m""${message_40044}""\\x1b[0m"
+            ret_colored_rgb3113_v0="\\x1b[${fallback_40224}m""${message_40220}""\\x1b[0m"
             return 0
         fi
     else
-        if [ "$(( fallback_40048 == 0 ))" != 0 ]; then
-            ret_colored_rgb3102_v0="${message_40044}"
+        if [ "$(( fallback_40224 == 0 ))" != 0 ]; then
+            ret_colored_rgb3113_v0="${message_40220}"
             return 0
         fi
-        ret_colored_rgb3102_v0="\\x1b[${fallback_40048}m""${message_40044}""\\x1b[0m"
+        ret_colored_rgb3113_v0="\\x1b[${fallback_40224}m""${message_40220}""\\x1b[0m"
         return 0
     fi
 }
 
 # inner_get_xylitol_colors()
-inner_get_xylitol_colors__3104_v0() {
+inner_get_xylitol_colors__3115_v0() {
     if [ "$(( ! _got_xylitol_colors_154 ))" != 0 ]; then
         env_var_get__120_v0 "XYLITOL_PRIMARY_COLOR"
         __status=$?
-        local primary_env_40038="${ret_env_var_get120_v0}"
-        if [ "$([ "_${primary_env_40038}" == "_" ]; echo $?)" != 0 ]; then
-            split__4_v0 "${primary_env_40038}" ";"
-            local parts_40039=("${ret_split4_v0[@]}")
-            local __length_609=("${parts_40039[@]}")
-            if [ "$(( ${#__length_609[@]} == 4 ))" != 0 ]; then
-                parse_int__13_v0 "${parts_40039[0]?"Index out of bounds (at src/./file/../utils/truecolor.ab:110:37)"}"
+        local primary_env_40214="${ret_env_var_get120_v0}"
+        if [ "$([ "_${primary_env_40214}" == "_" ]; echo $?)" != 0 ]; then
+            split__4_v0 "${primary_env_40214}" ";"
+            local parts_40215=("${ret_split4_v0[@]}")
+            local __length_619=("${parts_40215[@]}")
+            if [ "$(( ${#__length_619[@]} == 4 ))" != 0 ]; then
+                parse_int__13_v0 "${parts_40215[0]?"Index out of bounds (at src/./file/../utils/truecolor.ab:110:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors3104_v0=''
+                    ret_inner_get_xylitol_colors3115_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__110_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_40039[1]?"Index out of bounds (at src/./file/../utils/truecolor.ab:111:37)"}"
+                parse_int__13_v0 "${parts_40215[1]?"Index out of bounds (at src/./file/../utils/truecolor.ab:111:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors3104_v0=''
+                    ret_inner_get_xylitol_colors3115_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__111_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_40039[2]?"Index out of bounds (at src/./file/../utils/truecolor.ab:112:37)"}"
+                parse_int__13_v0 "${parts_40215[2]?"Index out of bounds (at src/./file/../utils/truecolor.ab:112:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors3104_v0=''
+                    ret_inner_get_xylitol_colors3115_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__112_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_40039[3]?"Index out of bounds (at src/./file/../utils/truecolor.ab:113:37)"}"
+                parse_int__13_v0 "${parts_40215[3]?"Index out of bounds (at src/./file/../utils/truecolor.ab:113:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors3104_v0=''
+                    ret_inner_get_xylitol_colors3115_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__113_21="${ret_parse_int13_v0}"
@@ -8070,37 +8150,37 @@ inner_get_xylitol_colors__3104_v0() {
         fi
         env_var_get__120_v0 "XYLITOL_SECONDARY_COLOR"
         __status=$?
-        local secondary_env_40040="${ret_env_var_get120_v0}"
-        if [ "$([ "_${secondary_env_40040}" == "_" ]; echo $?)" != 0 ]; then
-            split__4_v0 "${secondary_env_40040}" ";"
-            local parts_40041=("${ret_split4_v0[@]}")
-            local __length_611=("${parts_40041[@]}")
-            if [ "$(( ${#__length_611[@]} == 4 ))" != 0 ]; then
-                parse_int__13_v0 "${parts_40041[0]?"Index out of bounds (at src/./file/../utils/truecolor.ab:123:37)"}"
+        local secondary_env_40216="${ret_env_var_get120_v0}"
+        if [ "$([ "_${secondary_env_40216}" == "_" ]; echo $?)" != 0 ]; then
+            split__4_v0 "${secondary_env_40216}" ";"
+            local parts_40217=("${ret_split4_v0[@]}")
+            local __length_621=("${parts_40217[@]}")
+            if [ "$(( ${#__length_621[@]} == 4 ))" != 0 ]; then
+                parse_int__13_v0 "${parts_40217[0]?"Index out of bounds (at src/./file/../utils/truecolor.ab:123:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors3104_v0=''
+                    ret_inner_get_xylitol_colors3115_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__123_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_40041[1]?"Index out of bounds (at src/./file/../utils/truecolor.ab:124:37)"}"
+                parse_int__13_v0 "${parts_40217[1]?"Index out of bounds (at src/./file/../utils/truecolor.ab:124:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors3104_v0=''
+                    ret_inner_get_xylitol_colors3115_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__124_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_40041[2]?"Index out of bounds (at src/./file/../utils/truecolor.ab:125:37)"}"
+                parse_int__13_v0 "${parts_40217[2]?"Index out of bounds (at src/./file/../utils/truecolor.ab:125:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors3104_v0=''
+                    ret_inner_get_xylitol_colors3115_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__125_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_40041[3]?"Index out of bounds (at src/./file/../utils/truecolor.ab:126:37)"}"
+                parse_int__13_v0 "${parts_40217[3]?"Index out of bounds (at src/./file/../utils/truecolor.ab:126:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors3104_v0=''
+                    ret_inner_get_xylitol_colors3115_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__126_21="${ret_parse_int13_v0}"
@@ -8109,37 +8189,37 @@ inner_get_xylitol_colors__3104_v0() {
         fi
         env_var_get__120_v0 "XYLITOL_ACCENT_COLOR"
         __status=$?
-        local accent_env_40042="${ret_env_var_get120_v0}"
-        if [ "$([ "_${accent_env_40042}" == "_" ]; echo $?)" != 0 ]; then
-            split__4_v0 "${accent_env_40042}" ";"
-            local parts_40043=("${ret_split4_v0[@]}")
-            local __length_613=("${parts_40043[@]}")
-            if [ "$(( ${#__length_613[@]} == 4 ))" != 0 ]; then
-                parse_int__13_v0 "${parts_40043[0]?"Index out of bounds (at src/./file/../utils/truecolor.ab:136:37)"}"
+        local accent_env_40218="${ret_env_var_get120_v0}"
+        if [ "$([ "_${accent_env_40218}" == "_" ]; echo $?)" != 0 ]; then
+            split__4_v0 "${accent_env_40218}" ";"
+            local parts_40219=("${ret_split4_v0[@]}")
+            local __length_623=("${parts_40219[@]}")
+            if [ "$(( ${#__length_623[@]} == 4 ))" != 0 ]; then
+                parse_int__13_v0 "${parts_40219[0]?"Index out of bounds (at src/./file/../utils/truecolor.ab:136:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors3104_v0=''
+                    ret_inner_get_xylitol_colors3115_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__136_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_40043[1]?"Index out of bounds (at src/./file/../utils/truecolor.ab:137:37)"}"
+                parse_int__13_v0 "${parts_40219[1]?"Index out of bounds (at src/./file/../utils/truecolor.ab:137:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors3104_v0=''
+                    ret_inner_get_xylitol_colors3115_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__137_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_40043[2]?"Index out of bounds (at src/./file/../utils/truecolor.ab:138:37)"}"
+                parse_int__13_v0 "${parts_40219[2]?"Index out of bounds (at src/./file/../utils/truecolor.ab:138:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors3104_v0=''
+                    ret_inner_get_xylitol_colors3115_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__138_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_40043[3]?"Index out of bounds (at src/./file/../utils/truecolor.ab:139:37)"}"
+                parse_int__13_v0 "${parts_40219[3]?"Index out of bounds (at src/./file/../utils/truecolor.ab:139:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors3104_v0=''
+                    ret_inner_get_xylitol_colors3115_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__139_21="${ret_parse_int13_v0}"
@@ -8151,8 +8231,8 @@ inner_get_xylitol_colors__3104_v0() {
 }
 
 # get_xylitol_colors()
-get_xylitol_colors__3105_v0() {
-    inner_get_xylitol_colors__3104_v0 
+get_xylitol_colors__3116_v0() {
+    inner_get_xylitol_colors__3115_v0 
     __status=$?
     if [ "${__status}" != 0 ]; then
         echo_colored__134_v0 "WARN: Failed to parse Xylitol colors from envs." 33
@@ -8161,35 +8241,35 @@ get_xylitol_colors__3105_v0() {
 }
 
 # colored_primary(message: Text)
-colored_primary__3106_v0() {
-    local message_40037="${1}"
+colored_primary__3117_v0() {
+    local message_40213="${1}"
     if [ "$(( ! _got_xylitol_colors_154 ))" != 0 ]; then
-        get_xylitol_colors__3105_v0 
+        get_xylitol_colors__3116_v0 
     fi
-    colored_rgb__3102_v0 "${message_40037}" "${_primary_color_155[0]?"Index out of bounds (at src/./file/../utils/truecolor.ab:159:48)"}" "${_primary_color_155[1]?"Index out of bounds (at src/./file/../utils/truecolor.ab:159:67)"}" "${_primary_color_155[2]?"Index out of bounds (at src/./file/../utils/truecolor.ab:159:86)"}" "${_primary_color_155[3]?"Index out of bounds (at src/./file/../utils/truecolor.ab:159:105)"}"
-    ret_colored_primary3106_v0="${ret_colored_rgb3102_v0}"
+    colored_rgb__3113_v0 "${message_40213}" "${_primary_color_155[0]?"Index out of bounds (at src/./file/../utils/truecolor.ab:159:48)"}" "${_primary_color_155[1]?"Index out of bounds (at src/./file/../utils/truecolor.ab:159:67)"}" "${_primary_color_155[2]?"Index out of bounds (at src/./file/../utils/truecolor.ab:159:86)"}" "${_primary_color_155[3]?"Index out of bounds (at src/./file/../utils/truecolor.ab:159:105)"}"
+    ret_colored_primary3117_v0="${ret_colored_rgb3113_v0}"
     return 0
 }
 
 # colored_secondary(message: Text)
-colored_secondary__3107_v0() {
-    local message_40051="${1}"
+colored_secondary__3118_v0() {
+    local message_40227="${1}"
     if [ "$(( ! _got_xylitol_colors_154 ))" != 0 ]; then
-        get_xylitol_colors__3105_v0 
+        get_xylitol_colors__3116_v0 
     fi
-    colored_rgb__3102_v0 "${message_40051}" "${_secondary_color_156[0]?"Index out of bounds (at src/./file/../utils/truecolor.ab:166:50)"}" "${_secondary_color_156[1]?"Index out of bounds (at src/./file/../utils/truecolor.ab:166:71)"}" "${_secondary_color_156[2]?"Index out of bounds (at src/./file/../utils/truecolor.ab:166:92)"}" "${_secondary_color_156[3]?"Index out of bounds (at src/./file/../utils/truecolor.ab:166:113)"}"
-    ret_colored_secondary3107_v0="${ret_colored_rgb3102_v0}"
+    colored_rgb__3113_v0 "${message_40227}" "${_secondary_color_156[0]?"Index out of bounds (at src/./file/../utils/truecolor.ab:166:50)"}" "${_secondary_color_156[1]?"Index out of bounds (at src/./file/../utils/truecolor.ab:166:71)"}" "${_secondary_color_156[2]?"Index out of bounds (at src/./file/../utils/truecolor.ab:166:92)"}" "${_secondary_color_156[3]?"Index out of bounds (at src/./file/../utils/truecolor.ab:166:113)"}"
+    ret_colored_secondary3118_v0="${ret_colored_rgb3113_v0}"
     return 0
 }
 
 # colored_accent(message: Text)
-colored_accent__3108_v0() {
-    local message_40222="${1}"
+colored_accent__3119_v0() {
+    local message_40402="${1}"
     if [ "$(( ! _got_xylitol_colors_154 ))" != 0 ]; then
-        get_xylitol_colors__3105_v0 
+        get_xylitol_colors__3116_v0 
     fi
-    colored_rgb__3102_v0 "${message_40222}" "${_accent_color_157[0]?"Index out of bounds (at src/./file/../utils/truecolor.ab:173:47)"}" "${_accent_color_157[1]?"Index out of bounds (at src/./file/../utils/truecolor.ab:173:65)"}" "${_accent_color_157[2]?"Index out of bounds (at src/./file/../utils/truecolor.ab:173:83)"}" "${_accent_color_157[3]?"Index out of bounds (at src/./file/../utils/truecolor.ab:173:101)"}"
-    ret_colored_accent3108_v0="${ret_colored_rgb3102_v0}"
+    colored_rgb__3113_v0 "${message_40402}" "${_accent_color_157[0]?"Index out of bounds (at src/./file/../utils/truecolor.ab:173:47)"}" "${_accent_color_157[1]?"Index out of bounds (at src/./file/../utils/truecolor.ab:173:65)"}" "${_accent_color_157[2]?"Index out of bounds (at src/./file/../utils/truecolor.ab:173:83)"}" "${_accent_color_157[3]?"Index out of bounds (at src/./file/../utils/truecolor.ab:173:101)"}"
+    ret_colored_accent3119_v0="${ret_colored_rgb3113_v0}"
     return 0
 }
 
@@ -8198,11 +8278,11 @@ colored_accent__3108_v0() {
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
 # colored(message: Text, color: Int)
-colored__3161_v0() {
-    local message_40085="${1}"
-    local color_40086="${2}"
+colored__3172_v0() {
+    local message_40261="${1}"
+    local color_40262="${2}"
     # Returns a text wrapped in color codes.
-    ret_colored3161_v0="\\x1b[${color_40086}m""${message_40085}""\\x1b[0m"
+    ret_colored3172_v0="\\x1b[${color_40262}m""${message_40261}""\\x1b[0m"
     return 0
 }
 
@@ -8216,69 +8296,69 @@ _term_size_162=(80 24)
 export XYLITOL_RUNTIME_STTY_COUNT=0
 __status=$?
 # store_term_size(size: Text)
-store_term_size__3202_v0() {
-    local size_40064="${1}"
-    if [ "$([ "_${size_40064}" != "_" ]; echo $?)" != 0 ]; then
-        ret_store_term_size3202_v0=0
+store_term_size__3214_v0() {
+    local size_40240="${1}"
+    if [ "$([ "_${size_40240}" != "_" ]; echo $?)" != 0 ]; then
+        ret_store_term_size3214_v0=0
         return 0
     fi
-    split__4_v0 "${size_40064}" " "
-    local parts_40065=("${ret_split4_v0[@]}")
-    local __length_616=("${parts_40065[@]}")
-    if [ "$(( ${#__length_616[@]} != 2 ))" != 0 ]; then
-        ret_store_term_size3202_v0=0
+    split__4_v0 "${size_40240}" " "
+    local parts_40241=("${ret_split4_v0[@]}")
+    local __length_626=("${parts_40241[@]}")
+    if [ "$(( ${#__length_626[@]} != 2 ))" != 0 ]; then
+        ret_store_term_size3214_v0=0
         return 0
     fi
-    parse_int__13_v0 "${parts_40065[1]?"Index out of bounds (at src/./file/../utils/widget/../term.ab:53:41)"}"
+    parse_int__13_v0 "${parts_40241[1]?"Index out of bounds (at src/./file/../utils/widget/../term.ab:57:41)"}"
     __status=$?
-    local ret_parse_int13_v0__53_25="${ret_parse_int13_v0}"
-    parse_int__13_v0 "${parts_40065[0]?"Index out of bounds (at src/./file/../utils/widget/../term.ab:53:68)"}"
+    local ret_parse_int13_v0__57_25="${ret_parse_int13_v0}"
+    parse_int__13_v0 "${parts_40241[0]?"Index out of bounds (at src/./file/../utils/widget/../term.ab:57:68)"}"
     __status=$?
-    local ret_parse_int13_v0__53_52="${ret_parse_int13_v0}"
-    _term_size_162=("${ret_parse_int13_v0__53_25}" "${ret_parse_int13_v0__53_52}")
-    ret_store_term_size3202_v0=1
+    local ret_parse_int13_v0__57_52="${ret_parse_int13_v0}"
+    _term_size_162=("${ret_parse_int13_v0__57_25}" "${ret_parse_int13_v0__57_52}")
+    ret_store_term_size3214_v0=1
     return 0
 }
 
 # query_term_size()
-query_term_size__3203_v0() {
-    local command_618
-    command_618="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
+query_term_size__3215_v0() {
+    local command_628
+    command_628="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
     __status=$?
-    local size_40067="${command_618}"
-    store_term_size__3202_v0 "${size_40067}"
-    ret_query_term_size3203_v0="${ret_store_term_size3202_v0}"
+    local size_40243="${command_628}"
+    store_term_size__3214_v0 "${size_40243}"
+    ret_query_term_size3215_v0="${ret_store_term_size3214_v0}"
     return 0
 }
 
 # stty_term_size()
-stty_term_size__3204_v0() {
-    local command_619
-    command_619="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
+stty_term_size__3216_v0() {
+    local command_629
+    command_629="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
     __status=$?
-    local size_40063="${command_619}"
-    store_term_size__3202_v0 "${size_40063}"
-    ret_stty_term_size3204_v0="${ret_store_term_size3202_v0}"
+    local size_40239="${command_629}"
+    store_term_size__3214_v0 "${size_40239}"
+    ret_stty_term_size3216_v0="${ret_store_term_size3214_v0}"
     return 0
 }
 
 # get_term_size()
-get_term_size__3205_v0() {
-    stty_term_size__3204_v0 
-    local detected_40066="${ret_stty_term_size3204_v0}"
-    if [ "$(( ! detected_40066 ))" != 0 ]; then
-        query_term_size__3203_v0 
-        detected_40066="${ret_query_term_size3203_v0}"
+get_term_size__3217_v0() {
+    stty_term_size__3216_v0 
+    local detected_40242="${ret_stty_term_size3216_v0}"
+    if [ "$(( ! detected_40242 ))" != 0 ]; then
+        query_term_size__3215_v0 
+        detected_40242="${ret_query_term_size3215_v0}"
     fi
     _got_term_size_161=1
 }
 
 # term_width()
-term_width__3207_v0() {
+term_width__3219_v0() {
     if [ "$(( ! _got_term_size_161 ))" != 0 ]; then
-        get_term_size__3205_v0 
+        get_term_size__3217_v0 
     fi
-    ret_term_width3207_v0="${_term_size_162[0]?"Index out of bounds (at src/./file/../utils/widget/../term.ab:96:23)"}"
+    ret_term_width3219_v0="${_term_size_162[0]?"Index out of bounds (at src/./file/../utils/widget/../term.ab:100:23)"}"
     return 0
 }
 
@@ -8286,167 +8366,176 @@ term_width__3207_v0() {
 # move the cursor up or down `cnt` lines.
 # Which items of a multi-select widget are ticked.
 # print_help_line(pending: Text, line: Text, note_at: Int)
-print_help_line__3240_v0() {
-    local pending_40082="${1}"
-    local line_40083="${2}"
-    local note_at_40084="${3}"
-    if [ "$(( note_at_40084 < 0 ))" != 0 ]; then
-        local array_621=()
-        printf__128_v0 "${pending_40082}""${line_40083}""
-" array_621[@]
+print_help_line__3252_v0() {
+    local pending_40258="${1}"
+    local line_40259="${2}"
+    local note_at_40260="${3}"
+    if [ "$(( note_at_40260 < 0 ))" != 0 ]; then
+        local array_631=()
+        printf__128_v0 "${pending_40258}""${line_40259}""
+" array_631[@]
     # A length of zero means "to the end" in `slice`, so a line that is
     # all note has to be handled on its own.
-    elif [ "$(( note_at_40084 == 0 ))" != 0 ]; then
-        colored__3161_v0 "${line_40083}" 90
-        local ret_colored3161_v0__12_40="${ret_colored3161_v0}"
-        local array_622=()
-        printf__128_v0 "${pending_40082}""${ret_colored3161_v0__12_40}""
-" array_622[@]
+    elif [ "$(( note_at_40260 == 0 ))" != 0 ]; then
+        colored__3172_v0 "${line_40259}" 90
+        local ret_colored3172_v0__12_40="${ret_colored3172_v0}"
+        local array_632=()
+        printf__128_v0 "${pending_40258}""${ret_colored3172_v0__12_40}""
+" array_632[@]
     else
-        slice__24_v0 "${line_40083}" 0 "${note_at_40084}"
+        slice__24_v0 "${line_40259}" 0 "${note_at_40260}"
         local ret_slice24_v0__13_32="${ret_slice24_v0}"
-        slice__24_v0 "${line_40083}" "${note_at_40084}" 0
+        slice__24_v0 "${line_40259}" "${note_at_40260}" 0
         local ret_slice24_v0__13_66="${ret_slice24_v0}"
-        colored__3161_v0 "${ret_slice24_v0__13_66}" 90
-        local ret_colored3161_v0__13_58="${ret_colored3161_v0}"
-        local array_623=()
-        printf__128_v0 "${pending_40082}""${ret_slice24_v0__13_32}""${ret_colored3161_v0__13_58}""
-" array_623[@]
+        colored__3172_v0 "${ret_slice24_v0__13_66}" 90
+        local ret_colored3172_v0__13_58="${ret_colored3172_v0}"
+        local array_633=()
+        printf__128_v0 "${pending_40258}""${ret_slice24_v0__13_32}""${ret_colored3172_v0__13_58}""
+" array_633[@]
     fi
 }
 
 # render_help_entries(names: [Text], texts: [Text], notes: [Text], min_name_width: Int)
-render_help_entries__3241_v0() {
-    local names_40055=("${!1}")
-    local texts_40056=("${!2}")
-    local notes_40057=("${!3}")
-    local min_name_width_40058="${4}"
-    local __length_624=("${names_40055[@]}")
-    local count_40059="${#__length_624[@]}"
-    local name_width_40060="${min_name_width_40058}"
-    local __range_start_40061=0
-    local __range_end_40061="${count_40059}"
-    local __dir_40061=$(( ${__range_start_40061} <= ${__range_end_40061} ? 1 : -1 ))
-    for (( i_40061=${__range_start_40061}; i_40061 * ${__dir_40061} < ${__range_end_40061} * ${__dir_40061}; i_40061+=${__dir_40061} )); do
-        local __length_625="${names_40055[${i_40061}]?"Index out of bounds (at src/./file/../utils/widget/help.ab:28:33)"}"
-        local width_40062="${#__length_625}"
-        if [ "$(( width_40062 > name_width_40060 ))" != 0 ]; then
-            name_width_40060="${width_40062}"
+render_help_entries__3253_v0() {
+    local names_40231=("${!1}")
+    local texts_40232=("${!2}")
+    local notes_40233=("${!3}")
+    local min_name_width_40234="${4}"
+    local __length_634=("${names_40231[@]}")
+    local count_40235="${#__length_634[@]}"
+    local name_width_40236="${min_name_width_40234}"
+    local __range_start_40237=0
+    local __range_end_40237="${count_40235}"
+    local __dir_40237=$(( ${__range_start_40237} <= ${__range_end_40237} ? 1 : -1 ))
+    for (( i_40237=${__range_start_40237}; i_40237 * ${__dir_40237} < ${__range_end_40237} * ${__dir_40237}; i_40237+=${__dir_40237} )); do
+        local __length_635="${names_40231[${i_40237}]?"Index out of bounds (at src/./file/../utils/widget/help.ab:28:33)"}"
+        local width_40238="${#__length_635}"
+        if [ "$(( width_40238 > name_width_40236 ))" != 0 ]; then
+            name_width_40236="${width_40238}"
         fi
 done
-    term_width__3207_v0 
-    local width_40068="${ret_term_width3207_v0}"
+    term_width__3219_v0 
+    local width_40244="${ret_term_width3219_v0}"
     # Two spaces of margin, then three between a name and its description.
-    local indent_40069="$(( name_width_40060 + 5 ))"
+    local indent_40245="$(( name_width_40236 + 5 ))"
     # Once the description column gets too narrow to read, stop putting the
     # description beside the name and place it underneath instead.
-    local stacked_40070="$(( $(( width_40068 - indent_40069 )) < 24 ))"
-    if [ "${stacked_40070}" != 0 ]; then
-        indent_40069=6
+    local stacked_40246="$(( $(( width_40244 - indent_40245 )) < 24 ))"
+    if [ "${stacked_40246}" != 0 ]; then
+        indent_40245=6
     fi
-    local avail_40071="$(( width_40068 - indent_40069 ))"
-    rpad__28_v0 "" " " "${indent_40069}"
-    local blank_40072="${ret_rpad28_v0}"
-    local __range_start_40073=0
-    local __range_end_40073="${count_40059}"
-    local __dir_40073=$(( ${__range_start_40073} <= ${__range_end_40073} ? 1 : -1 ))
-    for (( i_40073=${__range_start_40073}; i_40073 * ${__dir_40073} < ${__range_end_40073} * ${__dir_40073}; i_40073+=${__dir_40073} )); do
-        local pending_40074="${blank_40072}"
-        if [ "${stacked_40070}" != 0 ]; then
-            local array_626=()
-            printf__128_v0 "  ""${names_40055[${i_40073}]?"Index out of bounds (at src/./file/../utils/widget/help.ab:48:33)"}""
-" array_626[@]
+    local avail_40247="$(( width_40244 - indent_40245 ))"
+    rpad__28_v0 "" " " "${indent_40245}"
+    local blank_40248="${ret_rpad28_v0}"
+    local __range_start_40249=0
+    local __range_end_40249="${count_40235}"
+    local __dir_40249=$(( ${__range_start_40249} <= ${__range_end_40249} ? 1 : -1 ))
+    for (( i_40249=${__range_start_40249}; i_40249 * ${__dir_40249} < ${__range_end_40249} * ${__dir_40249}; i_40249+=${__dir_40249} )); do
+        local pending_40250="${blank_40248}"
+        if [ "${stacked_40246}" != 0 ]; then
+            local array_636=()
+            printf__128_v0 "  ""${names_40231[${i_40249}]?"Index out of bounds (at src/./file/../utils/widget/help.ab:48:33)"}""
+" array_636[@]
         else
-            rpad__28_v0 "  ""${names_40055[${i_40073}]?"Index out of bounds (at src/./file/../utils/widget/help.ab:50:41)"}" " " "${indent_40069}"
+            rpad__28_v0 "  ""${names_40231[${i_40249}]?"Index out of bounds (at src/./file/../utils/widget/help.ab:50:41)"}" " " "${indent_40245}"
             local ret_rpad28_v0__50_23="${ret_rpad28_v0}"
-            pending_40074="${ret_rpad28_v0__50_23}"
+            pending_40250="${ret_rpad28_v0__50_23}"
         fi
-        split__4_v0 "${texts_40056[${i_40073}]?"Index out of bounds (at src/./file/../utils/widget/help.ab:52:33)"}" " "
+        split__4_v0 "${texts_40232[${i_40249}]?"Index out of bounds (at src/./file/../utils/widget/help.ab:52:33)"}" " "
         local ret_split4_v0__52_21=("${ret_split4_v0[@]}")
-        local words_40075=("${ret_split4_v0__52_21[@]}")
-        local __length_627=("${words_40075[@]}")
-        local note_start_40076="${#__length_627[@]}"
-        if [ "$([ "_${notes_40057[${i_40073}]?"Index out of bounds (at src/./file/../utils/widget/help.ab:54:18)"}" == "_" ]; echo $?)" != 0 ]; then
+        local words_40251=("${ret_split4_v0__52_21[@]}")
+        local __length_637=("${words_40251[@]}")
+        local note_start_40252="${#__length_637[@]}"
+        if [ "$([ "_${notes_40233[${i_40249}]?"Index out of bounds (at src/./file/../utils/widget/help.ab:54:18)"}" == "_" ]; echo $?)" != 0 ]; then
             # A note reads badly when split, so it moves between lines whole
             # unless it is too long to ever fit on one.
-            local __length_628="${notes_40057[${i_40073}]?"Index out of bounds (at src/./file/../utils/widget/help.ab:57:26)"}"
-            if [ "$(( ${#__length_628} > avail_40071 ))" != 0 ]; then
-                split__4_v0 "${notes_40057[${i_40073}]?"Index out of bounds (at src/./file/../utils/widget/help.ab:58:38)"}" " "
+            local __length_638="${notes_40233[${i_40249}]?"Index out of bounds (at src/./file/../utils/widget/help.ab:57:26)"}"
+            if [ "$(( ${#__length_638} > avail_40247 ))" != 0 ]; then
+                split__4_v0 "${notes_40233[${i_40249}]?"Index out of bounds (at src/./file/../utils/widget/help.ab:58:38)"}" " "
                 local ret_split4_v0__58_26=("${ret_split4_v0[@]}")
-                words_40075+=("${ret_split4_v0__58_26[@]}")
+                words_40251+=("${ret_split4_v0__58_26[@]}")
             else
-                local array_629=("${notes_40057[${i_40073}]?"Index out of bounds (at src/./file/../utils/widget/help.ab:60:33)"}")
-                words_40075+=("${array_629[@]}")
+                local array_639=("${notes_40233[${i_40249}]?"Index out of bounds (at src/./file/../utils/widget/help.ab:60:33)"}")
+                words_40251+=("${array_639[@]}")
             fi
         fi
-        local line_40077=""
+        local line_40253=""
         # Where the note begins on the line being built, so it can be dimmed
         # after wrapping decides how much of it fits. -1 while there is none.
-        local note_at_40078=-1
-        local __range_start_40079=0
-        local __length_630=("${words_40075[@]}")
-        local __range_end_40079="${#__length_630[@]}"
-        local __dir_40079=$(( ${__range_start_40079} <= ${__range_end_40079} ? 1 : -1 ))
-        for (( j_40079=${__range_start_40079}; j_40079 * ${__dir_40079} < ${__range_end_40079} * ${__dir_40079}; j_40079+=${__dir_40079} )); do
-            local word_40080="${words_40075[${j_40079}]?"Index out of bounds (at src/./file/../utils/widget/help.ab:70:32)"}"
-            local candidate_40081
-            candidate_40081="$(if [ "$([ "_${line_40077}" != "_" ]; echo $?)" != 0 ]; then echo "${word_40080}"; else echo "${line_40077}"" ""${word_40080}"; fi)"
-            local __length_631="${candidate_40081}"
-            if [ "$(( $(( ${#__length_631} > avail_40071 )) && $([ "_${line_40077}" == "_" ]; echo $?) ))" != 0 ]; then
-                print_help_line__3240_v0 "${pending_40074}" "${line_40077}" "${note_at_40078}"
-                pending_40074="${blank_40072}"
-                line_40077="${word_40080}"
-                note_at_40078="$(if [ "$(( j_40079 >= note_start_40076 ))" != 0 ]; then echo 0; else echo -1; fi)"
+        local note_at_40254=-1
+        local __range_start_40255=0
+        local __length_640=("${words_40251[@]}")
+        local __range_end_40255="${#__length_640[@]}"
+        local __dir_40255=$(( ${__range_start_40255} <= ${__range_end_40255} ? 1 : -1 ))
+        for (( j_40255=${__range_start_40255}; j_40255 * ${__dir_40255} < ${__range_end_40255} * ${__dir_40255}; j_40255+=${__dir_40255} )); do
+            local word_40256="${words_40251[${j_40255}]?"Index out of bounds (at src/./file/../utils/widget/help.ab:70:32)"}"
+            local candidate_40257
+            candidate_40257="$(if [ "$([ "_${line_40253}" != "_" ]; echo $?)" != 0 ]; then echo "${word_40256}"; else echo "${line_40253}"" ""${word_40256}"; fi)"
+            local __length_641="${candidate_40257}"
+            if [ "$(( $(( ${#__length_641} > avail_40247 )) && $([ "_${line_40253}" == "_" ]; echo $?) ))" != 0 ]; then
+                print_help_line__3252_v0 "${pending_40250}" "${line_40253}" "${note_at_40254}"
+                pending_40250="${blank_40248}"
+                line_40253="${word_40256}"
+                note_at_40254="$(if [ "$(( j_40255 >= note_start_40252 ))" != 0 ]; then echo 0; else echo -1; fi)"
             else
-                if [ "$(( $(( j_40079 >= note_start_40076 )) && $(( note_at_40078 < 0 )) ))" != 0 ]; then
-                    local __length_632="${candidate_40081}"
-                    local __length_633="${word_40080}"
-                    note_at_40078="$(( ${#__length_632} - ${#__length_633} ))"
+                if [ "$(( $(( j_40255 >= note_start_40252 )) && $(( note_at_40254 < 0 )) ))" != 0 ]; then
+                    local __length_642="${candidate_40257}"
+                    local __length_643="${word_40256}"
+                    note_at_40254="$(( ${#__length_642} - ${#__length_643} ))"
                 fi
-                line_40077="${candidate_40081}"
+                line_40253="${candidate_40257}"
             fi
 done
-        print_help_line__3240_v0 "${pending_40074}" "${line_40077}" "${note_at_40078}"
+        print_help_line__3252_v0 "${pending_40250}" "${line_40253}" "${note_at_40254}"
 done
 }
 
 # Facade over the helper modules, so every caller keeps importing one path.
 # get_key()
-get_key__3344_v0() {
-    local command_634
-    command_634="$(IFS= read -rsn1 k < /dev/tty; if [[ "$k" == $'\e' ]]; then IFS= read -rsn2 r < /dev/tty; k+=$r; fi; case "$k" in ($'\e[A') printf UP;; ($'\e[B') printf DOWN;; ($'\e[C') printf RIGHT;; ($'\e[D') printf LEFT;; ($'\177') printf BACKSPACE;; ($'	') printf TAB;; ($'\001') printf CTRL_A;; (' ') printf SPACE;; ('') printf INPUT;; (*) printf '%s' "$k";; esac)"
+get_key__3356_v0() {
+    local command_644
+    command_644="$(IFS= read -rsn1 k < /dev/tty; if [[ "$k" == $'\e' ]]; then IFS= read -rsn2 r < /dev/tty; k+=$r; fi; case "$k" in ($'\e[A') printf UP;; ($'\e[B') printf DOWN;; ($'\e[C') printf RIGHT;; ($'\e[D') printf LEFT;; ($'\177') printf BACKSPACE;; ($'	') printf TAB;; ($'\001') printf CTRL_A;; (' ') printf SPACE;; ('') printf INPUT;; (*) printf '%s' "$k";; esac)"
     __status=$?
-    ret_get_key3344_v0="${command_634}"
+    ret_get_key3356_v0="${command_644}"
     return 0
 }
 
 # eprintf(format: Text, args: [Text])
-eprintf__3346_v0() {
-    local format_40183="${1}"
-    local args_40184=("${!2}")
-    args_40184=("${format_40183}" "${args_40184[@]}")
+eprintf__3358_v0() {
+    local format_40363="${1}"
+    local args_40364=("${!2}")
+    args_40364=("${format_40363}" "${args_40364[@]}")
     __status=$?
-    printf "${args_40184[@]}" >&2
+    printf "${args_40364[@]}" >&2
     __status=$?
 }
 
 # eprintf_colored(message: Text, color: Int)
-eprintf_colored__3347_v0() {
-    local message_40190="${1}"
-    local color_40191="${2}"
+eprintf_colored__3359_v0() {
+    local message_40370="${1}"
+    local color_40371="${2}"
     # Prints an error message with a specified color.
-    local array_635=("${message_40190}")
-    eprintf__3346_v0 "\\x1b[${color_40191}m%s\\x1b[0m" array_635[@]
+    local array_645=("${message_40370}")
+    eprintf__3358_v0 "\\x1b[${color_40371}m%s\\x1b[0m" array_645[@]
 }
 
 # eprintf(format: Text, args: [Text])
-eprintf__3362_v0() {
-    local format_40133="${1}"
-    local args_40134=("${!2}")
-    args_40134=("${format_40133}" "${args_40134[@]}")
+eprintf__3374_v0() {
+    local format_40313="${1}"
+    local args_40314=("${!2}")
+    args_40314=("${format_40313}" "${args_40314[@]}")
     __status=$?
-    printf "${args_40134[@]}" >&2
+    printf "${args_40314[@]}" >&2
     __status=$?
+}
+
+# eprintf_colored(message: Text, color: Int)
+eprintf_colored__3375_v0() {
+    local message_40311="${1}"
+    local color_40312="${2}"
+    # Prints an error message with a specified color.
+    local array_646=("${message_40311}")
+    eprintf__3374_v0 "\\x1b[${color_40312}m%s\\x1b[0m" array_646[@]
 }
 
 # Perl Extensions Utilities
@@ -8459,191 +8548,198 @@ _term_size_170=(80 24)
 export XYLITOL_RUNTIME_STTY_COUNT=0
 __status=$?
 # stty_count()
-stty_count__3386_v0() {
-    local command_637
-    command_637="$(c="${XYLITOL_RUNTIME_STTY_COUNT:-0}"; [[ "$c" =~ ^[0-9]+$ ]] && echo "$c" || echo 0)"
+stty_count__3399_v0() {
+    local command_648
+    command_648="$(c="${XYLITOL_RUNTIME_STTY_COUNT:-0}"; [[ "$c" =~ ^[0-9]+$ ]] && echo "$c" || echo 0)"
     __status=$?
-    local count_40131="${command_637}"
-    parse_int__13_v0 "${count_40131}"
+    local count_40309="${command_648}"
+    parse_int__13_v0 "${count_40309}"
     __status=$?
-    ret_stty_count3386_v0="${ret_parse_int13_v0}"
+    ret_stty_count3399_v0="${ret_parse_int13_v0}"
     return 0
 }
 
 # stty_lock()
-stty_lock__3387_v0() {
-    stty_count__3386_v0 
-    local count_num_40132="${ret_stty_count3386_v0}"
-    if [ "$(( count_num_40132 == 0 ))" != 0 ]; then
-        stty -echo -icanon min 1 time 0 < /dev/tty
+stty_lock__3400_v0() {
+    stty_count__3399_v0 
+    local count_num_40310="${ret_stty_count3399_v0}"
+    if [ "$(( count_num_40310 == 0 ))" != 0 ]; then
+        stty -echo -icanon min 1 time 0 2>/dev/null < /dev/tty
         __status=$?
+        if [ "${__status}" != 0 ]; then
+            eprintf_colored__3375_v0 "Error: " 91
+            local array_649=("")
+            eprintf__3374_v0 "xylitol needs a terminal, and /dev/tty is not available here.
+" array_649[@]
+            exit 1
+        fi
     fi
-    count_num_40132="$(( count_num_40132 + 1 ))"
-    export XYLITOL_RUNTIME_STTY_COUNT=${count_num_40132}
+    count_num_40310="$(( count_num_40310 + 1 ))"
+    export XYLITOL_RUNTIME_STTY_COUNT=${count_num_40310}
     __status=$?
 }
 
 # stty_unlock()
-stty_unlock__3388_v0() {
-    stty_count__3386_v0 
-    local count_num_40283="${ret_stty_count3386_v0}"
-    if [ "$(( count_num_40283 > 0 ))" != 0 ]; then
-        count_num_40283="$(( count_num_40283 - 1 ))"
-        export XYLITOL_RUNTIME_STTY_COUNT=${count_num_40283}
+stty_unlock__3401_v0() {
+    stty_count__3399_v0 
+    local count_num_40463="${ret_stty_count3399_v0}"
+    if [ "$(( count_num_40463 > 0 ))" != 0 ]; then
+        count_num_40463="$(( count_num_40463 - 1 ))"
+        export XYLITOL_RUNTIME_STTY_COUNT=${count_num_40463}
         __status=$?
-        if [ "$(( count_num_40283 == 0 ))" != 0 ]; then
-            stty echo icanon < /dev/tty
+        if [ "$(( count_num_40463 == 0 ))" != 0 ]; then
+            stty echo icanon 2>/dev/null < /dev/tty
             __status=$?
         fi
     fi
 }
 
 # store_term_size(size: Text)
-store_term_size__3389_v0() {
-    local size_40136="${1}"
-    if [ "$([ "_${size_40136}" != "_" ]; echo $?)" != 0 ]; then
-        ret_store_term_size3389_v0=0
+store_term_size__3402_v0() {
+    local size_40316="${1}"
+    if [ "$([ "_${size_40316}" != "_" ]; echo $?)" != 0 ]; then
+        ret_store_term_size3402_v0=0
         return 0
     fi
-    split__4_v0 "${size_40136}" " "
-    local parts_40137=("${ret_split4_v0[@]}")
-    local __length_638=("${parts_40137[@]}")
-    if [ "$(( ${#__length_638[@]} != 2 ))" != 0 ]; then
-        ret_store_term_size3389_v0=0
+    split__4_v0 "${size_40316}" " "
+    local parts_40317=("${ret_split4_v0[@]}")
+    local __length_650=("${parts_40317[@]}")
+    if [ "$(( ${#__length_650[@]} != 2 ))" != 0 ]; then
+        ret_store_term_size3402_v0=0
         return 0
     fi
-    parse_int__13_v0 "${parts_40137[1]?"Index out of bounds (at src/./file/../choose/../utils/term.ab:53:41)"}"
+    parse_int__13_v0 "${parts_40317[1]?"Index out of bounds (at src/./file/../choose/../utils/term.ab:57:41)"}"
     __status=$?
-    local ret_parse_int13_v0__53_25="${ret_parse_int13_v0}"
-    parse_int__13_v0 "${parts_40137[0]?"Index out of bounds (at src/./file/../choose/../utils/term.ab:53:68)"}"
+    local ret_parse_int13_v0__57_25="${ret_parse_int13_v0}"
+    parse_int__13_v0 "${parts_40317[0]?"Index out of bounds (at src/./file/../choose/../utils/term.ab:57:68)"}"
     __status=$?
-    local ret_parse_int13_v0__53_52="${ret_parse_int13_v0}"
-    _term_size_170=("${ret_parse_int13_v0__53_25}" "${ret_parse_int13_v0__53_52}")
-    ret_store_term_size3389_v0=1
+    local ret_parse_int13_v0__57_52="${ret_parse_int13_v0}"
+    _term_size_170=("${ret_parse_int13_v0__57_25}" "${ret_parse_int13_v0__57_52}")
+    ret_store_term_size3402_v0=1
     return 0
 }
 
 # query_term_size()
-query_term_size__3390_v0() {
-    local command_640
-    command_640="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
+query_term_size__3403_v0() {
+    local command_652
+    command_652="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
     __status=$?
-    local size_40139="${command_640}"
-    store_term_size__3389_v0 "${size_40139}"
-    ret_query_term_size3390_v0="${ret_store_term_size3389_v0}"
+    local size_40319="${command_652}"
+    store_term_size__3402_v0 "${size_40319}"
+    ret_query_term_size3403_v0="${ret_store_term_size3402_v0}"
     return 0
 }
 
 # stty_term_size()
-stty_term_size__3391_v0() {
-    local command_641
-    command_641="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
+stty_term_size__3404_v0() {
+    local command_653
+    command_653="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
     __status=$?
-    local size_40135="${command_641}"
-    store_term_size__3389_v0 "${size_40135}"
-    ret_stty_term_size3391_v0="${ret_store_term_size3389_v0}"
+    local size_40315="${command_653}"
+    store_term_size__3402_v0 "${size_40315}"
+    ret_stty_term_size3404_v0="${ret_store_term_size3402_v0}"
     return 0
 }
 
 # get_term_size()
-get_term_size__3392_v0() {
-    stty_term_size__3391_v0 
-    local detected_40138="${ret_stty_term_size3391_v0}"
-    if [ "$(( ! detected_40138 ))" != 0 ]; then
-        query_term_size__3390_v0 
-        detected_40138="${ret_query_term_size3390_v0}"
+get_term_size__3405_v0() {
+    stty_term_size__3404_v0 
+    local detected_40318="${ret_stty_term_size3404_v0}"
+    if [ "$(( ! detected_40318 ))" != 0 ]; then
+        query_term_size__3403_v0 
+        detected_40318="${ret_query_term_size3403_v0}"
     fi
     _got_term_size_169=1
 }
 
 # term_width()
-term_width__3394_v0() {
+term_width__3407_v0() {
     if [ "$(( ! _got_term_size_169 ))" != 0 ]; then
-        get_term_size__3392_v0 
+        get_term_size__3405_v0 
     fi
-    ret_term_width3394_v0="${_term_size_170[0]?"Index out of bounds (at src/./file/../choose/../utils/term.ab:96:23)"}"
+    ret_term_width3407_v0="${_term_size_170[0]?"Index out of bounds (at src/./file/../choose/../utils/term.ab:100:23)"}"
     return 0
 }
 
 # term_height()
-term_height__3395_v0() {
+term_height__3408_v0() {
     if [ "$(( ! _got_term_size_169 ))" != 0 ]; then
-        get_term_size__3392_v0 
+        get_term_size__3405_v0 
     fi
-    ret_term_height3395_v0="${_term_size_170[1]?"Index out of bounds (at src/./file/../choose/../utils/term.ab:104:23)"}"
+    ret_term_height3408_v0="${_term_size_170[1]?"Index out of bounds (at src/./file/../choose/../utils/term.ab:108:23)"}"
     return 0
 }
 
 # // Cursor /////
 # remove_line(cnt: Int)
-remove_line__3397_v0() {
-    local cnt_40254="${1}"
-    if [ "$(( cnt_40254 > 0 ))" != 0 ]; then
-        local sequence_40255=""
-        local __range_start_40256=0
-        local __range_end_40256="${cnt_40254}"
-        local __dir_40256=$(( ${__range_start_40256} <= ${__range_end_40256} ? 1 : -1 ))
-        for (( ____40256=${__range_start_40256}; ____40256 * ${__dir_40256} < ${__range_end_40256} * ${__dir_40256}; ____40256+=${__dir_40256} )); do
-            sequence_40255+="\\x1b[2K\\x1b[1A"
+remove_line__3410_v0() {
+    local cnt_40434="${1}"
+    if [ "$(( cnt_40434 > 0 ))" != 0 ]; then
+        local sequence_40435=""
+        local __range_start_40436=0
+        local __range_end_40436="${cnt_40434}"
+        local __dir_40436=$(( ${__range_start_40436} <= ${__range_end_40436} ? 1 : -1 ))
+        for (( ____40436=${__range_start_40436}; ____40436 * ${__dir_40436} < ${__range_end_40436} * ${__dir_40436}; ____40436+=${__dir_40436} )); do
+            sequence_40435+="\\x1b[2K\\x1b[1A"
 done
-        local array_642=("")
-        eprintf__3362_v0 "${sequence_40255}" array_642[@]
+        local array_654=("")
+        eprintf__3374_v0 "${sequence_40435}" array_654[@]
     fi
-    local array_643=("")
-    eprintf__3362_v0 "\\x1b[G" array_643[@]
+    local array_655=("")
+    eprintf__3374_v0 "\\x1b[G" array_655[@]
 }
 
 # remove_current_line()
-remove_current_line__3398_v0() {
-    local array_644=("")
-    eprintf__3362_v0 "\\x1b[2K\\x1b[G" array_644[@]
+remove_current_line__3411_v0() {
+    local array_656=("")
+    eprintf__3374_v0 "\\x1b[2K\\x1b[G" array_656[@]
 }
 
 # print_blank(cnt: Int)
-print_blank__3399_v0() {
-    local cnt_40245="${1}"
-    printf '%*s' "${cnt_40245}" ' ' >&2
+print_blank__3412_v0() {
+    local cnt_40425="${1}"
+    printf '%*s' "${cnt_40425}" ' ' >&2
     __status=$?
 }
 
 # new_line(cnt: Int)
-new_line__3400_v0() {
-    local cnt_40188="${1}"
-    local __range_start_40189=0
-    local __range_end_40189="${cnt_40188}"
-    local __dir_40189=$(( ${__range_start_40189} <= ${__range_end_40189} ? 1 : -1 ))
-    for (( ____40189=${__range_start_40189}; ____40189 * ${__dir_40189} < ${__range_end_40189} * ${__dir_40189}; ____40189+=${__dir_40189} )); do
-        local array_645=("")
-        eprintf__3362_v0 "
-" array_645[@]
+new_line__3413_v0() {
+    local cnt_40368="${1}"
+    local __range_start_40369=0
+    local __range_end_40369="${cnt_40368}"
+    local __dir_40369=$(( ${__range_start_40369} <= ${__range_end_40369} ? 1 : -1 ))
+    for (( ____40369=${__range_start_40369}; ____40369 * ${__dir_40369} < ${__range_end_40369} * ${__dir_40369}; ____40369+=${__dir_40369} )); do
+        local array_657=("")
+        eprintf__3374_v0 "
+" array_657[@]
 done
 }
 
 # go_up(cnt: Int)
-go_up__3401_v0() {
-    local cnt_40211="${1}"
-    local array_646=("")
-    eprintf__3362_v0 "\\x1b[${cnt_40211}A" array_646[@]
+go_up__3414_v0() {
+    local cnt_40391="${1}"
+    local array_658=("")
+    eprintf__3374_v0 "\\x1b[${cnt_40391}A" array_658[@]
 }
 
 # go_down(cnt: Int)
-go_down__3402_v0() {
-    local cnt_40282="${1}"
-    local array_647=("")
-    eprintf__3362_v0 "\\x1b[${cnt_40282}B" array_647[@]
+go_down__3415_v0() {
+    local cnt_40462="${1}"
+    local array_659=("")
+    eprintf__3374_v0 "\\x1b[${cnt_40462}B" array_659[@]
 }
 
 # move the cursor up or down `cnt` lines.
 # hide_cursor()
-hide_cursor__3404_v0() {
-    local array_648=("")
-    eprintf__3362_v0 "\\x1b[?25l" array_648[@]
+hide_cursor__3417_v0() {
+    local array_660=("")
+    eprintf__3374_v0 "\\x1b[?25l" array_660[@]
 }
 
 # show_cursor()
-show_cursor__3405_v0() {
-    local array_649=("")
-    eprintf__3362_v0 "\\x1b[?25h" array_649[@]
+show_cursor__3418_v0() {
+    local array_661=("")
+    eprintf__3374_v0 "\\x1b[?25h" array_661[@]
 }
 
 # How many elements one entry takes up in `get_directory_entries`.
@@ -8657,84 +8753,84 @@ _supports_truecolor_173="None"
 _got_xylitol_colors_174=0
 _secondary_color_176=(3 118 206 94)
 # get_supports_truecolor()
-get_supports_truecolor__3443_v0() {
+get_supports_truecolor__3456_v0() {
     env_var_get__120_v0 "XYLITOL_TRUECOLOR"
     __status=$?
-    local config_40244="${ret_env_var_get120_v0}"
-    _supports_truecolor_173="$(if [ "$([ "_${config_40244}" != "_Yes" ]; echo $?)" != 0 ]; then echo "Yes"; else echo "No"; fi)"
-    ret_get_supports_truecolor3443_v0="$([ "_${_supports_truecolor_173}" != "_Yes" ]; echo $?)"
+    local config_40424="${ret_env_var_get120_v0}"
+    _supports_truecolor_173="$(if [ "$([ "_${config_40424}" != "_Yes" ]; echo $?)" != 0 ]; then echo "Yes"; else echo "No"; fi)"
+    ret_get_supports_truecolor3456_v0="$([ "_${_supports_truecolor_173}" != "_Yes" ]; echo $?)"
     return 0
 }
 
 # colored_rgb(message: Text, r: Int, g: Int, b: Int, fallback: Int)
-colored_rgb__3444_v0() {
-    local message_40239="${1}"
-    local r_40240="${2}"
-    local g_40241="${3}"
-    local b_40242="${4}"
-    local fallback_40243="${5}"
+colored_rgb__3457_v0() {
+    local message_40419="${1}"
+    local r_40420="${2}"
+    local g_40421="${3}"
+    local b_40422="${4}"
+    local fallback_40423="${5}"
     if [ "$([ "_${_supports_truecolor_173}" != "_Yes" ]; echo $?)" != 0 ]; then
-        ret_colored_rgb3444_v0="\\x1b[38;2;${r_40240};${g_40241};${b_40242}m""${message_40239}""\\x1b[0m"
+        ret_colored_rgb3457_v0="\\x1b[38;2;${r_40420};${g_40421};${b_40422}m""${message_40419}""\\x1b[0m"
         return 0
     elif [ "$([ "_${_supports_truecolor_173}" != "_None" ]; echo $?)" != 0 ]; then
-        get_supports_truecolor__3443_v0 
-        local ret_get_supports_truecolor3443_v0__45_17="${ret_get_supports_truecolor3443_v0}"
-        if [ "${ret_get_supports_truecolor3443_v0__45_17}" != 0 ]; then
-            ret_colored_rgb3444_v0="\\x1b[38;2;${r_40240};${g_40241};${b_40242}m""${message_40239}""\\x1b[0m"
+        get_supports_truecolor__3456_v0 
+        local ret_get_supports_truecolor3456_v0__45_17="${ret_get_supports_truecolor3456_v0}"
+        if [ "${ret_get_supports_truecolor3456_v0__45_17}" != 0 ]; then
+            ret_colored_rgb3457_v0="\\x1b[38;2;${r_40420};${g_40421};${b_40422}m""${message_40419}""\\x1b[0m"
             return 0
-        elif [ "$(( fallback_40243 == 0 ))" != 0 ]; then
-            ret_colored_rgb3444_v0="${message_40239}"
+        elif [ "$(( fallback_40423 == 0 ))" != 0 ]; then
+            ret_colored_rgb3457_v0="${message_40419}"
             return 0
         else
-            ret_colored_rgb3444_v0="\\x1b[${fallback_40243}m""${message_40239}""\\x1b[0m"
+            ret_colored_rgb3457_v0="\\x1b[${fallback_40423}m""${message_40419}""\\x1b[0m"
             return 0
         fi
     else
-        if [ "$(( fallback_40243 == 0 ))" != 0 ]; then
-            ret_colored_rgb3444_v0="${message_40239}"
+        if [ "$(( fallback_40423 == 0 ))" != 0 ]; then
+            ret_colored_rgb3457_v0="${message_40419}"
             return 0
         fi
-        ret_colored_rgb3444_v0="\\x1b[${fallback_40243}m""${message_40239}""\\x1b[0m"
+        ret_colored_rgb3457_v0="\\x1b[${fallback_40423}m""${message_40419}""\\x1b[0m"
         return 0
     fi
 }
 
 # inner_get_xylitol_colors()
-inner_get_xylitol_colors__3446_v0() {
+inner_get_xylitol_colors__3459_v0() {
     if [ "$(( ! _got_xylitol_colors_174 ))" != 0 ]; then
         env_var_get__120_v0 "XYLITOL_PRIMARY_COLOR"
         __status=$?
-        local primary_env_40233="${ret_env_var_get120_v0}"
-        if [ "$([ "_${primary_env_40233}" == "_" ]; echo $?)" != 0 ]; then
-            split__4_v0 "${primary_env_40233}" ";"
-            local parts_40234=("${ret_split4_v0[@]}")
-            local __length_653=("${parts_40234[@]}")
-            if [ "$(( ${#__length_653[@]} == 4 ))" != 0 ]; then
-                parse_int__13_v0 "${parts_40234[0]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:110:37)"}"
+        local primary_env_40413="${ret_env_var_get120_v0}"
+        if [ "$([ "_${primary_env_40413}" == "_" ]; echo $?)" != 0 ]; then
+            split__4_v0 "${primary_env_40413}" ";"
+            local parts_40414=("${ret_split4_v0[@]}")
+            local __length_665=("${parts_40414[@]}")
+            if [ "$(( ${#__length_665[@]} == 4 ))" != 0 ]; then
+                parse_int__13_v0 "${parts_40414[0]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:110:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors3446_v0=''
+                    ret_inner_get_xylitol_colors3459_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__110_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_40234[1]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:111:37)"}"
+                parse_int__13_v0 "${parts_40414[1]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:111:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors3446_v0=''
+                    ret_inner_get_xylitol_colors3459_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__111_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_40234[2]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:112:37)"}"
+                parse_int__13_v0 "${parts_40414[2]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:112:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors3446_v0=''
+                    ret_inner_get_xylitol_colors3459_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__112_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_40234[3]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:113:37)"}"
+                parse_int__13_v0 "${parts_40414[3]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:113:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors3446_v0=''
+                    ret_inner_get_xylitol_colors3459_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__113_21="${ret_parse_int13_v0}"
@@ -8742,37 +8838,37 @@ inner_get_xylitol_colors__3446_v0() {
         fi
         env_var_get__120_v0 "XYLITOL_SECONDARY_COLOR"
         __status=$?
-        local secondary_env_40235="${ret_env_var_get120_v0}"
-        if [ "$([ "_${secondary_env_40235}" == "_" ]; echo $?)" != 0 ]; then
-            split__4_v0 "${secondary_env_40235}" ";"
-            local parts_40236=("${ret_split4_v0[@]}")
-            local __length_655=("${parts_40236[@]}")
-            if [ "$(( ${#__length_655[@]} == 4 ))" != 0 ]; then
-                parse_int__13_v0 "${parts_40236[0]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:123:37)"}"
+        local secondary_env_40415="${ret_env_var_get120_v0}"
+        if [ "$([ "_${secondary_env_40415}" == "_" ]; echo $?)" != 0 ]; then
+            split__4_v0 "${secondary_env_40415}" ";"
+            local parts_40416=("${ret_split4_v0[@]}")
+            local __length_667=("${parts_40416[@]}")
+            if [ "$(( ${#__length_667[@]} == 4 ))" != 0 ]; then
+                parse_int__13_v0 "${parts_40416[0]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:123:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors3446_v0=''
+                    ret_inner_get_xylitol_colors3459_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__123_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_40236[1]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:124:37)"}"
+                parse_int__13_v0 "${parts_40416[1]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:124:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors3446_v0=''
+                    ret_inner_get_xylitol_colors3459_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__124_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_40236[2]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:125:37)"}"
+                parse_int__13_v0 "${parts_40416[2]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:125:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors3446_v0=''
+                    ret_inner_get_xylitol_colors3459_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__125_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_40236[3]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:126:37)"}"
+                parse_int__13_v0 "${parts_40416[3]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:126:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors3446_v0=''
+                    ret_inner_get_xylitol_colors3459_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__126_21="${ret_parse_int13_v0}"
@@ -8781,37 +8877,37 @@ inner_get_xylitol_colors__3446_v0() {
         fi
         env_var_get__120_v0 "XYLITOL_ACCENT_COLOR"
         __status=$?
-        local accent_env_40237="${ret_env_var_get120_v0}"
-        if [ "$([ "_${accent_env_40237}" == "_" ]; echo $?)" != 0 ]; then
-            split__4_v0 "${accent_env_40237}" ";"
-            local parts_40238=("${ret_split4_v0[@]}")
-            local __length_657=("${parts_40238[@]}")
-            if [ "$(( ${#__length_657[@]} == 4 ))" != 0 ]; then
-                parse_int__13_v0 "${parts_40238[0]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:136:37)"}"
+        local accent_env_40417="${ret_env_var_get120_v0}"
+        if [ "$([ "_${accent_env_40417}" == "_" ]; echo $?)" != 0 ]; then
+            split__4_v0 "${accent_env_40417}" ";"
+            local parts_40418=("${ret_split4_v0[@]}")
+            local __length_669=("${parts_40418[@]}")
+            if [ "$(( ${#__length_669[@]} == 4 ))" != 0 ]; then
+                parse_int__13_v0 "${parts_40418[0]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:136:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors3446_v0=''
+                    ret_inner_get_xylitol_colors3459_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__136_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_40238[1]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:137:37)"}"
+                parse_int__13_v0 "${parts_40418[1]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:137:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors3446_v0=''
+                    ret_inner_get_xylitol_colors3459_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__137_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_40238[2]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:138:37)"}"
+                parse_int__13_v0 "${parts_40418[2]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:138:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors3446_v0=''
+                    ret_inner_get_xylitol_colors3459_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__138_21="${ret_parse_int13_v0}"
-                parse_int__13_v0 "${parts_40238[3]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:139:37)"}"
+                parse_int__13_v0 "${parts_40418[3]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:139:37)"}"
                 __status=$?
                 if [ "${__status}" != 0 ]; then
-                    ret_inner_get_xylitol_colors3446_v0=''
+                    ret_inner_get_xylitol_colors3459_v0=''
                     return "${__status}"
                 fi
                 local ret_parse_int13_v0__139_21="${ret_parse_int13_v0}"
@@ -8822,8 +8918,8 @@ inner_get_xylitol_colors__3446_v0() {
 }
 
 # get_xylitol_colors()
-get_xylitol_colors__3447_v0() {
-    inner_get_xylitol_colors__3446_v0 
+get_xylitol_colors__3460_v0() {
+    inner_get_xylitol_colors__3459_v0 
     __status=$?
     if [ "${__status}" != 0 ]; then
         echo_colored__134_v0 "WARN: Failed to parse Xylitol colors from envs." 33
@@ -8832,13 +8928,13 @@ get_xylitol_colors__3447_v0() {
 }
 
 # colored_secondary(message: Text)
-colored_secondary__3449_v0() {
-    local message_40232="${1}"
+colored_secondary__3462_v0() {
+    local message_40412="${1}"
     if [ "$(( ! _got_xylitol_colors_174 ))" != 0 ]; then
-        get_xylitol_colors__3447_v0 
+        get_xylitol_colors__3460_v0 
     fi
-    colored_rgb__3444_v0 "${message_40232}" "${_secondary_color_176[0]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:166:50)"}" "${_secondary_color_176[1]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:166:71)"}" "${_secondary_color_176[2]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:166:92)"}" "${_secondary_color_176[3]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:166:113)"}"
-    ret_colored_secondary3449_v0="${ret_colored_rgb3444_v0}"
+    colored_rgb__3457_v0 "${message_40412}" "${_secondary_color_176[0]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:166:50)"}" "${_secondary_color_176[1]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:166:71)"}" "${_secondary_color_176[2]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:166:92)"}" "${_secondary_color_176[3]?"Index out of bounds (at src/./file/../choose/../utils/truecolor.ab:166:113)"}"
+    ret_colored_secondary3462_v0="${ret_colored_rgb3457_v0}"
     return 0
 }
 
@@ -8846,388 +8942,388 @@ colored_secondary__3449_v0() {
 # "None" until the first call decides, then "Yes" or "No".
 _perl_state_178="None"
 # perl_available()
-perl_available__3466_v0() {
+perl_available__3479_v0() {
     if [ "$([ "_${_perl_state_178}" != "_None" ]; echo $?)" != 0 ]; then
-        local command_659
-        command_659="$(echo "$XYLITOL_USE_PERL")"
+        local command_671
+        command_671="$(echo "$XYLITOL_USE_PERL")"
         __status=$?
-        local disabled_40153
-        disabled_40153="$([ "_${command_659}" != "_No" ]; echo $?)"
-        local command_660
-        command_660="$(command -v perl > /dev/null && echo 0 || echo 1)"
+        local disabled_40333
+        disabled_40333="$([ "_${command_671}" != "_No" ]; echo $?)"
+        local command_672
+        command_672="$(command -v perl > /dev/null && echo 0 || echo 1)"
         __status=$?
-        local found_40154
-        found_40154="$(( $(( ! disabled_40153 )) && $([ "_${command_660}" != "_0" ]; echo $?) ))"
-        _perl_state_178="$(if [ "${found_40154}" != 0 ]; then echo "Yes"; else echo "No"; fi)"
+        local found_40334
+        found_40334="$(( $(( ! disabled_40333 )) && $([ "_${command_672}" != "_0" ]; echo $?) ))"
+        _perl_state_178="$(if [ "${found_40334}" != 0 ]; then echo "Yes"; else echo "No"; fi)"
     fi
-    ret_perl_available3466_v0="$([ "_${_perl_state_178}" != "_Yes" ]; echo $?)"
+    ret_perl_available3479_v0="$([ "_${_perl_state_178}" != "_Yes" ]; echo $?)"
     return 0
 }
 
 # perl_get_cjk_width(text: Text)
-perl_get_cjk_width__3467_v0() {
-    local text_40152="${1}"
-    perl_available__3466_v0 
-    local ret_perl_available3466_v0__19_12="${ret_perl_available3466_v0}"
-    if [ "$(( ! ret_perl_available3466_v0__19_12 ))" != 0 ]; then
-        ret_perl_get_cjk_width3467_v0=''
+perl_get_cjk_width__3480_v0() {
+    local text_40332="${1}"
+    perl_available__3479_v0 
+    local ret_perl_available3479_v0__19_12="${ret_perl_available3479_v0}"
+    if [ "$(( ! ret_perl_available3479_v0__19_12 ))" != 0 ]; then
+        ret_perl_get_cjk_width3480_v0=''
         return 1
     fi
-    local command_661
-    command_661="$(perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text_40152}" 2>/dev/null)"
+    local command_673
+    command_673="$(perl -CSDA -E '$w=0;$w+=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1 for split//,shift; say $w' "${text_40332}" 2>/dev/null)"
     __status=$?
     if [ "${__status}" != 0 ]; then
-        ret_perl_get_cjk_width3467_v0=''
+        ret_perl_get_cjk_width3480_v0=''
         return "${__status}"
     fi
-    local width_str_40155="${command_661}"
-    parse_int__13_v0 "${width_str_40155}"
+    local width_str_40335="${command_673}"
+    parse_int__13_v0 "${width_str_40335}"
     __status=$?
     if [ "${__status}" != 0 ]; then
-        ret_perl_get_cjk_width3467_v0=''
+        ret_perl_get_cjk_width3480_v0=''
         return "${__status}"
     fi
-    local width_40156="${ret_parse_int13_v0}"
-    ret_perl_get_cjk_width3467_v0="${width_40156}"
+    local width_40336="${ret_parse_int13_v0}"
+    ret_perl_get_cjk_width3480_v0="${width_40336}"
     return 0
 }
 
 # perl_truncate_cjk(text: Text, max_width: Int)
-perl_truncate_cjk__3468_v0() {
-    local text_40165="${1}"
-    local max_width_40166="${2}"
-    perl_available__3466_v0 
-    local ret_perl_available3466_v0__30_12="${ret_perl_available3466_v0}"
-    if [ "$(( ! ret_perl_available3466_v0__30_12 ))" != 0 ]; then
-        ret_perl_truncate_cjk3468_v0=''
+perl_truncate_cjk__3481_v0() {
+    local text_40345="${1}"
+    local max_width_40346="${2}"
+    perl_available__3479_v0 
+    local ret_perl_available3479_v0__30_12="${ret_perl_available3479_v0}"
+    if [ "$(( ! ret_perl_available3479_v0__30_12 ))" != 0 ]; then
+        ret_perl_truncate_cjk3481_v0=''
         return 1
     fi
-    local command_662
-    command_662="$(perl -CSDA -E '$t=shift;$m=shift;$w=0;$r="";$c=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1,($w+$c<=$m?($w+=$c,$r.=$_):last) for split//,$t; print $r' "${text_40165}" ${max_width_40166} 2>/dev/null)"
+    local command_674
+    command_674="$(perl -CSDA -E '$t=shift;$m=shift;$w=0;$r="";$c=/\p{EastAsianWidth=Wide}|\p{EastAsianWidth=Fullwidth}|\p{EastAsianWidth=Ambiguous}/?2:1,($w+$c<=$m?($w+=$c,$r.=$_):last) for split//,$t; print $r' "${text_40345}" ${max_width_40346} 2>/dev/null)"
     __status=$?
     if [ "${__status}" != 0 ]; then
-        ret_perl_truncate_cjk3468_v0=''
+        ret_perl_truncate_cjk3481_v0=''
         return "${__status}"
     fi
-    local result_40167="${command_662}"
-    ret_perl_truncate_cjk3468_v0="${result_40167}"
+    local result_40347="${command_674}"
+    ret_perl_truncate_cjk3481_v0="${result_40347}"
     return 0
 }
 
 # has_ansi_escape(text: Text)
-has_ansi_escape__3472_v0() {
-    local text_40160="${1}"
+has_ansi_escape__3485_v0() {
+    local text_40340="${1}"
     # Check for ESC character (0x1B = 27) or literal \x1b[
-    local command_663
-    command_663="$([[ "${text_40160}" == *$'\x1b'* || "${text_40160}" == *'\x1b['* ]] && echo "1" || echo "0")"
+    local command_675
+    command_675="$([[ "${text_40340}" == *$'\x1b'* || "${text_40340}" == *'\x1b['* ]] && echo "1" || echo "0")"
     __status=$?
-    local has_escape_40161="${command_663}"
-    ret_has_ansi_escape3472_v0="$([ "_${has_escape_40161}" != "_1" ]; echo $?)"
+    local has_escape_40341="${command_675}"
+    ret_has_ansi_escape3485_v0="$([ "_${has_escape_40341}" != "_1" ]; echo $?)"
     return 0
 }
 
 # strip_ansi(text: Text)
-strip_ansi__3474_v0() {
-    local text_40148="${1}"
-    local command_664
-    command_664="$(printf "%s" "${text_40148}" | sed $'s/\x1b\[[0-9;]*m//g' | sed 's/\\x1b\[[0-9;]*m//g')"
+strip_ansi__3487_v0() {
+    local text_40328="${1}"
+    local command_676
+    command_676="$(printf "%s" "${text_40328}" | sed $'s/\x1b\[[0-9;]*m//g' | sed 's/\\x1b\[[0-9;]*m//g')"
     __status=$?
-    ret_strip_ansi3474_v0="${command_664}"
+    ret_strip_ansi3487_v0="${command_676}"
     return 0
 }
 
 # is_all_ascii(text: Text)
-is_all_ascii__3475_v0() {
-    local text_40150="${1}"
-    local command_665
-    command_665="$(printf "%s" "${text_40150}" | LC_ALL=C grep -q '^[ -~]*$' && echo 0 || echo 1)"
+is_all_ascii__3488_v0() {
+    local text_40330="${1}"
+    local command_677
+    command_677="$(printf "%s" "${text_40330}" | LC_ALL=C grep -q '^[ -~]*$' && echo 0 || echo 1)"
     __status=$?
-    local result_40151="${command_665}"
-    ret_is_all_ascii3475_v0="$([ "_${result_40151}" != "_0" ]; echo $?)"
+    local result_40331="${command_677}"
+    ret_is_all_ascii3488_v0="$([ "_${result_40331}" != "_0" ]; echo $?)"
     return 0
 }
 
 # plain_len(text: Text)
-plain_len__3476_v0() {
-    local text_40145="${1}"
-    local command_666
-    command_666="$(LC_ALL=C; __t="${text_40145}"; case "$__t" in (*[!\ -~]*) echo -1;; (*'\x1b['*) echo -1;; (*) echo "${#__t}";; esac)"
+plain_len__3489_v0() {
+    local text_40325="${1}"
+    local command_678
+    command_678="$(LC_ALL=C; __t="${text_40325}"; case "$__t" in (*[!\ -~]*) echo -1;; (*'\x1b['*) echo -1;; (*) echo "${#__t}";; esac)"
     __status=$?
-    local measured_40146="${command_666}"
-    parse_int__13_v0 "${measured_40146}"
+    local measured_40326="${command_678}"
+    parse_int__13_v0 "${measured_40326}"
     __status=$?
-    ret_plain_len3476_v0="${ret_parse_int13_v0}"
+    ret_plain_len3489_v0="${ret_parse_int13_v0}"
     return 0
 }
 
 # get_visible_len(text: Text)
-get_visible_len__3477_v0() {
-    local text_40144="${1}"
-    plain_len__3476_v0 "${text_40144}"
-    local plain_40147="${ret_plain_len3476_v0}"
-    if [ "$(( plain_40147 >= 0 ))" != 0 ]; then
-        ret_get_visible_len3477_v0="${plain_40147}"
+get_visible_len__3490_v0() {
+    local text_40324="${1}"
+    plain_len__3489_v0 "${text_40324}"
+    local plain_40327="${ret_plain_len3489_v0}"
+    if [ "$(( plain_40327 >= 0 ))" != 0 ]; then
+        ret_get_visible_len3490_v0="${plain_40327}"
         return 0
     fi
-    strip_ansi__3474_v0 "${text_40144}"
-    local stripped_40149="${ret_strip_ansi3474_v0}"
-    is_all_ascii__3475_v0 "${stripped_40149}"
-    local ret_is_all_ascii3475_v0__46_12="${ret_is_all_ascii3475_v0}"
-    if [ "$(( ! ret_is_all_ascii3475_v0__46_12 ))" != 0 ]; then
-        perl_get_cjk_width__3467_v0 "${stripped_40149}"
+    strip_ansi__3487_v0 "${text_40324}"
+    local stripped_40329="${ret_strip_ansi3487_v0}"
+    is_all_ascii__3488_v0 "${stripped_40329}"
+    local ret_is_all_ascii3488_v0__46_12="${ret_is_all_ascii3488_v0}"
+    if [ "$(( ! ret_is_all_ascii3488_v0__46_12 ))" != 0 ]; then
+        perl_get_cjk_width__3480_v0 "${stripped_40329}"
         __status=$?
         if [ "${__status}" != 0 ]; then
-            local __length_667="${stripped_40149}"
-            ret_get_visible_len3477_v0="${#__length_667}"
+            local __length_679="${stripped_40329}"
+            ret_get_visible_len3490_v0="${#__length_679}"
             return 0
         fi
-        ret_get_visible_len3477_v0="${ret_perl_get_cjk_width3467_v0}"
+        ret_get_visible_len3490_v0="${ret_perl_get_cjk_width3480_v0}"
         return 0
     fi
-    local __length_668="${stripped_40149}"
-    ret_get_visible_len3477_v0="${#__length_668}"
+    local __length_680="${stripped_40329}"
+    ret_get_visible_len3490_v0="${#__length_680}"
     return 0
 }
 
 # truncate_text(text: Text, max_width: Int)
-truncate_text__3478_v0() {
-    local text_40162="${1}"
-    local max_width_40163="${2}"
-    get_visible_len__3477_v0 "${text_40162}"
-    local visible_len_40164="${ret_get_visible_len3477_v0}"
-    if [ "$(( visible_len_40164 <= max_width_40163 ))" != 0 ]; then
-        ret_truncate_text3478_v0="${text_40162}"
+truncate_text__3491_v0() {
+    local text_40342="${1}"
+    local max_width_40343="${2}"
+    get_visible_len__3490_v0 "${text_40342}"
+    local visible_len_40344="${ret_get_visible_len3490_v0}"
+    if [ "$(( visible_len_40344 <= max_width_40343 ))" != 0 ]; then
+        ret_truncate_text3491_v0="${text_40342}"
         return 0
     fi
-    is_all_ascii__3475_v0 "${text_40162}"
-    local ret_is_all_ascii3475_v0__61_12="${ret_is_all_ascii3475_v0}"
-    if [ "$(( ! ret_is_all_ascii3475_v0__61_12 ))" != 0 ]; then
-        perl_truncate_cjk__3468_v0 "${text_40162}" "${max_width_40163}"
+    is_all_ascii__3488_v0 "${text_40342}"
+    local ret_is_all_ascii3488_v0__61_12="${ret_is_all_ascii3488_v0}"
+    if [ "$(( ! ret_is_all_ascii3488_v0__61_12 ))" != 0 ]; then
+        perl_truncate_cjk__3481_v0 "${text_40342}" "${max_width_40343}"
         __status=$?
         if [ "${__status}" != 0 ]; then
-            printf "%s" "${text_40162}" | cut -c1-${max_width_40163}
+            printf "%s" "${text_40342}" | cut -c1-${max_width_40343}
             __status=$?
         fi
-        ret_truncate_text3478_v0="${ret_perl_truncate_cjk3468_v0}"
+        ret_truncate_text3491_v0="${ret_perl_truncate_cjk3481_v0}"
         return 0
     fi
-    local command_669
-    command_669="$(printf "%s" "${text_40162}" | cut -c1-${max_width_40163})"
+    local command_681
+    command_681="$(printf "%s" "${text_40342}" | cut -c1-${max_width_40343})"
     __status=$?
-    ret_truncate_text3478_v0="${command_669}"
+    ret_truncate_text3491_v0="${command_681}"
     return 0
 }
 
 # truncate_ansi(text: Text, max_width: Int)
-truncate_ansi__3479_v0() {
-    local text_40158="${1}"
-    local max_width_40159="${2}"
-    has_ansi_escape__3472_v0 "${text_40158}"
-    local ret_has_ansi_escape3472_v0__73_12="${ret_has_ansi_escape3472_v0}"
-    if [ "$(( ! ret_has_ansi_escape3472_v0__73_12 ))" != 0 ]; then
-        truncate_text__3478_v0 "${text_40158}" "${max_width_40159}"
-        ret_truncate_ansi3479_v0="${ret_truncate_text3478_v0}"
+truncate_ansi__3492_v0() {
+    local text_40338="${1}"
+    local max_width_40339="${2}"
+    has_ansi_escape__3485_v0 "${text_40338}"
+    local ret_has_ansi_escape3485_v0__73_12="${ret_has_ansi_escape3485_v0}"
+    if [ "$(( ! ret_has_ansi_escape3485_v0__73_12 ))" != 0 ]; then
+        truncate_text__3491_v0 "${text_40338}" "${max_width_40339}"
+        ret_truncate_ansi3492_v0="${ret_truncate_text3491_v0}"
         return 0
     fi
     # Check if text starts with \x1b[
-    local command_670
-    command_670="$([[ "${text_40158}" == '\x1b['* ]] && echo "1" || echo "0")"
+    local command_682
+    command_682="$([[ "${text_40338}" == '\x1b['* ]] && echo "1" || echo "0")"
     __status=$?
-    local starts_with_ansi_40168="${command_670}"
+    local starts_with_ansi_40348="${command_682}"
     # Replace \x1b[ with newline, then split
-    local command_671
-    command_671="$(t="${text_40158}"; printf '%s' "${t//\\x1b[/
+    local command_683
+    command_683="$(t="${text_40338}"; printf '%s' "${t//\\x1b[/
 }")"
     __status=$?
-    local replaced_40169="${command_671}"
-    split__4_v0 "${replaced_40169}" "
+    local replaced_40349="${command_683}"
+    split__4_v0 "${replaced_40349}" "
 "
-    local parts_40170=("${ret_split4_v0[@]}")
-    local result_40171=""
-    local remaining_width_40172="${max_width_40159}"
-    local __range_start_40173=0
-    local __length_672=("${parts_40170[@]}")
-    local __range_end_40173="${#__length_672[@]}"
-    local __dir_40173=$(( ${__range_start_40173} <= ${__range_end_40173} ? 1 : -1 ))
-    for (( idx_40173=${__range_start_40173}; idx_40173 * ${__dir_40173} < ${__range_end_40173} * ${__dir_40173}; idx_40173+=${__dir_40173} )); do
-        local part_40174="${parts_40170[${idx_40173}]?"Index out of bounds (at src/./file/../choose/../utils/text/ansi.ab:88:28)"}"
+    local parts_40350=("${ret_split4_v0[@]}")
+    local result_40351=""
+    local remaining_width_40352="${max_width_40339}"
+    local __range_start_40353=0
+    local __length_684=("${parts_40350[@]}")
+    local __range_end_40353="${#__length_684[@]}"
+    local __dir_40353=$(( ${__range_start_40353} <= ${__range_end_40353} ? 1 : -1 ))
+    for (( idx_40353=${__range_start_40353}; idx_40353 * ${__dir_40353} < ${__range_end_40353} * ${__dir_40353}; idx_40353+=${__dir_40353} )); do
+        local part_40354="${parts_40350[${idx_40353}]?"Index out of bounds (at src/./file/../choose/../utils/text/ansi.ab:88:28)"}"
         # If text starts with ANSI, all parts are "ANSIparams m text" format
         # If not, first part is pure text
-        if [ "$(( $(( idx_40173 == 0 )) && $([ "_${starts_with_ansi_40168}" != "_0" ]; echo $?) ))" != 0 ]; then
+        if [ "$(( $(( idx_40353 == 0 )) && $([ "_${starts_with_ansi_40348}" != "_0" ]; echo $?) ))" != 0 ]; then
             # First part is pure text (before any ANSI)
-            if [ "$(( $([ "_${part_40174}" == "_" ]; echo $?) && $(( remaining_width_40172 > 0 )) ))" != 0 ]; then
-                truncate_text__3478_v0 "${part_40174}" "${remaining_width_40172}"
-                local ret_truncate_text3478_v0__95_35="${ret_truncate_text3478_v0}"
-                local truncated_40175="${ret_truncate_text3478_v0__95_35}"
-                result_40171+="${truncated_40175}"
-                get_visible_len__3477_v0 "${truncated_40175}"
-                local ret_get_visible_len3477_v0__97_36="${ret_get_visible_len3477_v0}"
-                remaining_width_40172="$(( remaining_width_40172 - ret_get_visible_len3477_v0__97_36 ))"
+            if [ "$(( $([ "_${part_40354}" == "_" ]; echo $?) && $(( remaining_width_40352 > 0 )) ))" != 0 ]; then
+                truncate_text__3491_v0 "${part_40354}" "${remaining_width_40352}"
+                local ret_truncate_text3491_v0__95_35="${ret_truncate_text3491_v0}"
+                local truncated_40355="${ret_truncate_text3491_v0__95_35}"
+                result_40351+="${truncated_40355}"
+                get_visible_len__3490_v0 "${truncated_40355}"
+                local ret_get_visible_len3490_v0__97_36="${ret_get_visible_len3490_v0}"
+                remaining_width_40352="$(( remaining_width_40352 - ret_get_visible_len3490_v0__97_36 ))"
             fi
         else
             # Part is "ANSIparams m text" format - find first 'm'
-            local command_673
-            command_673="$(__p="${part_40174}"; for ((i=0; i<${#__p}; i++)); do [[ "${__p:$i:1}" == "m" ]] && echo $i && break; done)"
+            local command_685
+            command_685="$(__p="${part_40354}"; for ((i=0; i<${#__p}; i++)); do [[ "${__p:$i:1}" == "m" ]] && echo $i && break; done)"
             __status=$?
-            local m_idx_40176="${command_673}"
-            if [ "$([ "_${m_idx_40176}" == "_" ]; echo $?)" != 0 ]; then
+            local m_idx_40356="${command_685}"
+            if [ "$([ "_${m_idx_40356}" == "_" ]; echo $?)" != 0 ]; then
                 # Reconstruct ANSI sequence
-                local command_674
-                command_674="$(__p="${part_40174}"; printf "%s" "${__p:0:${m_idx_40176}}")"
+                local command_686
+                command_686="$(__p="${part_40354}"; printf "%s" "${__p:0:${m_idx_40356}}")"
                 __status=$?
-                local ansi_params_40177="${command_674}"
-                result_40171+="\\x1b[""${ansi_params_40177}""m"
+                local ansi_params_40357="${command_686}"
+                result_40351+="\\x1b[""${ansi_params_40357}""m"
                 # Rest is text content
-                parse_int__13_v0 "${m_idx_40176}"
+                parse_int__13_v0 "${m_idx_40356}"
                 __status=$?
                 local ret_parse_int13_v0__108_41="${ret_parse_int13_v0}"
-                local m_idx_num_40178="${ret_parse_int13_v0__108_41}"
-                local text_start_40179="$(( m_idx_num_40178 + 1 ))"
-                local command_675
-                command_675="$(__p="${part_40174}"; printf "%s" "${__p:${text_start_40179}}")"
+                local m_idx_num_40358="${ret_parse_int13_v0__108_41}"
+                local text_start_40359="$(( m_idx_num_40358 + 1 ))"
+                local command_687
+                command_687="$(__p="${part_40354}"; printf "%s" "${__p:${text_start_40359}}")"
                 __status=$?
-                local text_part_40180="${command_675}"
-                if [ "$(( $([ "_${text_part_40180}" == "_" ]; echo $?) && $(( remaining_width_40172 > 0 )) ))" != 0 ]; then
-                    truncate_text__3478_v0 "${text_part_40180}" "${remaining_width_40172}"
-                    local ret_truncate_text3478_v0__112_39="${ret_truncate_text3478_v0}"
-                    local truncated_40181="${ret_truncate_text3478_v0__112_39}"
-                    result_40171+="${truncated_40181}"
-                    get_visible_len__3477_v0 "${truncated_40181}"
-                    local ret_get_visible_len3477_v0__114_40="${ret_get_visible_len3477_v0}"
-                    remaining_width_40172="$(( remaining_width_40172 - ret_get_visible_len3477_v0__114_40 ))"
+                local text_part_40360="${command_687}"
+                if [ "$(( $([ "_${text_part_40360}" == "_" ]; echo $?) && $(( remaining_width_40352 > 0 )) ))" != 0 ]; then
+                    truncate_text__3491_v0 "${text_part_40360}" "${remaining_width_40352}"
+                    local ret_truncate_text3491_v0__112_39="${ret_truncate_text3491_v0}"
+                    local truncated_40361="${ret_truncate_text3491_v0__112_39}"
+                    result_40351+="${truncated_40361}"
+                    get_visible_len__3490_v0 "${truncated_40361}"
+                    local ret_get_visible_len3490_v0__114_40="${ret_get_visible_len3490_v0}"
+                    remaining_width_40352="$(( remaining_width_40352 - ret_get_visible_len3490_v0__114_40 ))"
                 fi
             else
                 # No 'm' found, treat as text
-                if [ "$(( $([ "_${part_40174}" == "_" ]; echo $?) && $(( remaining_width_40172 > 0 )) ))" != 0 ]; then
-                    truncate_text__3478_v0 "${part_40174}" "${remaining_width_40172}"
-                    local ret_truncate_text3478_v0__119_39="${ret_truncate_text3478_v0}"
-                    local truncated_40182="${ret_truncate_text3478_v0__119_39}"
-                    result_40171+="${truncated_40182}"
-                    get_visible_len__3477_v0 "${truncated_40182}"
-                    local ret_get_visible_len3477_v0__121_40="${ret_get_visible_len3477_v0}"
-                    remaining_width_40172="$(( remaining_width_40172 - ret_get_visible_len3477_v0__121_40 ))"
+                if [ "$(( $([ "_${part_40354}" == "_" ]; echo $?) && $(( remaining_width_40352 > 0 )) ))" != 0 ]; then
+                    truncate_text__3491_v0 "${part_40354}" "${remaining_width_40352}"
+                    local ret_truncate_text3491_v0__119_39="${ret_truncate_text3491_v0}"
+                    local truncated_40362="${ret_truncate_text3491_v0__119_39}"
+                    result_40351+="${truncated_40362}"
+                    get_visible_len__3490_v0 "${truncated_40362}"
+                    local ret_get_visible_len3490_v0__121_40="${ret_get_visible_len3490_v0}"
+                    remaining_width_40352="$(( remaining_width_40352 - ret_get_visible_len3490_v0__121_40 ))"
                 fi
             fi
         fi
 done
-    ret_truncate_ansi3479_v0="${result_40171}"
+    ret_truncate_ansi3492_v0="${result_40351}"
     return 0
 }
 
 # cutoff_text(text: Text, max_width: Int)
-cutoff_text__3480_v0() {
-    local text_40142="${1}"
-    local max_width_40143="${2}"
-    get_visible_len__3477_v0 "${text_40142}"
-    local visible_len_40157="${ret_get_visible_len3477_v0}"
-    if [ "$(( visible_len_40157 <= max_width_40143 ))" != 0 ]; then
-        ret_cutoff_text3480_v0="${text_40142}"
+cutoff_text__3493_v0() {
+    local text_40322="${1}"
+    local max_width_40323="${2}"
+    get_visible_len__3490_v0 "${text_40322}"
+    local visible_len_40337="${ret_get_visible_len3490_v0}"
+    if [ "$(( visible_len_40337 <= max_width_40323 ))" != 0 ]; then
+        ret_cutoff_text3493_v0="${text_40322}"
         return 0
     fi
-    truncate_ansi__3479_v0 "${text_40142}" "$(( max_width_40143 - 3 ))"
-    local ret_truncate_ansi3479_v0__137_12="${ret_truncate_ansi3479_v0}"
-    ret_cutoff_text3480_v0="${ret_truncate_ansi3479_v0__137_12}""..."
+    truncate_ansi__3492_v0 "${text_40322}" "$(( max_width_40323 - 3 ))"
+    local ret_truncate_ansi3492_v0__137_12="${ret_truncate_ansi3492_v0}"
+    ret_cutoff_text3493_v0="${ret_truncate_ansi3492_v0__137_12}""..."
     return 0
 }
 
 # Perl Extensions Utilities
 # "None" until the first call decides, then "Yes" or "No".
 # eprintf(format: Text, args: [Text])
-eprintf__3501_v0() {
-    local format_40200="${1}"
-    local args_40201=("${!2}")
-    args_40201=("${format_40200}" "${args_40201[@]}")
+eprintf__3514_v0() {
+    local format_40380="${1}"
+    local args_40381=("${!2}")
+    args_40381=("${format_40380}" "${args_40381[@]}")
     __status=$?
-    printf "${args_40201[@]}" >&2
+    printf "${args_40381[@]}" >&2
     __status=$?
 }
 
 # eprintf_colored(message: Text, color: Int)
-eprintf_colored__3502_v0() {
-    local message_40198="${1}"
-    local color_40199="${2}"
+eprintf_colored__3515_v0() {
+    local message_40378="${1}"
+    local color_40379="${2}"
     # Prints an error message with a specified color.
-    local array_676=("${message_40198}")
-    eprintf__3501_v0 "\\x1b[${color_40199}m%s\\x1b[0m" array_676[@]
+    local array_688=("${message_40378}")
+    eprintf__3514_v0 "\\x1b[${color_40379}m%s\\x1b[0m" array_688[@]
 }
 
 # colored(message: Text, color: Int)
-colored__3503_v0() {
-    local message_40202="${1}"
-    local color_40203="${2}"
+colored__3516_v0() {
+    local message_40382="${1}"
+    local color_40383="${2}"
     # Returns a text wrapped in color codes.
-    ret_colored3503_v0="\\x1b[${color_40203}m""${message_40202}""\\x1b[0m"
+    ret_colored3516_v0="\\x1b[${color_40383}m""${message_40382}""\\x1b[0m"
     return 0
 }
 
 # render_tooltip(items: [Text], total_len: Int, term_width: Int)
-render_tooltip__3507_v0() {
-    local items_40192=("${!1}")
-    local total_len_40193="${2}"
-    local term_width_40194="${3}"
-    local separator_40195=" • "
-    local separator_len_40196=3
+render_tooltip__3520_v0() {
+    local items_40372=("${!1}")
+    local total_len_40373="${2}"
+    local term_width_40374="${3}"
+    local separator_40375=" • "
+    local separator_len_40376=3
     # Fast path: no truncation needed
-    if [ "$(( total_len_40193 <= term_width_40194 ))" != 0 ]; then
-        local iter_40197=0
+    if [ "$(( total_len_40373 <= term_width_40374 ))" != 0 ]; then
+        local iter_40377=0
         while :
         do
-            local __length_677=("${items_40192[@]}")
-            if [ "$(( iter_40197 >= ${#__length_677[@]} ))" != 0 ]; then
+            local __length_689=("${items_40372[@]}")
+            if [ "$(( iter_40377 >= ${#__length_689[@]} ))" != 0 ]; then
                 break
-            elif [ "$(( iter_40197 > 0 ))" != 0 ]; then
-                eprintf_colored__3502_v0 "${separator_40195}" 90
+            elif [ "$(( iter_40377 > 0 ))" != 0 ]; then
+                eprintf_colored__3515_v0 "${separator_40375}" 90
             fi
-            colored__3503_v0 "${items_40192[$(( iter_40197 + 1 ))]?"Index out of bounds (at src/./file/../choose/../utils/widget/tooltip.ab:23:55)"}" 2
-            local ret_colored3503_v0__23_41="${ret_colored3503_v0}"
-            local array_678=("")
-            eprintf__3501_v0 "${items_40192[${iter_40197}]?"Index out of bounds (at src/./file/../choose/../utils/widget/tooltip.ab:23:27)"}"" ""${ret_colored3503_v0__23_41}" array_678[@]
-            iter_40197="$(( iter_40197 + 2 ))"
+            colored__3516_v0 "${items_40372[$(( iter_40377 + 1 ))]?"Index out of bounds (at src/./file/../choose/../utils/widget/tooltip.ab:23:55)"}" 2
+            local ret_colored3516_v0__23_41="${ret_colored3516_v0}"
+            local array_690=("")
+            eprintf__3514_v0 "${items_40372[${iter_40377}]?"Index out of bounds (at src/./file/../choose/../utils/widget/tooltip.ab:23:27)"}"" ""${ret_colored3516_v0__23_41}" array_690[@]
+            iter_40377="$(( iter_40377 + 2 ))"
         done
     else
         # Slow path: truncate
-        local current_len_40204=0
-        local first_40205=1
-        local iter_40206=0
+        local current_len_40384=0
+        local first_40385=1
+        local iter_40386=0
         while :
         do
-            local __length_679=("${items_40192[@]}")
-            if [ "$(( iter_40206 >= ${#__length_679[@]} ))" != 0 ]; then
+            local __length_691=("${items_40372[@]}")
+            if [ "$(( iter_40386 >= ${#__length_691[@]} ))" != 0 ]; then
                 break
             fi
-            local key_40207="${items_40192[${iter_40206}]?"Index out of bounds (at src/./file/../choose/../utils/widget/tooltip.ab:35:31)"}"
-            local action_40208="${items_40192[$(( iter_40206 + 1 ))]?"Index out of bounds (at src/./file/../choose/../utils/widget/tooltip.ab:36:34)"}"
-            local __length_680="${key_40207}"
-            local __length_681="${action_40208}"
-            local part_len_40209="$(( $(( ${#__length_680} + 1 )) + ${#__length_681} ))"
-            local needed_40210="${part_len_40209}"
-            if [ "$(( ! first_40205 ))" != 0 ]; then
-                needed_40210="$(( needed_40210 + separator_len_40196 ))"
+            local key_40387="${items_40372[${iter_40386}]?"Index out of bounds (at src/./file/../choose/../utils/widget/tooltip.ab:35:31)"}"
+            local action_40388="${items_40372[$(( iter_40386 + 1 ))]?"Index out of bounds (at src/./file/../choose/../utils/widget/tooltip.ab:36:34)"}"
+            local __length_692="${key_40387}"
+            local __length_693="${action_40388}"
+            local part_len_40389="$(( $(( ${#__length_692} + 1 )) + ${#__length_693} ))"
+            local needed_40390="${part_len_40389}"
+            if [ "$(( ! first_40385 ))" != 0 ]; then
+                needed_40390="$(( needed_40390 + separator_len_40376 ))"
             fi
-            if [ "$(( $(( current_len_40204 + needed_40210 )) > term_width_40194 ))" != 0 ]; then
+            if [ "$(( $(( current_len_40384 + needed_40390 )) > term_width_40374 ))" != 0 ]; then
                 break
             fi
-            if [ "$(( ! first_40205 ))" != 0 ]; then
-                eprintf_colored__3502_v0 "${separator_40195}" 90
+            if [ "$(( ! first_40385 ))" != 0 ]; then
+                eprintf_colored__3515_v0 "${separator_40375}" 90
             fi
-            colored__3503_v0 "${action_40208}" 2
-            local ret_colored3503_v0__51_33="${ret_colored3503_v0}"
-            local array_682=("")
-            eprintf__3501_v0 "${key_40207}"" ""${ret_colored3503_v0__51_33}" array_682[@]
-            current_len_40204="$(( current_len_40204 + needed_40210 ))"
-            first_40205=0
-            iter_40206="$(( iter_40206 + 2 ))"
+            colored__3516_v0 "${action_40388}" 2
+            local ret_colored3516_v0__51_33="${ret_colored3516_v0}"
+            local array_694=("")
+            eprintf__3514_v0 "${key_40387}"" ""${ret_colored3516_v0__51_33}" array_694[@]
+            current_len_40384="$(( current_len_40384 + needed_40390 ))"
+            first_40385=0
+            iter_40386="$(( iter_40386 + 2 ))"
         done
     fi
 }
 
 # eprintf(format: Text, args: [Text])
-eprintf__3517_v0() {
-    local format_40270="${1}"
-    local args_40271=("${!2}")
-    args_40271=("${format_40270}" "${args_40271[@]}")
+eprintf__3530_v0() {
+    local format_40450="${1}"
+    local args_40451=("${!2}")
+    args_40451=("${format_40450}" "${args_40451[@]}")
     __status=$?
-    printf "${args_40271[@]}" >&2
+    printf "${args_40451[@]}" >&2
     __status=$?
 }
 
@@ -9240,33 +9336,33 @@ export XYLITOL_RUNTIME_STTY_COUNT=0
 __status=$?
 # // Cursor /////
 # go_up(cnt: Int)
-go_up__3556_v0() {
-    local cnt_40269="${1}"
-    local array_684=("")
-    eprintf__3517_v0 "\\x1b[${cnt_40269}A" array_684[@]
+go_up__3570_v0() {
+    local cnt_40449="${1}"
+    local array_696=("")
+    eprintf__3530_v0 "\\x1b[${cnt_40449}A" array_696[@]
 }
 
 # go_down(cnt: Int)
-go_down__3557_v0() {
-    local cnt_40272="${1}"
-    local array_685=("")
-    eprintf__3517_v0 "\\x1b[${cnt_40272}B" array_685[@]
+go_down__3571_v0() {
+    local cnt_40452="${1}"
+    local array_697=("")
+    eprintf__3530_v0 "\\x1b[${cnt_40452}B" array_697[@]
 }
 
 # move the cursor up or down `cnt` lines.
 # redraw_row(display_count: Int, index: Int, line: Text)
-redraw_row__3564_v0() {
-    local display_count_40266="${1}"
-    local index_40267="${2}"
-    local line_40268="${3}"
-    go_up__3556_v0 "$(( display_count_40266 - index_40267 ))"
-    local array_686=("")
-    eprintf__3501_v0 "\\x1b[G\\x1b[K" array_686[@]
-    local array_687=("")
-    eprintf__3501_v0 "${line_40268}" array_687[@]
-    go_down__3557_v0 "$(( display_count_40266 - index_40267 ))"
-    local array_688=("")
-    eprintf__3501_v0 "\\x1b[G" array_688[@]
+redraw_row__3578_v0() {
+    local display_count_40446="${1}"
+    local index_40447="${2}"
+    local line_40448="${3}"
+    go_up__3570_v0 "$(( display_count_40446 - index_40447 ))"
+    local array_698=("")
+    eprintf__3514_v0 "\\x1b[G\\x1b[K" array_698[@]
+    local array_699=("")
+    eprintf__3514_v0 "${line_40448}" array_699[@]
+    go_down__3571_v0 "$(( display_count_40446 - index_40447 ))"
+    local array_700=("")
+    eprintf__3514_v0 "\\x1b[G" array_700[@]
 }
 
 # Which items of a multi-select widget are ticked.
@@ -9275,67 +9371,67 @@ _count_184=0
 _total_185=0
 _limit_186=-1
 # checked_init(total: Int, limit: Int)
-checked_init__3566_v0() {
-    local total_40185="${1}"
-    local limit_40186="${2}"
+checked_init__3580_v0() {
+    local total_40365="${1}"
+    local limit_40366="${2}"
     _checked_183=()
-    local __range_start_40187=0
-    local __range_end_40187="${total_40185}"
-    local __dir_40187=$(( ${__range_start_40187} <= ${__range_end_40187} ? 1 : -1 ))
-    for (( ____40187=${__range_start_40187}; ____40187 * ${__dir_40187} < ${__range_end_40187} * ${__dir_40187}; ____40187+=${__dir_40187} )); do
-        local array_691=(0)
-        _checked_183+=("${array_691[@]}")
+    local __range_start_40367=0
+    local __range_end_40367="${total_40365}"
+    local __dir_40367=$(( ${__range_start_40367} <= ${__range_end_40367} ? 1 : -1 ))
+    for (( ____40367=${__range_start_40367}; ____40367 * ${__dir_40367} < ${__range_end_40367} * ${__dir_40367}; ____40367+=${__dir_40367} )); do
+        local array_703=(0)
+        _checked_183+=("${array_703[@]}")
 done
     _count_184=0
-    _total_185="${total_40185}"
-    _limit_186="${limit_40186}"
+    _total_185="${total_40365}"
+    _limit_186="${limit_40366}"
 }
 
 # checked_is(index: Int)
-checked_is__3567_v0() {
-    local index_40229="${1}"
-    ret_checked_is3567_v0="${_checked_183[${index_40229}]?"Index out of bounds (at src/./file/../choose/../utils/widget/checked.ab:19:21)"}"
+checked_is__3581_v0() {
+    local index_40409="${1}"
+    ret_checked_is3581_v0="${_checked_183[${index_40409}]?"Index out of bounds (at src/./file/../choose/../utils/widget/checked.ab:19:21)"}"
     return 0
 }
 
 # checked_toggle(index: Int)
-checked_toggle__3569_v0() {
-    local index_40261="${1}"
-    if [ "${_checked_183[${index_40261}]?"Index out of bounds (at src/./file/../choose/../utils/widget/checked.ab:29:17)"}" != 0 ]; then
-        _checked_183["${index_40261}"]=0
+checked_toggle__3583_v0() {
+    local index_40441="${1}"
+    if [ "${_checked_183[${index_40441}]?"Index out of bounds (at src/./file/../choose/../utils/widget/checked.ab:29:17)"}" != 0 ]; then
+        _checked_183["${index_40441}"]=0
         _count_184="$(( _count_184 - 1 ))"
-        ret_checked_toggle3569_v0=1
+        ret_checked_toggle3583_v0=1
         return 0
     fi
     if [ "$(( $(( _limit_186 >= 0 )) && $(( _count_184 >= _limit_186 )) ))" != 0 ]; then
-        ret_checked_toggle3569_v0=0
+        ret_checked_toggle3583_v0=0
         return 0
     fi
-    _checked_183["${index_40261}"]=1
+    _checked_183["${index_40441}"]=1
     _count_184="$(( _count_184 + 1 ))"
-    ret_checked_toggle3569_v0=1
+    ret_checked_toggle3583_v0=1
     return 0
 }
 
 # checked_all()
-checked_all__3570_v0() {
+checked_all__3584_v0() {
     if [ "$(( _limit_186 >= 0 ))" != 0 ]; then
-        ret_checked_all3570_v0=0
+        ret_checked_all3584_v0=0
         return 0
     fi
-    local was_all_40273="$(( _count_184 == _total_185 ))"
-    local __range_start_40274=0
-    local __range_end_40274="${_total_185}"
-    local __dir_40274=$(( ${__range_start_40274} <= ${__range_end_40274} ? 1 : -1 ))
-    for (( i_40274=${__range_start_40274}; i_40274 * ${__dir_40274} < ${__range_end_40274} * ${__dir_40274}; i_40274+=${__dir_40274} )); do
-        _checked_183["${i_40274}"]="$(( ! was_all_40273 ))"
+    local was_all_40453="$(( _count_184 == _total_185 ))"
+    local __range_start_40454=0
+    local __range_end_40454="${_total_185}"
+    local __dir_40454=$(( ${__range_start_40454} <= ${__range_end_40454} ? 1 : -1 ))
+    for (( i_40454=${__range_start_40454}; i_40454 * ${__dir_40454} < ${__range_end_40454} * ${__dir_40454}; i_40454+=${__dir_40454} )); do
+        _checked_183["${i_40454}"]="$(( ! was_all_40453 ))"
 done
-    if [ "${was_all_40273}" != 0 ]; then
+    if [ "${was_all_40453}" != 0 ]; then
         _count_184=0
     else
         _count_184="${_total_185}"
     fi
-    ret_checked_all3570_v0=1
+    ret_checked_all3584_v0=1
     return 0
 }
 
@@ -9373,129 +9469,129 @@ _first_render_204=1
 # has handed over that page, so `chooser_set_page` finishes the move.
 _up_paged_205=0
 # render_single_page()
-render_single_page__3641_v0() {
-    local __length_693="${_cursor_197}"
-    local cursor_len_40248="${#__length_693}"
-    local max_option_width_40249="$(( $(( _term_width_200 - cursor_len_40248 )) - 1 ))"
-    local __range_start_40250=0
-    local __range_end_40250="${_page_count_203}"
-    local __dir_40250=$(( ${__range_start_40250} <= ${__range_end_40250} ? 1 : -1 ))
-    for (( i_40250=${__range_start_40250}; i_40250 * ${__dir_40250} < ${__range_end_40250} * ${__dir_40250}; i_40250+=${__dir_40250} )); do
-        cutoff_text__3480_v0 "${_page_202[${i_40250}]?"Index out of bounds (at src/./file/../choose/engine.ab:44:45)"}" "${max_option_width_40249}"
-        local ret_cutoff_text3480_v0__44_27="${ret_cutoff_text3480_v0}"
-        local truncated_40251="${ret_cutoff_text3480_v0__44_27}"
-        if [ "$(( i_40250 == _selected_196 ))" != 0 ]; then
-            colored_secondary__3449_v0 "${_cursor_197}""${truncated_40251}""
+render_single_page__3655_v0() {
+    local __length_705="${_cursor_197}"
+    local cursor_len_40428="${#__length_705}"
+    local max_option_width_40429="$(( $(( _term_width_200 - cursor_len_40428 )) - 1 ))"
+    local __range_start_40430=0
+    local __range_end_40430="${_page_count_203}"
+    local __dir_40430=$(( ${__range_start_40430} <= ${__range_end_40430} ? 1 : -1 ))
+    for (( i_40430=${__range_start_40430}; i_40430 * ${__dir_40430} < ${__range_end_40430} * ${__dir_40430}; i_40430+=${__dir_40430} )); do
+        cutoff_text__3493_v0 "${_page_202[${i_40430}]?"Index out of bounds (at src/./file/../choose/engine.ab:44:45)"}" "${max_option_width_40429}"
+        local ret_cutoff_text3493_v0__44_27="${ret_cutoff_text3493_v0}"
+        local truncated_40431="${ret_cutoff_text3493_v0__44_27}"
+        if [ "$(( i_40430 == _selected_196 ))" != 0 ]; then
+            colored_secondary__3462_v0 "${_cursor_197}""${truncated_40431}""
 "
-            local ret_colored_secondary3449_v0__46_21="${ret_colored_secondary3449_v0}"
-            local array_694=("")
-            eprintf__3346_v0 "${ret_colored_secondary3449_v0__46_21}" array_694[@]
+            local ret_colored_secondary3462_v0__46_21="${ret_colored_secondary3462_v0}"
+            local array_706=("")
+            eprintf__3358_v0 "${ret_colored_secondary3462_v0__46_21}" array_706[@]
         else
-            print_blank__3399_v0 "${cursor_len_40248}"
-            local array_695=("")
-            eprintf__3346_v0 "${truncated_40251}""
-" array_695[@]
+            print_blank__3412_v0 "${cursor_len_40428}"
+            local array_707=("")
+            eprintf__3358_v0 "${truncated_40431}""
+" array_707[@]
         fi
 done
-    local remaining_slots_40252="$(( _display_count_193 - _page_count_203 ))"
-    if [ "$(( remaining_slots_40252 > 0 ))" != 0 ]; then
-        local __range_start_40253=0
-        local __range_end_40253="${remaining_slots_40252}"
-        local __dir_40253=$(( ${__range_start_40253} <= ${__range_end_40253} ? 1 : -1 ))
-        for (( ____40253=${__range_start_40253}; ____40253 * ${__dir_40253} < ${__range_end_40253} * ${__dir_40253}; ____40253+=${__dir_40253} )); do
-            local array_696=("")
-            eprintf__3346_v0 "\\x1b[K
-" array_696[@]
+    local remaining_slots_40432="$(( _display_count_193 - _page_count_203 ))"
+    if [ "$(( remaining_slots_40432 > 0 ))" != 0 ]; then
+        local __range_start_40433=0
+        local __range_end_40433="${remaining_slots_40432}"
+        local __dir_40433=$(( ${__range_start_40433} <= ${__range_end_40433} ? 1 : -1 ))
+        for (( ____40433=${__range_start_40433}; ____40433 * ${__dir_40433} < ${__range_end_40433} * ${__dir_40433}; ____40433+=${__dir_40433} )); do
+            local array_708=("")
+            eprintf__3358_v0 "\\x1b[K
+" array_708[@]
 done
     fi
 }
 
 # render_multi_page()
-render_multi_page__3642_v0() {
-    local __length_697="${_cursor_197}"
-    local cursor_len_40224="${#__length_697}"
-    local max_option_width_40225="$(( $(( _term_width_200 - cursor_len_40224 )) - 3 ))"
+render_multi_page__3656_v0() {
+    local __length_709="${_cursor_197}"
+    local cursor_len_40404="${#__length_709}"
+    local max_option_width_40405="$(( $(( _term_width_200 - cursor_len_40404 )) - 3 ))"
     # 2 for check mark
-    chooser_page_start__3647_v0 
-    local page_start_40226="${ret_chooser_page_start3647_v0}"
-    local __range_start_40227=0
-    local __range_end_40227="${_page_count_203}"
-    local __dir_40227=$(( ${__range_start_40227} <= ${__range_end_40227} ? 1 : -1 ))
-    for (( i_40227=${__range_start_40227}; i_40227 * ${__dir_40227} < ${__range_end_40227} * ${__dir_40227}; i_40227+=${__dir_40227} )); do
-        local global_idx_40228="$(( page_start_40226 + i_40227 ))"
-        checked_is__3567_v0 "${global_idx_40228}"
-        local ret_checked_is3567_v0__66_28="${ret_checked_is3567_v0}"
-        local check_mark_40230
-        check_mark_40230="$(if [ "${ret_checked_is3567_v0__66_28}" != 0 ]; then echo "✓ "; else echo "• "; fi)"
-        cutoff_text__3480_v0 "${_page_202[${i_40227}]?"Index out of bounds (at src/./file/../choose/engine.ab:67:45)"}" "${max_option_width_40225}"
-        local ret_cutoff_text3480_v0__67_27="${ret_cutoff_text3480_v0}"
-        local truncated_40231="${ret_cutoff_text3480_v0__67_27}"
-        checked_is__3567_v0 "${global_idx_40228}"
-        local ret_checked_is3567_v0__70_13="${ret_checked_is3567_v0}"
-        if [ "$(( i_40227 == _selected_196 ))" != 0 ]; then
-            colored_secondary__3449_v0 "${_cursor_197}""${check_mark_40230}""${truncated_40231}""
+    chooser_page_start__3661_v0 
+    local page_start_40406="${ret_chooser_page_start3661_v0}"
+    local __range_start_40407=0
+    local __range_end_40407="${_page_count_203}"
+    local __dir_40407=$(( ${__range_start_40407} <= ${__range_end_40407} ? 1 : -1 ))
+    for (( i_40407=${__range_start_40407}; i_40407 * ${__dir_40407} < ${__range_end_40407} * ${__dir_40407}; i_40407+=${__dir_40407} )); do
+        local global_idx_40408="$(( page_start_40406 + i_40407 ))"
+        checked_is__3581_v0 "${global_idx_40408}"
+        local ret_checked_is3581_v0__66_28="${ret_checked_is3581_v0}"
+        local check_mark_40410
+        check_mark_40410="$(if [ "${ret_checked_is3581_v0__66_28}" != 0 ]; then echo "✓ "; else echo "• "; fi)"
+        cutoff_text__3493_v0 "${_page_202[${i_40407}]?"Index out of bounds (at src/./file/../choose/engine.ab:67:45)"}" "${max_option_width_40405}"
+        local ret_cutoff_text3493_v0__67_27="${ret_cutoff_text3493_v0}"
+        local truncated_40411="${ret_cutoff_text3493_v0__67_27}"
+        checked_is__3581_v0 "${global_idx_40408}"
+        local ret_checked_is3581_v0__70_13="${ret_checked_is3581_v0}"
+        if [ "$(( i_40407 == _selected_196 ))" != 0 ]; then
+            colored_secondary__3462_v0 "${_cursor_197}""${check_mark_40410}""${truncated_40411}""
 "
-            local ret_colored_secondary3449_v0__69_37="${ret_colored_secondary3449_v0}"
-            local array_698=("")
-            eprintf__3346_v0 "${ret_colored_secondary3449_v0__69_37}" array_698[@]
-        elif [ "${ret_checked_is3567_v0__70_13}" != 0 ]; then
-            print_blank__3399_v0 "${cursor_len_40224}"
-            colored_secondary__3449_v0 "${check_mark_40230}""${truncated_40231}""
+            local ret_colored_secondary3462_v0__69_37="${ret_colored_secondary3462_v0}"
+            local array_710=("")
+            eprintf__3358_v0 "${ret_colored_secondary3462_v0__69_37}" array_710[@]
+        elif [ "${ret_checked_is3581_v0__70_13}" != 0 ]; then
+            print_blank__3412_v0 "${cursor_len_40404}"
+            colored_secondary__3462_v0 "${check_mark_40410}""${truncated_40411}""
 "
-            local ret_colored_secondary3449_v0__72_25="${ret_colored_secondary3449_v0}"
-            local array_699=("")
-            eprintf__3346_v0 "${ret_colored_secondary3449_v0__72_25}" array_699[@]
+            local ret_colored_secondary3462_v0__72_25="${ret_colored_secondary3462_v0}"
+            local array_711=("")
+            eprintf__3358_v0 "${ret_colored_secondary3462_v0__72_25}" array_711[@]
         else
-            print_blank__3399_v0 "${cursor_len_40224}"
-            local array_700=("")
-            eprintf__3346_v0 "${check_mark_40230}""${truncated_40231}""
-" array_700[@]
+            print_blank__3412_v0 "${cursor_len_40404}"
+            local array_712=("")
+            eprintf__3358_v0 "${check_mark_40410}""${truncated_40411}""
+" array_712[@]
         fi
 done
-    local remaining_slots_40246="$(( _display_count_193 - _page_count_203 ))"
-    if [ "$(( remaining_slots_40246 > 0 ))" != 0 ]; then
-        local __range_start_40247=0
-        local __range_end_40247="${remaining_slots_40246}"
-        local __dir_40247=$(( ${__range_start_40247} <= ${__range_end_40247} ? 1 : -1 ))
-        for (( ____40247=${__range_start_40247}; ____40247 * ${__dir_40247} < ${__range_end_40247} * ${__dir_40247}; ____40247+=${__dir_40247} )); do
-            local array_701=("")
-            eprintf__3346_v0 "\\x1b[K
-" array_701[@]
+    local remaining_slots_40426="$(( _display_count_193 - _page_count_203 ))"
+    if [ "$(( remaining_slots_40426 > 0 ))" != 0 ]; then
+        local __range_start_40427=0
+        local __range_end_40427="${remaining_slots_40426}"
+        local __dir_40427=$(( ${__range_start_40427} <= ${__range_end_40427} ? 1 : -1 ))
+        for (( ____40427=${__range_start_40427}; ____40427 * ${__dir_40427} < ${__range_end_40427} * ${__dir_40427}; ____40427+=${__dir_40427} )); do
+            local array_713=("")
+            eprintf__3358_v0 "\\x1b[K
+" array_713[@]
 done
     fi
 }
 
 # render_page()
-render_page__3643_v0() {
+render_page__3657_v0() {
     if [ "${_multi_198}" != 0 ]; then
-        render_multi_page__3642_v0 
+        render_multi_page__3656_v0 
     else
-        render_single_page__3641_v0 
+        render_single_page__3655_v0 
     fi
 }
 
 # render_page_indicator()
-render_page_indicator__3644_v0() {
+render_page_indicator__3658_v0() {
     if [ "$(( _total_pages_194 > 1 ))" != 0 ]; then
-        local array_702=("")
-        eprintf__3346_v0 "\\x1b[G\\x1b[K" array_702[@]
-        eprintf_colored__3347_v0 "Page $(( _current_page_195 + 1 ))/${_total_pages_194}" 90
-        local array_703=("")
-        eprintf__3346_v0 "\\x1b[G" array_703[@]
+        local array_714=("")
+        eprintf__3358_v0 "\\x1b[G\\x1b[K" array_714[@]
+        eprintf_colored__3359_v0 "Page $(( _current_page_195 + 1 ))/${_total_pages_194}" 90
+        local array_715=("")
+        eprintf__3358_v0 "\\x1b[G" array_715[@]
     fi
 }
 
 # render_tooltip_line()
-render_tooltip_line__3645_v0() {
+render_tooltip_line__3659_v0() {
     if [ "$(( ! _multi_198 ))" != 0 ]; then
         # "↑↓ select • enter confirm" = 9 + 3 + 13 = 25
         # "↑↓ select • ←→ page • enter confirm" = 9 + 3 + 8 + 3 + 13 = 36
         if [ "$(( _total_pages_194 > 1 ))" != 0 ]; then
-            local array_704=("↑↓" "select" "←→" "page" "enter" "confirm")
-            render_tooltip__3507_v0 array_704[@] 36 "${_term_width_200}"
+            local array_716=("↑↓" "select" "←→" "page" "enter" "confirm")
+            render_tooltip__3520_v0 array_716[@] 36 "${_term_width_200}"
         else
-            local array_705=("↑↓" "select" "enter" "confirm")
-            render_tooltip__3507_v0 array_705[@] 25 "${_term_width_200}"
+            local array_717=("↑↓" "select" "enter" "confirm")
+            render_tooltip__3520_v0 array_717[@] 25 "${_term_width_200}"
         fi
     else
         # "↑↓ select • x toggle • enter confirm" = 9 + 3 + 8 + 3 + 13 = 36
@@ -9503,208 +9599,208 @@ render_tooltip_line__3645_v0() {
         # "↑↓ select • x toggle • ←→ page • enter confirm" = 36 + 8 + 3 = 47
         # "↑↓ select • x toggle • a all • ←→ page • enter confirm" = 36 + 5 + 3 + 8 + 3 = 55
         if [ "$(( $(( _total_pages_194 > 1 )) && $(( _limit_199 < 0 )) ))" != 0 ]; then
-            local array_706=("↑↓" "select" "x" "toggle" "a" "all" "←→" "page" "enter" "confirm")
-            render_tooltip__3507_v0 array_706[@] 55 "${_term_width_200}"
+            local array_718=("↑↓" "select" "x" "toggle" "a" "all" "←→" "page" "enter" "confirm")
+            render_tooltip__3520_v0 array_718[@] 55 "${_term_width_200}"
         elif [ "$(( _total_pages_194 > 1 ))" != 0 ]; then
-            local array_707=("↑↓" "select" "x" "toggle" "←→" "page" "enter" "confirm")
-            render_tooltip__3507_v0 array_707[@] 47 "${_term_width_200}"
+            local array_719=("↑↓" "select" "x" "toggle" "←→" "page" "enter" "confirm")
+            render_tooltip__3520_v0 array_719[@] 47 "${_term_width_200}"
         elif [ "$(( _limit_199 < 0 ))" != 0 ]; then
-            local array_708=("↑↓" "select" "x" "toggle" "a" "all" "enter" "confirm")
-            render_tooltip__3507_v0 array_708[@] 44 "${_term_width_200}"
+            local array_720=("↑↓" "select" "x" "toggle" "a" "all" "enter" "confirm")
+            render_tooltip__3520_v0 array_720[@] 44 "${_term_width_200}"
         else
-            local array_709=("↑↓" "select" "x" "toggle" "enter" "confirm")
-            render_tooltip__3507_v0 array_709[@] 36 "${_term_width_200}"
+            local array_721=("↑↓" "select" "x" "toggle" "enter" "confirm")
+            render_tooltip__3520_v0 array_721[@] 36 "${_term_width_200}"
         fi
     fi
 }
 
 # chooser_begin(total: Int, page_size: Int, header: Text, cursor: Text, multi: Bool, limit: Int)
-chooser_begin__3646_v0() {
-    local total_40125="${1}"
-    local page_size_40126="${2}"
-    local header_40127="${3}"
-    local cursor_40128="${4}"
-    local multi_40129="${5}"
-    local limit_40130="${6}"
-    _total_191="${total_40125}"
-    _cursor_197="${cursor_40128}"
-    _multi_198="${multi_40129}"
-    _limit_199="${limit_40130}"
+chooser_begin__3660_v0() {
+    local total_40303="${1}"
+    local page_size_40304="${2}"
+    local header_40305="${3}"
+    local cursor_40306="${4}"
+    local multi_40307="${5}"
+    local limit_40308="${6}"
+    _total_191="${total_40303}"
+    _cursor_197="${cursor_40306}"
+    _multi_198="${multi_40307}"
+    _limit_199="${limit_40308}"
     _current_page_195=0
     _selected_196=0
     _first_render_204=1
     _up_paged_205=0
-    _has_header_201="$([ "_${header_40127}" == "_" ]; echo $?)"
-    stty_lock__3387_v0 
-    hide_cursor__3404_v0 
-    term_width__3394_v0 
-    _term_width_200="${ret_term_width3394_v0}"
-    term_height__3395_v0 
-    local term_height_40140="${ret_term_height3395_v0}"
-    local max_page_size_40141
-    max_page_size_40141="$(( term_height_40140 - $(if [ "${_has_header_201}" != 0 ]; then echo 3; else echo 2; fi) ))"
-    _page_size_192="${page_size_40126}"
-    if [ "$(( _page_size_192 > max_page_size_40141 ))" != 0 ]; then
-        _page_size_192="${max_page_size_40141}"
+    _has_header_201="$([ "_${header_40305}" == "_" ]; echo $?)"
+    stty_lock__3400_v0 
+    hide_cursor__3417_v0 
+    term_width__3407_v0 
+    _term_width_200="${ret_term_width3407_v0}"
+    term_height__3408_v0 
+    local term_height_40320="${ret_term_height3408_v0}"
+    local max_page_size_40321
+    max_page_size_40321="$(( term_height_40320 - $(if [ "${_has_header_201}" != 0 ]; then echo 3; else echo 2; fi) ))"
+    _page_size_192="${page_size_40304}"
+    if [ "$(( _page_size_192 > max_page_size_40321 ))" != 0 ]; then
+        _page_size_192="${max_page_size_40321}"
     fi
     if [ "${_has_header_201}" != 0 ]; then
-        cutoff_text__3480_v0 "${header_40127}" "${_term_width_200}"
-        local ret_cutoff_text3480_v0__152_17="${ret_cutoff_text3480_v0}"
-        local array_710=("")
-        eprintf__3346_v0 "${ret_cutoff_text3480_v0__152_17}""
-" array_710[@]
+        cutoff_text__3493_v0 "${header_40305}" "${_term_width_200}"
+        local ret_cutoff_text3493_v0__152_17="${ret_cutoff_text3493_v0}"
+        local array_722=("")
+        eprintf__3358_v0 "${ret_cutoff_text3493_v0__152_17}""
+" array_722[@]
     fi
-    _total_pages_194="$(( $(( $(( total_40125 + _page_size_192 )) - 1 )) / _page_size_192 ))"
+    _total_pages_194="$(( $(( $(( total_40303 + _page_size_192 )) - 1 )) / _page_size_192 ))"
     _display_count_193="${_page_size_192}"
-    if [ "$(( total_40125 < _page_size_192 ))" != 0 ]; then
-        _display_count_193="${total_40125}"
+    if [ "$(( total_40303 < _page_size_192 ))" != 0 ]; then
+        _display_count_193="${total_40303}"
     fi
-    if [ "${multi_40129}" != 0 ]; then
-        checked_init__3566_v0 "${total_40125}" "${limit_40130}"
+    if [ "${multi_40307}" != 0 ]; then
+        checked_init__3580_v0 "${total_40303}" "${limit_40308}"
     fi
-    new_line__3400_v0 "${_display_count_193}"
-    local array_711=("")
-    eprintf__3346_v0 "\\x1b[G" array_711[@]
+    new_line__3413_v0 "${_display_count_193}"
+    local array_723=("")
+    eprintf__3358_v0 "\\x1b[G" array_723[@]
     if [ "$(( _total_pages_194 > 1 ))" != 0 ]; then
-        eprintf_colored__3347_v0 "Page $(( _current_page_195 + 1 ))/${_total_pages_194}" 90
+        eprintf_colored__3359_v0 "Page $(( _current_page_195 + 1 ))/${_total_pages_194}" 90
     fi
-    new_line__3400_v0 1
-    render_tooltip_line__3645_v0 
-    go_up__3401_v0 "$(( _display_count_193 + 1 ))"
-    local array_712=("")
-    eprintf__3346_v0 "\\x1b[G" array_712[@]
+    new_line__3413_v0 1
+    render_tooltip_line__3659_v0 
+    go_up__3414_v0 "$(( _display_count_193 + 1 ))"
+    local array_724=("")
+    eprintf__3358_v0 "\\x1b[G" array_724[@]
 }
 
 # chooser_page_start()
-chooser_page_start__3647_v0() {
-    ret_chooser_page_start3647_v0="$(( _current_page_195 * _page_size_192 ))"
+chooser_page_start__3661_v0() {
+    ret_chooser_page_start3661_v0="$(( _current_page_195 * _page_size_192 ))"
     return 0
 }
 
 # chooser_page_count()
-chooser_page_count__3648_v0() {
-    chooser_page_start__3647_v0 
-    local start_40215="${ret_chooser_page_start3647_v0}"
-    local end_40216="$(( start_40215 + _page_size_192 ))"
-    if [ "$(( end_40216 > _total_191 ))" != 0 ]; then
-        end_40216="${_total_191}"
+chooser_page_count__3662_v0() {
+    chooser_page_start__3661_v0 
+    local start_40395="${ret_chooser_page_start3661_v0}"
+    local end_40396="$(( start_40395 + _page_size_192 ))"
+    if [ "$(( end_40396 > _total_191 ))" != 0 ]; then
+        end_40396="${_total_191}"
     fi
-    ret_chooser_page_count3648_v0="$(( end_40216 - start_40215 ))"
+    ret_chooser_page_count3662_v0="$(( end_40396 - start_40395 ))"
     return 0
 }
 
 # chooser_set_page(page: [Text])
-chooser_set_page__3649_v0() {
-    local page_40223=("${!1}")
-    _page_202=("${page_40223[@]}")
-    local __length_713=("${page_40223[@]}")
-    _page_count_203="${#__length_713[@]}"
+chooser_set_page__3663_v0() {
+    local page_40403=("${!1}")
+    _page_202=("${page_40403[@]}")
+    local __length_725=("${page_40403[@]}")
+    _page_count_203="${#__length_725[@]}"
     if [ "${_first_render_204}" != 0 ]; then
         _first_render_204=0
-        render_page__3643_v0 
+        render_page__3657_v0 
     else
         if [ "${_up_paged_205}" != 0 ]; then
             _selected_196="$(( _page_count_203 - 1 ))"
             _up_paged_205=0
         fi
-        go_up__3401_v0 1
-        remove_line__3397_v0 "$(( _display_count_193 - 1 ))"
-        remove_current_line__3398_v0 
-        local array_714=("")
-        eprintf__3346_v0 "\\x1b[G" array_714[@]
-        render_page__3643_v0 
-        render_page_indicator__3644_v0 
+        go_up__3414_v0 1
+        remove_line__3410_v0 "$(( _display_count_193 - 1 ))"
+        remove_current_line__3411_v0 
+        local array_726=("")
+        eprintf__3358_v0 "\\x1b[G" array_726[@]
+        render_page__3657_v0 
+        render_page_indicator__3658_v0 
     fi
 }
 
 # option_width()
-option_width__3650_v0() {
-    local check_width_40263
-    check_width_40263="$(if [ "${_multi_198}" != 0 ]; then echo 3; else echo 1; fi)"
-    local __length_715="${_cursor_197}"
-    ret_option_width3650_v0="$(( $(( _term_width_200 - ${#__length_715} )) - check_width_40263 ))"
+option_width__3664_v0() {
+    local check_width_40443
+    check_width_40443="$(if [ "${_multi_198}" != 0 ]; then echo 3; else echo 1; fi)"
+    local __length_727="${_cursor_197}"
+    ret_option_width3664_v0="$(( $(( _term_width_200 - ${#__length_727} )) - check_width_40443 ))"
     return 0
 }
 
 # unselected_line(index: Int)
-unselected_line__3651_v0() {
-    local index_40276="${1}"
-    local __length_716="${_cursor_197}"
-    rpad__28_v0 "" " " "${#__length_716}"
-    local blank_40277="${ret_rpad28_v0}"
-    option_width__3650_v0 
-    local ret_option_width3650_v0__223_49="${ret_option_width3650_v0}"
-    cutoff_text__3480_v0 "${_page_202[${index_40276}]?"Index out of bounds (at src/./file/../choose/engine.ab:223:41)"}" "${ret_option_width3650_v0__223_49}"
-    local truncated_40278="${ret_cutoff_text3480_v0}"
+unselected_line__3665_v0() {
+    local index_40456="${1}"
+    local __length_728="${_cursor_197}"
+    rpad__28_v0 "" " " "${#__length_728}"
+    local blank_40457="${ret_rpad28_v0}"
+    option_width__3664_v0 
+    local ret_option_width3664_v0__223_49="${ret_option_width3664_v0}"
+    cutoff_text__3493_v0 "${_page_202[${index_40456}]?"Index out of bounds (at src/./file/../choose/engine.ab:223:41)"}" "${ret_option_width3664_v0__223_49}"
+    local truncated_40458="${ret_cutoff_text3493_v0}"
     if [ "$(( ! _multi_198 ))" != 0 ]; then
-        ret_unselected_line3651_v0="${blank_40277}""${truncated_40278}"
+        ret_unselected_line3665_v0="${blank_40457}""${truncated_40458}"
         return 0
     fi
-    chooser_page_start__3647_v0 
-    local ret_chooser_page_start3647_v0__227_19="${ret_chooser_page_start3647_v0}"
-    checked_is__3567_v0 "$(( ret_chooser_page_start3647_v0__227_19 + index_40276 ))"
-    local ret_checked_is3567_v0__227_8="${ret_checked_is3567_v0}"
-    if [ "${ret_checked_is3567_v0__227_8}" != 0 ]; then
-        colored_secondary__3449_v0 "✓ ""${truncated_40278}"
-        local ret_colored_secondary3449_v0__228_24="${ret_colored_secondary3449_v0}"
-        ret_unselected_line3651_v0="${blank_40277}""${ret_colored_secondary3449_v0__228_24}"
+    chooser_page_start__3661_v0 
+    local ret_chooser_page_start3661_v0__227_19="${ret_chooser_page_start3661_v0}"
+    checked_is__3581_v0 "$(( ret_chooser_page_start3661_v0__227_19 + index_40456 ))"
+    local ret_checked_is3581_v0__227_8="${ret_checked_is3581_v0}"
+    if [ "${ret_checked_is3581_v0__227_8}" != 0 ]; then
+        colored_secondary__3462_v0 "✓ ""${truncated_40458}"
+        local ret_colored_secondary3462_v0__228_24="${ret_colored_secondary3462_v0}"
+        ret_unselected_line3665_v0="${blank_40457}""${ret_colored_secondary3462_v0__228_24}"
         return 0
     fi
-    ret_unselected_line3651_v0="${blank_40277}""• ""${truncated_40278}"
+    ret_unselected_line3665_v0="${blank_40457}""• ""${truncated_40458}"
     return 0
 }
 
 # selected_line(index: Int)
-selected_line__3652_v0() {
-    local index_40262="${1}"
-    option_width__3650_v0 
-    local ret_option_width3650_v0__235_49="${ret_option_width3650_v0}"
-    cutoff_text__3480_v0 "${_page_202[${index_40262}]?"Index out of bounds (at src/./file/../choose/engine.ab:235:41)"}" "${ret_option_width3650_v0__235_49}"
-    local truncated_40264="${ret_cutoff_text3480_v0}"
+selected_line__3666_v0() {
+    local index_40442="${1}"
+    option_width__3664_v0 
+    local ret_option_width3664_v0__235_49="${ret_option_width3664_v0}"
+    cutoff_text__3493_v0 "${_page_202[${index_40442}]?"Index out of bounds (at src/./file/../choose/engine.ab:235:41)"}" "${ret_option_width3664_v0__235_49}"
+    local truncated_40444="${ret_cutoff_text3493_v0}"
     if [ "$(( ! _multi_198 ))" != 0 ]; then
-        colored_secondary__3449_v0 "${_cursor_197}""${truncated_40264}"
-        ret_selected_line3652_v0="${ret_colored_secondary3449_v0}"
+        colored_secondary__3462_v0 "${_cursor_197}""${truncated_40444}"
+        ret_selected_line3666_v0="${ret_colored_secondary3462_v0}"
         return 0
     fi
-    chooser_page_start__3647_v0 
-    local ret_chooser_page_start3647_v0__239_29="${ret_chooser_page_start3647_v0}"
-    checked_is__3567_v0 "$(( ret_chooser_page_start3647_v0__239_29 + index_40262 ))"
-    local ret_checked_is3567_v0__239_18="${ret_checked_is3567_v0}"
-    local mark_40265
-    mark_40265="$(if [ "${ret_checked_is3567_v0__239_18}" != 0 ]; then echo "✓ "; else echo "• "; fi)"
-    colored_secondary__3449_v0 "${_cursor_197}""${mark_40265}""${truncated_40264}"
-    ret_selected_line3652_v0="${ret_colored_secondary3449_v0}"
+    chooser_page_start__3661_v0 
+    local ret_chooser_page_start3661_v0__239_29="${ret_chooser_page_start3661_v0}"
+    checked_is__3581_v0 "$(( ret_chooser_page_start3661_v0__239_29 + index_40442 ))"
+    local ret_checked_is3581_v0__239_18="${ret_checked_is3581_v0}"
+    local mark_40445
+    mark_40445="$(if [ "${ret_checked_is3581_v0__239_18}" != 0 ]; then echo "✓ "; else echo "• "; fi)"
+    colored_secondary__3462_v0 "${_cursor_197}""${mark_40445}""${truncated_40444}"
+    ret_selected_line3666_v0="${ret_colored_secondary3462_v0}"
     return 0
 }
 
 # redraw_selection(prev_selected: Int)
-redraw_selection__3653_v0() {
-    local prev_selected_40275="${1}"
-    unselected_line__3651_v0 "${prev_selected_40275}"
-    local ret_unselected_line3651_v0__246_47="${ret_unselected_line3651_v0}"
-    redraw_row__3564_v0 "${_display_count_193}" "${prev_selected_40275}" "${ret_unselected_line3651_v0__246_47}"
-    selected_line__3652_v0 "${_selected_196}"
-    local ret_selected_line3652_v0__247_43="${ret_selected_line3652_v0}"
-    redraw_row__3564_v0 "${_display_count_193}" "${_selected_196}" "${ret_selected_line3652_v0__247_43}"
+redraw_selection__3667_v0() {
+    local prev_selected_40455="${1}"
+    unselected_line__3665_v0 "${prev_selected_40455}"
+    local ret_unselected_line3665_v0__246_47="${ret_unselected_line3665_v0}"
+    redraw_row__3578_v0 "${_display_count_193}" "${prev_selected_40455}" "${ret_unselected_line3665_v0__246_47}"
+    selected_line__3666_v0 "${_selected_196}"
+    local ret_selected_line3666_v0__247_43="${ret_selected_line3666_v0}"
+    redraw_row__3578_v0 "${_display_count_193}" "${_selected_196}" "${ret_selected_line3666_v0__247_43}"
 }
 
 # redraw_current_line()
-redraw_current_line__3654_v0() {
-    selected_line__3652_v0 "${_selected_196}"
-    local ret_selected_line3652_v0__252_43="${ret_selected_line3652_v0}"
-    redraw_row__3564_v0 "${_display_count_193}" "${_selected_196}" "${ret_selected_line3652_v0__252_43}"
+redraw_current_line__3668_v0() {
+    selected_line__3666_v0 "${_selected_196}"
+    local ret_selected_line3666_v0__252_43="${ret_selected_line3666_v0}"
+    redraw_row__3578_v0 "${_display_count_193}" "${_selected_196}" "${ret_selected_line3666_v0__252_43}"
 }
 
 # chooser_step()
-chooser_step__3655_v0() {
-    get_key__3344_v0 
-    local key_40257="${ret_get_key3344_v0}"
-    local prev_selected_40258="${_selected_196}"
-    local prev_page_40259="${_current_page_195}"
-    chooser_page_start__3647_v0 
-    local page_start_40260="${ret_chooser_page_start3647_v0}"
+chooser_step__3669_v0() {
+    get_key__3356_v0 
+    local key_40437="${ret_get_key3356_v0}"
+    local prev_selected_40438="${_selected_196}"
+    local prev_page_40439="${_current_page_195}"
+    chooser_page_start__3661_v0 
+    local page_start_40440="${ret_chooser_page_start3661_v0}"
     _up_paged_205=0
-    if [ "$(( $([ "_${key_40257}" != "_UP" ]; echo $?) || $([ "_${key_40257}" != "_k" ]; echo $?) ))" != 0 ]; then
+    if [ "$(( $([ "_${key_40437}" != "_UP" ]; echo $?) || $([ "_${key_40437}" != "_k" ]; echo $?) ))" != 0 ]; then
         if [ "$(( $(( _selected_196 == 0 )) && $(( _total_pages_194 > 1 )) ))" != 0 ]; then
             if [ "$(( _current_page_195 > 0 ))" != 0 ]; then
                 _current_page_195="$(( _current_page_195 - 1 ))"
@@ -9717,7 +9813,7 @@ chooser_step__3655_v0() {
         else
             _selected_196="$(( _selected_196 - 1 ))"
         fi
-    elif [ "$(( $([ "_${key_40257}" != "_DOWN" ]; echo $?) || $([ "_${key_40257}" != "_j" ]; echo $?) ))" != 0 ]; then
+    elif [ "$(( $([ "_${key_40437}" != "_DOWN" ]; echo $?) || $([ "_${key_40437}" != "_j" ]; echo $?) ))" != 0 ]; then
         if [ "$(( _selected_196 == $(( _page_count_203 - 1 )) ))" != 0 ]; then
             if [ "$(( _current_page_195 < $(( _total_pages_194 - 1 )) ))" != 0 ]; then
                 _current_page_195="$(( _current_page_195 + 1 ))"
@@ -9728,328 +9824,328 @@ chooser_step__3655_v0() {
         else
             _selected_196="$(( _selected_196 + 1 ))"
         fi
-    elif [ "$(( $([ "_${key_40257}" != "_LEFT" ]; echo $?) || $([ "_${key_40257}" != "_h" ]; echo $?) ))" != 0 ]; then
+    elif [ "$(( $([ "_${key_40437}" != "_LEFT" ]; echo $?) || $([ "_${key_40437}" != "_h" ]; echo $?) ))" != 0 ]; then
         if [ "$(( _current_page_195 > 0 ))" != 0 ]; then
             _current_page_195="$(( _current_page_195 - 1 ))"
         fi
         _selected_196=0
-    elif [ "$(( $([ "_${key_40257}" != "_RIGHT" ]; echo $?) || $([ "_${key_40257}" != "_l" ]; echo $?) ))" != 0 ]; then
+    elif [ "$(( $([ "_${key_40437}" != "_RIGHT" ]; echo $?) || $([ "_${key_40437}" != "_l" ]; echo $?) ))" != 0 ]; then
         if [ "$(( _current_page_195 < $(( _total_pages_194 - 1 )) ))" != 0 ]; then
             _current_page_195="$(( _current_page_195 + 1 ))"
             _selected_196=0
         else
             _selected_196="$(( _page_count_203 - 1 ))"
         fi
-    elif [ "$(( _multi_198 && $(( $(( $([ "_${key_40257}" != "_x" ]; echo $?) || $([ "_${key_40257}" != "_X" ]; echo $?) )) || $([ "_${key_40257}" != "_TAB" ]; echo $?) )) ))" != 0 ]; then
-        checked_toggle__3569_v0 "$(( page_start_40260 + _selected_196 ))"
-        local ret_checked_toggle3569_v0__309_16="${ret_checked_toggle3569_v0}"
-        if [ "${ret_checked_toggle3569_v0__309_16}" != 0 ]; then
-            redraw_current_line__3654_v0 
+    elif [ "$(( _multi_198 && $(( $(( $([ "_${key_40437}" != "_x" ]; echo $?) || $([ "_${key_40437}" != "_X" ]; echo $?) )) || $([ "_${key_40437}" != "_TAB" ]; echo $?) )) ))" != 0 ]; then
+        checked_toggle__3583_v0 "$(( page_start_40440 + _selected_196 ))"
+        local ret_checked_toggle3583_v0__309_16="${ret_checked_toggle3583_v0}"
+        if [ "${ret_checked_toggle3583_v0__309_16}" != 0 ]; then
+            redraw_current_line__3668_v0 
         fi
-        ret_chooser_step3655_v0="${__CHOOSER_CONTINUE_188}"
+        ret_chooser_step3669_v0="${__CHOOSER_CONTINUE_188}"
         return 0
-    elif [ "$(( $(( _multi_198 && $(( $(( $([ "_${key_40257}" != "_a" ]; echo $?) || $([ "_${key_40257}" != "_A" ]; echo $?) )) || $([ "_${key_40257}" != "_CTRL_A" ]; echo $?) )) )) && $(( _limit_199 < 0 )) ))" != 0 ]; then
-        checked_all__3570_v0 
-        local ret_checked_all3570_v0__315_16="${ret_checked_all3570_v0}"
-        if [ "${ret_checked_all3570_v0__315_16}" != 0 ]; then
-            go_up__3401_v0 "${_display_count_193}"
-            local array_717=("")
-            eprintf__3346_v0 "\\x1b[G" array_717[@]
-            render_page__3643_v0 
+    elif [ "$(( $(( _multi_198 && $(( $(( $([ "_${key_40437}" != "_a" ]; echo $?) || $([ "_${key_40437}" != "_A" ]; echo $?) )) || $([ "_${key_40437}" != "_CTRL_A" ]; echo $?) )) )) && $(( _limit_199 < 0 )) ))" != 0 ]; then
+        checked_all__3584_v0 
+        local ret_checked_all3584_v0__315_16="${ret_checked_all3584_v0}"
+        if [ "${ret_checked_all3584_v0__315_16}" != 0 ]; then
+            go_up__3414_v0 "${_display_count_193}"
+            local array_729=("")
+            eprintf__3358_v0 "\\x1b[G" array_729[@]
+            render_page__3657_v0 
         fi
-        ret_chooser_step3655_v0="${__CHOOSER_CONTINUE_188}"
+        ret_chooser_step3669_v0="${__CHOOSER_CONTINUE_188}"
         return 0
-    elif [ "$(( $([ "_${key_40257}" != "_INPUT" ]; echo $?) || $([ "_${key_40257}" != "_SPACE" ]; echo $?) ))" != 0 ]; then
-        ret_chooser_step3655_v0="${__CHOOSER_DONE_190}"
+    elif [ "$(( $([ "_${key_40437}" != "_INPUT" ]; echo $?) || $([ "_${key_40437}" != "_SPACE" ]; echo $?) ))" != 0 ]; then
+        ret_chooser_step3669_v0="${__CHOOSER_DONE_190}"
         return 0
     else
-        ret_chooser_step3655_v0="${__CHOOSER_CONTINUE_188}"
+        ret_chooser_step3669_v0="${__CHOOSER_CONTINUE_188}"
         return 0
     fi
-    if [ "$(( prev_page_40259 != _current_page_195 ))" != 0 ]; then
-        ret_chooser_step3655_v0="${__CHOOSER_NEED_PAGE_189}"
+    if [ "$(( prev_page_40439 != _current_page_195 ))" != 0 ]; then
+        ret_chooser_step3669_v0="${__CHOOSER_NEED_PAGE_189}"
         return 0
     fi
-    if [ "$(( prev_selected_40258 != _selected_196 ))" != 0 ]; then
-        redraw_selection__3653_v0 "${prev_selected_40258}"
+    if [ "$(( prev_selected_40438 != _selected_196 ))" != 0 ]; then
+        redraw_selection__3667_v0 "${prev_selected_40438}"
     fi
-    ret_chooser_step3655_v0="${__CHOOSER_CONTINUE_188}"
+    ret_chooser_step3669_v0="${__CHOOSER_CONTINUE_188}"
     return 0
 }
 
 # chooser_selected()
-chooser_selected__3656_v0() {
-    chooser_page_start__3647_v0 
-    local ret_chooser_page_start3647_v0__339_12="${ret_chooser_page_start3647_v0}"
-    ret_chooser_selected3656_v0="$(( ret_chooser_page_start3647_v0__339_12 + _selected_196 ))"
+chooser_selected__3670_v0() {
+    chooser_page_start__3661_v0 
+    local ret_chooser_page_start3661_v0__339_12="${ret_chooser_page_start3661_v0}"
+    ret_chooser_selected3670_v0="$(( ret_chooser_page_start3661_v0__339_12 + _selected_196 ))"
     return 0
 }
 
 # chooser_end()
-chooser_end__3658_v0() {
-    local total_lines_40281="$(( _display_count_193 + 2 ))"
+chooser_end__3672_v0() {
+    local total_lines_40461="$(( _display_count_193 + 2 ))"
     if [ "${_has_header_201}" != 0 ]; then
-        total_lines_40281="$(( total_lines_40281 + 1 ))"
+        total_lines_40461="$(( total_lines_40461 + 1 ))"
     fi
-    go_down__3402_v0 1
-    remove_line__3397_v0 "$(( total_lines_40281 - 1 ))"
-    remove_current_line__3398_v0 
-    stty_unlock__3388_v0 
-    show_cursor__3405_v0 
+    go_down__3415_v0 1
+    remove_line__3410_v0 "$(( total_lines_40461 - 1 ))"
+    remove_current_line__3411_v0 
+    stty_unlock__3401_v0 
+    show_cursor__3418_v0 
 }
 
 # format_entry_display(name: Text, file_type: Text, target: Text)
-format_entry_display__3667_v0() {
-    local name_40219="${1}"
-    local file_type_40220="${2}"
-    local target_40221="${3}"
-    if [ "$([ "_${file_type_40220}" != "_d" ]; echo $?)" != 0 ]; then
-        colored_primary__3106_v0 "/"
-        local ret_colored_primary3106_v0__10_23="${ret_colored_primary3106_v0}"
-        ret_format_entry_display3667_v0="${name_40219}""${ret_colored_primary3106_v0__10_23}"
+format_entry_display__3681_v0() {
+    local name_40399="${1}"
+    local file_type_40400="${2}"
+    local target_40401="${3}"
+    if [ "$([ "_${file_type_40400}" != "_d" ]; echo $?)" != 0 ]; then
+        colored_primary__3117_v0 "/"
+        local ret_colored_primary3117_v0__10_23="${ret_colored_primary3117_v0}"
+        ret_format_entry_display3681_v0="${name_40399}""${ret_colored_primary3117_v0__10_23}"
         return 0
     fi
-    if [ "$([ "_${file_type_40220}" != "_l" ]; echo $?)" != 0 ]; then
-        colored_accent__3108_v0 " > "
-        local ret_colored_accent3108_v0__13_23="${ret_colored_accent3108_v0}"
-        colored_primary__3106_v0 "${target_40221}"
-        local ret_colored_primary3106_v0__13_47="${ret_colored_primary3106_v0}"
-        ret_format_entry_display3667_v0="${name_40219}""${ret_colored_accent3108_v0__13_23}""${ret_colored_primary3106_v0__13_47}"
+    if [ "$([ "_${file_type_40400}" != "_l" ]; echo $?)" != 0 ]; then
+        colored_accent__3119_v0 " > "
+        local ret_colored_accent3119_v0__13_23="${ret_colored_accent3119_v0}"
+        colored_primary__3117_v0 "${target_40401}"
+        local ret_colored_primary3117_v0__13_47="${ret_colored_primary3117_v0}"
+        ret_format_entry_display3681_v0="${name_40399}""${ret_colored_accent3119_v0__13_23}""${ret_colored_primary3117_v0__13_47}"
         return 0
     fi
-    ret_format_entry_display3667_v0="${name_40219}"
+    ret_format_entry_display3681_v0="${name_40399}"
     return 0
 }
 
 # xyl_file(start_path: Text, cursor: Text, show_hidden: Bool, page_size: Int)
-xyl_file__3668_v0() {
-    local start_path_40095="${1}"
-    local cursor_40096="${2}"
-    local show_hidden_40097="${3}"
-    local page_size_40098="${4}"
-    stty_lock__3045_v0 
+xyl_file__3682_v0() {
+    local start_path_40271="${1}"
+    local cursor_40272="${2}"
+    local show_hidden_40273="${3}"
+    local page_size_40274="${4}"
+    stty_lock__3056_v0 
     # Initialize current path
-    local current_path_40101="${start_path_40095}"
-    if [ "$([ "_${current_path_40101}" != "_" ]; echo $?)" != 0 ]; then
-        get_cwd__3087_v0 
-        current_path_40101="${ret_get_cwd3087_v0}"
+    local current_path_40281="${start_path_40271}"
+    if [ "$([ "_${current_path_40281}" != "_" ]; echo $?)" != 0 ]; then
+        get_cwd__3098_v0 
+        current_path_40281="${ret_get_cwd3098_v0}"
     fi
-    normalize_path__3088_v0 "${current_path_40101}"
-    current_path_40101="${ret_normalize_path3088_v0}"
+    normalize_path__3099_v0 "${current_path_40281}"
+    current_path_40281="${ret_normalize_path3099_v0}"
     while :
     do
-        colored_primary__3106_v0 "Loading files..."
-        local ret_colored_primary3106_v0__41_17="${ret_colored_primary3106_v0}"
-        local array_718=("")
-        eprintf__3004_v0 "${ret_colored_primary3106_v0__41_17}" array_718[@]
-        get_directory_entries__3086_v0 "${current_path_40101}"
-        local listed_40112=("${ret_get_directory_entries3086_v0[@]}")
+        colored_primary__3117_v0 "Loading files..."
+        local ret_colored_primary3117_v0__41_17="${ret_colored_primary3117_v0}"
+        local array_730=("")
+        eprintf__3014_v0 "${ret_colored_primary3117_v0__41_17}" array_730[@]
+        get_directory_entries__3097_v0 "${current_path_40281}"
+        local listed_40292=("${ret_get_directory_entries3097_v0[@]}")
         # No display text is built here. The loop below formats one page at a
         # time, so a directory with thousands of entries only formats the
         # handful that are on screen.
-        local names_40113=()
-        local types_40114=()
-        local targets_40115=()
+        local names_40293=()
+        local types_40294=()
+        local targets_40295=()
         # Add parent directory entry (..)
-        if [ "$([ "_${current_path_40101}" == "_/" ]; echo $?)" != 0 ]; then
-            names_40113+=("..")
-            types_40114+=("d")
-            targets_40115+=("")
+        if [ "$([ "_${current_path_40281}" == "_/" ]; echo $?)" != 0 ]; then
+            names_40293+=("..")
+            types_40294+=("d")
+            targets_40295+=("")
         fi
-        local __length_725=("${listed_40112[@]}")
-        local listed_count_40116="$(( ${#__length_725[@]} / __ENTRY_STRIDE_151 ))"
-        local __range_start_40117=0
-        local __range_end_40117="${listed_count_40116}"
-        local __dir_40117=$(( ${__range_start_40117} <= ${__range_end_40117} ? 1 : -1 ))
-        for (( i_40117=${__range_start_40117}; i_40117 * ${__dir_40117} < ${__range_end_40117} * ${__dir_40117}; i_40117+=${__dir_40117} )); do
-            local at_40118="$(( i_40117 * __ENTRY_STRIDE_151 ))"
-            local name_40119="${listed_40112[${at_40118}]?"Index out of bounds (at src/./file/./mod.ab:62:33)"}"
+        local __length_737=("${listed_40292[@]}")
+        local listed_count_40296="$(( ${#__length_737[@]} / __ENTRY_STRIDE_151 ))"
+        local __range_start_40297=0
+        local __range_end_40297="${listed_count_40296}"
+        local __dir_40297=$(( ${__range_start_40297} <= ${__range_end_40297} ? 1 : -1 ))
+        for (( i_40297=${__range_start_40297}; i_40297 * ${__dir_40297} < ${__range_end_40297} * ${__dir_40297}; i_40297+=${__dir_40297} )); do
+            local at_40298="$(( i_40297 * __ENTRY_STRIDE_151 ))"
+            local name_40299="${listed_40292[${at_40298}]?"Index out of bounds (at src/./file/./mod.ab:62:33)"}"
             # Skip hidden files if not showing them
-            starts_with__22_v0 "${name_40119}" "."
+            starts_with__22_v0 "${name_40299}" "."
             local ret_starts_with22_v0__64_36="${ret_starts_with22_v0}"
-            if [ "$(( $(( ! show_hidden_40097 )) && ret_starts_with22_v0__64_36 ))" != 0 ]; then
+            if [ "$(( $(( ! show_hidden_40273 )) && ret_starts_with22_v0__64_36 ))" != 0 ]; then
                 continue
             fi
-            local array_726=("${name_40119}")
-            names_40113+=("${array_726[@]}")
-            local array_727=("${listed_40112[$(( at_40118 + 1 ))]?"Index out of bounds (at src/./file/./mod.ab:68:30)"}")
-            types_40114+=("${array_727[@]}")
-            local array_728=("${listed_40112[$(( at_40118 + 2 ))]?"Index out of bounds (at src/./file/./mod.ab:69:32)"}")
-            targets_40115+=("${array_728[@]}")
+            local array_738=("${name_40299}")
+            names_40293+=("${array_738[@]}")
+            local array_739=("${listed_40292[$(( at_40298 + 1 ))]?"Index out of bounds (at src/./file/./mod.ab:68:30)"}")
+            types_40294+=("${array_739[@]}")
+            local array_740=("${listed_40292[$(( at_40298 + 2 ))]?"Index out of bounds (at src/./file/./mod.ab:69:32)"}")
+            targets_40295+=("${array_740[@]}")
 done
-        local __length_729=("${names_40113[@]}")
-        local total_40120="${#__length_729[@]}"
-        if [ "$(( total_40120 == 0 ))" != 0 ]; then
-            eprintf_colored__3005_v0 "ERROR: Directory is empty or inaccessible.
+        local __length_741=("${names_40293[@]}")
+        local total_40300="${#__length_741[@]}"
+        if [ "$(( total_40300 == 0 ))" != 0 ]; then
+            eprintf_colored__3015_v0 "ERROR: Directory is empty or inaccessible.
 " 31
-            stty_unlock__3046_v0 
-            ret_xyl_file3668_v0=""
+            stty_unlock__3057_v0 
+            ret_xyl_file3682_v0=""
             return 0
         fi
-        colored_primary__3106_v0 "${current_path_40101}"
-        local header_40122="${ret_colored_primary3106_v0}"
-        remove_current_line__3056_v0 
-        chooser_begin__3646_v0 "${total_40120}" "${page_size_40098}" "${header_40122}" "${cursor_40096}" 0 -1
-        local need_page_40212=1
+        colored_primary__3117_v0 "${current_path_40281}"
+        local header_40302="${ret_colored_primary3117_v0}"
+        remove_current_line__3067_v0 
+        chooser_begin__3660_v0 "${total_40300}" "${page_size_40274}" "${header_40302}" "${cursor_40272}" 0 -1
+        local need_page_40392=1
         while :
         do
-            if [ "${need_page_40212}" != 0 ]; then
-                local page_40213=()
-                chooser_page_start__3647_v0 
-                local start_40214="${ret_chooser_page_start3647_v0}"
-                chooser_page_count__3648_v0 
-                local count_40217="${ret_chooser_page_count3648_v0}"
-                local __range_start_40218="${start_40214}"
-                local __range_end_40218="$(( start_40214 + count_40217 ))"
-                local __dir_40218=$(( ${__range_start_40218} <= ${__range_end_40218} ? 1 : -1 ))
-                for (( i_40218=${__range_start_40218}; i_40218 * ${__dir_40218} < ${__range_end_40218} * ${__dir_40218}; i_40218+=${__dir_40218} )); do
-                    format_entry_display__3667_v0 "${names_40113[${i_40218}]?"Index out of bounds (at src/./file/./mod.ab:90:57)"}" "${types_40114[${i_40218}]?"Index out of bounds (at src/./file/./mod.ab:90:67)"}" "${targets_40115[${i_40218}]?"Index out of bounds (at src/./file/./mod.ab:90:79)"}"
-                    local ret_format_entry_display3667_v0__90_30="${ret_format_entry_display3667_v0}"
-                    local array_731=("${ret_format_entry_display3667_v0__90_30}")
-                    page_40213+=("${array_731[@]}")
+            if [ "${need_page_40392}" != 0 ]; then
+                local page_40393=()
+                chooser_page_start__3661_v0 
+                local start_40394="${ret_chooser_page_start3661_v0}"
+                chooser_page_count__3662_v0 
+                local count_40397="${ret_chooser_page_count3662_v0}"
+                local __range_start_40398="${start_40394}"
+                local __range_end_40398="$(( start_40394 + count_40397 ))"
+                local __dir_40398=$(( ${__range_start_40398} <= ${__range_end_40398} ? 1 : -1 ))
+                for (( i_40398=${__range_start_40398}; i_40398 * ${__dir_40398} < ${__range_end_40398} * ${__dir_40398}; i_40398+=${__dir_40398} )); do
+                    format_entry_display__3681_v0 "${names_40293[${i_40398}]?"Index out of bounds (at src/./file/./mod.ab:90:57)"}" "${types_40294[${i_40398}]?"Index out of bounds (at src/./file/./mod.ab:90:67)"}" "${targets_40295[${i_40398}]?"Index out of bounds (at src/./file/./mod.ab:90:79)"}"
+                    local ret_format_entry_display3681_v0__90_30="${ret_format_entry_display3681_v0}"
+                    local array_743=("${ret_format_entry_display3681_v0__90_30}")
+                    page_40393+=("${array_743[@]}")
 done
-                chooser_set_page__3649_v0 page_40213[@]
+                chooser_set_page__3663_v0 page_40393[@]
             fi
-            chooser_step__3655_v0 
-            local step_40279="${ret_chooser_step3655_v0}"
-            if [ "$(( step_40279 == __CHOOSER_DONE_190 ))" != 0 ]; then
+            chooser_step__3669_v0 
+            local step_40459="${ret_chooser_step3669_v0}"
+            if [ "$(( step_40459 == __CHOOSER_DONE_190 ))" != 0 ]; then
                 break
             fi
-            need_page_40212="$(( step_40279 == __CHOOSER_NEED_PAGE_189 ))"
+            need_page_40392="$(( step_40459 == __CHOOSER_NEED_PAGE_189 ))"
         done
-        chooser_selected__3656_v0 
-        local selected_idx_40280="${ret_chooser_selected3656_v0}"
-        chooser_end__3658_v0 
-        local name_40284="${names_40113[${selected_idx_40280}]?"Index out of bounds (at src/./file/./mod.ab:103:28)"}"
-        local file_type_40285="${types_40114[${selected_idx_40280}]?"Index out of bounds (at src/./file/./mod.ab:104:33)"}"
-        if [ "$([ "_${name_40284}" != "_.." ]; echo $?)" != 0 ]; then
-            get_parent_dir__3090_v0 "${current_path_40101}"
-            current_path_40101="${ret_get_parent_dir3090_v0}"
-        elif [ "$([ "_${file_type_40285}" != "_d" ]; echo $?)" != 0 ]; then
-            path_join__3089_v0 "${current_path_40101}" "${name_40284}"
-            current_path_40101="${ret_path_join3089_v0}"
-            normalize_path__3088_v0 "${current_path_40101}"
-            current_path_40101="${ret_normalize_path3088_v0}"
-        elif [ "$([ "_${file_type_40285}" != "_l" ]; echo $?)" != 0 ]; then
+        chooser_selected__3670_v0 
+        local selected_idx_40460="${ret_chooser_selected3670_v0}"
+        chooser_end__3672_v0 
+        local name_40464="${names_40293[${selected_idx_40460}]?"Index out of bounds (at src/./file/./mod.ab:103:28)"}"
+        local file_type_40465="${types_40294[${selected_idx_40460}]?"Index out of bounds (at src/./file/./mod.ab:104:33)"}"
+        if [ "$([ "_${name_40464}" != "_.." ]; echo $?)" != 0 ]; then
+            get_parent_dir__3101_v0 "${current_path_40281}"
+            current_path_40281="${ret_get_parent_dir3101_v0}"
+        elif [ "$([ "_${file_type_40465}" != "_d" ]; echo $?)" != 0 ]; then
+            path_join__3100_v0 "${current_path_40281}" "${name_40464}"
+            current_path_40281="${ret_path_join3100_v0}"
+            normalize_path__3099_v0 "${current_path_40281}"
+            current_path_40281="${ret_normalize_path3099_v0}"
+        elif [ "$([ "_${file_type_40465}" != "_l" ]; echo $?)" != 0 ]; then
             # Resolve symlink target path
-            local target_40290="${targets_40115[${selected_idx_40280}]?"Index out of bounds (at src/./file/./mod.ab:116:40)"}"
-            local target_path_40291="${target_40290}"
-            starts_with__22_v0 "${target_40290}" "/"
+            local target_40470="${targets_40295[${selected_idx_40460}]?"Index out of bounds (at src/./file/./mod.ab:116:40)"}"
+            local target_path_40471="${target_40470}"
+            starts_with__22_v0 "${target_40470}" "/"
             local ret_starts_with22_v0__118_24="${ret_starts_with22_v0}"
             if [ "$(( ! ret_starts_with22_v0__118_24 ))" != 0 ]; then
-                path_join__3089_v0 "${current_path_40101}" "${target_40290}"
-                target_path_40291="${ret_path_join3089_v0}"
+                path_join__3100_v0 "${current_path_40281}" "${target_40470}"
+                target_path_40471="${ret_path_join3100_v0}"
             fi
             # Follow symlink if it points to a directory, otherwise return path
-            dir_exists__38_v0 "${target_path_40291}"
+            dir_exists__38_v0 "${target_path_40471}"
             local ret_dir_exists38_v0__122_20="${ret_dir_exists38_v0}"
             if [ "${ret_dir_exists38_v0__122_20}" != 0 ]; then
-                current_path_40101="${target_path_40291}"
-                normalize_path__3088_v0 "${current_path_40101}"
-                current_path_40101="${ret_normalize_path3088_v0}"
+                current_path_40281="${target_path_40471}"
+                normalize_path__3099_v0 "${current_path_40281}"
+                current_path_40281="${ret_normalize_path3099_v0}"
             else
-                stty_unlock__3046_v0 
-                path_join__3089_v0 "${current_path_40101}" "${name_40284}"
-                ret_xyl_file3668_v0="${ret_path_join3089_v0}"
+                stty_unlock__3057_v0 
+                path_join__3100_v0 "${current_path_40281}" "${name_40464}"
+                ret_xyl_file3682_v0="${ret_path_join3100_v0}"
                 return 0
             fi
         else
-            stty_unlock__3046_v0 
-            path_join__3089_v0 "${current_path_40101}" "${name_40284}"
-            ret_xyl_file3668_v0="${ret_path_join3089_v0}"
+            stty_unlock__3057_v0 
+            path_join__3100_v0 "${current_path_40281}" "${name_40464}"
+            ret_xyl_file3682_v0="${ret_path_join3100_v0}"
             return 0
         fi
     done
-    stty_unlock__3046_v0 
-    ret_xyl_file3668_v0=""
+    stty_unlock__3057_v0 
+    ret_xyl_file3682_v0=""
     return 0
 }
 
 # print_file_help()
-print_file_help__3768_v0() {
-    local usage_40010=("Usage:" "./xylitol.sh" "file" "[<path>]" "[flags]")
-    print_wrapped__3064_v0 usage_40010[@]
+print_file_help__3782_v0() {
+    local usage_40186=("Usage:" "./xylitol.sh" "file" "[<path>]" "[flags]")
+    print_wrapped__3075_v0 usage_40186[@]
     printf '%s\n' ""
-    colored_primary__3106_v0 "file"
-    local ret_colored_primary3106_v0__8_20="${ret_colored_primary3106_v0}"
-    local title_40050=("${ret_colored_primary3106_v0__8_20}" "-" "Browse" "filesystem" "and" "select" "a" "file.")
-    print_wrapped__3064_v0 title_40050[@]
+    colored_primary__3117_v0 "file"
+    local ret_colored_primary3117_v0__8_20="${ret_colored_primary3117_v0}"
+    local title_40226=("${ret_colored_primary3117_v0__8_20}" "-" "Browse" "filesystem" "and" "select" "a" "file.")
+    print_wrapped__3075_v0 title_40226[@]
     printf '%s\n' ""
-    colored_secondary__3107_v0 "Arguments:"
-    local ret_colored_secondary3107_v0__11_12="${ret_colored_secondary3107_v0}"
-    local array_734=()
-    printf__128_v0 "${ret_colored_secondary3107_v0__11_12}""
-" array_734[@]
-    local arg_names_40052=("[<path>]")
-    local arg_texts_40053=("Starting directory path")
-    local arg_notes_40054=("(default: current directory)")
+    colored_secondary__3118_v0 "Arguments:"
+    local ret_colored_secondary3118_v0__11_12="${ret_colored_secondary3118_v0}"
+    local array_746=()
+    printf__128_v0 "${ret_colored_secondary3118_v0__11_12}""
+" array_746[@]
+    local arg_names_40228=("[<path>]")
+    local arg_texts_40229=("Starting directory path")
+    local arg_notes_40230=("(default: current directory)")
     # 20 keeps this section on the same column as Flags below.
-    render_help_entries__3241_v0 arg_names_40052[@] arg_texts_40053[@] arg_notes_40054[@] 20
+    render_help_entries__3253_v0 arg_names_40228[@] arg_texts_40229[@] arg_notes_40230[@] 20
     printf '%s\n' ""
-    colored_secondary__3107_v0 "Flags:"
-    local ret_colored_secondary3107_v0__18_12="${ret_colored_secondary3107_v0}"
-    local array_738=()
-    printf__128_v0 "${ret_colored_secondary3107_v0__18_12}""
-" array_738[@]
-    local names_40087=("-h, --help" "-a, --all" "--cursor=\"<text>\"" "--path=\"<path>\"" "--page-size=<number>")
-    local texts_40088=("Show this help message" "Show hidden files" "Set the cursor text" "Set the starting directory path" "Set the number of entries per page")
-    local notes_40089=("" "" "(default: '> ')" "" "(default: 10)")
-    render_help_entries__3241_v0 names_40087[@] texts_40088[@] notes_40089[@] 0
+    colored_secondary__3118_v0 "Flags:"
+    local ret_colored_secondary3118_v0__18_12="${ret_colored_secondary3118_v0}"
+    local array_750=()
+    printf__128_v0 "${ret_colored_secondary3118_v0__18_12}""
+" array_750[@]
+    local names_40263=("-h, --help" "-a, --all" "--cursor=\"<text>\"" "--path=\"<path>\"" "--page-size=<number>")
+    local texts_40264=("Show this help message" "Show hidden files" "Set the cursor text" "Set the starting directory path" "Set the number of entries per page")
+    local notes_40265=("" "" "(default: '> ')" "" "(default: 10)")
+    render_help_entries__3253_v0 names_40263[@] texts_40264[@] notes_40265[@] 0
     printf '%s\n' ""
 }
 
 # execute_file(parameters: [Text])
-execute_file__3826_v0() {
-    local parameters_40004=("${!1}")
-    local cursor_40005="> "
-    local start_path_40006=""
-    local show_hidden_40007=0
-    local page_size_40008=10
-    local __length_745=("${parameters_40004[@]}")
-    local slice_upper_744="${#__length_745[@]}"
-    local slice_offset_746=2
-    local slice_offset_746=$((${slice_offset_746} > 0 ? ${slice_offset_746} : 0))
-    local slice_length_747="$(( slice_upper_744 - slice_offset_746 ))"
-    local slice_length_747=$((${slice_length_747} > 0 ? ${slice_length_747} : 0))
-    for param_40009 in "${parameters_40004[@]:${slice_offset_746}:${slice_length_747}}"; do
-        starts_with__22_v0 "${param_40009}" "--cursor="
+execute_file__3840_v0() {
+    local parameters_40180=("${!1}")
+    local cursor_40181="> "
+    local start_path_40182=""
+    local show_hidden_40183=0
+    local page_size_40184=10
+    local __length_757=("${parameters_40180[@]}")
+    local slice_upper_756="${#__length_757[@]}"
+    local slice_offset_758=2
+    local slice_offset_758=$((${slice_offset_758} > 0 ? ${slice_offset_758} : 0))
+    local slice_length_759="$(( slice_upper_756 - slice_offset_758 ))"
+    local slice_length_759=$((${slice_length_759} > 0 ? ${slice_length_759} : 0))
+    for param_40185 in "${parameters_40180[@]:${slice_offset_758}:${slice_length_759}}"; do
+        starts_with__22_v0 "${param_40185}" "--cursor="
         local ret_starts_with22_v0__18_13="${ret_starts_with22_v0}"
-        starts_with__22_v0 "${param_40009}" "--path="
+        starts_with__22_v0 "${param_40185}" "--path="
         local ret_starts_with22_v0__21_13="${ret_starts_with22_v0}"
-        starts_with__22_v0 "${param_40009}" "--page-size="
+        starts_with__22_v0 "${param_40185}" "--page-size="
         local ret_starts_with22_v0__27_13="${ret_starts_with22_v0}"
-        if [ "$(( $([ "_${param_40009}" != "_-h" ]; echo $?) || $([ "_${param_40009}" != "_--help" ]; echo $?) ))" != 0 ]; then
-            print_file_help__3768_v0 
+        if [ "$(( $([ "_${param_40185}" != "_-h" ]; echo $?) || $([ "_${param_40185}" != "_--help" ]; echo $?) ))" != 0 ]; then
+            print_file_help__3782_v0 
             exit 0
         elif [ "${ret_starts_with22_v0__18_13}" != 0 ]; then
-            local __length_748="--cursor="
-            slice__24_v0 "${param_40009}" "${#__length_748}" 0
-            cursor_40005="${ret_slice24_v0}"
+            local __length_760="--cursor="
+            slice__24_v0 "${param_40185}" "${#__length_760}" 0
+            cursor_40181="${ret_slice24_v0}"
         elif [ "${ret_starts_with22_v0__21_13}" != 0 ]; then
-            local __length_749="--path="
-            slice__24_v0 "${param_40009}" "${#__length_749}" 0
-            start_path_40006="${ret_slice24_v0}"
-        elif [ "$(( $([ "_${param_40009}" != "_-a" ]; echo $?) || $([ "_${param_40009}" != "_--all" ]; echo $?) ))" != 0 ]; then
-            show_hidden_40007=1
+            local __length_761="--path="
+            slice__24_v0 "${param_40185}" "${#__length_761}" 0
+            start_path_40182="${ret_slice24_v0}"
+        elif [ "$(( $([ "_${param_40185}" != "_-a" ]; echo $?) || $([ "_${param_40185}" != "_--all" ]; echo $?) ))" != 0 ]; then
+            show_hidden_40183=1
         elif [ "${ret_starts_with22_v0__27_13}" != 0 ]; then
-            local __length_750="--page-size="
-            slice__24_v0 "${param_40009}" "${#__length_750}" 0
-            local value_40090="${ret_slice24_v0}"
-            parse_int__13_v0 "${value_40090}"
+            local __length_762="--page-size="
+            slice__24_v0 "${param_40185}" "${#__length_762}" 0
+            local value_40266="${ret_slice24_v0}"
+            parse_int__13_v0 "${value_40266}"
             __status=$?
             if [ "${__status}" != 0 ]; then
-                eprintf_colored__3005_v0 "ERROR: Invalid page-size value: ""${value_40090}""
+                eprintf_colored__3015_v0 "ERROR: Invalid page-size value: ""${value_40266}""
 " 31
                 exit 1
             fi
-            page_size_40008="${ret_parse_int13_v0}"
+            page_size_40184="${ret_parse_int13_v0}"
         else
             # Treat as start path if not a flag
-            start_path_40006="${param_40009}"
+            start_path_40182="${param_40185}"
         fi
     done
-    xyl_file__3668_v0 "${start_path_40006}" "${cursor_40005}" "${show_hidden_40007}" "${page_size_40008}"
-    ret_execute_file3826_v0="${ret_xyl_file3668_v0}"
+    xyl_file__3682_v0 "${start_path_40182}" "${cursor_40181}" "${show_hidden_40183}" "${page_size_40184}"
+    ret_execute_file3840_v0="${ret_xyl_file3682_v0}"
     return 0
 }
 
@@ -10057,63 +10153,63 @@ execute_file__3826_v0() {
 __VERSION_211="0.1.0"
 __AMBER_VERSION_212="0.6.0-alpha"
 # trap_cleanup()
-trap_cleanup__3828_v0() {
+trap_cleanup__3842_v0() {
     trap 'printf "\x1b[?25h\x1b[0m" >&2; 
-            stty echo icanon < /dev/tty' EXIT
+            stty echo icanon 2>/dev/null < /dev/tty' EXIT
     __status=$?
 }
 
 typeset -r args_213=("$0" "$@")
-trap_cleanup__3828_v0 
+trap_cleanup__3842_v0 
 # `args[1]` must not be read before the length is checked,
 # because `or` evaluates both of its operands.
-__length_752=("${args_213[@]}")
-if [ "$(( ${#__length_752[@]} < 2 ))" != 0 ]; then
-    print_help__555_v0 
+__length_764=("${args_213[@]}")
+if [ "$(( ${#__length_764[@]} < 2 ))" != 0 ]; then
+    print_help__557_v0 
     exit 0
 fi
 command_1579="${args_213[1]?"Index out of bounds (at src/main.ab:29:26)"}"
 if [ "$(( $(( $([ "_${command_1579}" != "_help" ]; echo $?) || $([ "_${command_1579}" != "_--help" ]; echo $?) )) || $([ "_${command_1579}" != "_-h" ]; echo $?) ))" != 0 ]; then
-    print_help__555_v0 
+    print_help__557_v0 
 elif [ "$([ "_${command_1579}" != "_input" ]; echo $?)" != 0 ]; then
-    execute_input__1091_v0 args_213[@]
-    ret_execute_input1091_v0__36_18="${ret_execute_input1091_v0}"
-    printf '%s\n' "${ret_execute_input1091_v0__36_18}"
+    execute_input__1095_v0 args_213[@]
+    ret_execute_input1095_v0__36_18="${ret_execute_input1095_v0}"
+    printf '%s\n' "${ret_execute_input1095_v0__36_18}"
 elif [ "$([ "_${command_1579}" != "_choose" ]; echo $?)" != 0 ]; then
-    execute_choose__1755_v0 args_213[@]
-    ret_execute_choose1755_v0__39_18="${ret_execute_choose1755_v0}"
-    printf '%s\n' "${ret_execute_choose1755_v0__39_18}"
+    execute_choose__1761_v0 args_213[@]
+    ret_execute_choose1761_v0__39_18="${ret_execute_choose1761_v0}"
+    printf '%s\n' "${ret_execute_choose1761_v0__39_18}"
 elif [ "$([ "_${command_1579}" != "_filter" ]; echo $?)" != 0 ]; then
-    execute_filter__2306_v0 args_213[@]
-    ret_execute_filter2306_v0__42_18="${ret_execute_filter2306_v0}"
-    printf '%s\n' "${ret_execute_filter2306_v0__42_18}"
+    execute_filter__2314_v0 args_213[@]
+    ret_execute_filter2314_v0__42_18="${ret_execute_filter2314_v0}"
+    printf '%s\n' "${ret_execute_filter2314_v0__42_18}"
 elif [ "$([ "_${command_1579}" != "_confirm" ]; echo $?)" != 0 ]; then
-    execute_confirm__2886_v0 args_213[@]
-    result_29676="${ret_execute_confirm2886_v0}"
-    if [ "$([ "_${result_29676}" != "_yes" ]; echo $?)" != 0 ]; then
+    execute_confirm__2896_v0 args_213[@]
+    result_29802="${ret_execute_confirm2896_v0}"
+    if [ "$([ "_${result_29802}" != "_yes" ]; echo $?)" != 0 ]; then
         exit 0
     else
         exit 1
     fi
 elif [ "$([ "_${command_1579}" != "_file" ]; echo $?)" != 0 ]; then
-    execute_file__3826_v0 args_213[@]
-    ret_execute_file3826_v0__52_18="${ret_execute_file3826_v0}"
-    printf '%s\n' "${ret_execute_file3826_v0__52_18}"
+    execute_file__3840_v0 args_213[@]
+    ret_execute_file3840_v0__52_18="${ret_execute_file3840_v0}"
+    printf '%s\n' "${ret_execute_file3840_v0__52_18}"
 elif [ "$(( $(( $([ "_${command_1579}" != "_version" ]; echo $?) || $([ "_${command_1579}" != "_--version" ]; echo $?) )) || $([ "_${command_1579}" != "_-v" ]; echo $?) ))" != 0 ]; then
-    colored_primary__263_v0 "xylitol.sh"
-    ret_colored_primary263_v0__55_20="${ret_colored_primary263_v0}"
-    array_753=()
-    printf__128_v0 "${ret_colored_primary263_v0__55_20}" array_753[@]
-    array_754=()
-    printf__128_v0 " version: " array_754[@]
-    colored_accent__265_v0 "${__VERSION_211}"
-    ret_colored_accent265_v0__57_20="${ret_colored_accent265_v0}"
-    array_755=()
-    printf__128_v0 "${ret_colored_accent265_v0__57_20}" array_755[@]
+    colored_primary__264_v0 "xylitol.sh"
+    ret_colored_primary264_v0__55_20="${ret_colored_primary264_v0}"
+    array_765=()
+    printf__128_v0 "${ret_colored_primary264_v0__55_20}" array_765[@]
+    array_766=()
+    printf__128_v0 " version: " array_766[@]
+    colored_accent__266_v0 "${__VERSION_211}"
+    ret_colored_accent266_v0__57_20="${ret_colored_accent266_v0}"
+    array_767=()
+    printf__128_v0 "${ret_colored_accent266_v0__57_20}" array_767[@]
     printf '%s\n' ""
     printf_colored__160_v0 "written in Amber: " 90
     printf_colored__160_v0 "  ""${__AMBER_VERSION_212}" 90
 else
-    print_help__555_v0 
+    print_help__557_v0 
     printf_colored__160_v0 "ERROR: Unknown command '""${command_1579}""'" 91
 fi

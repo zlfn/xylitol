@@ -13,7 +13,7 @@ const AMBER_VERSION = "0.6.0-alpha"
 
 fun trap_cleanup(): Null {
     trust $ trap 'printf "\x1b[?25h\x1b[0m" >&2; 
-            stty echo icanon < /dev/tty' EXIT $
+            stty echo icanon 2>/dev/null < /dev/tty' EXIT $
 }
 
 main(args) {

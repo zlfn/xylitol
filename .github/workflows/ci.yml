@@ -29,6 +29,20 @@ jobs:
       - name: Committed script is up to date
         run: diff -u xylitol.sh /tmp/xylitol.sh
 
+      - name: Refuses to run without a terminal
+        run: |
+          for cmd in choose confirm input file filter; do
+            if setsid --wait bash -c "printf 'a\\nb\\n' | bash xylitol.sh $cmd" < /dev/null > out.txt 2>&1; then
+              echo "::error::$cmd exited 0 with no tty"
+              exit 1
+            fi
+            if [ -s out.txt ] && ! grep -q "needs a terminal" out.txt; then
+              echo "::error::$cmd did not say why it stopped"
+              cat out.txt
+              exit 1
+            fi
+          done
+
       - name: Unit tests
         run: amber test src/
 

@@ -1,6 +1,6 @@
 import { printf } from "std/env"
 import { split, parse_int } from "std/text"
-import { eprintf } from "./io.ab"
+import { eprintf, eprintf_colored } from "./io.ab"
 import { has_ansi_escape, get_visible_len } from "./text/ansi.ab"
 
 /// global variables to store terminal size
@@ -22,7 +22,11 @@ fun stty_count(): Int {
 pub fun stty_lock(): Null {
     let count_num = stty_count()
     if count_num == 0 {
-        trust $ stty -echo -icanon min 1 time 0 < /dev/tty $
+        $ stty -echo -icanon min 1 time 0 2>/dev/null < /dev/tty $ failed {
+            eprintf_colored("Error: ", 91)
+            eprintf("xylitol needs a terminal, and /dev/tty is not available here.\n")
+            exit(1)
+        }
     }
     count_num += 1
     trust $ export XYLITOL_RUNTIME_STTY_COUNT={count_num} $
@@ -35,7 +39,7 @@ pub fun stty_unlock(): Null {
         count_num -= 1
         trust $ export XYLITOL_RUNTIME_STTY_COUNT={count_num} $
         if count_num == 0 {
-            trust $ stty echo icanon < /dev/tty $
+            trust $ stty echo icanon 2>/dev/null < /dev/tty $
         }
     }
 }

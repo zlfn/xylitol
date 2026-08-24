@@ -18,7 +18,7 @@ jobs:
 
       - name: Compile without warnings
         run: |
-          amber build --target bash-3.2 src/main.ab /tmp/xylitol.sh 2> build.log
+          tools/build.sh /tmp/xylitol.sh 2> build.log
           if [ -s build.log ]; then
             cat build.log
             echo "::error::the compiler had something to say"
@@ -28,6 +28,15 @@ jobs:
       # xylitol.sh is committed, so it has to be what the sources produce.
       - name: Committed script is up to date
         run: diff -u xylitol.sh /tmp/xylitol.sh
+
+      - name: Works when sourced and when bundled
+        run: |
+          source ./xylitol.sh
+          xylitol --version > /dev/null
+          printf 'xylitol --version\n' > /tmp/app.sh
+          tools/bundle.sh /tmp/app.sh > /tmp/standalone.sh
+          bash -n /tmp/standalone.sh
+          bash /tmp/standalone.sh | grep -q version
 
       - name: Refuses to run without a terminal
         run: |
@@ -58,10 +67,10 @@ jobs:
 
       - uses: Swatinem/rust-cache@v2
         with:
-          workspaces: e2e-test
+          workspaces: tools/e2e-test
 
       - name: Drive xylitol through a terminal
-        run: cargo run --release --manifest-path e2e-test/Cargo.toml -- --docker bash:${{ matrix.bash }}
+        run: cargo run --release --manifest-path tools/e2e-test/Cargo.toml -- --docker bash:${{ matrix.bash }}
 
   e2e-macos:
     # The bash macOS ships is 3.2, and the userland is BSD rather than GNU.
@@ -72,7 +81,7 @@ jobs:
 
       - uses: Swatinem/rust-cache@v2
         with:
-          workspaces: e2e-test
+          workspaces: tools/e2e-test
 
       - name: Drive xylitol through a terminal
-        run: cargo run --release --manifest-path e2e-test/Cargo.toml -- --bash /bin/bash
+        run: cargo run --release --manifest-path tools/e2e-test/Cargo.toml -- --bash /bin/bash

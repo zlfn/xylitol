@@ -63,13 +63,13 @@ fun store_term_size(size: Text): Bool {
 /// The read times out, otherwise terminals without the extension would
 /// wait for a reply that never arrives.
 fun query_term_size(): Bool {
-    const size = trust $ printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "\$height" =~ ^[1-9][0-9]*\$ && "\$width" =~ ^[1-9][0-9]*\$ ]] && echo "\$height \$width" $
+    const size = trust $ printf '\x1b[18t' 2>/dev/null > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width 2>/dev/null < /dev/tty; [[ "\$height" =~ ^[1-9][0-9]*\$ && "\$width" =~ ^[1-9][0-9]*\$ ]] && echo "\$height \$width" $
     return store_term_size(size)
 }
 
 /// Read the terminal size from the tty itself with a `TIOCGWINSZ` ioctl.
 fun stty_term_size(): Bool {
-    const size = trust $ read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "\$rows" =~ ^[1-9][0-9]*\$ && "\$cols" =~ ^[1-9][0-9]*\$ ]] && echo "\$rows \$cols" $
+    const size = trust $ read -r rows cols < <(stty size 2>/dev/null < /dev/tty); [[ "\$rows" =~ ^[1-9][0-9]*\$ && "\$cols" =~ ^[1-9][0-9]*\$ ]] && echo "\$rows \$cols" $
     return store_term_size(size)
 }
 

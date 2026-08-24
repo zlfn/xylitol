@@ -404,7 +404,7 @@ store_term_size__205_v0() {
 # query_term_size()
 query_term_size__206_v0() {
     local command_25
-    command_25="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
+    command_25="$(printf '\x1b[18t' 2>/dev/null > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width 2>/dev/null < /dev/tty; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
     __status=$?
     local size_1483="${command_25}"
     store_term_size__205_v0 "${size_1483}"
@@ -415,7 +415,7 @@ query_term_size__206_v0() {
 # stty_term_size()
 stty_term_size__207_v0() {
     local command_26
-    command_26="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
+    command_26="$(read -r rows cols < <(stty size 2>/dev/null < /dev/tty); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
     __status=$?
     local size_1475="${command_26}"
     store_term_size__205_v0 "${size_1475}"
@@ -754,7 +754,7 @@ store_term_size__361_v0() {
 # query_term_size()
 query_term_size__362_v0() {
     local command_44
-    command_44="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
+    command_44="$(printf '\x1b[18t' 2>/dev/null > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width 2>/dev/null < /dev/tty; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
     __status=$?
     local size_1542="${command_44}"
     store_term_size__361_v0 "${size_1542}"
@@ -765,7 +765,7 @@ query_term_size__362_v0() {
 # stty_term_size()
 stty_term_size__363_v0() {
     local command_45
-    command_45="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
+    command_45="$(read -r rows cols < <(stty size 2>/dev/null < /dev/tty); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
     __status=$?
     local size_1538="${command_45}"
     store_term_size__361_v0 "${size_1538}"
@@ -1226,7 +1226,7 @@ store_term_size__684_v0() {
 # query_term_size()
 query_term_size__685_v0() {
     local command_92
-    command_92="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
+    command_92="$(printf '\x1b[18t' 2>/dev/null > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width 2>/dev/null < /dev/tty; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
     __status=$?
     local size_3126="${command_92}"
     store_term_size__684_v0 "${size_3126}"
@@ -1237,7 +1237,7 @@ query_term_size__685_v0() {
 # stty_term_size()
 stty_term_size__686_v0() {
     local command_93
-    command_93="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
+    command_93="$(read -r rows cols < <(stty size 2>/dev/null < /dev/tty); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
     __status=$?
     local size_3122="${command_93}"
     store_term_size__684_v0 "${size_3122}"
@@ -1999,7 +1999,7 @@ store_term_size__840_v0() {
 # query_term_size()
 query_term_size__841_v0() {
     local command_143
-    command_143="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
+    command_143="$(printf '\x1b[18t' 2>/dev/null > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width 2>/dev/null < /dev/tty; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
     __status=$?
     local size_3177="${command_143}"
     store_term_size__840_v0 "${size_3177}"
@@ -2010,7 +2010,7 @@ query_term_size__841_v0() {
 # stty_term_size()
 stty_term_size__842_v0() {
     local command_144
-    command_144="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
+    command_144="$(read -r rows cols < <(stty size 2>/dev/null < /dev/tty); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
     __status=$?
     local size_3173="${command_144}"
     store_term_size__840_v0 "${size_3173}"
@@ -2573,7 +2573,7 @@ store_term_size__1222_v0() {
 # query_term_size()
 query_term_size__1223_v0() {
     local command_196
-    command_196="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
+    command_196="$(printf '\x1b[18t' 2>/dev/null > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width 2>/dev/null < /dev/tty; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
     __status=$?
     local size_17957="${command_196}"
     store_term_size__1222_v0 "${size_17957}"
@@ -2584,7 +2584,7 @@ query_term_size__1223_v0() {
 # stty_term_size()
 stty_term_size__1224_v0() {
     local command_197
-    command_197="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
+    command_197="$(read -r rows cols < <(stty size 2>/dev/null < /dev/tty); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
     __status=$?
     local size_17953="${command_197}"
     store_term_size__1222_v0 "${size_17953}"
@@ -3375,7 +3375,7 @@ store_term_size__1378_v0() {
 # query_term_size()
 query_term_size__1379_v0() {
     local command_248
-    command_248="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
+    command_248="$(printf '\x1b[18t' 2>/dev/null > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width 2>/dev/null < /dev/tty; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
     __status=$?
     local size_17995="${command_248}"
     store_term_size__1378_v0 "${size_17995}"
@@ -3386,7 +3386,7 @@ query_term_size__1379_v0() {
 # stty_term_size()
 stty_term_size__1380_v0() {
     local command_249
-    command_249="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
+    command_249="$(read -r rows cols < <(stty size 2>/dev/null < /dev/tty); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
     __status=$?
     local size_17991="${command_249}"
     store_term_size__1378_v0 "${size_17991}"
@@ -4604,7 +4604,7 @@ store_term_size__1892_v0() {
 # query_term_size()
 query_term_size__1893_v0() {
     local command_346
-    command_346="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
+    command_346="$(printf '\x1b[18t' 2>/dev/null > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width 2>/dev/null < /dev/tty; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
     __status=$?
     local size_27421="${command_346}"
     store_term_size__1892_v0 "${size_27421}"
@@ -4615,7 +4615,7 @@ query_term_size__1893_v0() {
 # stty_term_size()
 stty_term_size__1894_v0() {
     local command_347
-    command_347="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
+    command_347="$(read -r rows cols < <(stty size 2>/dev/null < /dev/tty); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
     __status=$?
     local size_27417="${command_347}"
     store_term_size__1892_v0 "${size_27417}"
@@ -5399,7 +5399,7 @@ store_term_size__2048_v0() {
 # query_term_size()
 query_term_size__2049_v0() {
     local command_398
-    command_398="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
+    command_398="$(printf '\x1b[18t' 2>/dev/null > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width 2>/dev/null < /dev/tty; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
     __status=$?
     local size_27469="${command_398}"
     store_term_size__2048_v0 "${size_27469}"
@@ -5410,7 +5410,7 @@ query_term_size__2049_v0() {
 # stty_term_size()
 stty_term_size__2050_v0() {
     local command_399
-    command_399="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
+    command_399="$(read -r rows cols < <(stty size 2>/dev/null < /dev/tty); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
     __status=$?
     local size_27465="${command_399}"
     store_term_size__2048_v0 "${size_27465}"
@@ -6465,7 +6465,7 @@ store_term_size__2484_v0() {
 # query_term_size()
 query_term_size__2485_v0() {
     local command_492
-    command_492="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
+    command_492="$(printf '\x1b[18t' 2>/dev/null > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width 2>/dev/null < /dev/tty; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
     __status=$?
     local size_29634="${command_492}"
     store_term_size__2484_v0 "${size_29634}"
@@ -6476,7 +6476,7 @@ query_term_size__2485_v0() {
 # stty_term_size()
 stty_term_size__2486_v0() {
     local command_493
-    command_493="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
+    command_493="$(read -r rows cols < <(stty size 2>/dev/null < /dev/tty); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
     __status=$?
     local size_29630="${command_493}"
     store_term_size__2484_v0 "${size_29630}"
@@ -7281,7 +7281,7 @@ store_term_size__2640_v0() {
 # query_term_size()
 query_term_size__2641_v0() {
     local command_543
-    command_543="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
+    command_543="$(printf '\x1b[18t' 2>/dev/null > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width 2>/dev/null < /dev/tty; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
     __status=$?
     local size_29672="${command_543}"
     store_term_size__2640_v0 "${size_29672}"
@@ -7292,7 +7292,7 @@ query_term_size__2641_v0() {
 # stty_term_size()
 stty_term_size__2642_v0() {
     local command_544
-    command_544="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
+    command_544="$(read -r rows cols < <(stty size 2>/dev/null < /dev/tty); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
     __status=$?
     local size_29668="${command_544}"
     store_term_size__2640_v0 "${size_29668}"
@@ -7870,7 +7870,7 @@ store_term_size__3058_v0() {
 # query_term_size()
 query_term_size__3059_v0() {
     local command_597
-    command_597="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
+    command_597="$(printf '\x1b[18t' 2>/dev/null > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width 2>/dev/null < /dev/tty; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
     __status=$?
     local size_40192="${command_597}"
     store_term_size__3058_v0 "${size_40192}"
@@ -7881,7 +7881,7 @@ query_term_size__3059_v0() {
 # stty_term_size()
 stty_term_size__3060_v0() {
     local command_598
-    command_598="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
+    command_598="$(read -r rows cols < <(stty size 2>/dev/null < /dev/tty); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
     __status=$?
     local size_40188="${command_598}"
     store_term_size__3058_v0 "${size_40188}"
@@ -8323,7 +8323,7 @@ store_term_size__3214_v0() {
 # query_term_size()
 query_term_size__3215_v0() {
     local command_628
-    command_628="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
+    command_628="$(printf '\x1b[18t' 2>/dev/null > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width 2>/dev/null < /dev/tty; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
     __status=$?
     local size_40243="${command_628}"
     store_term_size__3214_v0 "${size_40243}"
@@ -8334,7 +8334,7 @@ query_term_size__3215_v0() {
 # stty_term_size()
 stty_term_size__3216_v0() {
     local command_629
-    command_629="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
+    command_629="$(read -r rows cols < <(stty size 2>/dev/null < /dev/tty); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
     __status=$?
     local size_40239="${command_629}"
     store_term_size__3214_v0 "${size_40239}"
@@ -8622,7 +8622,7 @@ store_term_size__3402_v0() {
 # query_term_size()
 query_term_size__3403_v0() {
     local command_652
-    command_652="$(printf '\x1b[18t' > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width < /dev/tty 2>/dev/null; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
+    command_652="$(printf '\x1b[18t' 2>/dev/null > /dev/tty; IFS=';' read -t 1 -rsd t _ignore height width 2>/dev/null < /dev/tty; [[ "$height" =~ ^[1-9][0-9]*$ && "$width" =~ ^[1-9][0-9]*$ ]] && echo "$height $width")"
     __status=$?
     local size_40319="${command_652}"
     store_term_size__3402_v0 "${size_40319}"
@@ -8633,7 +8633,7 @@ query_term_size__3403_v0() {
 # stty_term_size()
 stty_term_size__3404_v0() {
     local command_653
-    command_653="$(read -r rows cols < <(stty size < /dev/tty 2>/dev/null); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
+    command_653="$(read -r rows cols < <(stty size 2>/dev/null < /dev/tty); [[ "$rows" =~ ^[1-9][0-9]*$ && "$cols" =~ ^[1-9][0-9]*$ ]] && echo "$rows $cols")"
     __status=$?
     local size_40315="${command_653}"
     store_term_size__3402_v0 "${size_40315}"
@@ -10159,6 +10159,10 @@ trap_cleanup__3842_v0() {
     __status=$?
 }
 
+xylitol() (
+    # The compiler reads $? after tests that are meant to fail.
+    set +euo pipefail
+
 typeset -r args_213=("$0" "$@")
 trap_cleanup__3842_v0 
 # `args[1]` must not be read before the length is checked,
@@ -10212,4 +10216,9 @@ elif [ "$(( $(( $([ "_${command_1579}" != "_version" ]; echo $?) || $([ "_${comm
 else
     print_help__557_v0 
     printf_colored__160_v0 "ERROR: Unknown command '""${command_1579}""'" 91
+fi
+)
+
+if [ "${BASH_SOURCE[0]}" = "$0" ]; then
+    xylitol "$@"
 fi

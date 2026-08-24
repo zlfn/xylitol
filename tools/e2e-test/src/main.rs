@@ -1,10 +1,10 @@
 //! Drives the built `xylitol.sh` through a pseudo terminal the way a person
 //! would, either on this machine or inside a container with a chosen bash.
 //!
-//!     cargo run --manifest-path e2e-test/Cargo.toml -- --local
-//!     cargo run --manifest-path e2e-test/Cargo.toml -- --docker bash:3.2
-//!     cargo run --manifest-path e2e-test/Cargo.toml -- --bash /bin/bash
-//!     cargo run --manifest-path e2e-test/Cargo.toml -- --local --filter choose
+//!     cargo run --manifest-path tools/e2e-test/Cargo.toml -- --local
+//!     cargo run --manifest-path tools/e2e-test/Cargo.toml -- --docker bash:3.2
+//!     cargo run --manifest-path tools/e2e-test/Cargo.toml -- --bash /bin/bash
+//!     cargo run --manifest-path tools/e2e-test/Cargo.toml -- --local --filter choose
 
 mod cases;
 
@@ -248,7 +248,7 @@ fn main() {
     }
 
     let repo = std::fs::canonicalize(
-        Path::new(env!("CARGO_MANIFEST_DIR")).join(".."),
+        Path::new(env!("CARGO_MANIFEST_DIR")).join("../.."),
     )
     .expect("repository root");
     // Per process, so two runs can go at once without eating each other's

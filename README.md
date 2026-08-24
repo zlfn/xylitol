@@ -13,7 +13,7 @@ or use [Amber](https://amber-lang.com/) to compile Bash script from amber code.
 
 ```
 bash <(curl -sL "https://github.com/amber-lang/amber/releases/download/0.6.0-alpha/install.sh")
-amber build --target bash-3.2 src/main.ab xylitol.sh
+tools/build.sh
 ```
 
 ## Commands

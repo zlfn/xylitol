@@ -33,10 +33,11 @@ jobs:
         run: |
           source ./xylitol.sh
           xylitol --version > /dev/null
-          printf 'xylitol --version\n' > /tmp/app.sh
+          printf 'source ./xylitol.sh\nxylitol --version\n' > /tmp/app.sh
           tools/bundle.sh /tmp/app.sh > /tmp/standalone.sh
           bash -n /tmp/standalone.sh
-          bash /tmp/standalone.sh | grep -q version
+          # Runs where xylitol.sh is absent, so a leftover source line would fail.
+          ( cd /tmp && bash /tmp/standalone.sh | grep -q version )
 
       - name: Refuses to run without a terminal
         run: |

@@ -29,4 +29,5 @@ fi
 
 sed "/$guard/,\$d" "$lib"
 echo
-cat "$app"
+# The embedded copy already defines xylitol, so a line that sources it drops out.
+sed -E '/^[[:space:]]*(source|\.)[[:space:]]+[^[:space:]]*xylitol\.sh([[:space:]].*)?$/d' "$app"

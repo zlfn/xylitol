@@ -20,9 +20,10 @@ tools/build.sh
 
 ### From a Bash script
 
-Source `xylitol.sh` and call `xylitol` in your script.
+Source `xylitol.sh` in your script, `app.sh`:
 
 ```bash
+#!/usr/bin/env bash
 source ./xylitol.sh
 
 name=$(xylitol input --header="Project name")
@@ -33,15 +34,16 @@ if xylitol confirm --header="Create $name as a $kind?"; then
 fi
 ```
 
-Fold xylitol into the script to ship a single file:
+Bundle it into a single file to ship:
 
 ```bash
 tools/bundle.sh app.sh > app-standalone.sh
+./app-standalone.sh
 ```
 
 ### From an Amber script
 
-Vendor this repository and import the widgets from `src/lib.ab`:
+Vendor this repository and import from `src/lib.ab`:
 
 ```bash
 git submodule add https://github.com/zlfn/xylitol.git vendor/xylitol

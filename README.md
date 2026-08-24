@@ -16,6 +16,48 @@ bash <(curl -sL "https://github.com/amber-lang/amber/releases/download/0.6.0-alp
 tools/build.sh
 ```
 
+## Usage
+
+### From a Bash script
+
+Source `xylitol.sh` and call `xylitol` in your script.
+
+```bash
+source ./xylitol.sh
+
+name=$(xylitol input --header="Project name")
+kind=$(printf 'lib\nbin\n' | xylitol choose --header="Kind")
+
+if xylitol confirm --header="Create $name as a $kind?"; then
+    echo "creating $name"
+fi
+```
+
+Fold xylitol into the script to ship a single file:
+
+```bash
+tools/bundle.sh app.sh > app-standalone.sh
+```
+
+### From an Amber script
+
+Vendor this repository and import the widgets from `src/lib.ab`:
+
+```bash
+git submodule add https://github.com/zlfn/xylitol.git vendor/xylitol
+```
+
+```js
+import { xyl_choose, xyl_confirm } from "vendor/xylitol/src/lib.ab"
+
+main {
+    const env = xyl_choose(["dev", "staging", "prod"])
+    if xyl_confirm("Deploy to {env}?") {
+        echo("deploying to {env}")
+    }
+}
+```
+
 ## Commands
 * [`choose`](#choose): Choose an option from a list of choices
 * [`filter`](#filter): Pick from a list narrowed by typing
